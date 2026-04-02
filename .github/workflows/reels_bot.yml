@@ -35,7 +35,6 @@ jobs:
 
       - name: Instalar FFmpeg
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-
       - name: Iniciar Bot de Reels
         env:
           GDRIVE_JSON_B64: ${{ secrets.GDRIVE_JSON_B64 }}

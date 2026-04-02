@@ -11,7 +11,29 @@ class MetaAPI:
         self.ig_account_id = ig_account_id or IG_ACCOUNT_ID
         self.fb_page_id = fb_page_id or FB_PAGE_ID
         self.base_url = "https://graph.facebook.com/v25.0"
-        
+    def _get_public_url(self, item_id, platform="ig"):
+                    if platform == "ig":
+                                    return f"https://www.instagram.com/reels/{item_id}/"
+                    else:
+                                    return f"https://www.facebook.com/{self.fb_page_id}/videos/{item_id}/"
+                            
+        def create_ig_reels_container(self, video_path, caption, media_type="VIDEO"):
+                    if media_type == "IMAGE":
+                                    return self.upload_ig_image(video_path, caption)
+                                return self.upload_ig_reels_resumable(video_path, caption)
+
+    def create_ig_carousel_container(self, files, caption):
+                return self.upload_ig_carousel(files, caption)
+
+    def publish_ig_reels(self, container_id):
+                return {"id": container_id}
+
+    def create_fb_reels_container(self, video_path, caption):
+                return self.upload_fb_reels_resumable(video_path, caption)
+
+    def publish_fb_reels(self, container_id):
+                return {"id": container_id}
+
     def _check_status(self, container_id, platform="ig"):
         """Verifica se o video terminou de ser processado pela Meta"""
         if platform == "ig":
