@@ -1,0 +1,110 @@
+================================================================================
+          🤖 MANUAL MESTRE: CONFIGURAÇÃO DO ZERO AO FUNCIONAMENTO 🚀
+================================================================================
+Este manual ensina como configurar e entender todo o mecanismo de agendamento 
+e postagem automática (Reels, Imagens, Carrosséis) no Instagram e Facebook.
+Sistema: NUVEM HÍBRIDA (Desktop para agendar + GitHub para postar).
+================================================================================
+
+--------------------------------------------------------------------------------
+1. O QUE VOCÊ PRECISA (FERRAMENTAS)
+--------------------------------------------------------------------------------
+
+- PYTHON (v3.10+): Motor local para rodar a interface (GUI).
+- GIT: Necessário para empurrar sua agenda para a nuvem.
+- GOOGLE CLOUD CONSOLE: Para a API do Google Drive (armazenamento).
+- META FOR DEVELOPERS: Para a API do Instagram/Facebook (postagem).
+- GITHUB: Para hospedar o código e rodar a automação 24h/dia (Actions).
+- GOOGLE APPS SCRIPT: Opcional, para "acordar" o bot a cada 5 minutos.
+
+--------------------------------------------------------------------------------
+2. PASSO A PASSO DA CONFIGURAÇÃO (DO ZERO)
+--------------------------------------------------------------------------------
+
+PASSO A: GOOGLE CLOUD (Para baixar vídeos do Drive)
+1. Acesse: https://console.cloud.google.com/
+2. Crie um projeto novo (ex: "Instagram Bot").
+3. Habilite a "Google Drive API".
+4. Vá em "Credenciais" > "Criar Credenciais" > "Conta de Serviço".
+5. Clique na conta criada > "Chaves" > "Adicionar Chave" > "JSON".
+6. Baixe o arquivo e renomeie para 'credentials.json' na pasta do bot.
+7. IMPORTANTE: Copie o e-mail da conta de serviço (ex: bot@projeto.iam.gserviceaccount.com) 
+   e COMPARTILHE sua pasta do Google Drive com esse e-mail como EDITOR.
+
+PASSO B: META FOR DEVELOPERS (Para postar nas redes)
+1. Acesse: https://developers.facebook.com/
+2. Crie um App do tipo "Business" (Negócios).
+3. Adicione o produto "Instagram Graph API".
+4. Use o "Gerador de Token de Acesso" ou o "Explorador" para obter um Token.
+5. Permissões necessárias: facebook_ads_management, instagram_basic, 
+   instagram_content_publish, pages_read_engagement, pages_show_list, 
+   ads_management, business_management, public_profile.
+6. Transforme seu token em "LONGA DURAÇÃO" (60 dias) nas ferramentas da Meta.
+7. Obtenha seu 'IG_ACCOUNT_ID' e 'FB_PAGE_ID' (nas configurações da Página/Conta).
+
+PASSO C: GITHUB (O Cérebro na Nuvem)
+1. Crie um repositório PRIVADO no GitHub.
+2. Suba todos os arquivos do bot para lá.
+3. Gere um 'Personal Access Token (PAT)' (em Settings > Developer Settings).
+4. No Repositório, vá em Settings > Secrets and Variables > Actions.
+5. Adicione os Segredos (Secrets):
+   - ACCOUNTS_JSON: O conteúdo do seu arquivo 'accounts.json'.
+   - GDRIVE_JSON_B64: O seu 'credentials.json' convertido para Base64.
+   - GDRIVE_FOLDER_ID: O ID da pasta do Google Drive.
+   - GITHUB_TOKEN: Seu Token de Acesso Pessoal (PAT).
+
+--------------------------------------------------------------------------------
+3. COMO O MECANISMO FUNCIONA (FLUXO COMPLETO)
+--------------------------------------------------------------------------------
+
+FASE 1: AGENDAMENTO LOCAL (Seu PC)
+- Você abre o 'gui.py'.
+- O bot usa o 'credentials.json' para ler sua pasta do Google Drive.
+- Você seleciona o dia/hora no calendário e escreve a legenda.
+- O bot salva isso no arquivo 'schedule_queue.json'.
+
+FASE 2: SINCRONIZAÇÃO (Envio para a Nuvem)
+- Ao clicar em "SINCRONIZAR NUVEM", o bot executa comandos GIT:
+  1. 'git add schedule_queue.json accounts.json' (salva sua agenda e contas).
+  2. 'git commit -m "Update schedule"' (carimba a mudança).
+  3. 'git push' (envia para o GitHub).
+- Agora sua agenda está segura na internet. Você pode desligar o PC.
+
+FASE 3: POSTAGEM AUTOMÁTICA (Nuvem GitHub)
+- O GitHub Actions (reels_bot.yml) "acorda" sozinho a cada 5-10 minutos.
+- Ele baixa o código, instala o Python e roda o 'main.py'.
+- O 'main.py' lê o 'schedule_queue.json' e pergunta: "Tem algo para postar AGORA?".
+- Se SIM: 
+  1. Ele baixa o arquivo do Google Drive.
+  2. Envia para a Meta API (Instagram/Facebook).
+  3. Salva o sucesso no 'posted_history.json'.
+  4. Remove o item da fila 'schedule_queue.json'.
+  5. Faz um 'COMMIT' e 'PUSH' de volta para o GitHub para atualizar o estado.
+
+--------------------------------------------------------------------------------
+4. TOKENS E ARQUIVOS CHAVE (ONDE ESTÁ O QUÊ?)
+--------------------------------------------------------------------------------
+
+- credentials.json: Sua chave de entrada no Google Drive (Service Account).
+- accounts.json: Lista das suas contas, tokens da Meta e IDs de cada nicho.
+- .env: Arquivo local com atalhos para os IDs e Tokens principais.
+- posted_history.json: A "memória" do bot. Evita postar o mesmo vídeo 2 vezes.
+- schedule_queue.json: A "fila" de espera de tudo que será postado.
+
+--------------------------------------------------------------------------------
+5. RESOLUÇÃO DE PROBLEMAS E MANUTENÇÃO
+--------------------------------------------------------------------------------
+
+1. O BOT NÃO POSTA MAIS: 
+   Geralmente o Token da Meta expirou. Use o painel para renovar e atualize o 'accounts.json'.
+2. VÍDEO NÃO APARECE NA GUI: 
+   Verifique se a pasta do Drive foi compartilhada com o e-mail do 'credentials.json'.
+3. ERRO NO GITHUB ACTIONS: 
+   Verifique se as 'Secrets' foram adicionadas corretamente no painel do GitHub.
+4. "CONFLITO DE SINCRONIZAÇÃO": 
+   Se você ou o bot mudarem a agenda ao mesmo tempo, use o botão "PUXAR NUVEM" 
+   para alinhar os arquivos antes de agendar novos posts.
+
+================================================================================
+                BOT CONFIGURADO! AGORA É SÓ ESCALAR! 🚀🫡
+================================================================================
