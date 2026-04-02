@@ -5,7 +5,8 @@ accounts.json
 *.log
 downloads/
 temp_upload.json
-schedule_queue.json
+# schedule_queue.json
+# posted_history.json
 credentials.json
 .git_backup/
 .git_backup_master/
