@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.env
+accounts.json
+*.log
+downloads/
+temp_upload.json
+schedule_queue.json
+credentials.json
+.git_backup/
+.git_backup_master/
+validate_tokens.py
+*.tmp
+*.bak
