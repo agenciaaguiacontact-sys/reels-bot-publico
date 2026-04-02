@@ -3596,11 +3596,11 @@ class MetaStudioApp(ctk.CTk):
     
     def open_github_actions(self):
         """Abre o GitHub Actions no navegador"""
-        webbrowser.open("https://github.com/agenciaaguiacontact-sys/ig-fb-reels-bot/actions")
+        webbrowser.open("https://github.com/agenciaaguiacontact-sys/reels-bot-publico/actions")
     
     def open_schedule_file(self):
         """Abre o arquivo de fila no GitHub"""
-        webbrowser.open("https://github.com/agenciaaguiacontact-sys/ig-fb-reels-bot/blob/main/schedule_queue.json")
+        webbrowser.open("https://github.com/agenciaaguiacontact-sys/reels-bot-publico/blob/main/schedule_queue.json")
 
 
 if __name__ == "__main__":
