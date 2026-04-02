@@ -69,7 +69,12 @@ def main():
     for job in queue:
         schedule_time = job.get("schedule_time", 0)
         
+        # Debug de tempo
+        dt_local = datetime.datetime.fromtimestamp(schedule_time)
+        dt_utc = datetime.datetime.fromtimestamp(schedule_time, datetime.timezone.utc)
+        
         if schedule_time <= current_time:
+            print(f"✅ [TEMPO ATINGIDO] {job.get('filename')} (Agendado: {dt_local.strftime('%H:%M:%S')} Local / {dt_utc.strftime('%H:%M:%S')} UTC)")
             filename = job.get("filename", "video.mp4")
             file_id = job.get("gdrive_id")
             caption = job.get("caption", "")
@@ -267,7 +272,14 @@ def main():
             json.dump(new_queue, f, indent=2, ensure_ascii=False)
         with open("posted_history.json", "w", encoding="utf-8") as f:
             json.dump(posted_history[-500:], f, indent=2) # Mantem apenas os ultimos 500
-        
+    
+    if not posted_any:
+        print("ℹ️ Nenhum vídeo pronto para postar (baseado no horário agendado).")
+        if queue:
+            next_job = min(queue, key=lambda x: x.get("schedule_time", 0))
+            nt = datetime.datetime.fromtimestamp(next_job["schedule_time"])
+            print(f"📅 Próximo agendamento: {next_job['filename']} às {nt.strftime('%H:%M:%S')} (Local/Runner Time)")
+    
     print("\n=== Ciclo da Nuvem Concluído ===")
 
 if __name__ == "__main__":

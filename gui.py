@@ -2741,6 +2741,7 @@ class MetaStudioApp(ctk.CTk):
                     removed_count = 0
                     for item in data:
                         if "schedule_time" in item:
+                            # Converte timestamp UTC para datetime local
                             item["schedule_time"] = datetime.datetime.fromtimestamp(item["schedule_time"])
                         
                         # Verificar se já foi postado
@@ -2790,6 +2791,7 @@ class MetaStudioApp(ctk.CTk):
         for s in self.schedule:
             item = s.copy()
             if isinstance(item["schedule_time"], datetime.datetime):
+                # Converte datetime local para timestamp UTC
                 item["schedule_time"] = int(item["schedule_time"].timestamp())
             data.append(item)
         
