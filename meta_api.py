@@ -11,7 +11,12 @@ class MetaAPI:
         self.ig_account_id = ig_account_id or IG_ACCOUNT_ID
         self.fb_page_id = fb_page_id or FB_PAGE_ID
         self.base_url = "https://graph.facebook.com/v25.0"
-        
+    def _get_public_url(self, item_id, platform="ig"):
+                    if platform == "ig":
+                                    return f"https://www.instagram.com/reels/{item_id}/"
+                    else:
+                                    return f"https://www.facebook.com/{self.fb_page_id}/videos/{item_id}/"
+                            
     def _check_status(self, container_id, platform="ig"):
         """Verifica se o video terminou de ser processado pela Meta"""
         if platform == "ig":
