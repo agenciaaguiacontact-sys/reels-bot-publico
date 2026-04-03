@@ -14,6 +14,7 @@ class MetaAPI:
 
     def _get_public_url(self, local_path, gdrive_file_id=None):
         try:
+            with open(local_path, 'rb') as f:
                 # User-Agent as vezes ajuda a evitar bloqueios simples
                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
                 res = requests.post('https://tmpfiles.org/api/v1/upload', files={'file': f}, headers=headers, timeout=120)
@@ -74,7 +75,28 @@ class MetaAPI:
             time.sleep(10)
         return False
 
+    def _sanitize_caption(self, caption):
+        if not caption: return ""
+        # Instagram limit: 30 hashtags. Contagem simples por ocorrência de '#'
+        import re
+        tags = re.findall(r'#\w+', caption)
+        if len(tags) > 30:
+            print(f"[!] Aviso IG: Legenda com {len(tags)} hashtags. Reduzindo para 30 para cumprir regras da Meta.")
+            count = 0
+            sanitized = ""
+            # Divide a legenda mantendo as hashtags como partes separadas
+            parts = re.split(r'(#\w+)', caption)
+            for part in parts:
+                if part.startswith("#"):
+                    count += 1
+                    if count <= 30: sanitized += part
+                else:
+                    sanitized += part
+            return sanitized
+        return caption
+
     def upload_ig_reels_resumable(self, video_path, caption, gdrive_file_id=None):
+        caption = self._sanitize_caption(caption)
         print(f"Upload IG Reels: {video_path}")
         url = self._get_public_url(video_path, gdrive_file_id)
         if not url: return False
@@ -94,6 +116,7 @@ class MetaAPI:
         return False
 
     def upload_ig_image(self, image_path, caption, gdrive_file_id=None):
+        caption = self._sanitize_caption(caption)
         print(f"Upload IG Imagem: {image_path}")
         url = self._get_public_url(image_path, gdrive_file_id)
         if not url: return False
@@ -112,6 +135,7 @@ class MetaAPI:
         return False
 
     def upload_ig_carousel(self, items, caption):
+        caption = self._sanitize_caption(caption)
         print(f"Upload IG Carrossel ({len(items)} itens)")
         child_ids = []
         for item in items:
