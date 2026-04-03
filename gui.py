@@ -247,9 +247,17 @@ class VideoCard(ModernCard):
             # Verificar se está agendado
             scheduled = None
             for s in app.schedule:
+                # Match direto (Top-level)
                 if (video_id and s.get("gdrive_id") == video_id) or (s.get("filename") == video_name):
                     scheduled = s
                     break
+                
+                # Match dentro de Carrossel Agrupado
+                if s.get("media_type") == "CAROUSEL" and ("_carousel_items_gdrive" in s or "items" in s):
+                    carousel_items = s.get("_carousel_items_gdrive", s.get("items", []))
+                    if any((video_id and item.get("gdrive_id") == video_id) or (item.get("filename") == video_name) for item in carousel_items):
+                        scheduled = s
+                        break
             
             if posted:
                 # Postado
@@ -3176,10 +3184,20 @@ class MetaStudioApp(ctk.CTk):
             )
             
             # Verificar se já está agendado
-            is_scheduled = any(
-                (video_id and s.get("gdrive_id") == video_id) or (s.get("filename") == video_name)
-                for s in self.schedule
-            )
+            is_scheduled = False
+            for s in self.schedule:
+                # Match direto
+                match_direct = (video_id and s.get("gdrive_id") == video_id) or (s.get("filename") == video_name)
+                
+                # Match dentro de carrossel
+                match_carousel = False
+                if s.get("media_type") == "CAROUSEL" and ("_carousel_items_gdrive" in s or "items" in s):
+                    carousel_items = s.get("_carousel_items_gdrive", s.get("items", []))
+                    match_carousel = any((video_id and item.get("gdrive_id") == video_id) or (item.get("filename") == video_name) for item in carousel_items)
+                
+                if match_direct or match_carousel:
+                    is_scheduled = True
+                    break
             
             if is_posted:
                 skipped_videos.append(f"✅ {video_name} (já postado)")
