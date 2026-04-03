@@ -58,19 +58,33 @@ class GoogleDriveAPI:
             print(f"Erro ao listar arquivos do Drive: {e}")
             return all_items
 
-    def download_file(self, file_id, file_name, destination_folder='./downloads'):
-        if not self.service: return None
-        if not os.path.exists(destination_folder): os.makedirs(destination_folder)
-        file_path = os.path.join(destination_folder, file_name)
+    def download_file(self, file_id, file_path):
+        """Baixa um arquivo do Drive para o caminho especificado.
+        
+        Args:
+            file_id: ID do arquivo no Google Drive
+            file_path: Caminho completo de destino (ex: '.tmp/video.mp4')
+        """
+        if not self.service or not file_id:
+            return None
+        # Garante que o diretório de destino existe
+        dest_dir = os.path.dirname(file_path)
+        if dest_dir:
+            os.makedirs(dest_dir, exist_ok=True)
+        file_name = os.path.basename(file_path)
         print(f"Baixando {file_name}...")
-        request = self.service.files().get_media(fileId=file_id)
-        fh = io.FileIO(file_path, mode='wb')
-        downloader = MediaIoBaseDownload(fh, request)
-        done = False
-        while done is False:
-            status, done = downloader.next_chunk()
-        print(f"Download concluido: {file_path}")
-        return file_path
+        try:
+            request = self.service.files().get_media(fileId=file_id)
+            fh = io.FileIO(file_path, mode='wb')
+            downloader = MediaIoBaseDownload(fh, request)
+            done = False
+            while done is False:
+                status, done = downloader.next_chunk()
+            print(f"Download concluido: {file_path}")
+            return file_path
+        except Exception as e:
+            print(f"Erro ao baixar {file_name}: {e}")
+            return None
 
     def delete_file(self, file_id):
         if not self.service: return
