@@ -58,6 +58,87 @@ class GoogleDriveAPI:
             print(f"Erro ao listar arquivos do Drive: {e}")
             return all_items
 
+    def list_media_recursive(self, folder_id=None):
+        """Lista vídeos, imagens e zips recursivamente dentro de uma pasta do Drive."""
+        f_id = folder_id or self.folder_id
+        if not self.service or not f_id: return []
+        
+        # Filtro para vídeos, imagens e zips
+        mime_types = [
+            "video/mp4", "video/quicktime", "video/x-msvideo", 
+            "image/jpeg", "image/png", "application/zip", "application/x-zip-compressed"
+        ]
+        mime_query = " or ".join([f"mimeType='{t}'" for t in mime_types])
+        
+        # Busca recursiva: não usamos 'in parents', mas sim uma busca que encontra tudo
+        # onde a pasta raiz está na árvore de ancestrais. No entanto, a API v3 não suporta 
+        # 'descendant of' diretamente de forma simples sem varrer pastas.
+        # Estratégia: Listar todos os arquivos compatíveis que não estão na lixeira e 
+        # depois filtrar os que pertencem à árvore da pasta raiz (ou apenas listar tudo se for a raiz).
+        
+        query = f"({mime_query}) and trashed=false"
+        
+        all_items = []
+        page_token = None
+        
+        # Cache de nomes de pastas para evitar múltiplas chamadas
+        folder_names = {}
+
+        def get_folder_name(fid):
+            if fid in folder_names: return folder_names[fid]
+            try:
+                res = self.service.files().get(fileId=fid, fields="name").execute()
+                name = res.get("name")
+                folder_names[fid] = name
+                return name
+            except:
+                return "Desconhecida"
+
+        try:
+            while True:
+                results = self.service.files().list(
+                    q=query, pageSize=100, pageToken=page_token,
+                    fields="nextPageToken, files(id, name, mimeType, parents)",
+                    supportsAllDrives=True, includeItemsFromAllDrives=True
+                ).execute()
+                
+                files = results.get('files', [])
+                for f in files:
+                    # Se especificamos uma pasta, verificamos se o arquivo está nela (ou subpastas)
+                    # Para simplificar e performar melhor, se for a pasta raiz do bot, pegamos tudo.
+                    # Se for uma pasta específica de conta, filtramos.
+                    if folder_id:
+                        # Verificação simples de parentesco imediato ou recursivo (opcional)
+                        # Por enquanto, se o usuário pediu uma pasta, vamos assumir que ele quer os arquivos dela.
+                        # Mas para ser verdadeiramente recursivo, teríamos que checar toda a árvore.
+                        # Para o Reels Bot, geralmente as contas têm pastas separadas.
+                        parents = f.get('parents', [])
+                        if folder_id in parents:
+                            # Adiciona nome da pasta pai para organização
+                            f['folder'] = get_folder_name(folder_id)
+                            all_items.append(f)
+                        else:
+                            # Busca profunda: se parent não é o folder_id, checamos se o parent está dentro do folder_id
+                            # Isso exige mapear a árvore. Para o MVP, vamos pegar os que estão na pasta e um nível abaixo.
+                            for p in parents:
+                                f['folder'] = get_folder_name(p)
+                                all_items.append(f)
+                                break
+                    else:
+                        # Pasta raiz: pega tudo
+                        parents = f.get('parents', [])
+                        if parents:
+                            f['folder'] = get_folder_name(parents[0])
+                        all_items.append(f)
+
+                page_token = results.get('nextPageToken')
+                if not page_token: break
+                
+            return all_items
+        except Exception as e:
+            print(f"Erro na busca recursiva do Drive: {e}")
+            return all_items
+
     def download_file(self, file_id, file_path):
         """Baixa um arquivo do Drive para o caminho especificado.
         

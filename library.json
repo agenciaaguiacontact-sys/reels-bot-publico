@@ -610,5 +610,23 @@
     "mimeType": "image/png",
     "account": null,
     "folder": "DENTISTA CURIOSO"
+  },
+  {
+    "path": "Design sem nome.zip",
+    "filename": "Design sem nome.zip",
+    "caption": "",
+    "gdrive_id": "19V3-lu-ona-GlYOo6EDidQuRkYsvoLAy",
+    "account": null,
+    "folder": "VIDEOS REELS",
+    "mime_type": "application/x-zip-compressed"
+  },
+  {
+    "path": "JOGOSXVIDAREAL.mp4",
+    "filename": "JOGOSXVIDAREAL.mp4",
+    "caption": "",
+    "gdrive_id": "15M-3PomwbqhKLDUgxDhhqmXG7uXhWdgT",
+    "account": null,
+    "folder": "Bot - Rainha da shopee",
+    "mime_type": "video/mp4"
   }
 ]

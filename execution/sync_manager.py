@@ -19,7 +19,7 @@ if sys.stdout.encoding != 'utf-8':
 
 def download_all(drive):
     print("Sincronizando do GDrive (Download)...")
-    files = ['schedule_queue.json', 'accounts.json', 'posted_history.json']
+    files = ['schedule_queue.json', 'accounts.json', 'posted_history.json', 'library.json']
     for f in files:
         try:
             data = drive.get_json(f)
@@ -34,7 +34,7 @@ def download_all(drive):
 
 def upload_all(drive):
     print("Sincronizando para o GDrive (Upload)...")
-    files = ['schedule_queue.json', 'accounts.json', 'posted_history.json'] # Incluindo accounts.json para Cloud
+    files = ['schedule_queue.json', 'accounts.json', 'posted_history.json', 'library.json'] # Incluindo accounts.json e library.json para Cloud
     for f in files:
         try:
             if os.path.exists(f):

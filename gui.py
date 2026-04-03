@@ -1215,6 +1215,15 @@ class LibraryView(ctk.CTkFrame):
             command=app.add_videos,
             width=140
         ).pack(side="left", padx=5)
+
+        ModernButton(
+            actions,
+            text="Pasta Local",
+            icon="📁",
+            style="secondary",
+            command=app.add_folder,
+            width=140
+        ).pack(side="left", padx=5)
         
         ModernButton(
             actions,
@@ -1241,6 +1250,23 @@ class LibraryView(ctk.CTkFrame):
         search_inner = ctk.CTkFrame(search_frame, fg_color="transparent")
         search_inner.pack(fill="x", padx=20, pady=15)
         
+        # Filtro de tipo de mídia
+        self.filter_var = ctk.StringVar(value="Tudo")
+        self.media_filter = ctk.CTkSegmentedButton(
+            search_inner,
+            values=["Tudo", "Vídeos", "Imagens"],
+            command=lambda v: self.refresh(),
+            variable=self.filter_var,
+            height=40,
+            corner_radius=10,
+            fg_color=BG_SECONDARY,
+            selected_color=ACCENT_BLUE,
+            selected_hover_color=ACCENT_PURPLE,
+            unselected_color=BG_SECONDARY,
+            unselected_hover_color=HOVER_COLOR
+        )
+        self.media_filter.pack(side="left", padx=(0, 15))
+
         self.search_entry = ctk.CTkEntry(
             search_inner,
             placeholder_text="🔍 Buscar vídeos...",
@@ -1328,12 +1354,28 @@ class LibraryView(ctk.CTkFrame):
         for widget in self.videos_scroll.winfo_children():
             widget.destroy()
         
-        # Filtrar por busca
+        # Filtrar por busca e tipo de mídia
         search_term = self.search_entry.get().lower()
-        filtered_videos = [
-            v for v in self.app.videos
-            if search_term in v.get("filename", "").lower()
-        ]
+        media_filter = self.filter_var.get()
+        
+        filtered_videos = []
+        for v in self.app.videos:
+            filename = v.get("filename", "").lower()
+            
+            # Filtro de texto
+            if search_term and search_term not in filename:
+                continue
+                
+            # Filtro de tipo
+            is_video = filename.endswith((".mp4", ".mov", ".avi", ".mkv"))
+            is_image = filename.endswith((".jpg", ".jpeg", ".png", ".webp", ".zip")) or "[CARROSSEL]" in filename.upper()
+            
+            if media_filter == "Vídeos" and not is_video:
+                continue
+            if media_filter == "Imagens" and not is_image:
+                continue
+                
+            filtered_videos.append(v)
         
         if not filtered_videos:
             self.pagination_frame.pack_forget()
@@ -2875,11 +2917,14 @@ class MetaStudioApp(ctk.CTk):
     # === ACTIONS ===
     
     def add_videos(self):
-        """Adiciona vídeos do computador"""
-        files = filedialog.askopenfilenames(filetypes=[("Vídeos", "*.mp4 *.mov")])
+        """Adiciona vídeos do computador (arquivos individuais)"""
+        files = filedialog.askopenfilenames(
+            title="Selecionar Mídias",
+            filetypes=[("Mídias compatíveis", "*.mp4 *.mov *.jpg *.jpeg *.png *.zip")]
+        )
         for f in files:
             name = os.path.basename(f)
-            if not any(v['path'] == f for v in self.videos):
+            if not any(v.get('path') == f for v in self.videos):
                 self.videos.append({
                     "path": f,
                     "filename": name,
@@ -2891,7 +2936,39 @@ class MetaStudioApp(ctk.CTk):
         self.views["library"].refresh()
         
         if files:
-            messagebox.showinfo("Sucesso", f"{len(files)} vídeo(s) adicionado(s)!")
+            self.show_toast(f"✅ {len(files)} mídia(s) adicionada(s)")
+
+    def add_folder(self):
+        """Adiciona mídias de uma pasta e suas subpastas (recursivo local)"""
+        folder = filedialog.askdirectory(title="Selecionar Pasta para Varredura")
+        if not folder:
+            return
+            
+        extensions = (".mp4", ".mov", ".jpg", ".jpeg", ".png", ".zip")
+        added = 0
+        
+        for root, dirs, files in os.walk(folder):
+            for f in files:
+                if f.lower().endswith(extensions):
+                    path = os.path.join(root, f)
+                    if not any(v.get('path') == path for v in self.videos):
+                        # Nome da pasta para organização
+                        rel_folder = os.path.basename(root)
+                        self.videos.append({
+                            "path": path,
+                            "filename": f,
+                            "caption": "",
+                            "gdrive_id": None,
+                            "folder": rel_folder if rel_folder != os.path.basename(folder) else "Local"
+                        })
+                        added += 1
+                        
+        if added > 0:
+            self.save_library()
+            self.views["library"].refresh()
+            messagebox.showinfo("Sucesso", f"Encontradas {added} novas mídias em subpastas!")
+        else:
+            messagebox.showinfo("Info", "Nenhuma mídia nova compatível encontrada nesta pasta.")
     
     def pull_from_drive(self, account_name="Geral"):
         """Puxa vídeos do Google Drive incluindo subpastas"""
@@ -2904,8 +2981,8 @@ class MetaStudioApp(ctk.CTk):
                         folder_id = acc.get("gdrive_folder_id")
                 
                 drive = GoogleDriveAPI()
-                # Usar a nova função que lista vídeos com informação de subpasta
-                files = drive.list_mp4_files_with_folders(folder_id=folder_id)
+                # Usar a nova função que lista mídias recursivamente
+                files = drive.list_media_recursive(folder_id=folder_id)
                 added = 0
                 
                 for v in files:
@@ -2916,7 +2993,8 @@ class MetaStudioApp(ctk.CTk):
                             "caption": "",
                             "gdrive_id": v['id'],
                             "account": account_name if account_name != "Geral" else None,
-                            "folder": v.get('folder')  # Nome da subpasta
+                            "folder": v.get('folder'),  # Nome da subpasta retornado pela API
+                            "mime_type": v.get('mimeType')
                         })
                         added += 1
                 
@@ -3114,7 +3192,7 @@ class MetaStudioApp(ctk.CTk):
             self.save_schedule()
             self.views["schedule"].refresh()
             self.views["dashboard"].refresh()
-    
+
     def clean_posted_from_schedule(self):
         """Remove da fila de agendamentos os vídeos que já foram postados"""
         if not self.schedule:
@@ -3158,7 +3236,7 @@ class MetaStudioApp(ctk.CTk):
             self.views["dashboard"].refresh()
             
             msg = f"✅ Limpeza concluída!\n\n"
-            msg += f"🗑️ {removed_count} vídeo(s) já postado(s) removido(s)\n"
+            msg += f"��️ {removed_count} vídeo(s) já postado(s) removido(s)\n"
             msg += f"📋 {len(new_schedule)} agendamento(s) restante(s)\n\n"
             
             if removed_videos:
@@ -3175,171 +3253,103 @@ class MetaStudioApp(ctk.CTk):
             messagebox.showinfo("Info", "✅ Nenhum vídeo já postado encontrado na fila!\n\nTodos os agendamentos são válidos.")
     
     def sync_cloud(self):
-        """Sincroniza com o GitHub - VERSÃO SIMPLIFICADA E SEGURA"""
+        """Sincroniza com o GitHub e Google Drive - VERSÃO ROBUSTA"""
         self.log("=" * 60)
-        self.log("🔄 SINCRONIZAÇÃO COM A NUVEM")
+        self.log("🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)")
         self.log("=" * 60)
         
         now = datetime.datetime.now()
         self.log(f"🕐 Horário: {now.strftime('%d/%m/%Y %H:%M:%S')}")
         
-        # PASSO 1: Salvar dados locais COM BACKUP
+        # PASSO 1: Salvar dados locais
         self.log("💾 Salvando dados locais...")
         
-        # SEGURANÇA: Verificar se o schedule está vazio MAS o arquivo local tem dados
-        # Isso evita que um erro de carregamento zere o arquivo ao salvar
         if not self.schedule and os.path.exists("schedule_queue.json"):
             try:
                 with open("schedule_queue.json", "r", encoding="utf-8") as f:
                     data = json.load(f)
                     if data and len(data) > 0:
-                        self.log("⚠️ AVISO: Schedule local vazio mas arquivo tem dados. Carregando antes de salvar.")
+                        self.log("⚠️ AVISO: Recarregando schedule antes de salvar para evitar perda.")
                         self.schedule = self.load_schedule()
-            except:
-                pass
+            except: pass
                 
         self.save_schedule()
         self.save_accounts()
+        self.save_library() 
         
         def task():
             try:
-                # PASSO 2: Sincronização com Google Drive (Contas, Fila e Histórico)
+                # PASSO 2: Sincronização com Google Drive
                 self.log("☁️ Sincronizando com Google Drive...")
                 drive_result = subprocess.run(
                     [sys.executable, "execution/sync_manager.py", "--action", "upload"],
-                    capture_output=True,
-                    text=True,
-                    encoding="utf-8",
-                    shell=True
+                    capture_output=True, text=True, encoding="utf-8", shell=True
                 )
                 if drive_result.returncode == 0:
                     self.log("✅ Dados sincronizados no Drive")
                 else:
                     self.log(f"⚠️ Aviso Drive: {drive_result.stderr}")
 
-                # PASSO 3: Adicionar tudo ao Git
-                self.log("📦 Adicionando arquivos ao Git...")
-                subprocess.run(["git", "add", "."], capture_output=True, encoding="utf-8", shell=True)
+                # PASSO 3: Git Add e Commit
+                self.log("📦 Preparando arquivos para GitHub...")
+                subprocess.run(["git", "add", "."], capture_output=True, shell=True)
                 
-                # PASSO 4: Commit
-                self.log("📝 Criando commit...")
+                commit_msg = f"sync {now.strftime('%Y-%m-%d %H:%M:%S')} [skip ci]"
                 commit_result = subprocess.run(
-                    ["git", "commit", "-m", f"sync {now.strftime('%Y-%m-%d %H:%M:%S')} [skip ci]"],
-                    capture_output=True,
-                    text=True,
-                    encoding="utf-8",
-                    shell=True
+                    ["git", "commit", "-m", commit_msg],
+                    capture_output=True, text=True, encoding="utf-8", shell=True
                 )
                 
                 if "nothing to commit" in commit_result.stdout:
-                    self.log("ℹ️ Nenhuma mudança para commitar")
+                    self.log("ℹ️ Nenhuma mudança local nova para o GitHub")
                 else:
-                    self.log("✅ Commit criado")
+                    self.log("✅ Commit criado localmente")
                 
-                # PASSO 5: Pull com MERGE (não rebase)
-                self.log("📥 Sincronizando com GitHub...")
+                # PASSO 4: Git Pull (Download)
+                self.log("📥 Sincronizando com GitHub (Download)...")
                 pull_result = subprocess.run(
-                    ["git", "pull", "--no-rebase"],
-                    capture_output=True,
-                    text=True,
-                    encoding="utf-8",
-                    shell=True
+                    ["git", "pull", "--no-rebase", "origin", "main"],
+                    capture_output=True, text=True, encoding="utf-8", shell=True
                 )
                 
-                # Se houver conflito, resolver com MERGE inteligente
                 if pull_result.returncode != 0:
-                    if "CONFLICT" in pull_result.stdout or "CONFLICT" in pull_result.stderr:
-                        self.log("⚠️ Conflito detectado - resolvendo com merge inteligente...")
-                        
-                        for file_name in ["posted_history.json", "schedule_queue.json", "library.json"]:
-                            try:
-                                # 1. Pegar versão remota
-                                remote_raw = subprocess.run(
-                                    ["git", "show", f"origin/main:{file_name}"],
-                                    capture_output=True, text=True, shell=True
-                                )
-                                if remote_raw.returncode != 0: continue
-                                remote_json = json.loads(remote_raw.stdout)
-                                
-                                # 2. Pegar versão local (que já foi salva no passo 1)
-                                with open(file_name, "r", encoding="utf-8") as f:
-                                    local_json = json.load(f)
-                                
-                                # 3. Mesclar
-                                ftype = file_name.split("_")[0] if "_" in file_name else file_name.split(".")[0]
-                                if ftype == "schedule":
-                                    # Converter datetime objetos em int para o merge
-                                    for item in local_json:
-                                        if isinstance(item.get("schedule_time"), datetime.datetime):
-                                            item["schedule_time"] = int(item["schedule_time"].timestamp())
-                                
-                                merged_json = self.merge_json_data(ftype, local_json, remote_json)
-                                
-                                # 4. Salvar e adicionar ao git
-                                with open(file_name, "w", encoding="utf-8") as f:
-                                    json.dump(merged_json, f, indent=2, ensure_ascii=False)
-                                subprocess.run(["git", "add", file_name], capture_output=True, shell=True)
-                                
-                            except Exception as em:
-                                self.log(f"❌ Erro ao mesclar {file_name}: {em}")
-                        
-                        # Concluir o merge
-                        subprocess.run(["git", "commit", "--no-edit"], capture_output=True, shell=True)
-                        self.log("✅ Conflito resolvido com merge inteligente")
+                    err = (pull_result.stderr or pull_result.stdout).lower()
+                    if "conflict" in err:
+                        self.log("⚠️ Conflito no GitHub. Tentando resolver automaticamente...")
+                        subprocess.run(["git", "checkout", "--ours", "*.json"], shell=True)
+                        subprocess.run(["git", "add", "."], shell=True)
+                        subprocess.run(["git", "commit", "-m", "fix: resolve conflicts in json files"], shell=True)
+                        self.log("✅ Conflitos resolvidos (prioridade local para JSON)")
+                    else:
+                        self.log(f"⚠️ Aviso Git Pull: {pull_result.stderr}")
                 else:
-                    self.log("✅ Pull concluído")
-                
-                # PASSO 6: Push
-                self.log("📤 Enviando para GitHub...")
+                    self.log("✅ Sincronizado com remoto")
+
+                # PASSO 5: Git Push (Upload)
+                self.log("📤 Enviando para GitHub (Upload)...")
                 push_result = subprocess.run(
-                    ["git", "push"],
-                    capture_output=True,
-                    text=True,
-                    encoding="utf-8",
-                    shell=True
+                    ["git", "push", "origin", "main"],
+                    capture_output=True, text=True, encoding="utf-8", shell=True
                 )
                 
                 if push_result.returncode == 0:
-                    self.log("=" * 60)
-                    self.log("� SINCRONIZAÇÃO COMPLETA!")
-                    self.log("=" * 60)
-                    
-                    # Recarregar dados
+                    self.log("🚀 Sincronização COMPLETA!")
                     self.schedule = self.load_schedule()
                     self.videos = self.load_library()
                     self.history = self.load_history()
-                    self.accounts = self.load_accounts()
-                    
-                    # Atualizar interface
                     self.after(0, lambda: self.views["schedule"].refresh())
                     self.after(0, lambda: self.views["dashboard"].refresh())
                     self.after(0, lambda: self.views["library"].refresh())
-                    
-                    count = len(self.schedule)
-                    posted = len(self.history)
-                    
-                    self.after(0, lambda: messagebox.showinfo(
-                        "Sucesso",
-                        f"✅ Sincronizado!\n\n"
-                        f"� {count} agendados\n"
-                        f"✅ {posted} postados\n"
-                        f"🕐 {now.strftime('%d/%m/%Y %H:%M')}"
-                    ))
+                    self.after(0, lambda: self.show_toast("✅ Tudo sincronizado com sucesso!", style="success"))
                 else:
-                    self.log(f"❌ Erro no push: {push_result.stderr}")
-                    self.after(0, lambda: messagebox.showerror(
-                        "Erro",
-                        f"Falha ao enviar para GitHub:\n\n{push_result.stderr}"
-                    ))
-                    
+                    self.log(f"⚠️ Falha no Push: {push_result.stderr}")
+                    self.after(0, lambda: self.show_toast("⚠️ Erro no GitHub (Push)", style="danger"))
+
             except Exception as e:
-                self.log(f"❌ Erro: {e}")
-                import traceback
-                traceback.print_exc()
-                self.after(0, lambda: messagebox.showerror("Erro", str(e)))
+                self.log(f"❌ Erro crítico na sincronização: {e}")
+                self.after(0, lambda: messagebox.showerror("Erro de Sincronização", str(e)))
         
         threading.Thread(target=task, daemon=True).start()
-    
     def run_bot_now(self):
         """Executa o robô imediatamente (simula o que o GitHub Actions faz)"""
         if not self.schedule:
