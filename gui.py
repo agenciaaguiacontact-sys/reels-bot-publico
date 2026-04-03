@@ -396,6 +396,31 @@ class ScheduleCard(ModernCard):
                 hover_color="#dc2626",
                 command=on_remove
             ).pack(side="left", padx=2)
+        
+        # Botão Marcar como Postado (apenas se estiver no passado)
+        if dt < datetime.datetime.now():
+            # Acessar app através do parent do parent (ScheduleView -> MetaStudioApp)
+            app = parent.master.master if hasattr(parent.master, 'master') else None
+            # Tentar encontrar o app de forma mais robusta buscando nos ancestrais
+            curr = parent
+            while curr and not hasattr(curr, 'mark_as_posted'):
+                if hasattr(curr, 'master'):
+                    curr = curr.master
+                else:
+                    curr = None
+                    break
+            
+            if curr and hasattr(curr, 'mark_as_posted'):
+                 ctk.CTkButton(
+                    actions_frame,
+                    text="✅",
+                    width=35,
+                    height=35,
+                    corner_radius=10,
+                    fg_color=ACCENT_GREEN,
+                    hover_color="#15803d",
+                    command=lambda: curr.mark_as_posted(schedule_data)
+                ).pack(side="left", padx=2)
 
 class StatCard(ModernCard):
     """Card de estatística"""
@@ -2845,6 +2870,47 @@ class MetaStudioApp(ctk.CTk):
         return h
 
     
+    def mark_as_posted(self, item):
+        """Marca um item manualmente como postado"""
+        filename = item.get("filename", "video.mp4")
+        if not messagebox.askyesno("Confirmar", f"Deseja marcar '{filename}' como postado?\n\nEle será removido da fila e movido para o histórico."):
+            return
+            
+        self.log(f"✅ Marcando manualmente como postado: {filename}")
+        
+        # 1. Adicionar ao histórico
+        gdrive_id = item.get("gdrive_id")
+        if not any(h.get("id") == gdrive_id or h.get("filename") == filename for h in self.history):
+            self.history.append({
+                "id": gdrive_id,
+                "filename": filename,
+                "post_time": int(time.time()),
+                "status": "manual_success",
+                "accounts": [acc.get("name") for acc in item.get("accounts", [])]
+            })
+            
+        # 2. Remover da fila
+        self.schedule = [s for s in self.schedule if s != item]
+        
+        # 3. Salvar
+        self.save_history()
+        self.save_schedule()
+        
+        # 4. Refresh UI
+        self.views["schedule"].refresh()
+        self.views["dashboard"].refresh()
+        
+        self.show_toast(f"✅ Item marcado como postado!\n📋 {len(self.schedule)} restantes")
+        
+        # 5. Sincronizar (Opcional mas recomendado)
+        if messagebox.askyesno("Sincronizar", "Deseja sincronizar essa mudança com o Drive/GitHub agora?"):
+            self.sync_cloud()
+
+    def save_history(self):
+        """Salva o histórico de postagens"""
+        with open("posted_history.json", "w", encoding="utf-8") as f:
+            json.dump(self.history[-500:], f, indent=2, ensure_ascii=False)
+            
     # === ACTIONS ===
     
     def add_videos(self):
@@ -3160,6 +3226,16 @@ class MetaStudioApp(ctk.CTk):
         
         removed_count = original_count - len(new_schedule)
         
+        # Opcional: Detectar se há itens no PASSADO que não estão no histórico
+        past_items = []
+        now = datetime.datetime.now()
+        for item in new_schedule:
+            dt = item.get("schedule_time")
+            if isinstance(dt, int):
+                dt = datetime.datetime.fromtimestamp(dt)
+            if dt < now:
+                past_items.append(item)
+        
         if removed_count > 0:
             self.schedule = new_schedule
             self.save_schedule()
@@ -3179,6 +3255,31 @@ class MetaStudioApp(ctk.CTk):
             
             if messagebox.askyesno("Sincronizar", "Deseja sincronizar com a nuvem agora?"):
                 self.sync_cloud()
+        elif past_items:
+            if messagebox.askyesno("Limpeza Inteligente", f"Encontrei {len(past_items)} agendamento(s) com horário no passado que não estão no histórico.\n\nDeseja marcá-los como postados e limpá-los da fila?"):
+                for item in past_items:
+                    # Adicionar ao histórico
+                    gdrive_id = item.get("gdrive_id")
+                    filename = item.get("filename")
+                    if not any(h.get("id") == gdrive_id or h.get("filename") == filename for h in self.history):
+                        self.history.append({
+                            "id": gdrive_id,
+                            "filename": filename,
+                            "post_time": int(time.time()),
+                            "status": "auto_cleanup_past",
+                            "accounts": [acc.get("name") for acc in item.get("accounts", [])]
+                        })
+                    # Remover da fila
+                    self.schedule = [s for s in self.schedule if s != item]
+                
+                self.save_history()
+                self.save_schedule()
+                self.views["schedule"].refresh()
+                self.views["dashboard"].refresh()
+                messagebox.showinfo("Sucesso", f"✅ {len(past_items)} agendamentos antigos removidos!")
+                
+                if messagebox.askyesno("Sincronizar", "Deseja sincronizar com a nuvem agora?"):
+                    self.sync_cloud()
         else:
             messagebox.showinfo("Info", "✅ Nenhum vídeo já postado encontrado na fila!\n\nTodos os agendamentos são válidos.")
     
