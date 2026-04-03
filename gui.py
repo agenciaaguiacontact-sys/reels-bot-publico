@@ -3209,6 +3209,7 @@ class MetaStudioApp(ctk.CTk):
                     [sys.executable, "execution/sync_manager.py", "--action", "upload"],
                     capture_output=True,
                     text=True,
+                    encoding="utf-8",
                     shell=True
                 )
                 if drive_result.returncode == 0:
@@ -3218,7 +3219,7 @@ class MetaStudioApp(ctk.CTk):
 
                 # PASSO 3: Adicionar tudo ao Git
                 self.log("📦 Adicionando arquivos ao Git...")
-                subprocess.run(["git", "add", "."], capture_output=True, shell=True)
+                subprocess.run(["git", "add", "."], capture_output=True, encoding="utf-8", shell=True)
                 
                 # PASSO 4: Commit
                 self.log("📝 Criando commit...")
@@ -3226,6 +3227,7 @@ class MetaStudioApp(ctk.CTk):
                     ["git", "commit", "-m", f"sync {now.strftime('%Y-%m-%d %H:%M:%S')} [skip ci]"],
                     capture_output=True,
                     text=True,
+                    encoding="utf-8",
                     shell=True
                 )
                 
@@ -3240,6 +3242,7 @@ class MetaStudioApp(ctk.CTk):
                     ["git", "pull", "--no-rebase"],
                     capture_output=True,
                     text=True,
+                    encoding="utf-8",
                     shell=True
                 )
                 
@@ -3292,6 +3295,7 @@ class MetaStudioApp(ctk.CTk):
                     ["git", "push"],
                     capture_output=True,
                     text=True,
+                    encoding="utf-8",
                     shell=True
                 )
                 
