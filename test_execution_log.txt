@@ -1,0 +1,83 @@
+============================================================
+­ƒº¬ REELS BOT ÔÇö Bateria de Testes End-to-End
+============================================================
+Credenciais do Google Drive carregadas via Base64.
+
+­ƒô▒ Contas a testar: ['Dentista Curioso', 'Enfermagem Curiosa']
+
+­ƒÄ¿ Gerando m├¡dias de teste...
+  Ô£à V├¡deo: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_reel.mp4
+  Ô£à Imagem 1 (single): C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_image.jpg
+  Ô£à Imagem 2 (carousel item 1): C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_carousel_1.jpg
+  Ô£à Imagem 3 (carousel item 2): C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_carousel_2.jpg
+
+Ôÿü´©Å Fazendo upload dos assets de teste Para o Google Drive...
+  ­ƒôñ Tentando upload de test_reel.mp4...
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando arquivo LOCAL para teste de REELS (Bypass Drive).
+  ­ƒôñ Tentando upload de test_image.jpg...
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando arquivo LOCAL para teste de IMAGE (Bypass Drive).
+  ­ƒôñ Tentando upload de test_carousel_1.jpg...
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando item LOCAL 1 para CAROUSEL (Bypass Drive).
+  ­ƒôñ Tentando upload de test_carousel_2.jpg...
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando item LOCAL 2 para CAROUSEL (Bypass Drive).
+
+­ƒö¼ Iniciando testes diretos via MetaAPI...
+
+==================================================
+­ƒö¼ Testando: REELS | gdrive_id=None
+==================================================
+  Ô£à Usando asset local: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_reel.mp4
+  ­ƒô© IG (Dentista Curioso) ÔåÆ REELS...
+Upload IG Reels: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_reel.mp4
+DEBUG FB: Error IG: {
+  "status_code": "ERROR",
+  "id": "18003258173886815"
+}
+  ÔåÆ ÔØî FALHA
+  ­ƒôÿ FB (Dentista Curioso) ÔåÆ REELS...
+Upload FB Reels: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_reel.mp4
+  ÔåÆ ÔØî FALHA
+  Ô£à Usando asset local: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_reel.mp4
+  ­ƒô© IG (Enfermagem Curiosa) ÔåÆ REELS...
+Upload IG Reels: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_reel.mp4
+DEBUG FB: Error IG: {
+  "status_code": "ERROR",
+  "id": "18073599479540887"
+}
+  ÔåÆ ÔØî FALHA
+  ­ƒôÿ FB (Enfermagem Curiosa) ÔåÆ REELS...
+Upload FB Reels: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_reel.mp4
+  ÔåÆ ÔØî FALHA
+
+==================================================
+­ƒö¼ Testando: IMAGE | gdrive_id=None
+==================================================
+  Ô£à Usando asset local: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_image.jpg
+  ­ƒô© IG (Dentista Curioso) ÔåÆ IMAGE...
+Upload IG Imagem: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_image.jpg
+Aguardando propagacao interna Meta (15s)...
+IMAGEM PUBLICADA NO IG! ID: 18086578454461336
+  ÔåÆ Ô£à SUCESSO
+  ­ƒôÿ FB (Dentista Curioso) ÔåÆ IMAGE...
+Upload FB Imagem: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_image.jpg
+IMAGEM PUBLICADA NO FB! ID: 122180499050766925
+  ÔåÆ Ô£à SUCESSO
+  Ô£à Usando asset local: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_image.jpg
+  ­ƒô© IG (Enfermagem Curiosa) ÔåÆ IMAGE...
+Upload IG Imagem: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\ig-fb-reels-bot - Copia\.tmp\test_assets\test_image.jpg
+Aguardando propagacao interna Meta (15s)...
+IMAGEM PUBLICADA NO IG! ID: 17936094597196626
+  ÔåÆ Ô£à SUCESSO
+  ­ƒôÿ FB (Enfermagem Curiosa) ÔåÆ IMAGE...

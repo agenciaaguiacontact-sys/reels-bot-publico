@@ -4,6 +4,15 @@ import os
 import sys
 import traceback
 
+# Forçar output em UTF-8 para evitar erros de encoding no Windows (CP1252)
+if sys.stdout.encoding != 'utf-8':
+    try:
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+    except:
+        pass
+
 def run_script(script_path, args=[]):
     """Executa um script de execução determinístico com PYTHONPATH configurado."""
     # Garante que o diretório raiz esteja no PYTHONPATH para que os scripts encontrem as APIs

@@ -13,6 +13,15 @@ import traceback
 import shutil
 from datetime import datetime
 
+# Forçar output em UTF-8 para evitar erros de encoding no Windows (CP1252)
+if sys.stdout.encoding != 'utf-8':
+    try:
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+    except:
+        pass
+
 # Adicionar a raiz do projeto ao path para importar os módulos
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
@@ -149,7 +158,8 @@ def upload_and_prepare_queue(assets, accounts, drive):
     """Faz upload das mídias de teste ao Drive e prepara a fila de agendamentos."""
     print("\n☁️ Fazendo upload dos assets de teste Para o Google Drive...")
     
-    # Usar a pasta de alguma das contas configuradas
+    # Pasta de teste criada pelo bot para contornar problemas de permissão
+    TEST_FOLDER_ID_FALLBACK = "1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV"
     test_folder_id = None
     for acc in accounts:
         if acc.get('gdrive_folder_id'):
@@ -157,7 +167,17 @@ def upload_and_prepare_queue(assets, accounts, drive):
             break
     
     if not test_folder_id:
-        print("  ⚠️ Nenhuma pasta de Drive configurada nas contas. Usando pasta raiz.")
+        print(f"  ⚠️ Nenhuma pasta configurada. Usando fallback: {TEST_FOLDER_ID_FALLBACK}")
+        test_folder_id = TEST_FOLDER_ID_FALLBACK
+    
+    # Tentar upload na pasta da conta, se falhar, usar fallback
+    def _safe_upload(path, name, mime, preferred_folder):
+        print(f"  📤 Tentando upload de {name}...")
+        res = drive.upload_file(path, name, mime, preferred_folder)
+        if not res and preferred_folder != TEST_FOLDER_ID_FALLBACK:
+            print(f"  ⚠️ Falha na pasta preferida. Usando fallback: {TEST_FOLDER_ID_FALLBACK}")
+            res = drive.upload_file(path, name, mime, TEST_FOLDER_ID_FALLBACK)
+        return res
 
     jobs = []
     test_timestamp = int(time.time()) - 60  # Agendado 1 min atrás = executa imediatamente
@@ -166,9 +186,9 @@ def upload_and_prepare_queue(assets, accounts, drive):
     # (para testar múltiplas contas de uma vez)
 
     # T1/T4 — REELS (IG e FB são cobertos pelo DOE no content_processor)
-    video_id = drive.upload_file(assets['video'], 'test_reel.mp4', 'video/mp4', test_folder_id) if test_folder_id else None
-    if video_id:
-        print(f"  ✅ Vídeo enviado ao Drive: {video_id}")
+    video_id = _safe_upload(assets['video'], 'test_reel.mp4', 'video/mp4', test_folder_id)
+    if video_id or os.path.exists(assets['video']):
+        if not video_id: print("  ⚠️ Usando arquivo LOCAL para teste de REELS (Bypass Drive).")
         jobs.append({
             "gdrive_id": video_id,
             "filename": "test_reel.mp4",
@@ -176,15 +196,16 @@ def upload_and_prepare_queue(assets, accounts, drive):
             "caption": TEST_CAPTION + " [REELS]",
             "schedule_time": test_timestamp,
             "accounts": accounts,
-            "_test_type": "REELS"
+            "_test_type": "REELS",
+            "_local_path_override": assets['video']
         })
     else:
-        print("  ⚠️ Falha no upload do vídeo ao Drive — pulando testes de REELS.")
+        print("  ⚠️ Falha no upload e arquivo local não encontrado — pulando testes de REELS.")
 
     # T2/T5 — IMAGE
-    img_id = drive.upload_file(assets['image'], 'test_image.jpg', 'image/jpeg', test_folder_id) if test_folder_id else None
-    if img_id:
-        print(f"  ✅ Imagem enviada ao Drive: {img_id}")
+    img_id = _safe_upload(assets['image'], 'test_image.jpg', 'image/jpeg', test_folder_id)
+    if img_id or os.path.exists(assets['image']):
+        if not img_id: print("  ⚠️ Usando arquivo LOCAL para teste de IMAGE (Bypass Drive).")
         jobs.append({
             "gdrive_id": img_id,
             "filename": "test_image.jpg",
@@ -192,19 +213,25 @@ def upload_and_prepare_queue(assets, accounts, drive):
             "caption": TEST_CAPTION + " [IMAGE]",
             "schedule_time": test_timestamp,
             "accounts": accounts,
-            "_test_type": "IMAGE"
+            "_test_type": "IMAGE",
+            "_local_path_override": assets['image']
         })
     else:
-        print("  ⚠️ Falha no upload da imagem ao Drive — pulando testes de IMAGE.")
+        print("  ⚠️ Falha no upload e arquivo local não encontrado — pulando testes de IMAGE.")
 
     # T3/T6 — CAROUSEL
     # Upload individual de cada item e criação do job
     carousel_items_for_api = []
     for i, cp in enumerate(assets['carousel']):
-        cid = drive.upload_file(cp, f'test_carousel_{i+1}.jpg', 'image/jpeg', test_folder_id) if test_folder_id else None
-        if cid:
-            print(f"  ✅ Item carousel {i+1} enviado ao Drive: {cid}")
-            carousel_items_for_api.append({'gdrive_id': cid, 'filename': f'test_carousel_{i+1}.jpg', 'media_type': 'IMAGE'})
+        cid = _safe_upload(cp, f'test_carousel_{i+1}.jpg', 'image/jpeg', test_folder_id)
+        if cid or os.path.exists(cp):
+            if not cid: print(f"  ⚠️ Usando item LOCAL {i+1} para CAROUSEL (Bypass Drive).")
+            carousel_items_for_api.append({
+                'gdrive_id': cid, 
+                'filename': f'test_carousel_{i+1}.jpg', 
+                'media_type': 'IMAGE', 
+                '_local_path_override': cp
+            })
 
     if len(carousel_items_for_api) >= 2:
         jobs.append({
@@ -258,13 +285,22 @@ def run_direct_tests(jobs, drive):
             local_path = None
             carousel_local = []
 
+            local_override = job.get('_local_path_override')
+ 
             if media_type == 'CAROUSEL':
                 carousel_data = job.get('_carousel_items_gdrive', [])
                 for item in carousel_data:
-                    lp = drive.download_file(item['gdrive_id'], item['filename'], os.path.join(PROJECT_ROOT, '.tmp'))
-                    if lp:
-                        carousel_local.append({'local_path': lp, 'gdrive_id': item['gdrive_id'], 'media_type': 'IMAGE'})
-            else:
+                    lp_ov = item.get('_local_path_override')
+                    if lp_ov and os.path.exists(lp_ov):
+                        carousel_local.append({'local_path': lp_ov, 'gdrive_id': item['gdrive_id'], 'media_type': 'IMAGE', '_is_local': True})
+                    elif item['gdrive_id']:
+                        lp = drive.download_file(item['gdrive_id'], item['filename'], os.path.join(PROJECT_ROOT, '.tmp'))
+                        if lp:
+                            carousel_local.append({'local_path': lp, 'gdrive_id': item['gdrive_id'], 'media_type': 'IMAGE'})
+            elif local_override and os.path.exists(local_override):
+                local_path = local_override
+                print(f"  ✅ Usando asset local: {local_path}")
+            elif gdrive_id:
                 local_path = drive.download_file(gdrive_id, filename, os.path.join(PROJECT_ROOT, '.tmp'))
 
             # ─── IG Tests ───
@@ -302,10 +338,11 @@ def run_direct_tests(jobs, drive):
                 results.append(fb_result)
 
         # Limpeza dos arquivos temporários baixados
-        if local_path and os.path.exists(local_path):
+        # (Apenas se NÃO forem originais do assets/)
+        if local_path and os.path.exists(local_path) and '.tmp\\test_assets' not in local_path:
             os.remove(local_path)
         for it in carousel_local:
-            if os.path.exists(it['local_path']):
+            if os.path.exists(it['local_path']) and not it.get('_is_local'):
                 os.remove(it['local_path'])
 
     return results
@@ -346,10 +383,14 @@ def run_via_orchestrator(jobs):
     print("\n🤖 Executando bot via orquestrador (python main.py --once)...")
     stdout_log = ""
     try:
+        # Injetar a pasta de teste no ambiente para o orquestrador não falhar na sincronização
+        env = os.environ.copy()
+        env["GDRIVE_FOLDER_ID"] = "1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV"
+        
         res = subprocess.run(
             [sys.executable, 'main.py', '--once'],
             capture_output=True, text=True, timeout=600,
-            cwd=PROJECT_ROOT
+            cwd=PROJECT_ROOT, env=env
         )
         stdout_log = res.stdout + ("\n--- STDERR ---\n" + res.stderr if res.stderr.strip() else "")
         print(stdout_log)

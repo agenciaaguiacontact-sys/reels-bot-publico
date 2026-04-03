@@ -8,6 +8,15 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from gdrive_api import GoogleDriveAPI
 
+# Forçar output em UTF-8 para evitar erros de encoding no Windows (CP1252)
+if sys.stdout.encoding != 'utf-8':
+    try:
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+    except:
+        pass
+
 def download_all(drive):
     print("Sincronizando do GDrive (Download)...")
     files = ['schedule_queue.json', 'accounts.json', 'posted_history.json']
