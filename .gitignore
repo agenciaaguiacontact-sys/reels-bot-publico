@@ -1,14 +1,13 @@
 # === SEGURANÇA: Credenciais e dados sensíveis ===
 .env
 credentials.json
-accounts.json
+# accounts.json (Removido do ignore para permitir sync se o repo for privado)
 
-# === Estado local (gerenciado pelo Google Drive na nuvem) ===
-schedule_queue.json
-posted_history.json
-schedule_queue_backup_*.json
-library.json
-settings.json
+# === Estado local (Sincronizado entre Drive e GitHub) ===
+# schedule_queue.json
+# posted_history.json
+# library.json
+# settings.json
 
 # === Arquivos temporários do bot ===
 downloads/

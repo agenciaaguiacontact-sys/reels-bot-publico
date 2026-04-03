@@ -2387,6 +2387,7 @@ class MetaStudioApp(ctk.CTk):
                 self.log("🔄 Detectadas diferenças - fazendo merge...")
                 
                 # IDs que estão no local mas não no GitHub = foram postados
+                github_ids = set(item.get("gdrive_id") for item in github_schedule if item.get("gdrive_id"))
                 posted_ids = local_ids - github_ids
                 
                 if posted_ids:
@@ -2606,7 +2607,7 @@ class MetaStudioApp(ctk.CTk):
         
         threading.Thread(target=task, daemon=True).start()
     
-    def show_toast(self, message):
+    def show_toast(self, message, style="success"):
         """Mostra uma notificação toast (não modal) no canto da tela"""
         toast = ctk.CTkToplevel(self)
         toast.title("")
@@ -2624,7 +2625,10 @@ class MetaStudioApp(ctk.CTk):
         toast.configure(fg_color=BG_CARD)
         
         # Container
-        container = ctk.CTkFrame(toast, fg_color=BG_CARD, corner_radius=15, border_width=2, border_color=ACCENT_GREEN)
+        # Cores baseadas no estilo
+        colors = {"success": ACCENT_GREEN, "danger": ACCENT_RED, "warning": ACCENT_ORANGE, "info": ACCENT_BLUE}
+        border_color = colors.get(style, ACCENT_GREEN)
+        container = ctk.CTkFrame(toast, fg_color=BG_CARD, corner_radius=15, border_width=2, border_color=border_color)
         container.pack(fill="both", expand=True, padx=5, pady=5)
         
         # Mensagem

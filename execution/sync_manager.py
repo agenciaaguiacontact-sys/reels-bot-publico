@@ -32,6 +32,8 @@ def download_all(drive):
         except Exception as e:
             print(f"❌ Erro ao baixar {f}: {e}")
 
+def upload_all(drive):
+    print("Sincronizando para GDrive (Upload)...")
     # Prioriza arquivos críticos de estado
     critical_files = ['schedule_queue.json', 'posted_history.json']
     additional_files = ['accounts.json', 'library.json']
@@ -43,7 +45,7 @@ def download_all(drive):
                     data = json.load(local_f)
                 res = drive.save_json(f, data)
                 if res:
-                    print(f"✅ {f} enviado ao Drive.")
+                    print(f"✅ {item_f} enviado ao Drive.".replace("item_f", f))
                 else:
                     if f == 'library.json':
                         print(f"⚠️ Aviso: Falha ao sincronizar {f}. Pode ser ignorado se for erro de cota.")
@@ -53,6 +55,7 @@ def download_all(drive):
                 print(f"⚠️ {f} local não encontrado.")
         except Exception as e:
             print(f"❌ Erro ao enviar {f}: {e}")
+
 
 def main():
     parser = argparse.ArgumentParser(description="DOE Execution: Sync Manager")
