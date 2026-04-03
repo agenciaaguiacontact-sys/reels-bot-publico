@@ -14,12 +14,15 @@ class MetaAPI:
 
     def _get_public_url(self, local_path, gdrive_file_id=None):
         try:
-            with open(local_path, 'rb') as f:
-                res = requests.post('https://tmpfiles.org/api/v1/upload', files={'file': f}, timeout=120)
+                # User-Agent as vezes ajuda a evitar bloqueios simples
+                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+                res = requests.post('https://tmpfiles.org/api/v1/upload', files={'file': f}, headers=headers, timeout=120)
                 if res.status_code == 200:
                     r = res.json()
                     if r.get('status') == 'success':
-                        return r['data']['url'].replace('tmpfiles.org/', 'tmpfiles.org/dl/')
+                        url = r['data']['url'].replace('tmpfiles.org/', 'tmpfiles.org/dl/')
+                        print(f"✅ URL gerada (tmpfiles): {url}")
+                        return url
                     else:
                         print(f"⚠️ Aviso tmpfiles.org: {r.get('message', 'Erro desconhecido')}")
                 else:
@@ -34,8 +37,9 @@ class MetaAPI:
                 url = drive.make_file_public(gdrive_file_id)
                 # Formato lh3 costuma ser mais 'direto' para crawlers de midia
                 # mas o link drive.usercontent.google.com tambem e bom.
-                # Vamos adicionar um pequeno delay para propagacao de permissao
-                time.sleep(2)
+                # Aumentamos o delay para 5s para garantir propagação de permissão na rede GCP/Meta
+                print(f"✅ URL gerada (GDrive): {url} (Aguardando propagação 5s...)")
+                time.sleep(5)
                 return url
             except Exception as e:
                 print(f"❌ Erro ao tornar GDrive publico: {e}")

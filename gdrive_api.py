@@ -243,7 +243,8 @@ class GoogleDriveAPI:
         if not self.service: return None
         try:
             self.service.permissions().create(fileId=file_id, body={'type': 'anyone', 'role': 'reader'}, supportsAllDrives=True).execute()
-            url = f"https://drive.usercontent.google.com/download?id={file_id}&export=download&confirm=t"
+            # Formato lh3 é um link direto que o Instagram aceita bem para imagens
+            url = f"https://lh3.googleusercontent.com/d/{file_id}"
             print(f"Arquivo tornado publico: {url}")
             return url
         except Exception as e:
