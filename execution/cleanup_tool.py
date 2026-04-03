@@ -6,10 +6,19 @@ import sys
 # Garante que o diretorio raiz esteja no path, mesmo se executado de dentro de 'execution/'
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+# Forçar output em UTF-8 para evitar erros de encoding no Windows (CP1252)
+if sys.stdout.encoding != 'utf-8':
+    try:
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+    except:
+        pass
+
 from gdrive_api import GoogleDriveAPI
 
 def cleanup_tmp():
-    print("🧹 Limpando pasta .tmp...")
+    print("[-] Limpando pasta .tmp...")
     if os.path.exists('.tmp'):
         for f in os.listdir('.tmp'):
             p = os.path.join('.tmp', f)
@@ -20,7 +29,7 @@ def cleanup_tmp():
                     import shutil
                     shutil.rmtree(p)
             except Exception as e:
-                print(f"⚠️ Erro ao remover {f}: {e}")
+                print(f"[!] Erro ao remover {f}: {e}")
 
 def main():
     print("=== DOE: Cleanup Tool ===")
@@ -28,7 +37,7 @@ def main():
     
     results_path = '.tmp/last_execution_results.json'
     if not os.path.exists(results_path):
-        print("📭 Nenhum resultado de execução para processar.")
+        print("[EMPTY] Nenhum resultado de execução para processar.")
         cleanup_tmp()
         return
 
@@ -40,7 +49,7 @@ def main():
         with open('schedule_queue.json', 'r', encoding='utf-8') as f: queue = json.load(f)
         with open('posted_history.json', 'r', encoding='utf-8') as f: history = json.load(f)
     except:
-        print("❌ Erro ao carregar estados locais para limpeza.")
+        print("[ERR] Erro ao carregar estados locais para limpeza.")
         return
 
     new_queue = []
@@ -61,19 +70,19 @@ def main():
         if res['any_success']:
             if not res['failed_accounts']:
                 # Sucesso total!
-                print(f"✅ [FULL SUCCESS] {filename}. Removendo do Drive.")
+                print(f"[OK] [FULL SUCCESS] {filename}. Removendo do Drive.")
                 drive.delete_file(gdrive_id)
                 history.append({"id": gdrive_id, "filename": filename, "post_time": int(time.time()), "accounts": res['success_accounts']})
             else:
                 # Sucesso parcial
-                print(f"⚠️ [PARTIAL SUCCESS] {filename}. Mantendo falhas na fila.")
+                print(f"[!] [PARTIAL SUCCESS] {filename}. Mantendo falhas na fila.")
                 job['accounts'] = res['failed_accounts']
                 new_queue.append(job)
                 # Adicionar ao histórico uma entrada parcial se quiser, ou apenas no final
                 history.append({"id": gdrive_id, "filename": filename, "post_time": int(time.time()), "status": "partial", "success_accounts": res['success_accounts']})
         else:
             # Falha total
-            print(f"❌ [TOTAL FAILURE] {filename}. Mantendo na fila para retentar.")
+            print(f"[ERR] [TOTAL FAILURE] {filename}. Mantendo na fila para retentar.")
             new_queue.append(job)
 
     # Salvar estados locais atualizados
@@ -83,7 +92,7 @@ def main():
     with open('posted_history.json', 'w', encoding='utf-8') as f:
         json.dump(history, f, indent=2, ensure_ascii=False)
 
-    print("✅ Estados locais atualizados.")
+    print("[OK] Estados locais atualizados.")
     
     # Limpar resultados e arquivos temporários
     os.remove(results_path)

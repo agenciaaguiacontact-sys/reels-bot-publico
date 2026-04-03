@@ -15,22 +15,38 @@ class MetaAPI:
     def _get_public_url(self, local_path, gdrive_file_id=None):
         try:
             with open(local_path, 'rb') as f:
-                r = requests.post('https://tmpfiles.org/api/v1/upload', files={'file': f}, timeout=120).json()
-                if r.get('status') == 'success':
-                    return r['data']['url'].replace('tmpfiles.org/', 'tmpfiles.org/dl/')
-        except: pass
+                res = requests.post('https://tmpfiles.org/api/v1/upload', files={'file': f}, timeout=120)
+                if res.status_code == 200:
+                    r = res.json()
+                    if r.get('status') == 'success':
+                        return r['data']['url'].replace('tmpfiles.org/', 'tmpfiles.org/dl/')
+                    else:
+                        print(f"⚠️ Aviso tmpfiles.org: {r.get('message', 'Erro desconhecido')}")
+                else:
+                    print(f"⚠️ Aviso tmpfiles.org: Status {res.status_code}")
+        except Exception as e:
+            print(f"⚠️ Erro ao tentar tmpfiles.org: {e}")
+
         if gdrive_file_id:
             try:
                 from gdrive_api import GoogleDriveAPI
                 drive = GoogleDriveAPI()
-                return drive.make_file_public(gdrive_file_id)
-            except: pass
+                url = drive.make_file_public(gdrive_file_id)
+                # Formato lh3 costuma ser mais 'direto' para crawlers de midia
+                # mas o link drive.usercontent.google.com tambem e bom.
+                # Vamos adicionar um pequeno delay para propagacao de permissao
+                time.sleep(2)
+                return url
+            except Exception as e:
+                print(f"❌ Erro ao tornar GDrive publico: {e}")
         return None
 
     def _check_status(self, container_id, platform="ig"):
         url = f"{self.base_url}/{container_id}?fields=status_code&access_token={self.access_token}"
         if platform == "fb": url = f"{self.base_url}/{container_id}?fields=status&access_token={self.access_token}"
-        for _ in range(15):
+        # Facebook Reels podem demorar até 10 minutos para processar
+        iterations = 60 if platform == "fb" else 20
+        for _ in range(iterations):
             try:
                 res = requests.get(url, timeout=60).json()
                 if platform == "ig":
@@ -40,10 +56,16 @@ class MetaAPI:
                         return False
                 else:
                     s = res.get('status', {})
-                    if isinstance(s, dict) and s.get('video_status') == 'ready': return True
-                    if isinstance(s, dict) and s.get('video_status') == 'error':
-                        print(f"DEBUG FB: Error FB: {json.dumps(res, indent=2)}")
-                        return False
+                    if isinstance(s, dict):
+                        status_val = s.get('video_status')
+                        if status_val in ['ready', 'published']: return True
+                        if status_val == 'error':
+                            print(f"DEBUG FB: Error FB: {json.dumps(res, indent=2)}")
+                            return False
+                        # Log para outros status (processing, upload_complete, etc)
+                        print(f"  ... FB Status: {status_val}")
+                    else:
+                        print(f"DEBUG FB: Status format unknown: {res}")
             except: pass
             time.sleep(10)
         return False
@@ -116,16 +138,32 @@ class MetaAPI:
         print(f"Upload FB Reels: {video_path}")
         fs = os.path.getsize(video_path)
         init = requests.post(f"{self.base_url}/{self.fb_page_id}/video_reels", data={'upload_phase': 'start', 'access_token': self.access_token, 'file_size': fs}, timeout=60).json()
-        if 'video_id' not in init: return False
+        if 'video_id' not in init:
+            print(f"DEBUG FB: Start Phase Failed: {json.dumps(init, indent=2)}")
+            return False
         video_id = init['video_id']
+        
         with open(video_path, 'rb') as f:
-            requests.post(init['upload_url'], headers={'Authorization': f'OAuth {self.access_token}', 'offset': '0', 'file_size': str(fs)}, data=f.read(), timeout=300)
-        if not self._check_status(video_id, "fb"): return False
+            up_res = requests.post(init['upload_url'], headers={'Authorization': f'OAuth {self.access_token}', 'offset': '0', 'file_size': str(fs)}, data=f.read(), timeout=300)
+            if up_res.status_code not in [200, 201]:
+                print(f"DEBUG FB: Upload Phase Failed (Status {up_res.status_code}): {up_res.text}")
+                return False
+        
+        # O processamento só começa DEPOIS do finish no modo resumable do FB
         finish = requests.post(f"{self.base_url}/{self.fb_page_id}/video_reels", data={'access_token': self.access_token, 'video_id': video_id, 'upload_phase': 'finish', 'video_state': 'PUBLISHED', 'description': caption}, timeout=120).json()
-        if finish.get('success'):
-            print(f"REEL PUBLICADO NO FB! ID: {video_id}")
-            return True
-        return False
+        
+        if not finish.get('success'):
+            print(f"DEBUG FB: Finish Phase Failed: {json.dumps(finish, indent=2)}")
+            return False
+
+        print(f"Aguardando processamento FB Reels (video_id: {video_id})...")
+        if not self._check_status(video_id, "fb"):
+            print(f"DEBUG FB: Timeout or Error waiting for video_id {video_id} to be published.")
+            # Nota: Mesmo com timeout no status check, o post pode acabar sendo publicado depois
+            return False
+        
+        print(f"REEL PUBLICADO NO FB! ID: {video_id}")
+        return True
 
     def upload_fb_image(self, image_path, caption):
         print(f"Upload FB Imagem: {image_path}")

@@ -45,7 +45,7 @@ def upload_all(drive):
                     data = json.load(local_f)
                 res = drive.save_json(f, data)
                 if res:
-                    print(f"✅ {item_f} enviado ao Drive.".replace("item_f", f))
+                    print(f"✅ {f} enviado ao Drive.")
                 else:
                     if f == 'library.json':
                         print(f"⚠️ Aviso: Falha ao sincronizar {f}. Pode ser ignorado se for erro de cota.")

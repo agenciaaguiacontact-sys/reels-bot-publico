@@ -1,5 +1,0 @@
-Credenciais do Google Drive carregadas via Base64.
-Sincronizando para o GDrive (Upload)...
-Ô£à schedule_queue.json enviado ao Drive.
-Ô£à accounts.json enviado ao Drive.
-ÔÜá´©Å posted_history.json local n├úo encontrado.

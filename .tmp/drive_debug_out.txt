@@ -1,5 +1,0 @@
-Credenciais do Google Drive carregadas via Base64.
-Folder ID local: [1ukeIgzJsTcx40ZepjEnX8p-Xb13zmZZh]
-Total arquivos JSON: 2
-[MATCH] accounts.json -> pasta 1ukeIgzJsTcx40ZepjEnX8p-Xb13zmZZh
-[MATCH] schedule_queue.json -> pasta 1ukeIgzJsTcx40ZepjEnX8p-Xb13zmZZh

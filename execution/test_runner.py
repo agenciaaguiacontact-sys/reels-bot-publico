@@ -45,34 +45,47 @@ TEST_CAPTION = "✅ [TESTE AUTOMÁTICO] Reels Bot — Validação de Sistema. Ig
 # ─────────────────────────────────────────────
 
 def _make_minimal_mp4(path):
-    """Cria um arquivo .mp4 mínimo válido para teste (vídeo preto de 1s)."""
-    # ftyp box (24 bytes)
-    ftyp = (
-        b'\x00\x00\x00\x18' # size
-        b'ftyp'
-        b'isom'             # major brand
-        b'\x00\x00\x02\x00' # minor version
-        b'isom' b'iso2'
-    )
-    # mdat box minimal (8 bytes header + 1 byte payload)
-    mdat = b'\x00\x00\x00\x09mdat\x00'
-    
-    # moov box com track mínimo (necessário para algumas APIs aceitarem o arquivo)
-    # Usando um moov mínimo bem-formado
-    moov_content = (
-        b'\x00\x00\x00\x6c'  # mvhd size=108 (0x6c)
-        b'mvhd'
-        b'\x00\x00\x00\x00'  # version + flags
-        + b'\x00' * 16       # creation/modification/timescale/duration (zeros ok para teste)
-        + b'\x00\x01\x00\x00' # rate
-        + b'\x01\x00'         # volume
-        + b'\x00' * 70        # padding + matrix + next track id
-    )
-    moov = struct.pack('>I', 8 + len(moov_content)) + b'moov' + moov_content
-    
-    with open(path, 'wb') as f:
-        f.write(ftyp + mdat + moov)
-    return path
+    """Cria um arquivo .mp4 válido para teste usando ffmpeg (5 segundos)."""
+    # Meta Reels requerem pelo menos 3 segundos. Vamos gerar 5s com cor azul e som.
+    import subprocess
+    try:
+        # Se ffmpeg estiver disponivel, gera video real. Caso contrário, gera arquivo minimalista.
+        cmd = [
+            'ffmpeg', '-y', '-f', 'lavfi', '-i', 'color=c=blue:s=720x1280:d=5', 
+            '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo', 
+            '-c:v', 'libx264', '-t', '5', '-pix_fmt', 'yuv420p', '-shortest', path
+        ]
+        # Silencia o ffmpeg
+        subprocess.run(cmd, capture_output=True, check=True)
+        return path
+    except Exception as e:
+        print(f"  ⚠️ Falha ao usar ffmpeg: {e}. Usando fallback minimalista.")
+        # ftyp box (24 bytes)
+        ftyp = (
+            b'\x00\x00\x00\x18' # size
+            b'ftyp'
+            b'isom'             # major brand
+            b'\x00\x00\x02\x00' # minor version
+            b'isom' b'iso2'
+        )
+        # mdat box minimal (8 bytes header + 1 byte payload)
+        mdat = b'\x00\x00\x00\x09mdat\x00'
+        
+        # moov box com track mínimo
+        moov_content = (
+            b'\x00\x00\x00\x6c'  # mvhd size=108 (0x6c)
+            b'mvhd'
+            b'\x00\x00\x00\x00'  # version + flags
+            + b'\x00' * 16
+            + b'\x00\x01\x00\x00' # rate
+            + b'\x01\x00'         # volume
+            + b'\x00' * 70
+        )
+        moov = struct.pack('>I', 8 + len(moov_content)) + b'moov' + moov_content
+        
+        with open(path, 'wb') as f:
+            f.write(ftyp + mdat + moov)
+        return path
 
 
 def _make_jpeg(path, color=(30, 120, 200)):
@@ -392,14 +405,18 @@ def run_via_orchestrator(jobs):
             capture_output=True, text=True, timeout=600,
             cwd=PROJECT_ROOT, env=env
         )
-        stdout_log = res.stdout + ("\n--- STDERR ---\n" + res.stderr if res.stderr.strip() else "")
+        # Garantir que stdout e stderr sejam strings
+        stdout_val = res.stdout if res.stdout is not None else ""
+        stderr_val = res.stderr if res.stderr is not None else ""
+        stdout_log = stdout_val + ("\n--- STDERR ---\n" + stderr_val if stderr_val.strip() else "")
         print(stdout_log)
     except subprocess.TimeoutExpired:
         stdout_log = "TIMEOUT: O bot não concluiu em 10 minutos."
         print(f"  ⚠️ {stdout_log}")
     except Exception as e:
-        stdout_log = f"ERRO AO EXECUTAR: {e}"
+        stdout_log = f"ERRO AO EXECUTAR: {type(e).__name__}: {str(e)}"
         print(f"  ❌ {stdout_log}")
+        traceback.print_exc()
     finally:
         # Restaurar a fila original
         with open(QUEUE_PATH, 'w', encoding='utf-8') as f:

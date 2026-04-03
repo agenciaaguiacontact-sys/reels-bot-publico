@@ -10,6 +10,15 @@ import pytz
 # Garante que o diretorio raiz esteja no path, mesmo se executado de dentro de 'execution/'
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+# Forçar output em UTF-8 para evitar erros de encoding no Windows (CP1252)
+if sys.stdout.encoding != 'utf-8':
+    try:
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
+    except:
+        pass
+
 from gdrive_api import GoogleDriveAPI
 from meta_api import MetaAPI
 
@@ -21,10 +30,10 @@ def process_job(job, drive, global_accounts, tz_br):
     # Auto-detecção de tipo de mídia por extensão (Safety net para Cloud)
     ext = filename.lower().split('.')[-1]
     if ext in ['png', 'jpg', 'jpeg', 'webp'] and media_type in ['VIDEO', 'REELS']:
-        print(f"⚠️ Aviso: Arquivo {filename} é imagem mas estava como {media_type}. Ajustando para IMAGE.")
+        print(f"[!] Aviso: Arquivo {filename} é imagem mas estava como {media_type}. Ajustando para IMAGE.")
         media_type = 'IMAGE'
     elif ext in ['mp4', 'mov', 'avi', 'mkv'] and media_type == 'IMAGE':
-        print(f"⚠️ Aviso: Arquivo {filename} é vídeo mas estava como IMAGE. Ajustando para VIDEO.")
+        print(f"[!] Aviso: Arquivo {filename} é vídeo mas estava como IMAGE. Ajustando para VIDEO.")
         media_type = 'VIDEO'
 
     caption = job.get('caption', '')
@@ -71,12 +80,12 @@ def process_job(job, drive, global_accounts, tz_br):
             local_path = drive.download_file(file_id, tmp_path)
         
         if not local_path and not carousel_items:
-            print(f"❌ Erro ao baixar {filename}.")
+            print(f"[ERR] Erro ao baixar {filename}.")
             return result
 
         for acc in job_accounts:
             acc_name = acc.get('name', 'Conta s/ nome')
-            print(f"🚀 Postando em {acc_name} ({media_type})...")
+            print(f">>> Postando em {acc_name} ({media_type})...")
             acc_meta = MetaAPI(acc.get('ig_account_id'), acc.get('fb_page_id'), acc.get('access_token'))
             
             ig_success = False
@@ -85,7 +94,7 @@ def process_job(job, drive, global_accounts, tz_br):
                     if media_type in ['VIDEO', 'REELS']: ig_success = acc_meta.upload_ig_reels_resumable(local_path, caption, file_id)
                     elif media_type == 'IMAGE': ig_success = acc_meta.upload_ig_image(local_path, caption, file_id)
                     elif media_type == 'CAROUSEL': ig_success = acc_meta.upload_ig_carousel(carousel_items, caption)
-                except Exception as e: print(f"❌ Erro IG em {acc_name}: {e}")
+                except Exception as e: print(f"[ERR] Erro IG em {acc_name}: {e}")
             
             fb_success = False
             if acc.get('fb_page_id'):
@@ -93,7 +102,7 @@ def process_job(job, drive, global_accounts, tz_br):
                     if media_type in ['VIDEO', 'REELS']: fb_success = acc_meta.upload_fb_reels_resumable(local_path, caption)
                     elif media_type == 'IMAGE': fb_success = acc_meta.upload_fb_image(local_path, caption)
                     elif media_type == 'CAROUSEL': fb_success = acc_meta.upload_fb_carousel(carousel_items, caption)
-                except Exception as e: print(f"❌ Erro FB em {acc_name}: {e}")
+                except Exception as e: print(f"[ERR] Erro FB em {acc_name}: {e}")
                 
             if ig_success or fb_success:
                 result["any_success"] = True
@@ -128,7 +137,7 @@ def main():
         return
 
     if not queue:
-        print("📭 Fila vazia.")
+        print("[EMPTY] Fila vazia.")
         return
 
     current_time = int(time.time())
@@ -140,7 +149,7 @@ def main():
         schedule_time = job.get('schedule_time', 0)
         if current_time >= schedule_time and posts_made_count < max_posts_per_hour:
             dt_local = datetime.fromtimestamp(schedule_time, tz=tz_br)
-            print(f"⏰ [DUE] {job.get('filename')} (Agendado: {dt_local.strftime('%H:%M:%S')})")
+            print(f"[*] [DUE] {job.get('filename')} (Agendado: {dt_local.strftime('%H:%M:%S')})")
             
             res = process_job(job, drive, accounts, tz_br)
             results.append(res)
@@ -151,7 +160,7 @@ def main():
     with open('.tmp/last_execution_results.json', 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Processamento concluído. {len(results)} jobs processados.")
+    print(f"[OK] Processamento concluído. {len(results)} jobs processados.")
 
 if __name__ == "__main__":
     main()
