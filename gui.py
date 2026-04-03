@@ -3203,11 +3203,24 @@ class MetaStudioApp(ctk.CTk):
         
         def task():
             try:
-                # PASSO 2: Adicionar tudo ao Git
+                # PASSO 2: Sincronização com Google Drive (Contas, Fila e Histórico)
+                self.log("☁️ Sincronizando com Google Drive...")
+                drive_result = subprocess.run(
+                    [sys.executable, "execution/sync_manager.py", "--action", "upload"],
+                    capture_output=True,
+                    text=True,
+                    shell=True
+                )
+                if drive_result.returncode == 0:
+                    self.log("✅ Dados sincronizados no Drive")
+                else:
+                    self.log(f"⚠️ Aviso Drive: {drive_result.stderr}")
+
+                # PASSO 3: Adicionar tudo ao Git
                 self.log("📦 Adicionando arquivos ao Git...")
                 subprocess.run(["git", "add", "."], capture_output=True, shell=True)
                 
-                # PASSO 3: Commit
+                # PASSO 4: Commit
                 self.log("📝 Criando commit...")
                 commit_result = subprocess.run(
                     ["git", "commit", "-m", f"sync {now.strftime('%Y-%m-%d %H:%M:%S')} [skip ci]"],
@@ -3221,7 +3234,7 @@ class MetaStudioApp(ctk.CTk):
                 else:
                     self.log("✅ Commit criado")
                 
-                # PASSO 4: Pull com MERGE (não rebase)
+                # PASSO 5: Pull com MERGE (não rebase)
                 self.log("📥 Sincronizando com GitHub...")
                 pull_result = subprocess.run(
                     ["git", "pull", "--no-rebase"],
@@ -3273,7 +3286,7 @@ class MetaStudioApp(ctk.CTk):
                 else:
                     self.log("✅ Pull concluído")
                 
-                # PASSO 5: Push
+                # PASSO 6: Push
                 self.log("📤 Enviando para GitHub...")
                 push_result = subprocess.run(
                     ["git", "push"],
