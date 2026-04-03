@@ -1,8 +1,6 @@
 name: Auto Post Reels Bot (Reliability 1000%)
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch: # Permite disparar via API (Google Apps Script) ou manualmente
 
 jobs:
@@ -36,4 +34,4 @@ jobs:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           TZ: America/Sao_Paulo
         run: |
-          python main.py
+          python main.py --once
