@@ -1,0 +1,21 @@
+=== Iniciando Cerebro da Nuvem (Reels Bot) ===
+Credenciais do Google Drive carregadas via Base64.
+Sincronizando fila...
+Aviso: Lendo fila local (Drive inacessivel)
+[TEMPO ATINGIDO] ULTIMATE_Image_7.png (Agendado para: 21:00:00)
+Baixando ULTIMATE_Image_7.png...
+Download concluido: ./downloads\ULTIMATE_Image_7.png
+Postando em Dentista Curioso...
+Upload IG Imagem: ./downloads\ULTIMATE_Image_7.png
+Aguardando propagacao interna Meta (15s)...
+IMAGEM PUBLICADA NO IG! ID: 17933609562217247
+Upload FB Imagem: ./downloads\ULTIMATE_Image_7.png
+IMAGEM PUBLICADA NO FB! ID: 122180468864766925
+SUCESSO TOTAL! Removendo do Drive.
+Tentando mover para lixeira: <HttpError 403 when requesting https://www.googleapis.com/drive/v3/files/1PJ83Q1XWWjgFABl0GSQd6O-QbO1VH8s9?supportsAllDrives=true returned "The user does not have sufficient permissions for this file.". Details: "[{'message': 'The user does not have sufficient permissions for this file.', 'domain': 'global', 'reason': 'insufficientFilePermissions'}]">
+Erro ao remover arquivo: <HttpError 403 when requesting https://www.googleapis.com/drive/v3/files/1PJ83Q1XWWjgFABl0GSQd6O-QbO1VH8s9?supportsAllDrives=true&alt=json returned "The user does not have sufficient permissions for this file.". Details: "[{'message': 'The user does not have sufficient permissions for this file.', 'domain': 'global', 'reason': 'insufficientFilePermissions'}]">
+[TEMPO ATINGIDO] ULTIMATE_Reel_7.mp4 (Agendado para: 21:00:00)
+Baixando ULTIMATE_Reel_7.mp4...
+Download concluido: ./downloads\ULTIMATE_Reel_7.mp4
+Postando em Dentista Curioso...
+Upload IG Reels: ./downloads\ULTIMATE_Reel_7.mp4

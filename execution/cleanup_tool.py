@@ -1,0 +1,88 @@
+import os
+import json
+import time
+from gdrive_api import GoogleDriveAPI
+
+def cleanup_tmp():
+    print("🧹 Limpando pasta .tmp...")
+    if os.path.exists('.tmp'):
+        for f in os.listdir('.tmp'):
+            p = os.path.join('.tmp', f)
+            try:
+                if os.path.isfile(p):
+                    os.remove(p)
+                elif os.path.isdir(p):
+                    import shutil
+                    shutil.rmtree(p)
+            except Exception as e:
+                print(f"⚠️ Erro ao remover {f}: {e}")
+
+def main():
+    print("=== DOE: Cleanup Tool ===")
+    drive = GoogleDriveAPI()
+    
+    results_path = '.tmp/last_execution_results.json'
+    if not os.path.exists(results_path):
+        print("📭 Nenhum resultado de execução para processar.")
+        cleanup_tmp()
+        return
+
+    with open(results_path, 'r', encoding='utf-8') as f:
+        results = json.load(f)
+
+    # Carregar estados atuais locais
+    try:
+        with open('schedule_queue.json', 'r', encoding='utf-8') as f: queue = json.load(f)
+        with open('posted_history.json', 'r', encoding='utf-8') as f: history = json.load(f)
+    except:
+        print("❌ Erro ao carregar estados locais para limpeza.")
+        return
+
+    new_queue = []
+    # Usar um conjunto de gdrive_ids processados para evitar duplicatas na nova fila
+    processed_job_ids = [res['job'].get('gdrive_id') for res in results]
+    
+    # Manter na fila o que não foi processado nesta execução
+    for job in queue:
+        if job.get('gdrive_id') not in processed_job_ids:
+            new_queue.append(job)
+
+    # Processar resultados da execução
+    for res in results:
+        job = res['job']
+        gdrive_id = job.get('gdrive_id')
+        filename = job.get('filename')
+        
+        if res['any_success']:
+            if not res['failed_accounts']:
+                # Sucesso total!
+                print(f"✅ [FULL SUCCESS] {filename}. Removendo do Drive.")
+                drive.delete_file(gdrive_id)
+                history.append({"id": gdrive_id, "filename": filename, "post_time": int(time.time()), "accounts": res['success_accounts']})
+            else:
+                # Sucesso parcial
+                print(f"⚠️ [PARTIAL SUCCESS] {filename}. Mantendo falhas na fila.")
+                job['accounts'] = res['failed_accounts']
+                new_queue.append(job)
+                # Adicionar ao histórico uma entrada parcial se quiser, ou apenas no final
+                history.append({"id": gdrive_id, "filename": filename, "post_time": int(time.time()), "status": "partial", "success_accounts": res['success_accounts']})
+        else:
+            # Falha total
+            print(f"❌ [TOTAL FAILURE] {filename}. Mantendo na fila para retentar.")
+            new_queue.append(job)
+
+    # Salvar estados locais atualizados
+    with open('schedule_queue.json', 'w', encoding='utf-8') as f:
+        json.dump(new_queue, f, indent=2, ensure_ascii=False)
+    
+    with open('posted_history.json', 'w', encoding='utf-8') as f:
+        json.dump(history, f, indent=2, ensure_ascii=False)
+
+    print("✅ Estados locais atualizados.")
+    
+    # Limpar resultados e arquivos temporários
+    os.remove(results_path)
+    cleanup_tmp()
+
+if __name__ == "__main__":
+    main()

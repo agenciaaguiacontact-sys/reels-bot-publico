@@ -1,0 +1,48 @@
+=== Iniciando Cerebro da Nuvem (Reels Bot) ===
+Credenciais do Google Drive carregadas via Base64.
+Sincronizando fila...
+Aviso: Lendo fila local (GDrive inacessivel)
+[TEMPO ATINGIDO] ULTIMATE_Image_6.png (Agendado para: 21:00:00)
+Baixando ULTIMATE_Image_6.png...
+Download concluido: ./downloads\ULTIMATE_Image_6.png
+Postando em Dentista Curioso...
+Upload IG Imagem: ./downloads\ULTIMATE_Image_6.png
+DEBUG META: Erro publicacao Imagem IG: {
+  "error": {
+    "message": "Media ID is not available",
+    "type": "OAuthException",
+    "code": 9007,
+    "error_subcode": 2207027,
+    "is_transient": false,
+    "error_user_title": "N\u00e3o \u00e9 poss\u00edvel publicar",
+    "error_user_msg": "A m\u00eddia n\u00e3o est\u00e1 pronta para ser publicada. Aguarde um momento.",
+    "fbtrace_id": "AYsjEmy58z-mGLlrTri7k7g"
+  }
+}
+Upload FB Imagem: ./downloads\ULTIMATE_Image_6.png
+IMAGEM PUBLICADA NO FB! ID: 122180468570766925
+SUCESSO PARCIAL: Mantendo na fila para contas pendentes.
+[TEMPO ATINGIDO] ULTIMATE_Reel_6.mp4 (Agendado para: 21:00:00)
+Baixando ULTIMATE_Reel_6.mp4...
+Download concluido: ./downloads\ULTIMATE_Reel_6.mp4
+Postando em Dentista Curioso...
+Upload IG Reels: ./downloads\ULTIMATE_Reel_6.mp4
+REEL PUBLICADO NO IG! ID: 18173293030403241
+Upload FB Reels: ./downloads\ULTIMATE_Reel_6.mp4
+SUCESSO PARCIAL: Mantendo na fila para contas pendentes.
+[TEMPO ATINGIDO] ULTIMATE_Carousel_6 (Agendado para: 21:00:00)
+Baixando ULTIMATE_Carousel_6...
+Traceback (most recent call last):
+  File "C:\#1-CRIA��ES-AUTOMA��ES-EXTENS�ES\ig-fb-reels-bot - Copia\main.py", line 207, in <module>
+  File "C:\#1-CRIA��ES-AUTOMA��ES-EXTENS�ES\ig-fb-reels-bot - Copia\main.py", line 93, in main
+    if p: carousel_items.append({'local_path': p, 'gdrive_id': f['id'], 'media_type': 'IMAGE' if 'image' in f['mimeType'] else 'VIDEO'})
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\#1-CRIA��ES-AUTOMA��ES-EXTENS�ES\ig-fb-reels-bot - Copia\gdrive_api.py", line 71, in download_file
+    status, done = downloader.next_chunk()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\robso\AppData\Local\Programs\Python\Python312\Lib\site-packages\googleapiclient\_helpers.py", line 130, in positional_wrapper
+    return wrapped(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\robso\AppData\Local\Programs\Python\Python312\Lib\site-packages\googleapiclient\http.py", line 780, in next_chunk
+    raise HttpError(resp, content, uri=self._uri)
+googleapiclient.errors.HttpError: <HttpError 404 when requesting https://www.googleapis.com/drive/v3/files/1ukelgzJsTcx40ZepjEnX8p-Xb13zmS7m?alt=media returned "File not found: 1ukelgzJsTcx40ZepjEnX8p-Xb13zmS7m.". Details: "[{'message': 'File not found: 1ukelgzJsTcx40ZepjEnX8p-Xb13zmS7m.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">

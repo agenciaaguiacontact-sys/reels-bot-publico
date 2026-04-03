@@ -1,0 +1,3 @@
+=== Iniciando Cerebro da Nuvem (Reels Bot) ===
+Credenciais do Google Drive carregadas via Base64.
+Sincronizando fila...

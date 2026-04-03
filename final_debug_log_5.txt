@@ -1,0 +1,33 @@
+=== Iniciando Cerebro da Nuvem (Reels Bot) ===
+Credenciais do Google Drive carregadas via Base64.
+Sincronizando fila...
+Aviso: Lendo fila local (GDrive inacessivel)
+[TEMPO ATINGIDO] ULTIMATE_Image_5.png (Agendado para: 21:00:00)
+Baixando ULTIMATE_Image_5.png...
+Download concluido: ./downloads\ULTIMATE_Image_5.png
+Postando em Dentista Curioso...
+Upload IG Imagem: ./downloads\ULTIMATE_Image_5.png
+Credenciais do Google Drive carregadas via Base64.
+Arquivo tornado publico: https://drive.usercontent.google.com/download?id=1PJ83Q1XWWjgFABl0GSQd6O-QbO1VH8s9&export=download&confirm=t
+DEBUG META: Erro container Imagem IG: {
+  "error": {
+    "message": "Only photo or video can be accepted as media type.",
+    "type": "OAuthException",
+    "code": 9004,
+    "error_subcode": 2207052,
+    "is_transient": false,
+    "error_user_title": "Falha ao baixar m\u00eddia. O URI da m\u00eddia n\u00e3o atende aos nossos requisitos.",
+    "error_user_msg": "N\u00e3o foi poss\u00edvel obter a m\u00eddia deste URI: .Verifique a se\u00e7\u00e3o de limita\u00e7\u00f5es no nosso documento de desenvolvimento para mais informa\u00e7\u00f5es: https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media#creating",
+    "fbtrace_id": "Af_QONKPllFvvwq5F9DU7t6"
+  }
+}
+Upload FB Imagem: ./downloads\ULTIMATE_Image_5.png
+IMAGEM PUBLICADA NO FB! ID: 122180468456766925
+SUCESSO PARCIAL: Mantendo na fila para contas pendentes.
+[TEMPO ATINGIDO] ULTIMATE_Reel_5.mp4 (Agendado para: 21:00:00)
+Baixando ULTIMATE_Reel_5.mp4...
+Download concluido: ./downloads\ULTIMATE_Reel_5.mp4
+Postando em Dentista Curioso...
+Upload IG Reels: ./downloads\ULTIMATE_Reel_5.mp4
+Credenciais do Google Drive carregadas via Base64.
+Arquivo tornado publico: https://drive.usercontent.google.com/download?id=1_1vjTSQZ1Rh5i8dzlGHSwZxBSxVAq1zu&export=download&confirm=t

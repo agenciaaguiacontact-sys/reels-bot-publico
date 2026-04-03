@@ -1,0 +1,928 @@
+
+================================================================================
+   MANUAL COMPLETO - IG/FB REELS BOT (Meta Automation System)
+   Sistema de Automação de Postagens para Instagram e Facebook
+   Versão: 2.0 (Pública / Cloud + GUI Local)
+================================================================================
+
+ÍNDICE
+------
+  1. O QUE É ESSE SISTEMA
+  2. CAPACIDADES E FUNCIONALIDADES
+  3. ARQUITETURA DO SISTEMA
+  4. PRÉ-REQUISITOS
+  5. CONFIGURAÇÃO DO META (FACEBOOK/INSTAGRAM)
+  6. CONFIGURAÇÃO DO GOOGLE DRIVE
+  7. CONFIGURAÇÃO DO GITHUB ACTIONS
+  8. ARQUIVOS DO PROJETO (EXPLICAÇÃO COMPLETA)
+  9. VARIÁVEIS DE AMBIENTE E SECRETS
+ 10. ESTRUTURA DOS JSONs (DADOS)
+ 11. FLUXO DE FUNCIONAMENTO
+ 12. INTERFACE GRÁFICA (GUI)
+ 13. COMO USAR DO ZERO (PASSO A PASSO)
+ 14. LIÇÕES APRENDIDAS E PROBLEMAS RESOLVIDOS
+ 15. LIMITAÇÕES CONHECIDAS
+ 16. CHECKLIST DE IMPLEMENTAÇÃO
+
+================================================================================
+1. O QUE É ESSE SISTEMA
+================================================================================
+
+O "IG/FB Reels Bot" é um sistema de automação 100% gratuito para publicar
+conteúdo (Reels, Imagens e Carrosséis) automaticamente no Instagram e no
+Facebook, usando a API oficial da Meta.
+
+O sistema tem DUAS formas de executar:
+
+  [A] MODO NUVEM (Cloud):
+      - O bot roda dentro do GitHub Actions (servidor gratuito)
+      - É ativado automaticamente via Google Apps Script (agendado)
+      - Lê a fila de publicações do Google Drive
+      - Publica e registra o histórico no Google Drive
+      - ZERO custo, ZERO servidor próprio necessário
+
+  [B] MODO LOCAL (GUI):
+      - Interface gráfica visual (Python/CustomTkinter) rodando no seu PC
+      - Permite agendar, organizar e configurar tudo graficamente
+      - Lê vídeos do Google Drive e os distribui para as contas
+      - Pode ser usado em paralelo com o modo nuvem
+
+Em conjunto: a GUI gerencia a fila de agendamentos → o GitHub Actions executa
+as publicações automaticamente → o estado é sincronizado via Google Drive.
+
+================================================================================
+2. CAPACIDADES E FUNCIONALIDADES
+================================================================================
+
+TIPOS DE MÍDIA SUPORTADOS:
+  ✅ Reels (vídeo .mp4) → Instagram e Facebook
+  ✅ Imagem (.jpg, .jpeg, .png) → Instagram e Facebook
+  ✅ Carrossel (múltiplas imagens/vídeos) → Instagram e Facebook
+  ❌ Stories → NÃO suportado (removido por instabilidade da API)
+
+FUNCIONALIDADES PRINCIPAIS:
+  - Agendamento de postagens por data e horário
+  - Suporte a múltiplas contas simultaneamente (multi-conta)
+  - Upload de mídia via URL pública (tmpfiles.org) ou Google Drive direto
+  - Upload resumável para videos do Facebook (ideal para arquivos grandes)
+  - Histórico de postagens (deduplicação: não posta a mesma mídia duas vezes)
+  - Fila de agendamento sincronizada com Google Drive
+  - Fallback local: se o Drive estiver inacessível, usa arquivos locais
+  - Renovação automática de tokens de acesso da Meta
+  - Limpeza automática de arquivos temporários
+  - Interface gráfica completa para gerenciamento
+
+LIMITES DA API META (IMPORTANTES):
+  - Instagram: máximo de 50 publicações por dia por conta
+  - Facebook: sem limite diário documentado para Reels
+  - Reels IG: vídeo deve ter entre 3s e 90s de duração
+  - Reels FB: upload resumável obrigatório para arquivos grandes
+  - Carrossel IG: de 2 a 10 itens por post
+  - Tokens de acesso de longa duração: expiram em ~60 dias
+
+================================================================================
+3. ARQUITETURA DO SISTEMA
+================================================================================
+
+  +------------------+       +------------------+       +------------------+
+  |   GUI Local      |  ==>  |  Google Drive    |  ==>  | GitHub Actions   |
+  | (gui.py)         |       | (Estado Global)  |       | (Execução Cloud) |
+  |                  |       |                  |       |                  |
+  | - Agendar posts  |       | - schedule_queue |       | - main.py        |
+  | - Gerenciar       |       | - posted_history |       | - meta_api.py    |
+  |   contas          |       | - accounts.json  |       | - gdrive_api.py  |
+  | - Libray de mídia|       | - Arquivos de    |       |                  |
+  +------------------+       |   mídia (vídeos) |       +------------------+
+                             +------------------+
+                                     |
+                             +------------------+
+                             |   Meta Graph API |
+                             | (Instagram/FB)   |
+                             +------------------+
+
+  FLUXO SIMPLIFICADO:
+  1. Você usa a GUI para selecionar vídeos do Google Drive e agendar
+  2. A GUI grava a fila (schedule_queue.json) no Google Drive
+  3. O Google Apps Script dispara o GitHub Actions a cada X minutos/horas
+  4. O GitHub Actions roda o main.py, lê a fila do Drive
+  5. Para cada job cujo horário chegou, baixa o arquivo, faz upload na Meta
+  6. Atualiza o histórico e a fila no Drive
+  7. Apaga o arquivo de mídia do Drive após sucesso total
+
+================================================================================
+4. PRÉ-REQUISITOS
+================================================================================
+
+OBRIGATÓRIOS:
+  - Python 3.10 ou superior (para rodar localmente / GUI)
+  - Conta Meta Business com acesso à Graph API
+  - Página do Facebook (Business/Creator)
+  - Conta Instagram Business ou Creator (vinculada à Página FB)
+  - Conta Google com acesso ao Google Drive
+  - Conta GitHub (gratuita é suficiente - use repositório público)
+
+PARA A GUI LOCAL:
+  - Windows, macOS ou Linux com interface gráfica
+  - Tkinter instalado (normalmente vem com Python)
+
+DEPENDÊNCIAS PYTHON (requirements.txt):
+  - requests
+  - google-auth
+  - google-auth-oauthlib
+  - google-auth-httplib2
+  - google-api-python-client
+  - python-dotenv
+  - customtkinter
+  - Pillow
+  - pytz
+
+INSTALAÇÃO:
+  pip install -r requirements.txt
+
+================================================================================
+5. CONFIGURAÇÃO DO META (FACEBOOK/INSTAGRAM)
+================================================================================
+
+PASSO 1 - CRIAR APP NA META FOR DEVELOPERS
+  1. Acesse: https://developers.facebook.com
+  2. Crie um novo App do tipo "Business"
+  3. Ative os produtos: "Instagram Graph API" e "Facebook Graph API"
+  4. No painel do App, anote o "App ID" e "App Secret"
+
+PASSO 2 - CONFIGURAR PERMISSÕES
+  No seu App Meta, adicione as seguintes permissões (via Graph API Explorer
+  ou via OAuth):
+    - pages_show_list
+    - pages_read_engagement
+    - pages_manage_posts
+    - instagram_basic
+    - instagram_content_publish
+    - business_management
+    - public_profile
+
+PASSO 3 - OBTER O ACCESS TOKEN DE LONGA DURAÇÃO
+  1. Use o Graph API Explorer (https://developers.facebook.com/tools/explorer/)
+  2. Gere um User Access Token com as permissões acima
+  3. Converta para token de longa duração com:
+     GET https://graph.facebook.com/v25.0/oauth/access_token
+       ?grant_type=fb_exchange_token
+       &client_id={APP_ID}
+       &client_secret={APP_SECRET}
+       &fb_exchange_token={SHORT_TOKEN}
+  4. O token de longa duração dura ~60 dias e deve ser renovado periodicamente
+  5. O sistema já possui função de renovação automática (refresh_token)
+
+PASSO 4 - OBTER IDs DAS CONTAS
+  Com o token de longa duração:
+  
+  Para Páginas do Facebook:
+    GET https://graph.facebook.com/v25.0/me/accounts?access_token={TOKEN}
+    → Anote o "id" de cada página (esse é o FB_PAGE_ID)
+    → Anote o "access_token" de cada página (diferente do user token!)
+  
+  Para Contas Instagram:
+    GET https://graph.facebook.com/v25.0/{FB_PAGE_ID}
+          ?fields=instagram_business_account&access_token={PAGE_TOKEN}
+    → Anote o "id" retornado (esse é o IG_ACCOUNT_ID)
+
+IMPORTANTE: Cada conta tem seu próprio access_token (token da página),
+não use o token de usuário para postar. Use sempre o PAGE token.
+
+================================================================================
+6. CONFIGURAÇÃO DO GOOGLE DRIVE
+================================================================================
+
+PASSO 1 - CRIAR SERVICE ACCOUNT (CONTA DE SERVIÇO)
+  1. Acesse: https://console.cloud.google.com
+  2. Crie um novo projeto (ou use um existente)
+  3. Ative a "Google Drive API" no projeto
+  4. Em "Credenciais" → "Criar credenciais" → "Conta de serviço"
+  5. Dê um nome, depois clique em "Concluir" (não precisa de papel/role)
+  6. Clique na conta de serviço criada → "Chaves" → "Adicionar chave" → JSON
+  7. Baixe o arquivo JSON das credenciais (guarde com segurança!)
+  8. Anote o e-mail da conta de serviço (ex: nome@projeto.iam.gserviceaccount.com)
+
+PASSO 2 - CRIAR E COMPARTILHAR A PASTA NO DRIVE
+  1. No seu Google Drive, crie uma pasta (ex: "Reels Bot")
+  2. Clique com botão direito → Compartilhar
+  3. Adicione o e-mail da Service Account como "Editor"
+  4. Na URL da pasta (https://drive.google.com/drive/folders/XXXX), copie o ID
+     (a parte depois de /folders/) → esse é o GDRIVE_FOLDER_ID
+
+PASSO 3 - ESTRUTURA DE PASTAS NO DRIVE
+  A pasta principal deve conter:
+    /schedule_queue.json     → Fila de agendamentos (gerenciada pelo sistema)
+    /posted_history.json     → Histórico de postagens (gerenciado pelo sistema)
+    /accounts.json           → Lista de contas (opcional, pode ser local)
+    /[seus videos].mp4       → Arquivos de mídia para postar
+    /[suas imagens].png/.jpg → Imagens para postar
+    /[carrossel].zip         → Arquivo ZIP com imagens do carrossel
+
+  ESTRUTURA DE SUBPASTAS (multi-conta):
+    Você pode ter subpastas por conta:
+    /Conta A/video1.mp4
+    /Conta A/video2.mp4
+    /Conta B/video1.mp4
+    /Conta B/video2.mp4
+
+PASSO 4 - PREPARAR CREDENCIAIS PARA O GITHUB ACTIONS
+  1. Abra o arquivo credentials.json (baixado no passo 1)
+  2. Converta para Base64:
+     Windows PowerShell:
+       [Convert]::ToBase64String([IO.File]::ReadAllBytes("credentials.json"))
+     Linux/Mac:
+       base64 -w 0 credentials.json
+  3. Copie o resultado → esse é o valor do secret GDRIVE_JSON_B64
+
+================================================================================
+7. CONFIGURAÇÃO DO GITHUB ACTIONS
+================================================================================
+
+PASSO 1 - CRIAR REPOSITÓRIO PÚBLICO NO GITHUB
+  1. Crie um repositório público no GitHub (público = Actions ilimitados)
+  2. Adicione todos os arquivos do projeto ao repositório
+  3. NUNCA adicione: .env, credentials.json, accounts.json (dados sensíveis)
+  4. O .gitignore já está configurado para excluir esses arquivos
+
+PASSO 2 - CONFIGURAR SECRETS NO GITHUB
+  Em Settings → Secrets and variables → Actions, adicione:
+  
+  Nome do Secret         | Valor
+  ---------------------- | ----------------------------------------
+  GDRIVE_JSON_B64        | Conteúdo base64 do credentials.json
+  GDRIVE_FOLDER_ID       | ID da pasta principal no Google Drive
+  META_ACCESS_TOKEN      | Token de acesso de longa duração da Meta
+  IG_ACCOUNT_ID          | ID da conta Instagram Business (padrão)
+  FB_PAGE_ID             | ID da página do Facebook (padrão)
+
+  Nota: META_ACCESS_TOKEN, IG_ACCOUNT_ID e FB_PAGE_ID são os valores padrão
+  usados quando não há token específico por conta no accounts.json.
+
+PASSO 3 - WORKFLOW DO GITHUB ACTIONS
+  O arquivo .github/workflows/reels_bot.yml já está configurado:
+
+  - Roda em Ubuntu (gratuito)
+  - Instala Python 3.12 e dependências
+  - Instala FFmpeg
+  - Lê os secrets como variáveis de ambiente
+  - Executa o main.py (modo RUN_ONCE automático)
+
+  O workflow é disparado:
+  - Em cada push para a branch main
+  - Manualmente (workflow_dispatch)
+  - Via API (pelo Google Apps Script)
+
+PASSO 4 - CONFIGURAR GOOGLE APPS SCRIPT (AGENDADOR)
+  Para disparar o bot automaticamente em horários programados:
+  
+  1. No Google Drive, crie um Google Apps Script (Extensões → Apps Script)
+  2. Cole o código abaixo:
+
+  -----------------------------------------------------------------------
+  function dispararReelsBot() {
+    var url = "https://api.github.com/repos/SEU_USUARIO/SEU_REPO/actions/workflows/reels_bot.yml/dispatches";
+    var token = "ghp_SEU_GITHUB_TOKEN"; // Token Personal Access Token
+    
+    var payload = JSON.stringify({ ref: "main" });
+    
+    var options = {
+      method: "post",
+      contentType: "application/json",
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/vnd.github.v3+json"
+      },
+      payload: payload,
+      muteHttpExceptions: true
+    };
+    
+    var response = UrlFetchApp.fetch(url, options);
+    Logger.log("Status: " + response.getResponseCode());
+    Logger.log("Body: " + response.getContentText());
+  }
+  -----------------------------------------------------------------------
+
+  3. Configure os gatilhos (Triggers) para rodar a cada hora ou conforme
+     sua necessidade de frequência de postagens
+  4. Para criar um GitHub Personal Access Token:
+     - GitHub → Settings → Developer Settings → Personal access tokens
+     - Permissão necessária: "workflow"
+
+================================================================================
+8. ARQUIVOS DO PROJETO (EXPLICAÇÃO COMPLETA)
+================================================================================
+
+ESTRUTURA DE ARQUIVOS:
+  ├── main.py              → Cérebro do bot (roda no GitHub Actions)
+  ├── meta_api.py          → Módulo de comunicação com a API da Meta
+  ├── gdrive_api.py        → Módulo de comunicação com o Google Drive
+  ├── gui.py               → Interface gráfica local (3600+ linhas)
+  ├── config.py            → Lê variáveis de ambiente do .env
+  ├── requirements.txt     → Dependências Python
+  ├── .env                 → Variáveis locais SECRETAS (não vai ao Git)
+  ├── .env.example         → Modelo do .env (sem dados reais)
+  ├── .gitignore           → Arquivos ignorados pelo Git
+  ├── accounts.json        → Lista de contas configuradas (local)
+  ├── schedule_queue.json  → Fila de agendamentos (sincronizada com Drive)
+  ├── posted_history.json  → Histórico de postagens (sincronizado com Drive)
+  ├── settings.json        → Configurações da GUI (legenda padrão, tema, etc)
+  ├── library.json         → Cache da biblioteca de mídia do Drive
+  ├── credentials.json     → Credenciais Service Account (NUNCA no Git)
+  └── .github/
+      └── workflows/
+          └── reels_bot.yml → Workflow do GitHub Actions
+
+---
+
+MAIN.PY - O ORQUESTRADOR PRINCIPAL
+  Função: Executado pelo GitHub Actions. Lê a fila, processa os jobs,
+  faz as publicações e atualiza o estado.
+  
+  Fluxo interno:
+  1. Inicia GoogleDriveAPI e MetaAPI
+  2. LOOP INFINITO (com break se RUN_ONCE=true):
+     a. Lê schedule_queue.json do Drive (fallback: arquivo local)
+     b. Lê posted_history.json do Drive (fallback: arquivo local)
+     c. Lê accounts.json do Drive (fallback: arquivo local)
+     d. Se fila vazia: aguarda 10 min e continua
+     e. Para cada job na fila:
+        - Se hora chegou E posts não excederam max_posts_per_hour:
+          1. Se CAROUSEL: baixa zip e descompacta OU lista pasta
+          2. Se VIDEO/IMAGE: baixa o arquivo
+          3. Para cada conta no job:
+             - Tenta postar no Instagram (se tem ig_account_id)
+             - Tenta postar no Facebook (se tem fb_page_id)
+          4. Se sucesso total: remove arquivo do Drive, registra histórico
+          5. Se sucesso parcial: mantém na fila com contas que falharam
+          6. Se falha total: mantém na fila para tentar depois
+     f. Salva nova fila no Drive (fallback: local)
+     g. Aguarda 60 segundos e repete
+
+---
+
+META_API.PY - INTEGRAÇÃO COM API DA META
+  
+  Classes e Métodos:
+  
+  MetaAPI(ig_account_id, fb_page_id, access_token)
+    Permite instanciar com credenciais de uma conta específica.
+    Se não passar parâmetros, usa os valores do config.py (.env)
+  
+  _get_public_url(local_path, gdrive_file_id)
+    ESTRATÉGIA DUPLA para obter URL pública do arquivo:
+    1. Tenta upload no tmpfiles.org (servidor temporário gratuito)
+       - URL resultante: https://tmpfiles.org/dl/XXXXX/filename.mp4
+       - Dura ~1 hora (suficiente para a Meta processar)
+    2. Se tmpfiles falhar: torna o arquivo público no Google Drive
+       - URL: https://drive.usercontent.google.com/download?id=XXXXX&...
+    A Meta exige URLs públicas acessíveis para Reels e Imagens do IG.
+  
+  _check_status(container_id, platform)
+    Verifica se o container de mídia terminou de processar.
+    Tenta por até 15 vezes com intervalo de 10s (2,5 min máximo)
+    IG: espera status_code == 'FINISHED'
+    FB: espera video_status == 'ready'
+  
+  upload_ig_reels_resumable(video_path, caption, gdrive_file_id)
+    1. Obtém URL pública do vídeo
+    2. Cria container de mídia tipo REELS no IG
+    3. Aguarda processamento (_check_status)
+    4. Aguarda 15s de propagação interna da Meta
+    5. Publica com media_publish
+  
+  upload_ig_image(image_path, caption, gdrive_file_id)
+    1. Obtém URL pública da imagem
+    2. Cria container de mídia (sem especificar tipo, IG detecta)
+    3. Aguarda 15s de propagação interna
+    4. Publica com media_publish
+  
+  upload_ig_carousel(items, caption)
+    1. Para cada item: obtém URL pública e cria child container
+       - Vídeo no carrossel: usa media_type=REELS + video_url
+       - Imagem no carrossel: usa image_url
+    2. Aguarda processamento de todos os children
+    3. Cria container CAROUSEL com lista de child IDs
+    4. Aguarda 15s de propagação e publica
+  
+  upload_fb_reels_resumable(video_path, caption)
+    UPLOAD RESUMÁVEL - necessário para vídeos grandes:
+    1. Inicia upload com 'start' phase (recebe upload_url e video_id)
+    2. Faz PUT do arquivo binário completo para upload_url
+       (headers: Authorization, offset=0, file_size)
+    3. Aguarda processamento (_check_status)
+    4. Finaliza com 'finish' phase e video_state='PUBLISHED'
+  
+  upload_fb_image(image_path, caption)
+    POST direto para /PAGE_ID/photos com multipart/form-data
+  
+  upload_fb_carousel(items, caption)
+    NOTA: FB não suporta carrossel com vídeos. Só imagens.
+    1. Para cada imagem: faz upload não publicado para /PAGE_ID/photos
+    2. Agrupa as IDs em attached_media
+    3. Publica via /PAGE_ID/feed com attached_media
+  
+  get_account_details(access_token)
+    Retorna todas as páginas e contas IG associadas ao token.
+    Útil para descobrir os IDs automaticamente.
+  
+  refresh_token(old_token)
+    Renova token de acesso usando o App ID e Secret configurados.
+    Retorna (novo_token, expires_in)
+
+---
+
+GDRIVE_API.PY - INTEGRAÇÃO COM GOOGLE DRIVE
+  
+  GoogleDriveAPI(credentials_path='credentials.json')
+    Inicialização com prioridade:
+    1. Variável de ambiente GDRIVE_JSON_B64 (usada no GitHub Actions)
+    2. Arquivo credentials.json local (usado no desenvolvimento local)
+  
+  download_file(file_id, file_name, destination_folder='./downloads')
+    Baixa um arquivo do Drive para a pasta local downloads/
+  
+  upload_file(file_path, name, mimetype, folder_id)
+    Faz upload de um arquivo local para o Drive
+  
+  delete_file(file_id)
+    Remove arquivo do Drive. Tenta deleção permanente; se falhar, move
+    para lixeira
+  
+  get_json(name, folder_id)
+    Busca um arquivo JSON no Drive pelo nome e retorna como dict Python
+  
+  save_json(name, data, folder_id)
+    Salva/atualiza um arquivo JSON no Drive (create ou update)
+  
+  list_mp4_files(folder_id)
+    Lista todos arquivos .mp4 em uma pasta do Drive
+  
+  list_files_in_folder(folder_id, mime_filter)
+    Lista todos arquivos em uma pasta (com filtro opcional de tipo)
+  
+  search_file_by_name(name, folder_id)
+    Busca arquivo por nome exato, retorna o file_id
+  
+  make_file_public(file_id)
+    Torna um arquivo público (anyone com link) e retorna a URL de download
+  
+  cleanup_storage(days=7)
+    Remove arquivos com mais de N dias da pasta do Drive
+    (exceto os JSONs de estado: schedule_queue, posted_history, accounts)
+
+---
+
+GUI.PY - INTERFACE GRÁFICA LOCAL
+  Framework: CustomTkinter (dark mode, estético) + tkinter
+  Tema: Dark navy (#0a0e27 bg, #4f46e5 accent)
+  
+  Componentes principais:
+  - ModernButton: botão estilizado com 4 variantes (primary, success, danger, secondary)
+  - ModernCard: card com borda e cantos arredondados
+  - VideoCard: card para exibir arquivo de mídia com status (postado/agendado/pendente)
+  - ScheduleCard: card para exibir agendamento com data, hora e contas
+  - StatCard: card de estatística (número grande + ícone + título)
+  - ModernCalendar: calendário interativo com highlight de dias com agendamentos
+  - QuickScheduleWizard: modal passo-a-passo para agendar postagens
+  
+  Abas da interface:
+  1. Dashboard: estatísticas gerais, calendário, próximas postagens
+  2. Biblioteca: vídeos/imagens disponíveis no Drive por conta/pasta
+  3. Agendamentos: fila atual de postagens agendadas
+  4. Contas: gerenciamento de contas Meta (adicionar, testar, renovar token)
+  5. Configurações: legenda padrão, frequência, tema
+
+---
+
+CONFIG.PY - CONFIGURAÇÃO CENTRAL
+  Lê variáveis do arquivo .env usando python-dotenv.
+  Variáveis:
+  - META_ACCESS_TOKEN: token de acesso padrão da Meta
+  - IG_ACCOUNT_ID: ID da conta Instagram padrão
+  - FB_PAGE_ID: ID da página Facebook padrão
+  - GDRIVE_FOLDER_ID: ID da pasta raiz no Google Drive
+
+================================================================================
+9. VARIÁVEIS DE AMBIENTE E SECRETS
+================================================================================
+
+ARQUIVO .env (uso local):
+  META_ACCESS_TOKEN=EAAxxxxxx...
+  IG_ACCOUNT_ID=17841456604XXXXXX
+  FB_PAGE_ID=547184908XXXXXX
+  GDRIVE_FOLDER_ID=1WmvdB-n-jXMyxQYAw47kFFQocsXXXXXX
+
+SECRETS NO GITHUB (para GitHub Actions):
+  GDRIVE_JSON_B64    → Base64 do JSON da Service Account do Google
+  GDRIVE_FOLDER_ID   → ID da pasta principal do Drive
+  META_ACCESS_TOKEN  → Token de acesso Meta (default/fallback)
+  IG_ACCOUNT_ID      → ID conta Instagram (default/fallback)
+  FB_PAGE_ID         → ID página Facebook (default/fallback)
+
+VARIÁVEIS DE AMBIENTE ESPECIAIS:
+  RUN_ONCE=true → Se definida, o main.py executa uma vez e encerra
+                  (usado automaticamente pelo GitHub Actions que tem
+                   limite de tempo por execução)
+  GDRIVE_JSON_B64 → Credenciais Google como base64 (sem arquivo local)
+  TZ=America/Sao_Paulo → Fuso horário (definido no workflow YAML)
+
+================================================================================
+10. ESTRUTURA DOS JSONs (DADOS)
+================================================================================
+
+SCHEDULE_QUEUE.JSON - FILA DE AGENDAMENTOS
+  Lista de objetos, cada um representando um job de publicação:
+
+  [
+    {
+      "filename": "video.mp4",
+      "gdrive_id": "1ABC...XYZ",        // ID do arquivo no Google Drive
+      "media_type": "REELS",             // "REELS", "IMAGE" ou "CAROUSEL"
+      "schedule_time": 1774385463,       // Timestamp Unix do horário de post
+      "caption": "Legenda do post...",   // Texto/legenda
+      "accounts": [                      // Lista de contas para postar
+        {
+          "name": "Nome da Conta",
+          "ig_account_id": "17841456604444988",
+          "fb_page_id": "547184908483685",
+          "access_token": "EAAxxxxxxx"
+        }
+      ]
+    }
+  ]
+
+  Para CAROUSEL com ZIP:
+  {
+    "filename": "carrossel.zip",
+    "gdrive_id": "1ABC...XYZ",         // ID do arquivo ZIP no Drive
+    "media_type": "CAROUSEL",
+    "schedule_time": ...,
+    "caption": "...",
+    "accounts": [...]
+  }
+
+  Para CAROUSEL com pasta no Drive:
+  {
+    "filename": "nome_do_carrossel",
+    "folder_id": "1ABC...XYZ",         // ID da PASTA (sem gdrive_id)
+    "media_type": "CAROUSEL",
+    ...
+  }
+
+---
+
+POSTED_HISTORY.JSON - HISTÓRICO DE POSTAGENS
+  Lista de registros de posts realizados com sucesso:
+
+  [
+    {
+      "id": "1ABC...XYZ",       // gdrive_id do arquivo postado
+      "filename": "video.mp4",  // Nome do arquivo
+      "post_time": 1774385463   // Timestamp Unix de quando foi postado
+    }
+  ]
+
+  O sistema usa esse arquivo para deduplicação: se um arquivo já está no
+  histórico, não será postado novamente (mesmo que volte à fila).
+
+---
+
+ACCOUNTS.JSON - CONFIGURAÇÃO DE CONTAS
+  Lista de contas Meta configuradas:
+
+  [
+    {
+      "name": "Nome da Conta",
+      "ig_account_id": "17841456604444988",
+      "fb_page_id": "547184908483685",
+      "access_token": "EAAxxxxxxxx",
+      "gdrive_folder_id": "1WmvdB...",    // Pasta específica dessa conta no Drive
+      "profile_pic": "https://...",       // URL da foto de perfil (para GUI)
+      "token_expiry": 1779592859,         // Timestamp de expiração do token
+      "last_renewed": 1774408859,         // Timestamp da última renovação
+      "ig_username": "@username"          // Username do Instagram
+    }
+  ]
+
+---
+
+SETTINGS.JSON - CONFIGURAÇÕES DA GUI
+  {
+    "default_caption": "Texto padrão da legenda...",
+    "last_used_accounts": ["Nome da Conta"],
+    "ui_theme_color": "#3b82f6",
+    "posts_per_day": 1,
+    "interval_hours": 4
+  }
+
+---
+
+LIBRARY.JSON - CACHE DA BIBLIOTECA DE MÍDIA
+  Cache local dos arquivos encontrados no Google Drive.
+  Estrutura indexada por conta/pasta com metadados dos arquivos.
+  Atualizado quando o usuário clica em "Atualizar Biblioteca" na GUI.
+
+================================================================================
+11. FLUXO DE FUNCIONAMENTO
+================================================================================
+
+CICLO COMPLETO DE UMA POSTAGEM:
+
+1. PREPARAÇÃO DO CONTEÚDO
+   - Você faz upload do vídeo/imagem para a pasta do Google Drive
+   - Você abre a GUI local (python gui.py)
+
+2. AGENDAMENTO VIA GUI
+   - Na aba "Biblioteca", a GUI lista os arquivos do Drive
+   - Selecione o arquivo desejado e clique no checkbox
+   - Selecione os dias no calendário
+   - Clique em "Agendar Selecionados"
+   - No wizard: escolha contas, horários, legenda
+   - A GUI salva o job no schedule_queue.json do Drive
+
+3. EXECUÇÃO AUTOMÁTICA (GITHUB ACTIONS)
+   - O Google Apps Script dispara o workflow a cada hora
+   - O GitHub Actions inicia um runner Ubuntu gratuito
+   - Instala Python + dependências + FFmpeg
+   - Executa main.py com RUN_ONCE automático
+   - main.py lê a fila do Drive
+   - Para cada job com horário vencido:
+     a. Baixa o arquivo do Drive para a VM temporária
+     b. Obtém URL pública via tmpfiles.org
+     c. Chama API da Meta: cria container → aguarda → publica
+     d. Faz o mesmo para FB (upload binário resumável)
+   - Registra sucesso no posted_history.json
+   - Remove o arquivo do Drive após sucesso total
+   - Salva nova fila no Drive
+
+4. VERIFICAÇÃO
+   - Você abre a GUI para ver o histórico e status das postagens
+   - Ou verifica diretamente no Instagram/Facebook
+
+DIAGRAMA DE DECISÃO AO PROCESSAR UM JOB:
+
+  Job na fila → Hora chegou?
+  ├── NÃO  → Mantém na fila (new_queue)
+  └── SIM  → Baixa mídia
+             Para cada conta:
+             ├── Posta no IG → Sucesso? S/N
+             └── Posta no FB → Sucesso? S/N
+             
+             Resultado:
+             ├── TODO sucesso → Remove do Drive, registra histórico
+             ├── PARCIAL      → Mantém na fila com contas que falharam
+             └── FALHA TOTAL  → Mantém na fila (tentará no próximo ciclo)
+
+================================================================================
+12. INTERFACE GRÁFICA (GUI)
+================================================================================
+
+EXECUÇÃO:
+  python gui.py
+
+REQUISITOS ADICIONAIS:
+  - customtkinter instalado
+  - Pillow instalado
+  - .env configurado com credenciais
+
+ABA DASHBOARD:
+  - Cards de estatísticas: Total Agendados, Postados Hoje, Aguardando, Contas
+  - Calendário interativo: dias com postagens ficam em roxo com badge de count
+  - Lista das próximas 5 postagens agendadas
+  - Botão de sincronizar com o Drive
+
+ABA BIBLIOTECA:
+  - Lista de seleção de conta/pasta
+  - VideoCards com status (✅ Postado / ⏰ Agendado / 📭 Pendente)
+  - Filtros de busca por nome de arquivo
+  - Seleção múltipla com checkbox
+  - Botão "Agendar Selecionados" (abre QuickScheduleWizard)
+  - Botão "Atualizar Biblioteca" (recarrega do Drive)
+
+ABA AGENDAMENTOS:
+  - Lista de todos os jobs na fila
+  - ScheduleCards com data, hora, nome do arquivo, contas
+  - Botões de editar e remover por agendamento
+  - Ordenados por data/hora
+
+ABA CONTAS:
+  - Cards por conta com foto de perfil, nome, username IG
+  - Indicador de expiração do token
+  - Botão "Renovar Token" (chama refresh_token da MetaAPI)
+  - Botão "Adicionar Conta" (insere token e detecta IDs automaticamente)
+  - Botão "Testar Conexão"
+
+ABA CONFIGURAÇÕES:
+  - Campo de texto multilinha para legenda padrão
+  - Configuração de posts por dia e intervalo em horas
+  - Tema de cor da interface
+
+QUICK SCHEDULE WIZARD (Modal):
+  Passo 1: Selecionar contas para publicar
+  Passo 2: Definir horário de início + horário de fim
+  Passo 3: Definir intervalo entre posts (horas/minutos)
+  Passo 4: Digitar legenda (pré-preenchida com padrão)
+  Passo 5: Preview do agendamento e confirmar
+
+================================================================================
+13. COMO USAR DO ZERO (PASSO A PASSO)
+================================================================================
+
+SETUP INICIAL (ÚNICA VEZ):
+
+  ETAPA A: PREPARAÇÃO META
+  □ 1. Criar app na Meta for Developers
+  □ 2. Ativar permissões de publicação (instagram_content_publish, etc)
+  □ 3. Gerar token de usuário de longa duração
+  □ 4. Descobrir FB_PAGE_ID e IG_ACCOUNT_ID via /me/accounts
+  □ 5. Pegar o token de PÁGINA (não o de usuário) para cada conta
+
+  ETAPA B: PREPARAÇÃO GOOGLE DRIVE
+  □ 6. Criar projeto no Google Cloud Console
+  □ 7. Ativar Google Drive API
+  □ 8. Criar Service Account e baixar credentials.json
+  □ 9. Criar pasta no Drive e compartilhar com e-mail da Service Account
+  □ 10. Copiar ID da pasta (GDRIVE_FOLDER_ID)
+  □ 11. Converter credentials.json para Base64 (para o GitHub)
+
+  ETAPA C: CONFIGURAÇÃO LOCAL
+  □ 12. Clonar o repositório do projeto
+  □ 13. Instalar dependências: pip install -r requirements.txt
+  □ 14. Criar arquivo .env baseado no .env.example
+  □ 15. Preencher .env com META_ACCESS_TOKEN, IG_ACCOUNT_ID, FB_PAGE_ID,
+         GDRIVE_FOLDER_ID
+  □ 16. Colocar o credentials.json na pasta raiz do projeto
+  □ 17. Criar accounts.json com suas contas (modelo abaixo)
+  □ 18. Testar localmente: python gui.py
+
+  ETAPA D: CONFIGURAÇÃO GITHUB
+  □ 19. Criar repositório público no GitHub
+  □ 20. Fazer push do código (SEM .env, credentials.json, accounts.json)
+  □ 21. Ir em Settings → Secrets and variables → Actions
+  □ 22. Adicionar os 5 secrets (GDRIVE_JSON_B64, GDRIVE_FOLDER_ID,
+         META_ACCESS_TOKEN, IG_ACCOUNT_ID, FB_PAGE_ID)
+  □ 23. Testar Action manualmente (Actions → reels_bot.yml → Run workflow)
+
+  ETAPA E: AGENDAMENTO AUTOMÁTICO
+  □ 24. Criar Google Apps Script com o código da seção 7
+  □ 25. Configurar trigger para rodar a cada hora
+  □ 26. Criar GitHub Personal Access Token com permissão "workflow"
+  □ 27. Substituir o token no Apps Script e testar
+
+USO DIÁRIO:
+  1. Abrir GUI: python gui.py
+  2. Fazer upload dos vídeos para a pasta do Drive (manualmente ou via GUI)
+  3. Na aba Biblioteca, selecionar os vídeos desejados
+  4. Selecionar datas no calendário
+  5. Clicar "Agendar Selecionados" e configurar horário/legenda
+  6. Pronto! O bot cuida do resto automaticamente
+
+================================================================================
+14. LIÇÕES APRENDIDAS E PROBLEMAS RESOLVIDOS
+================================================================================
+
+PROBLEMA 1: TOKEN INVÁLIDO / PERMISSÕES
+  Causa: Usar o User Token em vez do Page Token para publicar
+  Solução: Sempre use o token retornado em /me/accounts para cada página,
+  não o token gerado diretamente no Graph API Explorer
+
+PROBLEMA 2: REELS DO IG COM ERRO "CONTAINER NOT READY"
+  Causa: Publicar antes do container terminar de processar
+  Solução: _check_status aguarda até status_code == 'FINISHED' + sleep(15s)
+
+PROBLEMA 3: URL NÃO ACESSÍVEL PELA META
+  Causa: tentar usar URL do Drive que requer autenticação
+  Solução: Usar tmpfiles.org como intermediário público. Se falhar,
+  tornar o arquivo público no Drive com make_file_public()
+
+PROBLEMA 4: UPLOAD PARA FB FALHA COM ARQUIVOS GRANDES
+  Causa: POST simples de vídeo tem timeout
+  Solução: Usar upload resumável em 3 fases:
+  start → transferência binária → finish com video_state=PUBLISHED
+
+PROBLEMA 5: ENCODING EM WINDOWS COM print() no terminal
+  Causa: Terminal Windows não suporta emojis/Unicode por padrão
+  Solução: 
+  - No python: sys.stdout.reconfigure(encoding='utf-8')
+  - Ou: evitar emojis nos prints do main.py rodado via terminal UTF-8
+
+PROBLEMA 6: CARROSSEL COM ZIP
+  Causa: Precisar enviar múltiplas imagens como um único arquivo
+  Solução: Zipar as imagens, fazer upload do .zip para o Drive.
+  O main.py detecta extensão .zip, descompacta localmente e processa
+  cada imagem como child do carrossel.
+
+PROBLEMA 7: GITHUB ACTIONS BILLING BLOQUEADO
+  Causa: Repositório privado consome minutos limitados do plano Free
+  Solução: Migrar repositório para PÚBLICO (repositórios públicos têm
+  Actions ilimitados no GitHub Free)
+
+PROBLEMA 8: GOOGLE DRIVE INACESSÍVEL DURANTE EXECUÇÃO
+  Causa: Intermitência de rede ou permissões no runner do Actions
+  Solução: Sistema de fallback duplo - tenta Drive e se falhar usa
+  arquivo local. A fila é sempre salva nos dois locais.
+
+PROBLEMA 9: FUSO HORÁRIO ERRADO NAS EXECUÇÕES
+  Causa: Servidor GitHub Actions usa UTC por padrão
+  Solução: Definir TZ=America/Sao_Paulo no workflow YAML e usar pytz
+  explicitamente no código para converter horários.
+
+PROBLEMA 10: STORIES - API INSTÁVEL
+  Causa: A API de Stories do IG mudou e requer configurações especiais
+  Solução: Feature de Stories foi removida do sistema. Foque em
+  Reels, Imagens e Carrosséis que funcionam de forma estável.
+
+PROBLEMA 11: TOKEN EXPIRANDO (60 dias)
+  Causa: Long-lived tokens da Meta expiram após ~60 dias
+  Solução: Implementar rotina de renovação. O botão "Renovar Token"
+  na aba Contas da GUI chama refresh_token() automaticamente.
+  Também monitore a data de expiração em token_expiry no accounts.json.
+
+PROBLEMA 12: MÚLTIPLAS CONTAS COM TOKENS DIFERENTES
+  Causa: Cada conta/página tem seu próprio Page Access Token
+  Solução: Cada objeto em accounts.json tem seu próprio "access_token".
+  MetaAPI é instanciada por conta: MetaAPI(ig_id, fb_id, token_da_conta)
+
+================================================================================
+15. LIMITAÇÕES CONHECIDAS
+================================================================================
+
+1. STORIES não são suportadas (API instável e requisitos diferentes)
+
+2. GITHUB ACTIONS tem limite de 6 horas por job. Mas como
+   RUN_ONCE=true, cada execução dura apenas ~5 minutos.
+
+3. TMPFILES.ORG: serviço de terceiros, pode ter downtime.
+   O sistema tem fallback para o Drive, mas o Drive também pode falhar
+   se as permissões públicas estiverem desativadas.
+
+4. RATE LIMITS da Meta: máximo 50 posts/dia no Instagram por conta.
+   O sistema não controla isso automaticamente (seria necessário contar
+   posts recentes via API antes de cada publicação).
+
+5. TAMANHO DE ARQUIVOS: vídeos muito grandes (>1GB) podem ter timeout
+   mesmo com upload resumável do Facebook.
+
+6. CARROSSEL DO FACEBOOK: não suporta vídeos nos itens. Apenas imagens.
+   (Restrição da própria API da Meta para carrossel no FB)
+
+7. TOKEN RENEWAL: requer App Secret configurado (está hardcoded no
+   meta_api.py - linha 170). Para uso em produção, mova para .env.
+
+8. CONCURRENT POSTS: se o GitHub Actions for disparado múltiplas vezes
+   simultaneamente, pode ocorrer conflict no schedule_queue.json.
+   Evite disparar em intervalos menores que 5 minutos.
+
+================================================================================
+16. CHECKLIST DE IMPLEMENTAÇÃO
+================================================================================
+
+INFRAESTRUTURA
+  □ App criado na Meta for Developers
+  □ Permissões de publicação aprovadas
+  □ Token de usuário de longa duração obtido
+  □ Page Tokens obtidos para cada página/conta
+  □ IDs de páginas FB e contas IG coletados
+  □ Service Account do Google Cloud criada
+  □ Google Drive API ativada
+  □ credentials.json baixado
+  □ Pasta do Drive criada e compartilhada com Service Account
+  □ GDRIVE_FOLDER_ID copiado
+
+REPOSITÓRIO LOCAL
+  □ Projeto clonado/criado
+  □ requirements.txt instalado
+  □ .env criado e preenchido
+  □ credentials.json na raiz
+  □ accounts.json criado com ao menos 1 conta
+  □ GUI funcionando (python gui.py)
+  □ Teste de listagem do Drive funcionando
+  □ Teste de publicação manual funcionando
+
+REPOSITÓRIO GITHUB
+  □ Repositório público criado
+  □ Código enviado (sem arquivos sensíveis)
+  □ 5 secrets configurados
+  □ Workflow YAML correto (reels_bot.yml)
+  □ Test run manual realizado com sucesso
+  □ Logs do Actions verificados
+
+AUTOMAÇÃO
+  □ Google Apps Script criado
+  □ Função dispararReelsBot() testada
+  □ Personal Access Token do GitHub com permissão "workflow"
+  □ Trigger configurado (ex: a cada hora)
+  □ Teste end-to-end: Apps Script → Actions → Drive → Meta → Post
+
+MONITORAMENTO
+  □ Verificar posted_history.json regularmente
+  □ Monitorar expiração dos tokens (token_expiry em accounts.json)
+  □ Checar logs do GitHub Actions periodicamente
+  □ Renovar tokens antes de expirarem (a cada 45-50 dias)
+
+================================================================================
+FIM DO MANUAL - IG/FB REELS BOT
+Criado com base em múltiplas conversas de desenvolvimento e testes reais.
+Sistema validado com postagens de Reels, Imagens e Carrosséis no
+Instagram e Facebook.
+================================================================================
