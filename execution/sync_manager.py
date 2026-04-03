@@ -34,7 +34,7 @@ def download_all(drive):
 
 def upload_all(drive):
     print("Sincronizando para o GDrive (Upload)...")
-    files = ['schedule_queue.json', 'posted_history.json'] # Accounts usually managed via GUI local
+    files = ['schedule_queue.json', 'accounts.json', 'posted_history.json'] # Incluindo accounts.json para Cloud
     for f in files:
         try:
             if os.path.exists(f):
