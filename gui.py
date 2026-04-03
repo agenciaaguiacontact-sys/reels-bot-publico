@@ -130,7 +130,11 @@ class VideoCard(ModernCard):
     def __init__(self, parent, video_data, on_select=None, on_remove=None, app=None):
         super().__init__(parent)
         self.video = video_data
-        self.selected = tk.BooleanVar(value=False)
+        # Estado de seleção persistente
+        if "selected" not in video_data:
+            video_data["selected"] = False
+            
+        self.selected = tk.BooleanVar(value=video_data["selected"])
         self.on_select = on_select
         self.app = app
         
@@ -138,6 +142,11 @@ class VideoCard(ModernCard):
         container = ctk.CTkFrame(self, fg_color="transparent")
         container.pack(fill="both", expand=True, padx=15, pady=8)
         
+        def toggle_selection():
+            video_data["selected"] = self.selected.get()
+            if on_select:
+                on_select()
+
         # Checkbox de seleção
         self.checkbox = ctk.CTkCheckBox(
             container,
@@ -150,7 +159,7 @@ class VideoCard(ModernCard):
             corner_radius=6,
             fg_color=ACCENT_BLUE,
             hover_color=ACCENT_PURPLE,
-            command=lambda: on_select() if on_select else None
+            command=toggle_selection
         )
         self.checkbox.pack(side="left", padx=(0, 15))
         
@@ -190,21 +199,31 @@ class VideoCard(ModernCard):
         )
         name_label.pack(anchor="w", pady=(0, 5))
         
-        # Origem e pasta
-        origin_parts = []
-        if video_data.get("gdrive_id"):
-            origin_parts.append("☁️ Google Drive")
-        else:
-            origin_parts.append("💻 Local")
+        # Nome da pasta (breadcrumb)
+        path_text = ""
+        folder = video_data.get("folder")
+        if folder:
+            # Se for do Drive e tiver subpasta, mostrar como breadcrumb
+            path_text = f"{folder}"
         
-        if folder_name:
-            origin_parts.append(f"📁 {folder_name}")
+        if path_text:
+            breadcrumb_label = ctk.CTkLabel(
+                info_frame,
+                text=f"📂 {path_text}",
+                font=ctk.CTkFont(size=10),
+                text_color=TEXT_DIM,
+                anchor="w"
+            )
+            breadcrumb_label.pack(anchor="w")
+
+        # Origem (💻 Local ou ☁️ Drive)
+        origin = "☁️ Google Drive" if video_data.get("gdrive_id") else "💻 Local"
         
         status_label = ctk.CTkLabel(
             info_frame,
-            text=" • ".join(origin_parts),
-            font=ctk.CTkFont(size=11),
-            text_color=TEXT_SECONDARY,
+            text=origin,
+            font=ctk.CTkFont(size=10),
+            text_color=TEXT_DIM,
             anchor="w"
         )
         status_label.pack(anchor="w")
@@ -747,6 +766,37 @@ class QuickScheduleWizard(ctk.CTkToplevel):
                 )
                 cb.pack(side="left", padx=15, pady=12)
         
+        # === MODO DE AGENDAMENTO (Se houver > 1 item) ===
+        self.schedule_mode = tk.StringVar(value="individual")
+        if len(self.videos) > 1:
+            self._create_section(main_scroll, "📦 Modo de Agendamento", "Como deseja publicar estas mídias?")
+            
+            mode_card = ModernCard(main_scroll)
+            mode_card.pack(fill="x", pady=(0, 30))
+            
+            mode_container = ctk.CTkFrame(mode_card, fg_color="transparent")
+            mode_container.pack(fill="x", padx=20, pady=20)
+            
+            ctk.CTkRadioButton(
+                mode_container,
+                text="Postagens Individuais (distribuídas no tempo)",
+                variable=self.schedule_mode,
+                value="individual",
+                fg_color=ACCENT_BLUE,
+                hover_color=ACCENT_PURPLE,
+                command=self._update_ui_state
+            ).pack(anchor="w", pady=5)
+            
+            ctk.CTkRadioButton(
+                mode_container,
+                text="Criar um Único Carrossel (todos os itens juntos)",
+                variable=self.schedule_mode,
+                value="carousel",
+                fg_color=ACCENT_BLUE,
+                hover_color=ACCENT_PURPLE,
+                command=self._update_ui_state
+            ).pack(anchor="w", pady=5)
+        
         # === SEÇÃO 2: HORÁRIOS ===
         self._create_section(main_scroll, "2️⃣ Quando Publicar?", "Configure os horários")
         
@@ -1026,6 +1076,9 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         self.posts_per_day.trace_add("write", lambda *_: self.preview_label.configure(text=self._generate_preview()))
         self.interval_hours.trace_add("write", lambda *_: self.preview_label.configure(text=self._generate_preview()))
         
+        # Inicializar estado da UI (seletores ativos/inativos)
+        self._update_ui_state()
+        
         # === BOTÕES ===
         btn_frame = ctk.CTkFrame(self, fg_color="transparent")
         btn_frame.pack(fill="x", padx=30, pady=(0, 30))
@@ -1046,6 +1099,22 @@ class QuickScheduleWizard(ctk.CTkToplevel):
             command=self._confirm,
             width=200
         ).pack(side="right")
+
+    def _update_ui_state(self):
+        """Habilita/Desabilita seletores baseado no modo"""
+        is_individual = self.schedule_mode.get() == "individual"
+        state = "normal" if is_individual else "disabled"
+        
+        self.ppd_slider.configure(state=state)
+        self.int_slider.configure(state=state)
+        
+        # Atualizar cores para indicar estado
+        dim_color = "#444444"
+        self.ppd_label.configure(text_color=ACCENT_GREEN if is_individual else dim_color)
+        self.int_label.configure(text_color=ACCENT_GREEN if is_individual else dim_color)
+        
+        # Mudar preview
+        self.preview_label.configure(text=self._generate_preview())
     
     def _create_section(self, parent, title, subtitle):
         """Cria um cabeçalho de seção"""
@@ -1080,13 +1149,19 @@ class QuickScheduleWizard(ctk.CTkToplevel):
     
     def _generate_preview(self):
         """Gera texto de preview do agendamento"""
-        total_posts = len(self.videos)
+        total_items = len(self.videos)
         days = len(self.selected_dates)
-        ppd = self.posts_per_day.get()
+        mode = self.schedule_mode.get()
         
-        preview = f"📦 {total_posts} vídeos serão distribuídos em {days} dia(s)\n"
-        preview += f"📊 Até {ppd} vídeos por dia, com intervalo de {self.interval_hours.get()}h\n"
-        preview += f"⏰ Primeiro post: {self.selected_dates[0].strftime('%d/%m/%Y')} às {self.hour_var.get():02d}:{self.min_var.get():02d}"
+        if mode == "carousel":
+            preview = f"🎠 1 Carrossel será criado com {total_items} mídias\n"
+            preview += f"📅 Data: {self.selected_dates[0].strftime('%d/%m/%Y')} às {self.hour_var.get():02d}:{self.min_var.get():02d}\n"
+            preview += f"⚡ Todas as mídias selecionadas serão postadas juntas."
+        else:
+            ppd = self.posts_per_day.get()
+            preview = f"📦 {total_items} mídias serão distribuídas em {days} dia(s)\n"
+            preview += f"📊 Até {ppd} posts por dia, com intervalo de {self.interval_hours.get()}h\n"
+            preview += f"⏰ Primeiro post: {self.selected_dates[0].strftime('%d/%m/%Y')} às {self.hour_var.get():02d}:{self.min_var.get():02d}"
         
         return preview
     
@@ -1105,7 +1180,8 @@ class QuickScheduleWizard(ctk.CTkToplevel):
             "posts_per_day": self.posts_per_day.get(),
             "interval_hours": self.interval_hours.get(),
             "caption_mode": self.caption_mode.get(),
-            "default_caption": self.caption_text.get("1.0", "end").strip()
+            "default_caption": self.caption_text.get("1.0", "end").strip(),
+            "schedule_mode": self.schedule_mode.get()
         }
         
         # Salvar legenda padrão
@@ -1206,9 +1282,12 @@ class LibraryView(ctk.CTkFrame):
         self.page = 0
         self.per_page = 20
         
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(2, weight=1) # Linha da lista (expansível)
+        
         # Header com ações
         header = ctk.CTkFrame(self, fg_color="transparent")
-        header.pack(fill="x", pady=(0, 20))
+        header.grid(row=0, column=0, sticky="ew", pady=(0, 25)) # Aumentado padding
         
         left_header = ctk.CTkFrame(header, fg_color="transparent")
         left_header.pack(side="left", fill="x", expand=True)
@@ -1269,11 +1348,15 @@ class LibraryView(ctk.CTkFrame):
         ).pack(side="left", padx=5)
         
         # Barra de busca e filtros
-        search_frame = ModernCard(self)
-        search_frame.pack(fill="x", pady=(0, 20))
+        self.search_frame = ModernCard(self)
+        self.search_frame.grid(row=1, column=0, sticky="ew", pady=(0, 20), padx=2) # Adicionado pequeno padx
         
-        search_inner = ctk.CTkFrame(search_frame, fg_color="transparent")
+        search_inner = ctk.CTkFrame(self.search_frame, fg_color="transparent")
         search_inner.pack(fill="x", padx=20, pady=15)
+        
+        # ... (restante dos widgets continuam iguais)
+        
+        # ... (restante dos widgets de busca continuam iguais)
         
         # Filtro de tipo de mídia
         self.filter_var = ctk.StringVar(value="Tudo")
@@ -1291,6 +1374,24 @@ class LibraryView(ctk.CTkFrame):
             unselected_hover_color=HOVER_COLOR
         )
         self.media_filter.pack(side="left", padx=(0, 15))
+
+        # Filtro de Ordenação
+        self.sort_var = ctk.StringVar(value="A-Z")
+        self.sort_filter = ctk.CTkComboBox(
+            search_inner,
+            values=["A-Z", "Z-A", "Mais Recentes", "Mais Antigos"],
+            command=lambda v: self.refresh(),
+            variable=self.sort_var,
+            width=140,
+            height=40,
+            corner_radius=10,
+            fg_color=BG_SECONDARY,
+            border_width=0,
+            button_color=ACCENT_BLUE,
+            button_hover_color=ACCENT_PURPLE,
+            font=ctk.CTkFont(size=13)
+        )
+        self.sort_filter.pack(side="left", padx=(0, 15))
 
         self.search_entry = ctk.CTkEntry(
             search_inner,
@@ -1322,13 +1423,14 @@ class LibraryView(ctk.CTkFrame):
         # Lista de vídeos
         self.videos_scroll = ctk.CTkScrollableFrame(
             self,
-            fg_color="transparent"
+            fg_color="transparent",
+            label_text="" # Remover qualquer label automático que possa causar offset
         )
-        self.videos_scroll.pack(fill="both", expand=True)
+        self.videos_scroll.grid(row=2, column=0, sticky="nsew", pady=(10, 0)) # Margem maior
         
         # Paginação
         self.pagination_frame = ctk.CTkFrame(self, fg_color="transparent")
-        self.pagination_frame.pack(fill="x", pady=(10, 0))
+        self.pagination_frame.grid(row=3, column=0, sticky="ew", pady=(15, 0)) # Mais espaço pro rodapé
         
         self.prev_btn = ModernButton(
             self.pagination_frame, 
@@ -1373,11 +1475,18 @@ class LibraryView(ctk.CTkFrame):
         self.refresh()
     
     def refresh(self):
+        # Voltar scroll para o topo ao mudar de página/filtro
+        try:
+            self.videos_scroll._parent_canvas.yview_moveto(0)
+        except:
+            pass
+
         self.count_label.configure(text=f"{len(self.app.videos)} vídeos")
         
-        # Limpar lista
+        # Limpar apenas os cards (preservar componentes internos do ScrollableFrame)
         for widget in self.videos_scroll.winfo_children():
-            widget.destroy()
+            if isinstance(widget, (VideoCard, ModernCard, ctk.CTkLabel)):
+                widget.destroy()
         
         # Filtrar por busca e tipo de mídia
         search_term = self.search_entry.get().lower()
@@ -1402,8 +1511,20 @@ class LibraryView(ctk.CTkFrame):
                 
             filtered_videos.append(v)
         
+        # Aplicar Ordenação
+        sort_mode = self.sort_var.get()
+        if sort_mode == "A-Z":
+            filtered_videos.sort(key=lambda x: x.get("filename", "").lower())
+        elif sort_mode == "Z-A":
+            filtered_videos.sort(key=lambda x: x.get("filename", "").lower(), reverse=True)
+        elif sort_mode == "Mais Recentes":
+            # Usar date_added se existir, senão usar 0
+            filtered_videos.sort(key=lambda x: x.get("date_added", 0), reverse=True)
+        elif sort_mode == "Mais Antigos":
+            filtered_videos.sort(key=lambda x: x.get("date_added", 0))
+
         if not filtered_videos:
-            self.pagination_frame.pack_forget()
+            self.pagination_frame.grid_forget()
             empty_card = ModernCard(self.videos_scroll)
             empty_card.pack(fill="x", pady=20)
             
@@ -1415,7 +1536,7 @@ class LibraryView(ctk.CTkFrame):
             ).pack(pady=40)
             return
         
-        self.pagination_frame.pack(fill="x", pady=(10, 0))
+        self.pagination_frame.grid(row=3, column=0, sticky="ew", pady=(10, 0))
         
         # Lógica de Paginação
         total_pages = max(1, (len(filtered_videos) + self.per_page - 1) // self.per_page)
@@ -1630,11 +1751,8 @@ class ScheduleView(ctk.CTkFrame):
             messagebox.showwarning("Atenção", "Selecione pelo menos um dia no calendário!")
             return
         
-        # Pegar vídeos selecionados
-        selected_videos = [
-            v for v in self.app.videos
-            if v.get("widget") and hasattr(v["widget"], "selected") and v["widget"].selected.get()
-        ]
+        # Pegar vídeos selecionados (AGORA PERSISTENTE EM TODAS AS PÁGINAS)
+        selected_videos = [v for v in self.app.videos if v.get("selected")]
         
         if not selected_videos:
             messagebox.showwarning("Atenção", "Selecione vídeos na Biblioteca primeiro!")
@@ -2696,7 +2814,12 @@ class MetaStudioApp(ctk.CTk):
         if os.path.exists("library.json"):
             try:
                 with open("library.json", "r", encoding="utf-8") as f:
-                    return json.load(f)
+                    data = json.load(f)
+                    # Manter ordem de carga original se date_added não existir (legado)
+                    for i, item in enumerate(data):
+                        if "date_added" not in item:
+                            item["date_added"] = i  # Uso a posição original como proxy de "idade"
+                    return data
             except:
                 pass
         return []
@@ -2926,7 +3049,8 @@ class MetaStudioApp(ctk.CTk):
                     "path": f,
                     "filename": name,
                     "caption": "",
-                    "gdrive_id": None
+                    "gdrive_id": None,
+                    "date_added": int(time.time())
                 })
         
         self.save_library()
@@ -2956,7 +3080,8 @@ class MetaStudioApp(ctk.CTk):
                             "filename": f,
                             "caption": "",
                             "gdrive_id": None,
-                            "folder": rel_folder if rel_folder != os.path.basename(folder) else "Local"
+                            "folder": rel_folder if rel_folder != os.path.basename(folder) else "Local",
+                            "date_added": int(time.time())
                         })
                         added += 1
                         
@@ -3017,10 +3142,13 @@ class MetaStudioApp(ctk.CTk):
             self.views["library"].refresh()
     
     def select_all_library(self):
-        """Seleciona todos os vídeos"""
+        """Seleciona todos os vídeos na lista filtrada atual (globalmente)"""
+        # Se houver busca ou filtro ativo, selecionar apenas os visíveis/filtrados?
+        # Por simplicidade e expectativa do usuário, vamos selecionar todos os que estão sendo exibidos
+        # Mas o usuário disse 'Selecionar Todos', geralmente espera-se todos da biblioteca.
         for v in self.videos:
-            if "widget" in v and hasattr(v["widget"], "selected"):
-                v["widget"].selected.set(True)
+            v["selected"] = True
+        self.views["library"].refresh()
     
     def clear_library(self):
         """Limpa toda a biblioteca"""
@@ -3081,51 +3209,94 @@ class MetaStudioApp(ctk.CTk):
             )
             return
         
-        for date in sorted_dates:
-            if video_idx >= len(videos):
-                break
+        if config.get("schedule_mode") == "carousel":
+            # Agrupar todos em um único post de carrossel
+            carousel_items = []
+            for v in videos:
+                # Determinar o tipo do item
+                item_type = "VIDEO"
+                if v["filename"].lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
+                    item_type = "IMAGE"
+                
+                carousel_items.append({
+                    "gdrive_id": v.get("gdrive_id"),
+                    "filename": v["filename"],
+                    "type": item_type,
+                    "path": v.get("path")
+                })
             
-            # Horário base do dia
+            # Horário do carrossel: primeira data e hora selecionadas
             base_dt = datetime.datetime.combine(
-                date,
+                sorted_dates[0],
                 datetime.time(config["start_hour"], config["start_min"])
             )
             
-            # Distribuir vídeos no dia
-            videos_today = config["posts_per_day"]
-            interval = config["interval_hours"]
-            
-            for _ in range(videos_today):
+            new_post = {
+                "gdrive_id": None,
+                "filename": f"Carrossel Agrupado ({len(videos)} itens)",
+                "media_type": "CAROUSEL",
+                "caption": config["default_caption"],
+                "schedule_time": base_dt,
+                "accounts": config["accounts"],
+                "_carousel_items_gdrive": carousel_items
+            }
+            all_generated.append(new_post)
+        else:
+            # MODO INDIVIDUAL: Distribuir vídeos nos dias selecionados
+            for date in sorted_dates:
                 if video_idx >= len(videos):
                     break
                 
-                v = videos[video_idx]
+                # Horário base do dia
+                base_dt = datetime.datetime.combine(
+                    date,
+                    datetime.time(config["start_hour"], config["start_min"])
+                )
                 
-                # Determinar legenda
-                if config["caption_mode"] == "title":
-                    caption = os.path.splitext(v["filename"])[0]
-                else:
-                    caption = config["default_caption"]
+                # Distribuir vídeos no dia baseado na configuração
+                posts_today = config["posts_per_day"]
+                interval = config["interval_hours"]
                 
-                new_post = {
-                    "gdrive_id": v.get("gdrive_id"),
-                    "filename": v["filename"],
-                    "caption": caption,
-                    "schedule_time": base_dt,
-                    "accounts": config["accounts"]
-                }
-                
-                all_generated.append(new_post)
-                base_dt += datetime.timedelta(hours=interval)
-                video_idx += 1
+                for _ in range(posts_today):
+                    if video_idx >= len(videos):
+                        break
+                    
+                    v = videos[video_idx]
+                    
+                    # Determinar legenda
+                    if config["caption_mode"] == "title":
+                        caption = os.path.splitext(v["filename"])[0]
+                    else:
+                        caption = config["default_caption"]
+                    
+                    # Determinar tipo de mídia
+                    filename_lower = v["filename"].lower()
+                    media_type = "VIDEO" # Default
+                    
+                    if filename_lower.endswith((".jpg", ".jpeg", ".png", ".webp")):
+                        media_type = "IMAGE"
+                    elif filename_lower.endswith(".zip") or "[CARROSSEL]" in v["filename"].upper():
+                        media_type = "CAROUSEL"
+                    
+                    new_post = {
+                        "gdrive_id": v.get("gdrive_id"),
+                        "filename": v["filename"],
+                        "media_type": media_type,
+                        "caption": caption,
+                        "schedule_time": base_dt,
+                        "accounts": config["accounts"]
+                    }
+                    
+                    all_generated.append(new_post)
+                    base_dt += datetime.timedelta(hours=interval)
+                    video_idx += 1
         
         # Adicionar à fila
         self.schedule.extend(all_generated)
         
-        # Desselecionar vídeos
-        for v in self.videos:  # Usar self.videos ao invés de videos
-            if "widget" in v and hasattr(v["widget"], "selected"):
-                v["widget"].selected.set(False)
+        # Desselecionar vídeos globalmente
+        for v in self.videos:
+            v["selected"] = False
         
         # Limpar seleção do calendário
         if "schedule" in self.views:

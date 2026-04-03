@@ -29,6 +29,12 @@ def process_job(job, drive, global_accounts, tz_br):
     
     # Auto-detecção de tipo de mídia por extensão (Safety net para Cloud)
     ext = filename.lower().split('.')[-1]
+    
+    # Detecção de Carrossel por ZIP
+    if ext == 'zip' and media_type == 'VIDEO':
+        print(f"[!] Aviso: Arquivo {filename} é ZIP. Tratando como CAROUSEL.")
+        media_type = 'CAROUSEL'
+        
     if ext in ['png', 'jpg', 'jpeg', 'webp'] and media_type in ['VIDEO', 'REELS']:
         print(f"[!] Aviso: Arquivo {filename} é imagem mas estava como {media_type}. Ajustando para IMAGE.")
         media_type = 'IMAGE'
@@ -55,7 +61,35 @@ def process_job(job, drive, global_accounts, tz_br):
         os.makedirs('.tmp', exist_ok=True)
         
         if media_type == 'CAROUSEL':
-            if not file_id:
+            # Suporte ao formato de teste (_carousel_items_gdrive) ou pastas dinâmicas
+            test_items = job.get('_carousel_items_gdrive')
+            if test_items:
+                print(f"[*] Baixando {len(test_items)} itens do carrossel (formato extra)...")
+                for item in test_items:
+                    item_id = item.get('id') or item.get('gdrive_id')
+                    local_path = item.get('path') or item.get('_local_path_override')
+                    
+                    # Pular se não tiver ID nem arquivo local válido
+                    if not item_id and not (local_path and os.path.exists(local_path)):
+                        continue
+                    
+                    p = None
+                    if item_id:
+                        tmp_name = item.get('name') or item.get('filename') or f"item_{item_id}"
+                        p = drive.download_file(item_id, os.path.join('.tmp', tmp_name))
+                    elif local_path:
+                        p = local_path
+                        print(f"[*] Usando arquivo local para carrossel: {p}")
+                    
+                    if p:
+                        m_type = item.get('type') or item.get('media_type') or 'IMAGE'
+                        carousel_items.append({
+                            'local_path': p, 
+                            'gdrive_id': item_id, 
+                            'media_type': 'IMAGE' if 'IMAGE' in m_type.upper() else 'VIDEO'
+                        })
+            
+            if not file_id and not carousel_items:
                 folder_id = job.get('folder_id')
                 if folder_id:
                     files = drive.list_files_in_folder(folder_id)
