@@ -17,6 +17,16 @@ def process_job(job, drive, global_accounts, tz_br):
     file_id = job.get('gdrive_id')
     filename = job.get('filename', 'arquivo_desconhecido')
     media_type = job.get('media_type', 'VIDEO')
+    
+    # Auto-detecção de tipo de mídia por extensão (Safety net para Cloud)
+    ext = filename.lower().split('.')[-1]
+    if ext in ['png', 'jpg', 'jpeg', 'webp'] and media_type in ['VIDEO', 'REELS']:
+        print(f"⚠️ Aviso: Arquivo {filename} é imagem mas estava como {media_type}. Ajustando para IMAGE.")
+        media_type = 'IMAGE'
+    elif ext in ['mp4', 'mov', 'avi', 'mkv'] and media_type == 'IMAGE':
+        print(f"⚠️ Aviso: Arquivo {filename} é vídeo mas estava como IMAGE. Ajustando para VIDEO.")
+        media_type = 'VIDEO'
+
     caption = job.get('caption', '')
     job_accounts = job.get('accounts', global_accounts)
     

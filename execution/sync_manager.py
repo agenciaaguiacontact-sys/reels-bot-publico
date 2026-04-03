@@ -32,10 +32,11 @@ def download_all(drive):
         except Exception as e:
             print(f"❌ Erro ao baixar {f}: {e}")
 
-def upload_all(drive):
-    print("Sincronizando para o GDrive (Upload)...")
-    files = ['schedule_queue.json', 'accounts.json', 'posted_history.json', 'library.json'] # Incluindo accounts.json e library.json para Cloud
-    for f in files:
+    # Prioriza arquivos críticos de estado
+    critical_files = ['schedule_queue.json', 'posted_history.json']
+    additional_files = ['accounts.json', 'library.json']
+    
+    for f in critical_files + additional_files:
         try:
             if os.path.exists(f):
                 with open(f, 'r', encoding='utf-8') as local_f:
@@ -44,7 +45,10 @@ def upload_all(drive):
                 if res:
                     print(f"✅ {f} enviado ao Drive.")
                 else:
-                    print(f"❌ Falha ao enviar {f} ao Drive.")
+                    if f == 'library.json':
+                        print(f"⚠️ Aviso: Falha ao sincronizar {f}. Pode ser ignorado se for erro de cota.")
+                    else:
+                        print(f"❌ Falha ao enviar {f} ao Drive.")
             else:
                 print(f"⚠️ {f} local não encontrado.")
         except Exception as e:

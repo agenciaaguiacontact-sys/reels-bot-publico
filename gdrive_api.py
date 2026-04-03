@@ -231,7 +231,11 @@ class GoogleDriveAPI:
             return True
         except Exception as e:
             msg = str(e)
-            if hasattr(e, 'content'): msg += " | Body: " + e.content.decode('utf-8')
+            if hasattr(e, 'content'):
+                content = e.content.decode('utf-8')
+                msg += " | Body: " + content
+                if 'storageQuotaExceeded' in content:
+                    print(f"❌ ERRO DE COTA: A Conta de Serviço não tem espaço. Crie o arquivo '{name}' manualmente no Drive e compartilhe-o.")
             print(f"Erro ao salvar JSON no Drive: {msg}")
             return False
 
