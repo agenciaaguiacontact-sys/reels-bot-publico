@@ -2213,8 +2213,8 @@ class MetaStudioApp(ctk.CTk):
         # Iniciar countdown
         self.update_countdown()
         
-        # Buscar dados do GitHub ao iniciar (via HTTP, sem Git)
-        self.after(1000, self.fetch_github_schedule)
+        # Iniciar sincronização automática (Drive + GitHub) ao iniciar
+        self.after(1000, self.auto_sync_on_startup)
     
     def show_view(self, view_id):
         """Mostra uma view específica"""
@@ -2317,7 +2317,7 @@ class MetaStudioApp(ctk.CTk):
                     remote_history = json.loads(h_resp.text)
                 else:
                     # Tentar via git show se HTTP falhar
-                    show_h = subprocess.run(["git", "show", "origin/main:posted_history.json"], capture_output=True, text=True, shell=True, timeout=10)
+                    show_h = subprocess.run(["git", "show", "origin/main:posted_history.json"], capture_output=True, text=True, encoding="utf-8", errors="replace", shell=True, timeout=10)
                     if show_h.returncode == 0:
                         remote_history = json.loads(show_h.stdout)
                 
@@ -2334,14 +2334,11 @@ class MetaStudioApp(ctk.CTk):
                 # Se falhar via HTTP (especialmente 404 em repos privados), tentar via comando GIT
                 github_schedule = None
                 if response.status_code != 200:
-                    self.log(f"⚠️ Erro HTTP {response.status_code}. Tentando via comando Git...")
-                    
-                    # Tentar buscar do remoto via git show (funciona se o git estiver logado no PC)
                     try:
                         # Primeiro garantir que o repo local sabe das novidades
-                        subprocess.run(["git", "fetch", "origin", "main"], capture_output=True, text=True, shell=True, timeout=15)
+                        subprocess.run(["git", "fetch", "origin", "main"], capture_output=True, text=True, encoding="utf-8", errors="replace", shell=True, timeout=15)
                         
-                        show_res = subprocess.run(["git", "show", "origin/main:schedule_queue.json"], capture_output=True, text=True, shell=True, timeout=10)
+                        show_res = subprocess.run(["git", "show", "origin/main:schedule_queue.json"], capture_output=True, text=True, encoding="utf-8", errors="replace", shell=True, timeout=10)
                         if show_res.returncode == 0:
                             github_schedule = json.loads(show_res.stdout)
                             self.log("✅ Dados obtidos via comando Git")
@@ -2455,23 +2452,13 @@ class MetaStudioApp(ctk.CTk):
                     json.dump(self.history[-500:], f, indent=2)
                 
                 self.log(f"✅ Merge concluído: {len(merged_schedule)} agendamentos")
-                
-                # Recarregar dados
                 self.schedule = self.load_schedule()
-                
-                # Atualizar interface
                 self.after(0, lambda: self.views["schedule"].refresh())
                 self.after(0, lambda: self.views["dashboard"].refresh())
                 self.after(0, lambda: self.views["library"].refresh())
                 
-                # Mostrar notificação
                 if posted_ids:
-                    self.after(0, lambda: self.show_toast(
-                        f"✅ Atualizado do GitHub\n"
-                        f"📅 {len(merged_schedule)} agendados\n"
-                        f"✅ {len(posted_ids)} postados"
-                    ))
-                
+                    self.after(0, lambda: self.show_toast(f"✅ Atualizado do GitHub\n📅 {len(merged_schedule)} agendados\n"))
             except requests.exceptions.RequestException as e:
                 self.log(f"⚠️ Erro ao conectar ao GitHub: {e}")
                 self.log("✅ Usando dados locais")
@@ -2483,130 +2470,70 @@ class MetaStudioApp(ctk.CTk):
         threading.Thread(target=task, daemon=True).start()
     
     def auto_sync_on_startup(self):
-        """Sincronização automática silenciosa ao iniciar o programa"""
+        """Sincronização automática silenciosa ao iniciar o programa (Drive + GitHub)"""
         self.log("=" * 60)
         self.log("🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR")
         self.log("=" * 60)
         
         def task():
             try:
-                # Fazer pull silencioso para pegar dados do GitHub
-                self.log("📥 Buscando dados do GitHub...")
-                
-                # Fetch primeiro
-                fetch = subprocess.run(
-                    ["git", "fetch", "origin", "main"],
-                    capture_output=True,
-                    text=True,
-                    shell=True
-                )
-                
-                if fetch.returncode != 0:
-                    self.log(f"⚠️ Aviso no fetch: {fetch.stderr}")
-                    return
-                
-                # Verificar se há mudanças remotas
-                diff_check = subprocess.run(
-                    ["git", "diff", "HEAD", "origin/main", "--", "schedule_queue.json", "posted_history.json"],
-                    capture_output=True,
-                    text=True,
-                    shell=True
-                )
-                
-                has_remote_changes = bool(diff_check.stdout.strip())
-                
-                if has_remote_changes:
-                    self.log("📋 Detectadas mudanças na nuvem - fazendo merge inteligente...")
-                    
-                    # NÃO fazer pull automático! Fazer merge manual para não perder dados
-                    # Ler o schedule remoto
-                    remote_schedule_raw = subprocess.run(
-                        ["git", "show", "origin/main:schedule_queue.json"],
-                        capture_output=True,
-                        text=True,
-                        shell=True
-                    )
-                    
-                    if remote_schedule_raw.returncode == 0:
-                        try:
-                            # 1. Primeiro, mesclar histórico se houver no remoto
-                            remote_history_raw = subprocess.run(
-                                ["git", "show", "origin/main:posted_history.json"],
-                                capture_output=True, text=True, shell=True
-                            )
-                            if remote_history_raw.returncode == 0:
-                                try:
-                                    remote_history = json.loads(remote_history_raw.stdout)
-                                    self.history = self.merge_json_data('history', self.history, remote_history)
-                                    with open("posted_history.json", "w", encoding="utf-8") as f:
-                                        json.dump(self.history[-500:], f, indent=2)
-                                except Exception as e_h:
-                                    self.log(f"⚠️ Erro ao mesclar histórico remoto: {e_h}")
+                self.log("📥 Sincronizando progresso da nuvem (Drive)...")
+                drive = GoogleDriveAPI()
+                remote_sch = drive.get_json('schedule_queue.json')
+                remote_his = drive.get_json('posted_history.json')
 
-                            # 2. Mesclar o schedule
-                            try:
-                                remote_schedule = json.loads(remote_schedule_raw.stdout)
-                                
-                                # Converter schedule local
-                                local_schedule_data = []
-                                for s in self.schedule:
-                                    item = s.copy()
-                                    if isinstance(item["schedule_time"], datetime.datetime):
-                                        item["schedule_time"] = int(item["schedule_time"].timestamp())
-                                    local_schedule_data.append(item)
-                                
-                                # MERGE inteligente
-                                merged_schedule = self.merge_json_data('schedule', local_schedule_data, remote_schedule)
-                                
-                                # Salvar o merge
-                                with open("schedule_queue.json", "w", encoding="utf-8") as f:
-                                    json.dump(merged_schedule, f, indent=2, ensure_ascii=False)
-                                
-                                self.log(f"🔄 Merge automático concluído: {len(merged_schedule)} agendamentos")
-                            except Exception as e_s:
-                                self.log(f"⚠️ Erro ao mesclar schedule remoto: {e_s}")
-                            
-                            # Recarregar dados
-                            self.schedule = self.load_schedule()
-                            self.videos = self.load_library()
-                            self.history = self.load_history()
-                            self.accounts = self.load_accounts()
-                            
-                            # Atualizar interface
-                            self.after(0, lambda: self.views["schedule"].refresh())
-                            self.after(0, lambda: self.views["dashboard"].refresh())
-                            self.after(0, lambda: self.views["library"].refresh())
-                            
-                            scheduled_count = len(self.schedule)
-                            posted_count = len(self.history)
-                            
-                            self.log(f"📊 Status: {scheduled_count} agendados, {posted_count} postados")
-                            
-                            # Mostrar toast notification
-                            self.after(0, lambda: self.show_toast(
-                                f"✅ Dados atualizados\n"
-                                f"📅 {scheduled_count} agendados • ✅ {posted_count} postados"
-                            ))
-                        except Exception as e_task:
-                            self.log(f"⚠️ Erro na tarefa de merge: {e_task}")
-                            
-                        except json.JSONDecodeError as je:
-                            self.log(f"⚠️ Erro ao fazer merge: {je}")
+                if remote_sch is not None:
+                    local_sch_data = []
+                    for s in self.schedule:
+                        item = s.copy()
+                        if isinstance(item["schedule_time"], datetime.datetime):
+                            item["schedule_time"] = int(item["schedule_time"].timestamp())
+                        local_sch_data.append(item)
+                    
+                    if remote_his:
+                        self.history = self.merge_json_data('history', self.history, remote_his)
+                    
+                    merged_sch = self.merge_json_data('schedule', local_sch_data, remote_sch)
+                    
+                    with open("schedule_queue.json", "w", encoding="utf-8") as f:
+                        json.dump(merged_sch, f, indent=2, ensure_ascii=False)
+                    with open("posted_history.json", "w", encoding="utf-8") as f:
+                        json.dump(self.history[-500:], f, indent=2, ensure_ascii=False)
+                    
+                    self.schedule = self.load_schedule()
+                    self.history = self.load_history()
+                    self.log("✅ Progresso do Drive carregado.")
                 else:
                     self.log("✅ Dados locais já estão atualizados")
-                    
-                    # Mesmo sem mudanças, mostrar status
                     scheduled_count = len(self.schedule)
                     posted_count = len(self.history)
                     self.log(f"📊 Status: {scheduled_count} agendados, {posted_count} postados")
                 
+                self.log("📥 Verificando mudanças no GitHub...")
+                subprocess.run(["git", "fetch", "origin", "main"], capture_output=True, text=True, encoding="utf-8", errors="replace", shell=True)
+                diff_check = subprocess.run(["git", "diff", "HEAD", "origin/main", "--", "schedule_queue.json"], capture_output=True, text=True, encoding="utf-8", errors="replace", shell=True)
+                
+                if diff_check.stdout.strip():
+                    self.log("📋 Mudanças no GitHub detectadas - use o botão Sincronizar para merge completo.")
+                
+                self.after(0, lambda: self.views["schedule"].refresh())
+                self.after(0, lambda: self.views["dashboard"].refresh())
+                self.after(0, lambda: self.views["library"].refresh())
+                
+                scheduled_count = len(self.schedule)
+                posted_count = len(self.history)
+                self.log(f"📊 Status Final: {scheduled_count} agendados, {posted_count} postados")
+                
+                self.after(0, lambda: self.show_toast(
+                    f"✅ Sincronizado ao Iniciar\n"
+                    f"📅 {scheduled_count} agendados • ✅ {posted_count} postados"
+                ))
             except Exception as e:
-                self.log(f"⚠️ Erro na sincronização automática: {e}")
+                self.log(f"⚠️ Erro na sincronização inicial: {e}")
                 import traceback
                 traceback.print_exc()
         
         threading.Thread(target=task, daemon=True).start()
-    
     def show_toast(self, message, style="success"):
         """Mostra uma notificação toast (não modal) no canto da tela"""
         toast = ctk.CTkToplevel(self)
@@ -3240,7 +3167,7 @@ class MetaStudioApp(ctk.CTk):
             self.views["dashboard"].refresh()
             
             msg = f"✅ Limpeza concluída!\n\n"
-            msg += f"��️ {removed_count} vídeo(s) já postado(s) removido(s)\n"
+            msg += f"🎬 {removed_count} vídeo(s) já postado(s) removido(s)\n"
             msg += f"📋 {len(new_schedule)} agendamento(s) restante(s)\n\n"
             
             if removed_videos:
@@ -3250,91 +3177,71 @@ class MetaStudioApp(ctk.CTk):
             
             messagebox.showinfo("Limpeza Concluída", msg)
             
-            # Perguntar se quer sincronizar
             if messagebox.askyesno("Sincronizar", "Deseja sincronizar com a nuvem agora?"):
                 self.sync_cloud()
         else:
             messagebox.showinfo("Info", "✅ Nenhum vídeo já postado encontrado na fila!\n\nTodos os agendamentos são válidos.")
     
     def sync_cloud(self):
-        """Sincroniza com o GitHub e Google Drive - VERSÃO ROBUSTA"""
+        """Sincroniza com o GitHub e Google Drive - VERSÃO BIDIRECIONAL ROBUSTA"""
         self.log("=" * 60)
         self.log("🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)")
         self.log("=" * 60)
         
         now = datetime.datetime.now()
-        self.log(f"🕐 Horário: {now.strftime('%d/%m/%Y %H:%M:%S')}")
-        
-        # PASSO 1: Salvar dados locais
-        self.log("💾 Salvando dados locais...")
-        
-        if not self.schedule and os.path.exists("schedule_queue.json"):
-            try:
-                with open("schedule_queue.json", "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    if data and len(data) > 0:
-                        self.log("⚠️ AVISO: Recarregando schedule antes de salvar para evitar perda.")
-                        self.schedule = self.load_schedule()
-            except: pass
-                
-        self.save_schedule()
-        self.save_accounts()
-        self.save_library() 
+        self.log(f"🕐 Horário de início: {now.strftime('%d/%m/%Y %H:%M:%S')}")
         
         def task():
             try:
-                # PASSO 2: Sincronização com Google Drive
-                self.log("☁️ Sincronizando com Google Drive...")
-                drive_result = subprocess.run(
-                    [sys.executable, "execution/sync_manager.py", "--action", "upload"],
-                    capture_output=True, text=True, encoding="utf-8", shell=True
-                )
-                if drive_result.returncode == 0:
-                    self.log("✅ Dados sincronizados no Drive")
-                else:
-                    self.log(f"⚠️ Aviso Drive: {drive_result.stderr}")
+                # PASSO 1: Salvar backup local do que temos agora
+                self.save_schedule()
+                
+                # PASSO 2: Baixar o estado atual do Bot Cloud (Drive)
+                self.log("📥 Buscando progresso da nuvem (Download do Drive)...")
+                drive = GoogleDriveAPI()
+                
+                # Buscar schedule e history remotos
+                remote_sch = drive.get_json('schedule_queue.json')
+                remote_his = drive.get_json('posted_history.json')
+                
+                if remote_sch is not None:
+                    self.log(f"🧩 Mesclando {len(remote_sch)} itens da nuvem com locais...")
+                    # Converte schedule local para formato timestamp para o merge
+                    local_sch_data = []
+                    for s in self.schedule:
+                        item = s.copy()
+                        if isinstance(item["schedule_time"], datetime.datetime):
+                            item["schedule_time"] = int(item["schedule_time"].timestamp())
+                        local_sch_data.append(item)
+                    
+                    # Merge do Histórico primeiro (para saber o que já foi postado)
+                    if remote_his:
+                        self.history = self.merge_json_data('history', self.history, remote_his)
+                    
+                    # Merge do Schedule
+                    merged_sch = self.merge_json_data('schedule', local_sch_data, remote_sch)
+                    
+                    # Salvar localmente o merge
+                    with open("schedule_queue.json", "w", encoding="utf-8") as f:
+                        json.dump(merged_sch, f, indent=2, ensure_ascii=False)
+                    with open("posted_history.json", "w", encoding="utf-8") as f:
+                        json.dump(self.history[-500:], f, indent=2, ensure_ascii=False)
+                    
+                    # Recarregar na memória da GUI
+                    self.schedule = self.load_schedule()
+                    self.history = self.load_history()
+                    self.log("✅ Mesclagem local concluída.")
+                
+                # PASSO 3: Sincronização de Upload para Google Drive (Atualizar nuvem com o merge)
+                self.log("📤 Atualizando nuvem (Upload para Drive)...")
+                subprocess.run([sys.executable, "execution/sync_manager.py", "--action", "upload"], shell=True)
 
-                # PASSO 3: Git Add e Commit
-                self.log("📦 Preparando arquivos para GitHub...")
-                subprocess.run(["git", "add", "."], capture_output=True, shell=True)
-                
-                commit_msg = f"sync {now.strftime('%Y-%m-%d %H:%M:%S')} [skip ci]"
-                commit_result = subprocess.run(
-                    ["git", "commit", "-m", commit_msg],
-                    capture_output=True, text=True, encoding="utf-8", shell=True
-                )
-                
-                if "nothing to commit" in commit_result.stdout:
-                    self.log("ℹ️ Nenhuma mudança local nova para o GitHub")
-                else:
-                    self.log("✅ Commit criado localmente")
-                
-                # PASSO 4: Git Pull (Download)
-                self.log("📥 Sincronizando com GitHub (Download)...")
-                pull_result = subprocess.run(
-                    ["git", "pull", "--no-rebase", "origin", "main"],
-                    capture_output=True, text=True, encoding="utf-8", shell=True
-                )
-                
-                if pull_result.returncode != 0:
-                    err = (pull_result.stderr or pull_result.stdout).lower()
-                    if "conflict" in err:
-                        self.log("⚠️ Conflito no GitHub. Tentando resolver automaticamente...")
-                        subprocess.run(["git", "checkout", "--ours", "*.json"], shell=True)
-                        subprocess.run(["git", "add", "."], shell=True)
-                        subprocess.run(["git", "commit", "-m", "fix: resolve conflicts in json files"], shell=True)
-                        self.log("✅ Conflitos resolvidos (prioridade local para JSON)")
-                    else:
-                        self.log(f"⚠️ Aviso Git Pull: {pull_result.stderr}")
-                else:
-                    self.log("✅ Sincronizado com remoto")
-
-                # PASSO 5: Git Push (Upload)
-                self.log("📤 Enviando para GitHub (Upload)...")
-                push_result = subprocess.run(
-                    ["git", "push", "origin", "main"],
-                    capture_output=True, text=True, encoding="utf-8", shell=True
-                )
+                # PASSO 4: Git Sync (GitHub)
+                self.log("📦 Sincronizando com GitHub...")
+                subprocess.run(["git", "add", "."], shell=True)
+                subprocess.run(["git", "commit", "-m", f"sync {now.strftime('%Y-%m-%d %H:%M:%S')} [skip ci]"], shell=True)
+                subprocess.run(["git", "pull", "--no-rebase", "origin", "main"], shell=True)
+                push_result = subprocess.run(["git", "push", "origin", "main"], capture_output=True, text=True, encoding="utf-8", errors="replace", shell=True)
                 
                 if push_result.returncode == 0:
                     self.log("🚀 Sincronização COMPLETA!")
