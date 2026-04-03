@@ -1,6 +1,11 @@
 import os
 import json
 import time
+import sys
+
+# Garante que o diretorio raiz esteja no path, mesmo se executado de dentro de 'execution/'
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from gdrive_api import GoogleDriveAPI
 
 def cleanup_tmp():

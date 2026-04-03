@@ -1,10 +1,15 @@
 import os
+import sys
 import json
 import time
 import zipfile
 import traceback
 from datetime import datetime
 import pytz
+
+# Garante que o diretorio raiz esteja no path, mesmo se executado de dentro de 'execution/'
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from gdrive_api import GoogleDriveAPI
 from meta_api import MetaAPI
 

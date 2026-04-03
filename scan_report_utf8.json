@@ -1,0 +1,91 @@
+﻿{
+  "project": {
+    "languages": [
+      "Python"
+    ],
+    "frameworks": [],
+    "has_git": true
+  },
+  "scan": {
+    "root": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia",
+    "safe_to_delete": [
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\__pycache__",
+        "path_relative": "__pycache__",
+        "reason": "Diretório de build/cache: __pycache__",
+        "size": 265015,
+        "size_human": "258.8 KB",
+        "is_dir": true
+      },
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\execution\\__pycache__",
+        "path_relative": "execution\\__pycache__",
+        "reason": "Diretório de build/cache: __pycache__",
+        "size": 23218,
+        "size_human": "22.7 KB",
+        "is_dir": true
+      },
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\temp_upload.json",
+        "path_relative": "temp_upload.json",
+        "reason": "Arquivo de cache/estado temporário",
+        "size": 6414,
+        "size_human": "6.3 KB",
+        "is_dir": false
+      }
+    ],
+    "review_needed": [
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\schedule_queue_backup_20260402_215836.json",
+        "path_relative": "schedule_queue_backup_20260402_215836.json",
+        "reason": "Backup automático da fila",
+        "size": 2532,
+        "size_human": "2.5 KB",
+        "is_dir": false,
+        "warning": "Backup da fila de postagens"
+      },
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\schedule_queue_backup_20260402_222340.json",
+        "path_relative": "schedule_queue_backup_20260402_222340.json",
+        "reason": "Backup automático da fila",
+        "size": 2532,
+        "size_human": "2.5 KB",
+        "is_dir": false,
+        "warning": "Backup da fila de postagens"
+      },
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\schedule_queue_backup_20260402_174754.json",
+        "path_relative": "schedule_queue_backup_20260402_174754.json",
+        "reason": "Backup automático da fila",
+        "size": 1829,
+        "size_human": "1.8 KB",
+        "is_dir": false,
+        "warning": "Backup da fila de postagens"
+      },
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\schedule_queue_backup_20260402_174811.json",
+        "path_relative": "schedule_queue_backup_20260402_174811.json",
+        "reason": "Backup automático da fila",
+        "size": 1829,
+        "size_human": "1.8 KB",
+        "is_dir": false,
+        "warning": "Backup da fila de postagens"
+      },
+      {
+        "path": "C:\\#1-CRIAÇÕES-AUTOMAÇÕES-EXTENSÕES\\ig-fb-reels-bot - Copia\\schedule_queue_backup_20260402_215833.json",
+        "path_relative": "schedule_queue_backup_20260402_215833.json",
+        "reason": "Backup automático da fila",
+        "size": 2,
+        "size_human": "2 B",
+        "is_dir": false,
+        "warning": "Backup da fila de postagens"
+      }
+    ],
+    "total_safe_bytes": 294647,
+    "total_safe_human": "287.7 KB",
+    "total_review_bytes": 8724,
+    "total_size_bytes": 303371,
+    "total_size_human": "296.3 KB"
+  }
+}
+
