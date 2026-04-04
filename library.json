@@ -6,7 +6,8 @@
     "gdrive_id": "19V3-lu-ona-GlYOo6EDidQuRkYsvoLAy",
     "account": null,
     "folder": "VIDEOS REELS",
-    "mime_type": "application/x-zip-compressed"
+    "mime_type": "application/x-zip-compressed",
+    "date_added": 0
   },
   {
     "path": "1.png",
@@ -15,7 +16,9 @@
     "gdrive_id": "1PJ83Q1XWWjgFABl0GSQd6O-QbO1VH8s9",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 1,
+    "selected": false
   },
   {
     "path": "8.png",
@@ -24,7 +27,9 @@
     "gdrive_id": "1I-yQiAqVk_dyrbNaNxIsWSgFfATRpWHy",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 2,
+    "selected": false
   },
   {
     "path": "6.png",
@@ -33,7 +38,9 @@
     "gdrive_id": "1gQZMRc0YmtFDtUju_xjUv0P0jlo1gwZ6",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 3,
+    "selected": false
   },
   {
     "path": "3.png",
@@ -42,7 +49,9 @@
     "gdrive_id": "1FQAsrpciZaPqf6dpnnMm6IPtRk6_buh1",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 4,
+    "selected": false
   },
   {
     "path": "4.png",
@@ -51,7 +60,9 @@
     "gdrive_id": "1PuLUP4OI72h0-82iLIa_WlDFrx---1zb",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 5,
+    "selected": false
   },
   {
     "path": "5.png",
@@ -60,7 +71,9 @@
     "gdrive_id": "1A4dRGDw0dDbekaWCWrur3iI4ZDoiR74I",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 6,
+    "selected": false
   },
   {
     "path": "7.png",
@@ -69,7 +82,9 @@
     "gdrive_id": "1So6Jzf6m_A7uC_si5xtDarMDm-XHmBeF",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 7,
+    "selected": false
   },
   {
     "path": "2.png",
@@ -78,7 +93,9 @@
     "gdrive_id": "1Ur9FEVevw4dwv-xGpG7bprJTfciFmkYN",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 8,
+    "selected": false
   },
   {
     "path": "DC- (78).mp4",
@@ -87,7 +104,8 @@
     "gdrive_id": "1_1vjTSQZ1Rh5i8dzlGHSwZxBSxVAq1zu",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 9
   },
   {
     "path": "DC- (77).mp4",
@@ -96,7 +114,8 @@
     "gdrive_id": "1gb7KUxDYQaWywVNzDh6Qi9scbq601Rvy",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 10
   },
   {
     "path": "DC- (76).mp4",
@@ -105,7 +124,8 @@
     "gdrive_id": "1CVDOfdrAcw0GY2iFKLIsX8yABX7IR8ym",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 11
   },
   {
     "path": "DC- (75).mp4",
@@ -114,7 +134,8 @@
     "gdrive_id": "1lJcDoisflZokQJnFv9bI631KLl9vqdw3",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 12
   },
   {
     "path": "DC- (74).mp4",
@@ -123,7 +144,8 @@
     "gdrive_id": "1Q5INNufRK7e4AGXTKkACk5wNNmB3XKbZ",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 13
   },
   {
     "path": "DC- (73).mp4",
@@ -132,7 +154,8 @@
     "gdrive_id": "14veQHrK8zV7C0GChcIJx_7q41Wdb8hZJ",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 14
   },
   {
     "path": "DC- (72).mp4",
@@ -141,7 +164,8 @@
     "gdrive_id": "1weTwR9p3WHQTJ9VMxFxKcO_6TOhtEI9z",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 15
   },
   {
     "path": "DC- (71).mp4",
@@ -150,7 +174,8 @@
     "gdrive_id": "1MxvbCh_DE2DUgocPHFzbRKRuDd2TZdU7",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 16
   },
   {
     "path": "DC- (70).mp4",
@@ -159,7 +184,8 @@
     "gdrive_id": "13C9QqBblA2wlvdhlTVBs3NX_2M5K1kjE",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 17
   },
   {
     "path": "DC- (69).mp4",
@@ -168,7 +194,8 @@
     "gdrive_id": "1V29bIcRsYztl7b5FyasOoOzC3039ESFg",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 18
   },
   {
     "path": "DC- (68).mp4",
@@ -177,7 +204,8 @@
     "gdrive_id": "1StNxYjUyCZ7S9NdneanolZgC1__-mzoP",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 19
   },
   {
     "path": "DC- (64).mp4",
@@ -186,7 +214,8 @@
     "gdrive_id": "1ayzgQ1_4ab2Y36B_dlEyLEzOWV2KbzRS",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 20
   },
   {
     "path": "DC- (63).mp4",
@@ -195,7 +224,8 @@
     "gdrive_id": "1n2o5_gZh-LMlsqHENZUnTi_Pxb0H3ePS",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 21
   },
   {
     "path": "DC- (62).mp4",
@@ -204,7 +234,8 @@
     "gdrive_id": "1i0EVdSBqQ8ebXs9TvknuryumElRKiP8h",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 22
   },
   {
     "path": "DC- (288).mp4",
@@ -213,7 +244,8 @@
     "gdrive_id": "1g4N26Cyxr09NLe_vF4jlW4mSlq9QXnYQ",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 23
   },
   {
     "path": "DC- (287).mp4",
@@ -222,7 +254,8 @@
     "gdrive_id": "1ftX54iqtIxBDugXN6EdGCZLnXhE9vn2d",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 24
   },
   {
     "path": "DC- (286).mp4",
@@ -231,7 +264,8 @@
     "gdrive_id": "1e3bb5E1_sjthlGPfDbjN0ySbVZPFRfzw",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 25
   },
   {
     "path": "DC- (285).mp4",
@@ -240,7 +274,8 @@
     "gdrive_id": "1DVMiAf8t5O2Mmz6zDhIDV5oSYJBwCpXF",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 26
   },
   {
     "path": "DC- (60).mp4",
@@ -249,7 +284,8 @@
     "gdrive_id": "1tmFtC3Hjvn60t_lXWK4imN8Y2TOuIfQO",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 27
   },
   {
     "path": "DC- (61).mp4",
@@ -258,7 +294,8 @@
     "gdrive_id": "152HD-xW9oZyiBsVpQjVk6OQgZBoZa-SA",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 28
   },
   {
     "path": "DC- (58).mp4",
@@ -267,7 +304,8 @@
     "gdrive_id": "1BS1ZDi-QPPGSMPto7kXH-IuRMbstTlkB",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 29
   },
   {
     "path": "DC- (284).mp4",
@@ -276,7 +314,8 @@
     "gdrive_id": "1rwiyzBoBKpAmTFnu4GG6TmnAXPOFtIul",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 30
   },
   {
     "path": "DC- (59).mp4",
@@ -285,7 +324,8 @@
     "gdrive_id": "1deriXH7UU83T83RYFYi0tWMsupzOT0bs",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 31
   },
   {
     "path": "DC- (41).mp4",
@@ -294,7 +334,8 @@
     "gdrive_id": "18M_6JsxZYCClF56y7TmTwH1dEkv1_ffO",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 32
   },
   {
     "path": "DC- (39).mp4",
@@ -303,7 +344,8 @@
     "gdrive_id": "1ppZL4GMZUh0rxa67NkaP_5F14xjDkABV",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 33
   },
   {
     "path": "DC- (38).mp4",
@@ -312,7 +354,8 @@
     "gdrive_id": "1Cs-aNDEFAMxuUHqWLBHzEoVP5wj8JkWh",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 34
   },
   {
     "path": "DC- (37).mp4",
@@ -321,7 +364,8 @@
     "gdrive_id": "1nFpf7F1i4-TTAs_h7CstGeBY4Etq3eIj",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 35
   },
   {
     "path": "DC- (34).mp4",
@@ -330,7 +374,8 @@
     "gdrive_id": "1EqrhHSpwTyy--x9IsIt5Oo2GwdMuMk0a",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 36
   },
   {
     "path": "DC- (40).mp4",
@@ -339,7 +384,8 @@
     "gdrive_id": "1daH9YnhiGRcv9lzICKS5Dl_Etd2PzF78",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 37
   },
   {
     "path": "DC- (36).mp4",
@@ -348,7 +394,8 @@
     "gdrive_id": "17mm98uBs4Vttq9kqcRrut92qvCuRRGT7",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 38
   },
   {
     "path": "DC- (35).mp4",
@@ -357,7 +404,8 @@
     "gdrive_id": "1UYLckOM9q8xbwy2N4goBKoGL_1t7dxx4",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 39
   },
   {
     "path": "DC- (32).mp4",
@@ -366,7 +414,8 @@
     "gdrive_id": "1qMPuImD8QL4ouDSUTkY4ett4EBprBi7K",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 40
   },
   {
     "path": "DC- (30).mp4",
@@ -375,7 +424,8 @@
     "gdrive_id": "1XunPDAdLZh_hjKnHSQm2rfBZfHxLp30e",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 41
   },
   {
     "path": "DC- (29).mp4",
@@ -384,7 +434,8 @@
     "gdrive_id": "13QhxQGeKY37n4_35LZvRdgvsbkELsUQ6",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 42
   },
   {
     "path": "DC- (33).mp4",
@@ -393,7 +444,8 @@
     "gdrive_id": "1Nq7m4pXqDV3dMIiRTjvkLara9c_r7o69",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 43
   },
   {
     "path": "DC- (31).mp4",
@@ -402,7 +454,8 @@
     "gdrive_id": "1F1JFTmrH32EwOOY05jhAecVWJXIS-6jb",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 44
   },
   {
     "path": "DC- (28).mp4",
@@ -411,7 +464,8 @@
     "gdrive_id": "1CB-p5gw5wrx0fBLOMv5ykDc3c_hSBju9",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 45
   },
   {
     "path": "DC- (55).mp4",
@@ -420,7 +474,8 @@
     "gdrive_id": "1VpMnOsN9wTjX-R3kmSAmMtm1uGRkh_0R",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 46
   },
   {
     "path": "DC- (54).mp4",
@@ -429,7 +484,8 @@
     "gdrive_id": "1BzBDomkmjFVkU_gl51pmaRac0YPNps0C",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 47
   },
   {
     "path": "DC- (25).mp4",
@@ -438,7 +494,8 @@
     "gdrive_id": "149mTG2u28jMB6L_qIYBMirJnaw2AC1fK",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 48
   },
   {
     "path": "DC- (24).mp4",
@@ -447,7 +504,8 @@
     "gdrive_id": "15PQwttfs7HnA8g4ZTP-qWIE6xb3L2fDt",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 49
   },
   {
     "path": "DC- (22).mp4",
@@ -456,7 +514,9 @@
     "gdrive_id": "1LtGjT-m2zcraDeiB1-Ar0sjrFYTAj648",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 50,
+    "selected": false
   },
   {
     "path": "DC- (20).mp4",
@@ -465,7 +525,9 @@
     "gdrive_id": "1LKMLiwNCLShkb_GMbA2BY7zFPYHiz-M8",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 51,
+    "selected": false
   },
   {
     "path": "DC- (23).mp4",
@@ -474,7 +536,9 @@
     "gdrive_id": "1c0arsUK7_HZzoCQQgKRlp8xKJUmAYMwD",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 52,
+    "selected": false
   },
   {
     "path": "DC- (53).mp4",
@@ -483,7 +547,8 @@
     "gdrive_id": "1smt-rYPuI36ZoBNe4HZfBcop3tts2xYI",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 53
   },
   {
     "path": "DC- (52).mp4",
@@ -492,7 +557,8 @@
     "gdrive_id": "11qYLKPq6ACh3wHV8SC2NBFkpsqPxrurR",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 54
   },
   {
     "path": "DC- (17).mp4",
@@ -501,7 +567,9 @@
     "gdrive_id": "1iux-JFB9aCHyXx9r9h1j66a8fj_Q6Xw8",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 55,
+    "selected": false
   },
   {
     "path": "DC- (15).mp4",
@@ -510,7 +578,9 @@
     "gdrive_id": "1rOBTtTSdrpCjfYjrkfAfX33qjZFfz9ew",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 56,
+    "selected": false
   },
   {
     "path": "DC- (14).mp4",
@@ -519,7 +589,9 @@
     "gdrive_id": "1oxL3mM9E7scbDnqovGd_u1n7txlQi6_0",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 57,
+    "selected": false
   },
   {
     "path": "DC- (13).mp4",
@@ -528,7 +600,9 @@
     "gdrive_id": "18s_ETnun2RodvxlWYOmcBQMrH-C4jTJv",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 58,
+    "selected": false
   },
   {
     "path": "DC- (18).mp4",
@@ -537,7 +611,9 @@
     "gdrive_id": "1lFJhpjtC2KUj4XxSA5pitMSJHLpdkFft",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 59,
+    "selected": false
   },
   {
     "path": "DC- (12).mp4",
@@ -546,7 +622,9 @@
     "gdrive_id": "1rxVOxevv0fepB0RkIA0YzpSyvmMhXL6N",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 60,
+    "selected": false
   },
   {
     "path": "DC- (11).mp4",
@@ -555,7 +633,9 @@
     "gdrive_id": "1KV0t_vfaTTwIffK8I92v1Tw8QhO92Q-Q",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 61,
+    "selected": false
   },
   {
     "path": "DC- (10).mp4",
@@ -564,7 +644,9 @@
     "gdrive_id": "1ZbkRA1cgk7vqWZ4nIo02xRyFNirOymRa",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 62,
+    "selected": false
   },
   {
     "path": "DC- (51).mp4",
@@ -573,7 +655,8 @@
     "gdrive_id": "1NpcnqbuVuBJQHszl4DxPrvhq9plYzsbc",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 63
   },
   {
     "path": "DC- (50).mp4",
@@ -582,7 +665,8 @@
     "gdrive_id": "1kE32IMB-s-AK-xq-4azbFAC9phOFC8-x",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 64
   },
   {
     "path": "DC- (8).mp4",
@@ -591,7 +675,8 @@
     "gdrive_id": "1MOFLfiUEdAZlkX3sFEEUkLMZcwmTjpB6",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 65
   },
   {
     "path": "DC- (7).mp4",
@@ -600,7 +685,8 @@
     "gdrive_id": "1wQFnAUArbHskXtCOfXrV4dP1NeG07KF3",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 66
   },
   {
     "path": "DC- (6).mp4",
@@ -609,7 +695,8 @@
     "gdrive_id": "16NKjxOrrqBQ8dWbdb6Rin2XMdGKpKi7Y",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 67
   },
   {
     "path": "DC- (9).mp4",
@@ -618,7 +705,8 @@
     "gdrive_id": "1K05b_i00IQZxPugfJP0nuw4skw262Pue",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 68
   },
   {
     "path": "DC- (5).mp4",
@@ -627,7 +715,8 @@
     "gdrive_id": "1mfb5e9V6tMASM0VC4goQSMAcy06xlBdp",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 69
   },
   {
     "path": "DC- (57).mp4",
@@ -636,7 +725,8 @@
     "gdrive_id": "1CxOfI0-6wVCOdRm2DVhKuE_BMDtmCiVq",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 70
   },
   {
     "path": "A.png",
@@ -645,7 +735,9 @@
     "gdrive_id": "1ULu8ZNBZoHfFmflzwzWE3lwpNzTUg_92",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 71,
+    "selected": false
   },
   {
     "path": "JOGOSXVIDAREAL.mp4",
@@ -654,7 +746,8 @@
     "gdrive_id": "15M-3PomwbqhKLDUgxDhhqmXG7uXhWdgT",
     "account": null,
     "folder": "Bot - Rainha da shopee",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 72
   },
   {
     "path": "JOGOSXVIDAREAL.mp4",
@@ -663,7 +756,8 @@
     "gdrive_id": "1wGwBk6Ylmt15SLqU2NGEYCQUwtc05-KM",
     "account": null,
     "folder": "RAINHA DA SHOPEE",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 73
   },
   {
     "path": "Design sem nome.png",
@@ -672,7 +766,8 @@
     "gdrive_id": "1fdXK336H0z-tebvN3MLrySu_5gdSEpQC",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 74
   },
   {
     "path": "VERMELHO.png",
@@ -681,7 +776,8 @@
     "gdrive_id": "1XQ2TMMEfr7_vA7_csVfpS6JwG25k-ILe",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 75
   },
   {
     "path": "VERDE.png",
@@ -690,7 +786,8 @@
     "gdrive_id": "1Ew-N9VHRRSTudD3pqjT_rRzdWqVRLCfP",
     "account": null,
     "folder": "DENTISTA CURIOSO",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 76
   },
   {
     "path": "slide_1.png",
@@ -699,7 +796,8 @@
     "gdrive_id": "1th0gvkr_j06_DuoL42KiLy6XUBi7-DC-",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 77
   },
   {
     "path": "slide_3.png",
@@ -708,7 +806,8 @@
     "gdrive_id": "1mOFJu0pxt7LrhROi0If3HeDUXBjl3Ayw",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 78
   },
   {
     "path": "slide_10.png",
@@ -717,7 +816,8 @@
     "gdrive_id": "1R4Cz9hvrYXqIZ8rnr8Rt3w7j19T6eP6s",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 79
   },
   {
     "path": "slide_2.png",
@@ -726,7 +826,8 @@
     "gdrive_id": "1jxModFWMnUIdO5PrFDVww0lxxXO1bA-E",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 80
   },
   {
     "path": "slide_7.png",
@@ -735,7 +836,8 @@
     "gdrive_id": "1B0o09IzytjQdJm5cCBTJ6mOqYGtTktHh",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 81
   },
   {
     "path": "slide_9.png",
@@ -744,7 +846,8 @@
     "gdrive_id": "1dkhGTBRfGW9TtV9eQ-v8QK3huJtnEr4p",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 82
   },
   {
     "path": "slide_6.png",
@@ -753,7 +856,8 @@
     "gdrive_id": "1E_aVUHQ4iAkUbEwkTjBLL59SRiTHpRHJ",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 83
   },
   {
     "path": "slide_4.png",
@@ -762,7 +866,8 @@
     "gdrive_id": "11q8-mubrlCSPYqc3SLGktzh16qDILrad",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 84
   },
   {
     "path": "slide_5.png",
@@ -771,7 +876,8 @@
     "gdrive_id": "13ShQQLqFpRimfb0w-Oije-PzR77Q2hOK",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 85
   },
   {
     "path": "slide_8.png",
@@ -780,6 +886,97 @@
     "gdrive_id": "1d9hFv389SSEmLOg_Dh6c6exCbgiOzwG2",
     "account": null,
     "folder": "carrossel_1350px",
+    "mime_type": "image/png",
+    "date_added": 86
+  },
+  {
+    "path": "10_healthcare_protest_v1.png",
+    "filename": "10_healthcare_protest_v1.png",
+    "caption": "",
+    "gdrive_id": "1f6MipJ020zlBdm8sHeLWRbti2iOBxuxZ",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "09_father_hospital_plea_v1.png",
+    "filename": "09_father_hospital_plea_v1.png",
+    "caption": "",
+    "gdrive_id": "1mEv2ShFJcTVKAgqLugGxWAdWkcsC6jzr",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "03_medicine_shortage_protest_v1.png",
+    "filename": "03_medicine_shortage_protest_v1.png",
+    "caption": "",
+    "gdrive_id": "1yR39O10JgI7YrR73-0z1-9oL8qrjR3zv",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "06_brazilian_disabled_man_v1.png",
+    "filename": "06_brazilian_disabled_man_v1.png",
+    "caption": "",
+    "gdrive_id": "1as-JwuueX-UqMsqq-D0DksY0WvIFY9yh",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "08_child_with_illness_v1.png",
+    "filename": "08_child_with_illness_v1.png",
+    "caption": "",
+    "gdrive_id": "1u7AZd4qhwsJJ6MeF3Z8tFbLX-w776vvp",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "05_sick_brazilian_boy_v1.png",
+    "filename": "05_sick_brazilian_boy_v1.png",
+    "caption": "",
+    "gdrive_id": "1lPFHZB8D_50R7ZpHc-FtWL3EQtyz6FKG",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "02_brazilian_mother_baby_v1.png",
+    "filename": "02_brazilian_mother_baby_v1.png",
+    "caption": "",
+    "gdrive_id": "1xg_1fbJmvlCsjPmQjwdMKxAGp7BPtBZh",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "04_dialysis_patient_v1.png",
+    "filename": "04_dialysis_patient_v1.png",
+    "caption": "",
+    "gdrive_id": "1epwZbO65wF_Q3qmVv8S2HZQd2VC4F0VN",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "07_lonely_elderly_woman_v1.png",
+    "filename": "07_lonely_elderly_woman_v1.png",
+    "caption": "",
+    "gdrive_id": "13t5P-5AVdMyfR7_UvL3FSqvJhyMqKLB-",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "01_elderly_cancer_patient_v1.png",
+    "filename": "01_elderly_cancer_patient_v1.png",
+    "caption": "",
+    "gdrive_id": "1jnypNOTiUWnV5Oq8IxYferembQhP2mvG",
+    "account": null,
+    "folder": "ENFERMAGEM CURIOSA",
     "mime_type": "image/png"
   }
 ]
