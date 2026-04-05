@@ -1,0 +1,71 @@
+[20:26:48] ============================================================
+[20:26:48] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[20:26:48] ============================================================
+[20:26:48] 📥 Sincronizando progresso da nuvem (Drive)...
+[20:26:48] ⚠️ Erro na sincronização inicial: name 'GoogleDriveAPI' is not defined
+[20:26:49] 🧹 Iniciando limpeza e verificações de integridade...
+[20:26:49] ✅ Limpeza e integridade verificadas.
+[20:27:04] ============================================================
+[20:27:04] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[20:27:04] ============================================================
+[20:27:04] 🕐 Horário de início: 05/04/2026 20:27:04
+[20:27:04] 💾 Backup criado: schedule_queue_backup_20260405_202704.json
+[20:27:04] ✅ Salvos 0 agendamentos
+[20:27:04] 📥 Buscando progresso da nuvem (Download do Drive)...
+[20:27:04] ❌ Erro crítico na sincronização: name 'GoogleDriveAPI' is not defined
+[20:27:24] ============================================================
+[20:27:24] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[20:27:24] ============================================================
+[20:27:24] 🕐 Horário de início: 05/04/2026 20:27:24
+[20:27:24] 💾 Backup criado: schedule_queue_backup_20260405_202724.json
+[20:27:24] ✅ Salvos 0 agendamentos
+[20:27:24] 📥 Buscando progresso da nuvem (Download do Drive)...
+[20:27:24] ❌ Erro crítico na sincronização: name 'GoogleDriveAPI' is not defined
+[20:27:32] ============================================================
+[20:27:32] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[20:27:32] ============================================================
+[20:27:32] 🕐 Horário de início: 05/04/2026 20:27:32
+[20:27:32] 💾 Backup criado: schedule_queue_backup_20260405_202732.json
+[20:27:32] ✅ Salvos 0 agendamentos
+[20:27:32] 📥 Buscando progresso da nuvem (Download do Drive)...
+[20:27:32] ❌ Erro crítico na sincronização: name 'GoogleDriveAPI' is not defined
+[20:27:32] ============================================================
+[20:27:32] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[20:27:32] ============================================================
+[20:27:32] 🕐 Horário de início: 05/04/2026 20:27:32
+[20:27:32] 💾 Backup criado: schedule_queue_backup_20260405_202732.json
+[20:27:32] ✅ Salvos 0 agendamentos
+[20:27:32] 📥 Buscando progresso da nuvem (Download do Drive)...
+[20:27:32] ❌ Erro crítico na sincronização: name 'GoogleDriveAPI' is not defined
+[20:27:32] ============================================================
+[20:27:32] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[20:27:32] ============================================================
+[20:27:32] 🕐 Horário de início: 05/04/2026 20:27:32
+[20:27:32] 💾 Backup criado: schedule_queue_backup_20260405_202732.json
+[20:27:32] ✅ Salvos 0 agendamentos
+[20:27:32] 📥 Buscando progresso da nuvem (Download do Drive)...
+[20:27:32] ❌ Erro crítico na sincronização: name 'GoogleDriveAPI' is not defined
+[20:30:20] ============================================================
+[20:30:20] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[20:30:20] ============================================================
+[20:30:20] 📥 Sincronizando progresso da nuvem (Drive)...
+[20:30:21] 🧹 Iniciando limpeza e verificações de integridade...
+[20:30:21] ✅ Limpeza e integridade verificadas.
+[20:30:23] 🧩 Mesclando history (Local: 25, Remoto: 25)
+[20:30:23] 🧩 Mesclando schedule (Local: 0, Remoto: 0)
+[20:30:23] ✅ Progresso do Drive carregado.
+[20:30:23] 📥 Verificando mudanças no GitHub...
+[20:30:24] 📊 Status Final: 0 agendados, 25 postados
+[20:43:36] ============================================================
+[20:43:36] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[20:43:36] ============================================================
+[20:43:36] 🕐 Horário de início: 05/04/2026 20:43:36
+[20:43:36] 💾 Backup criado: schedule_queue_backup_20260405_204336.json
+[20:43:36] ✅ Salvos 0 agendamentos
+[20:43:36] 📥 Buscando progresso da nuvem (Download do Drive)...
+[20:43:39] 🧩 Mesclando 0 itens da nuvem com locais...
+[20:43:39] 🧩 Mesclando history (Local: 25, Remoto: 25)
+[20:43:39] 🧩 Mesclando schedule (Local: 0, Remoto: 0)
+[20:43:39] ✅ Mesclagem local concluída.
+[20:43:39] 📤 Atualizando nuvem (Upload para Drive)...
+[20:43:48] 📦 Sincronizando com GitHub...

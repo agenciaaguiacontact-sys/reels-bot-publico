@@ -18,7 +18,6 @@ import shutil
 from meta_api import MetaAPI
 from gdrive_api import GoogleDriveAPI
 import config
-import execution.cleanup_tool as cleanup
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
@@ -81,20 +80,6 @@ def format_time_ago(timestamp):
     else:
         days = int(diff / 86400)
         return f"{days}d atrás"
-
-def rotate_logs(log_file='debug_log.txt', max_size=5*1024*1024):
-    """Garante que o arquivo de log não cresça indefinidamente"""
-    if os.path.exists(log_file) and os.path.getsize(log_file) > max_size:
-        try:
-            timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-            shutil.move(log_file, f"archive/log_backup_{timestamp}.txt")
-            # Manter apenas os últimos 3 backups de log no arquivo
-            log_backups = sorted([f for f in os.listdir("archive") if f.startswith("log_backup_")])
-            if len(log_backups) > 3:
-                for old in log_backups[:-3]:
-                    os.remove(os.path.join("archive", old))
-        except:
-            pass
 
 # === MODERN COMPONENTS ===
 
@@ -1202,8 +1187,7 @@ class QuickScheduleWizard(ctk.CTkToplevel):
             ppd = self.posts_per_day.get()
             preview = f"📦 {total_items} mídias serão distribuídas em {days} dia(s)\n"
             preview += f"📊 Até {ppd} posts por dia, com intervalo de {self.interval_hours.get()}h\n"
-            preview += f"⏰ Primeiro post: {self.selected_dates[0].strftime('%d/%m/%Y')} às {self.hour_var.get():02d}:{self.min_var.get():02d}\n"
-            preview += f"⚠️ Regra: Intervalo mínimo de 5 min entre postagens para evitar conflitos."
+            preview += f"⏰ Primeiro post: {self.selected_dates[0].strftime('%d/%m/%Y')} às {self.hour_var.get():02d}:{self.min_var.get():02d}"
         
         return preview
     
@@ -2280,48 +2264,10 @@ class MetaStudioApp(ctk.CTk):
         
         self.configure(fg_color=BG_PRIMARY)
         
-        # Inicializar Log e Limpeza
-        rotate_logs()
         self._build_ui()
-        
-        # Limpeza e integridade em segundo plano
-        self.after(2000, self.cleanup_startup)
         
         # Auto-renovar tokens
         self.check_token_renewals()
-    
-    def cleanup_startup(self):
-        """Executa limpezas e verificações iniciais em segundo plano"""
-        def task():
-            self.log("🧹 Iniciando limpeza e verificações de integridade...")
-            cleanup.cleanup_downloads(days=1)
-            cleanup.cleanup_tmp()
-            cleanup.archive_history(limit=500)
-            self.check_library_integrity()
-            self.log("✅ Limpeza e integridade verificadas.")
-        
-        threading.Thread(target=task, daemon=True).start()
-
-    def check_library_integrity(self):
-        """Verifica se os arquivos locais na biblioteca ainda existem"""
-        changed = False
-        missing_count = 0
-        for video in self.videos:
-            path = video.get('path')
-            if path and not video.get('gdrive_id') and not os.path.exists(path):
-                if not video.get('missing'):
-                    video['missing'] = True
-                    missing_count += 1
-                    changed = True
-            elif video.get('missing'):
-                video['missing'] = False
-                changed = True
-        
-        if changed:
-            if missing_count > 0:
-                self.log(f"⚠️ {missing_count} arquivos da biblioteca não foram encontrados localmente.")
-            self.save_library()
-            self.after(0, lambda: self.views["library"].refresh() if "library" in self.views else None)
     
     def _build_ui(self):
         # Sidebar
@@ -2871,15 +2817,8 @@ class MetaStudioApp(ctk.CTk):
         container.bind("<Button-1>", lambda e: close_toast())
     
     def log(self, message):
-        """Log de mensagens com persistência em arquivo"""
-        timestamp = datetime.datetime.now().strftime('%H:%M:%S')
-        log_msg = f"[{timestamp}] {message}"
-        print(log_msg)
-        try:
-            with open("debug_log.txt", "a", encoding="utf-8") as f:
-                f.write(log_msg + "\n")
-        except:
-            pass
+        """Log de mensagens"""
+        print(f"[{datetime.datetime.now().strftime('%H:%M:%S')}] {message}")
 
     def merge_json_data(self, file_type, local_data, remote_data):
         """
@@ -2902,9 +2841,7 @@ class MetaStudioApp(ctk.CTk):
             
             # Ordenar por tempo de postagem
             merged.sort(key=lambda x: x.get("post_time", 0))
-            
-            # Se exceder o limite, o arquivamento será tratado no save_history
-            return merged
+            return merged[-500:] # Mantém apenas os últimos 500
             
         elif file_type == 'schedule':
             # Para fila: união, mas REMOVE o que já está no histórico mesclado
@@ -3150,27 +3087,6 @@ class MetaStudioApp(ctk.CTk):
         
         return h
 
-    def check_schedule_conflict(self, proposed_time, exclude_item=None):
-        """
-        Verifica se há conflito de agendamento (menos de 5 minutos de diferença).
-        Retorna o item em conflito se houver, ou None.
-        """
-        if isinstance(proposed_time, int):
-            proposed_time = datetime.datetime.fromtimestamp(proposed_time)
-            
-        for item in self.schedule:
-            if item == exclude_item:
-                continue
-                
-            item_time = item["schedule_time"]
-            if isinstance(item_time, int):
-                item_time = datetime.datetime.fromtimestamp(item_time)
-            
-            diff = abs((proposed_time - item_time).total_seconds())
-            if diff < 300: # 5 minutos
-                return item
-        return None
-
     
     def mark_as_posted(self, item):
         """Marca um item manualmente como postado"""
@@ -3209,12 +3125,9 @@ class MetaStudioApp(ctk.CTk):
             self.sync_cloud()
 
     def save_history(self):
-        """Salva o histórico de postagens e aciona o arquivamento se necessário"""
+        """Salva o histórico de postagens"""
         with open("posted_history.json", "w", encoding="utf-8") as f:
-            json.dump(self.history, f, indent=2, ensure_ascii=False)
-        
-        # Acionar arquivamento assíncrono para manter a performance da UI
-        threading.Thread(target=lambda: cleanup.archive_history(limit=500), daemon=True).start()
+            json.dump(self.history[-500:], f, indent=2, ensure_ascii=False)
             
     # === ACTIONS ===
     
@@ -3483,34 +3396,6 @@ class MetaStudioApp(ctk.CTk):
                     base_dt += datetime.timedelta(hours=interval)
                     video_idx += 1
         
-        # --- VALIDAÇÃO DE CONFLITOS (TRAVA DE 5 MINUTOS) ---
-        conflicts = []
-        for new_item in all_generated:
-            # 1. Verificar contra itens já existentes na fila
-            existing_conflict = self.check_schedule_conflict(new_item["schedule_time"])
-            if existing_conflict:
-                conflicts.append(f"❌ '{new_item['filename']}' às {new_item['schedule_time'].strftime('%H:%M')} conflita com '{existing_conflict['filename']}'")
-            
-            # 2. Verificar contra outros itens sendo gerados neste mesmo lote
-            for other_item in all_generated:
-                if new_item == other_item:
-                    continue
-                diff = abs((new_item["schedule_time"] - other_item["schedule_time"]).total_seconds())
-                if diff < 300:
-                    conflicts.append(f"❌ Conflito interno: '{new_item['filename']}' e '{other_item['filename']}' estão muito próximos")
-        
-        if conflicts:
-            conflicts = list(set(conflicts)) # Remover duplicados se houver
-            error_msg = "⚠️ ERRO DE AGENDAMENTO (REGRA DOS 5 MINUTOS)\n\n"
-            error_msg += "O robô não permite postagens com menos de 5 minutos de intervalo.\n"
-            error_msg += "Os seguintes conflitos foram detectados:\n\n"
-            error_msg += "\n".join(conflicts[:15])
-            if len(conflicts) > 15:
-                error_msg += f"\n... e mais {len(conflicts) - 15} conflitos."
-            
-            messagebox.showerror("Conflito Detectado", error_msg)
-            return
-
         # Adicionar à fila
         self.schedule.extend(all_generated)
         
@@ -3553,19 +3438,8 @@ class MetaStudioApp(ctk.CTk):
         if new_time:
             try:
                 h, m = map(int, new_time.split(":"))
-                new_dt = item["schedule_time"].replace(hour=h, minute=m)
-                
-                # Validar conflito
-                conflict = self.check_schedule_conflict(new_dt, exclude_item=item)
-                if conflict:
-                    messagebox.showerror(
-                        "Conflito", 
-                        f"Este horário conflita com '{conflict['filename']}' (intervalo < 5 min).\n\nEscolha outro horário."
-                    )
-                    return
-
                 idx = self.schedule.index(item)
-                self.schedule[idx]["schedule_time"] = new_dt
+                self.schedule[idx]["schedule_time"] = item["schedule_time"].replace(hour=h, minute=m)
                 self.save_schedule()
                 self.views["schedule"].refresh()
                 self.views["dashboard"].refresh()
@@ -3761,8 +3635,7 @@ class MetaStudioApp(ctk.CTk):
 
             except Exception as e:
                 self.log(f"❌ Erro crítico na sincronização: {e}")
-                error_msg = str(e)
-                self.after(0, lambda: messagebox.showerror("Erro de Sincronização", error_msg))
+                self.after(0, lambda: messagebox.showerror("Erro de Sincronização", str(e)))
         
         threading.Thread(target=task, daemon=True).start()
     def run_bot_now(self):
