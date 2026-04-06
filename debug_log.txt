@@ -178,3 +178,20 @@
 [09:48:33] ✅ Mesclagem local concluída.
 [09:48:33] 📤 Atualizando nuvem (Upload para Drive)...
 [09:48:42] 📦 Sincronizando com GitHub...
+[09:48:44] 🚀 Sincronização COMPLETA!
+[09:48:51] 💾 Backup criado: schedule_queue_backup_20260406_094851.json
+[09:48:51] ✅ Salvos 4 agendamentos
+[09:48:51] 🗑️ Agendamento removido: 6h-post-religioso-1.png
+[09:48:52] ============================================================
+[09:48:52] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[09:48:52] ============================================================
+[09:48:52] 🕐 Horário de início: 06/04/2026 09:48:52
+[09:48:52] 💾 Backup criado: schedule_queue_backup_20260406_094852.json
+[09:48:52] ✅ Salvos 4 agendamentos
+[09:48:52] 📥 Buscando progresso da nuvem (Download do Drive)...
+[09:48:55] 🧩 Mesclando 5 itens da nuvem com locais...
+[09:48:55] 🧩 Mesclando history (Local: 25, Remoto: 25)
+[09:48:55] 🧩 Mesclando schedule (Local: 4, Remoto: 5)
+[09:48:55] ✅ Mesclagem local concluída.
+[09:48:55] 📤 Atualizando nuvem (Upload para Drive)...
+[09:49:03] 📦 Sincronizando com GitHub...
