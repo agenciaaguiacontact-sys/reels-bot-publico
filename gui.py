@@ -38,6 +38,12 @@ TEXT_DIM = "#64748b"
 BORDER_COLOR = "#2d3250"
 HOVER_COLOR = "#252b48"
 
+def natural_sort_key(s):
+    """Gera uma chave para ordenação alfanumérica natural (ex: slide_2 antes de slide_10)"""
+    import re
+    if not s: return []
+    return [int(text) if text.isdigit() else text.lower() for text in re.split('([0-9]+)', str(s))]
+
 # === UTILITY FUNCTIONS ===
 
 # Cores para subpastas/contas
@@ -1556,14 +1562,17 @@ class LibraryView(ctk.CTkFrame):
         # Aplicar Ordenação
         sort_mode = self.sort_var.get()
         if sort_mode == "A-Z":
-            filtered_videos.sort(key=lambda x: x.get("filename", "").lower())
+            filtered_videos.sort(key=lambda x: natural_sort_key(x.get("filename", "")))
         elif sort_mode == "Z-A":
-            filtered_videos.sort(key=lambda x: x.get("filename", "").lower(), reverse=True)
+            filtered_videos.sort(key=lambda x: natural_sort_key(x.get("filename", "")), reverse=True)
         elif sort_mode == "Mais Recentes":
             # Usar date_added se existir, senão usar 0
             filtered_videos.sort(key=lambda x: x.get("date_added", 0), reverse=True)
         elif sort_mode == "Mais Antigos":
             filtered_videos.sort(key=lambda x: x.get("date_added", 0))
+        
+        # Salvar para uso em seleção em massa (Select All)
+        self.current_filtered_videos = filtered_videos
 
         if not filtered_videos:
             self.pagination_frame.grid_forget()
@@ -3338,11 +3347,12 @@ class MetaStudioApp(ctk.CTk):
             self.views["library"].refresh()
     
     def select_all_library(self):
-        """Seleciona todas as mídias na lista filtrada atual (globalmente)"""
-        # Se houver busca ou filtro ativo, selecionar apenas os visíveis/filtrados?
-        # Por simplicidade e expectativa do usuário, vamos selecionar todos os que estão sendo exibidos
-        # Mas o usuário disse 'Selecionar Todos', geralmente espera-se todos da biblioteca.
-        for v in self.videos:
+        """Seleciona todas as mídias na lista filtrada atual respeitando a ordenação da GUI"""
+        target_list = self.videos
+        if "library" in self.views and hasattr(self.views["library"], "current_filtered_videos"):
+            target_list = self.views["library"].current_filtered_videos
+            
+        for v in target_list:
             v["selected"] = True
             if v not in self.selection_order:
                 self.selection_order.append(v)
@@ -3390,12 +3400,17 @@ class MetaStudioApp(ctk.CTk):
                     is_scheduled = True
                     break
             
+            # Modo de agendamento (Individual ou Carrossel)
+            is_carousel_mode = config.get("schedule_mode") == "carousel"
+            
             if is_posted:
                 skipped_videos.append(f"✅ {video_name} (já postado)")
-                videos.remove(v)
+                if not is_carousel_mode:
+                    videos.remove(v)
             elif is_scheduled:
                 skipped_videos.append(f"⏰ {video_name} (já agendado)")
-                videos.remove(v)
+                if not is_carousel_mode:
+                    videos.remove(v)
         
         # Mostrar aviso se houver vídeos pulados
         if skipped_videos:
