@@ -6,7 +6,9 @@
     "gdrive_id": "1eWdGlO0vKo_9RjliZYTdxL15GWuG55Jk",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 0,
+    "selected": false
   },
   {
     "path": "slide_8.png",
@@ -15,7 +17,9 @@
     "gdrive_id": "1yQHa7hCsuSX_wk8ZtR8DGgZRMnxC54j6",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 1,
+    "selected": false
   },
   {
     "path": "slide_9.png",
@@ -24,7 +28,9 @@
     "gdrive_id": "1b2Qechww9Ep0S4mJO5aEUCzSt-Ri5n-P",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 2,
+    "selected": false
   },
   {
     "path": "slide_7.png",
@@ -33,7 +39,9 @@
     "gdrive_id": "1CUZ9sZgqpHa_jgT5tBrICBNyk-4Ghusb",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 3,
+    "selected": false
   },
   {
     "path": "slide_3.png",
@@ -42,7 +50,9 @@
     "gdrive_id": "1yJwQut4yhfwvstfBQjZSwVmvNKQTSoE5",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 4,
+    "selected": false
   },
   {
     "path": "slide_5.png",
@@ -51,7 +61,9 @@
     "gdrive_id": "189UBdnJ7BIIZUUzvm6iTZyVeQdAtGTnw",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 5,
+    "selected": false
   },
   {
     "path": "slide_2.png",
@@ -60,7 +72,9 @@
     "gdrive_id": "1qfILcbx-fi8v7bSEe4ozNAFwofDTp9qh",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 6,
+    "selected": false
   },
   {
     "path": "slide_1.png",
@@ -69,7 +83,9 @@
     "gdrive_id": "1s7DKlzmhlXIHyOy5pAuBZkYJI0vAQ_ud",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 7,
+    "selected": false
   },
   {
     "path": "slide_6.png",
@@ -78,7 +94,9 @@
     "gdrive_id": "1dQgzIsiUdlG4p6I0vro-6cV4F_b0NMBO",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 8,
+    "selected": false
   },
   {
     "path": "slide_4.png",
@@ -87,7 +105,9 @@
     "gdrive_id": "1Y1V6oR66-cUQbDQshw2xAOZTyKoVTNMu",
     "account": null,
     "folder": "carrossel_1350px",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 9,
+    "selected": false
   },
   {
     "path": "20h-post-religioso-15.png",
@@ -96,7 +116,8 @@
     "gdrive_id": "1NMw0C-zPrbqYmvhCcbcNa_59ufZnYBaE",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 10
   },
   {
     "path": "8h-post-identidade-3.png",
@@ -105,7 +126,8 @@
     "gdrive_id": "1d6NLgKGjFkb5UDOsDhcTcpbwY17f-8-s",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 11
   },
   {
     "path": "18h-post-identidade-13.png",
@@ -114,7 +136,8 @@
     "gdrive_id": "1ZTAfa8C7eHSu7WU01merfvanwLUX5ebv",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 12
   },
   {
     "path": "12h-post-religioso-7.png",
@@ -123,7 +146,8 @@
     "gdrive_id": "1Zi5zwlsN3TAOGYvu_klF2x9GN-qn9otP",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 13
   },
   {
     "path": "6h-post-religioso-1.png",
@@ -132,7 +156,8 @@
     "gdrive_id": "1xqjmb0DIT6VAZwCSMGQ1dRJbGn0jgM4P",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 14
   },
   {
     "path": "22h-post-identidade-17.png",
@@ -141,7 +166,8 @@
     "gdrive_id": "1FI_1ZRwnbPvahrI0hqYiX83LkOrwne2I",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 15
   },
   {
     "path": "13h-post-educativo-8.png",
@@ -150,7 +176,8 @@
     "gdrive_id": "1fLCgDhyIgi6r7fNunXwsGslYjop6HCMu",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 16
   },
   {
     "path": "11h-post-carreira-12.png",
@@ -159,7 +186,8 @@
     "gdrive_id": "1VrHbg7rk4aKLQKuf5B43qTG13nZdK49E",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 17
   },
   {
     "path": "23h-post-religioso-18.png",
@@ -168,7 +196,8 @@
     "gdrive_id": "11lfsmTh4gatiqrX1Z9mNT1hGntWiIDuk",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 18
   },
   {
     "path": "7h-post-educativo-2.png",
@@ -177,7 +206,8 @@
     "gdrive_id": "1Q2jfD33I7EJNl1t05pW1cwGwiU__3Ogh",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 19
   },
   {
     "path": "17h-post-carreira-6.png",
@@ -186,7 +216,8 @@
     "gdrive_id": "1Su1skgks_ahDElZkkyfN1lL5RK_gCyBC",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 20
   },
   {
     "path": "19h-post-educativo-5.png",
@@ -195,7 +226,8 @@
     "gdrive_id": "1O0x1Cw9m3Di3A298Oe-oX2snGHyQ-u5K",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 21
   },
   {
     "path": "16h-post-educativo-11.png",
@@ -204,7 +236,8 @@
     "gdrive_id": "1dQRYDgiUjORFrPsug2T5pdjbYPBz1IWz",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 22
   },
   {
     "path": "21h-post-pratico-16.png",
@@ -213,7 +246,8 @@
     "gdrive_id": "1xxN9_VgZAcyl4dH-33Yg2PDSMiTzNnDN",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 23
   },
   {
     "path": "14h-post-identidade-9.png",
@@ -222,7 +256,8 @@
     "gdrive_id": "1Djjvnv_B_WYp0OeeCWr5-NztwhoUrwiC",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 24
   },
   {
     "path": "10h-post-educativo-14.png",
@@ -231,7 +266,8 @@
     "gdrive_id": "1MezH0aJOAlLkIJzbfKJiZ7Aty-3mmIAE",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 25
   },
   {
     "path": "9h-post-pratico-4.png",
@@ -240,7 +276,8 @@
     "gdrive_id": "1BNmP-EYClE2sP4PYYSRyNyiEIjKKlV2D",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 26
   },
   {
     "path": "15h-post-pratico-10.png",
@@ -249,7 +286,8 @@
     "gdrive_id": "1Kpn3ln3snTAt_yiMOfHZqcClS4p-bHBU",
     "account": null,
     "folder": "TESTE",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 27
   },
   {
     "path": "08_child_on_dialysis_v1.png",
@@ -258,7 +296,8 @@
     "gdrive_id": "12Ixa-sbcp0LFmc-_I7HpnsgjLnIVjKAk",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 28
   },
   {
     "path": "03_brazilian_boy_v1.png",
@@ -267,7 +306,8 @@
     "gdrive_id": "1EYmU6g-sg5tkDkqZPmDQa-sIeD8A1v5C",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 29
   },
   {
     "path": "04_brazilian_child_v1.png",
@@ -276,7 +316,8 @@
     "gdrive_id": "1B3o0VPmq_0CM8g3S1X03PYeNrWqzbH8U",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 30
   },
   {
     "path": "09_child_with_microcephaly_v1.png",
@@ -285,7 +326,8 @@
     "gdrive_id": "1qFttZ4avyaWUCC5PJZmTQRGP_HqsLLY9",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 31
   },
   {
     "path": "10_brazilian_healthcare_wait_v1.png",
@@ -294,7 +336,8 @@
     "gdrive_id": "15YpauzK1t2XavUtqUxFSxdNTrAX-fs6l",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 32
   },
   {
     "path": "06_brazilian_boy_disability_v1.png",
@@ -303,7 +346,8 @@
     "gdrive_id": "1Ilrb97pVYoKRqf-tXJvf1WYovSjNB7Nb",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 33
   },
   {
     "path": "07_brazilian_girl_scars_v1.png",
@@ -312,7 +356,8 @@
     "gdrive_id": "1QHRbs14KKuk-dfs-Vtu8Pt5UcW2sHQMs",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 34
   },
   {
     "path": "01_child_with_cancer_v1.png",
@@ -321,7 +366,8 @@
     "gdrive_id": "1ZHxPD7Cka5nikwyZmhIwtN5RhcK4uAY3",
     "account": null,
     "folder": "04042026",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 35
   },
   {
     "path": "10_healthcare_protest_v1.png",
@@ -330,7 +376,8 @@
     "gdrive_id": "1f6MipJ020zlBdm8sHeLWRbti2iOBxuxZ",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 36
   },
   {
     "path": "09_father_hospital_plea_v1.png",
@@ -339,7 +386,8 @@
     "gdrive_id": "1mEv2ShFJcTVKAgqLugGxWAdWkcsC6jzr",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 37
   },
   {
     "path": "03_medicine_shortage_protest_v1.png",
@@ -348,7 +396,8 @@
     "gdrive_id": "1yR39O10JgI7YrR73-0z1-9oL8qrjR3zv",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 38
   },
   {
     "path": "06_brazilian_disabled_man_v1.png",
@@ -357,7 +406,8 @@
     "gdrive_id": "1as-JwuueX-UqMsqq-D0DksY0WvIFY9yh",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 39
   },
   {
     "path": "08_child_with_illness_v1.png",
@@ -366,7 +416,8 @@
     "gdrive_id": "1u7AZd4qhwsJJ6MeF3Z8tFbLX-w776vvp",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 40
   },
   {
     "path": "05_sick_brazilian_boy_v1.png",
@@ -375,7 +426,8 @@
     "gdrive_id": "1lPFHZB8D_50R7ZpHc-FtWL3EQtyz6FKG",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 41
   },
   {
     "path": "02_brazilian_mother_baby_v1.png",
@@ -384,7 +436,8 @@
     "gdrive_id": "1xg_1fbJmvlCsjPmQjwdMKxAGp7BPtBZh",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 42
   },
   {
     "path": "04_dialysis_patient_v1.png",
@@ -393,7 +446,8 @@
     "gdrive_id": "1epwZbO65wF_Q3qmVv8S2HZQd2VC4F0VN",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 43
   },
   {
     "path": "07_lonely_elderly_woman_v1.png",
@@ -402,7 +456,8 @@
     "gdrive_id": "13t5P-5AVdMyfR7_UvL3FSqvJhyMqKLB-",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 44
   },
   {
     "path": "01_elderly_cancer_patient_v1.png",
@@ -411,7 +466,8 @@
     "gdrive_id": "1jnypNOTiUWnV5Oq8IxYferembQhP2mvG",
     "account": null,
     "folder": "ENFERMAGEM CURIOSA",
-    "mime_type": "image/png"
+    "mime_type": "image/png",
+    "date_added": 45
   },
   {
     "path": "Design sem nome.zip",
@@ -420,7 +476,8 @@
     "gdrive_id": "19V3-lu-ona-GlYOo6EDidQuRkYsvoLAy",
     "account": null,
     "folder": "VIDEOS REELS",
-    "mime_type": "application/x-zip-compressed"
+    "mime_type": "application/x-zip-compressed",
+    "date_added": 46
   },
   {
     "path": "JOGOSXVIDAREAL.mp4",
@@ -429,7 +486,8 @@
     "gdrive_id": "15M-3PomwbqhKLDUgxDhhqmXG7uXhWdgT",
     "account": null,
     "folder": "Bot - Rainha da shopee",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 47
   },
   {
     "path": "JOGOSXVIDAREAL.mp4",
@@ -438,6 +496,160 @@
     "gdrive_id": "1wGwBk6Ylmt15SLqU2NGEYCQUwtc05-KM",
     "account": null,
     "folder": "RAINHA DA SHOPEE",
-    "mime_type": "video/mp4"
+    "mime_type": "video/mp4",
+    "date_added": 48
+  },
+  {
+    "path": "7h_post_religioso_20260406_122701.png",
+    "filename": "7h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1Qb_rxnS9WuVKi1vjBThcBWkLf_tWl2uJ",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "22h_post_religioso_20260406_122701.png",
+    "filename": "22h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1ez5gaCVrk3U123us-dfTVthHQyr4jkvP",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "14h_post_religioso_20260406_122701.png",
+    "filename": "14h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "17iK5d2rSqzs0SRReVKG6p3UOXr5dlihe",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "21h_post_religioso_20260406_122701.png",
+    "filename": "21h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1HmzmXWb9QpMWnSL0XXMwjJA4NWWX3-le",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "12h_post_religioso_20260406_122701.png",
+    "filename": "12h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1b4-JPCZ9maAI0DR6kG_rZQ5MErnH6rlp",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "18h_post_religioso_20260406_122701.png",
+    "filename": "18h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1oEBTbuEX446aOePmggxGbpXxu4qT_mp_",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "16h_post_religioso_20260406_122701.png",
+    "filename": "16h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "11_uWEeO8HeJ5AGSsdNTg1rYuP-Ejv277",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "20h_post_religioso_20260406_122701.png",
+    "filename": "20h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1ngbnTh3bNh3ZcB2hdYi-lcAeINTXU200",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "19h_post_religioso_20260406_122701.png",
+    "filename": "19h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1CKXozSOTcLEJr8I0wu9T3N7WbXro0_iu",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "11h_post_religioso_20260406_122701.png",
+    "filename": "11h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1o8roqN5w6bv9ao3KiQAXiW07pEJqFRQv",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "15h_post_religioso_20260406_122701.png",
+    "filename": "15h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1AOdDgyjcA99xZD63NxI6zkjAv-SthjSD",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "17h_post_religioso_20260406_122701.png",
+    "filename": "17h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1UxojqX5P_MFv1fZLee2LoiLVO1SKs342",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "9h_post_religioso_20260406_122701.png",
+    "filename": "9h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1IDudc1hn8MIYuXZe8s3Xh0_lAmvz0az7",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "6h_post_religioso_20260406_122701.png",
+    "filename": "6h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1OTpNPzQ7meq6IpEfUwlv3GPRZ876nLb8",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "8h_post_religioso_20260406_122701.png",
+    "filename": "8h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1DbJISQe3GwK4hf-Q423UN6AW3doH-lQI",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "23h_post_religioso_20260406_122701.png",
+    "filename": "23h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1M3lUfXzU1wIISuIUs_tem8BBl7BjdngE",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
+  },
+  {
+    "path": "13h_post_religioso_20260406_122701.png",
+    "filename": "13h_post_religioso_20260406_122701.png",
+    "caption": "",
+    "gdrive_id": "1c1uQm2hfHDVj5pUlw6uAKMWrZHcbvhmR",
+    "account": null,
+    "folder": "060826",
+    "mime_type": "image/png"
   }
 ]
