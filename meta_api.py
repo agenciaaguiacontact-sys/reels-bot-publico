@@ -13,6 +13,20 @@ class MetaAPI:
         self.base_url = "https://graph.facebook.com/v25.0"
 
     def _get_public_url(self, local_path, gdrive_file_id=None):
+        if gdrive_file_id:
+            try:
+                from gdrive_api import GoogleDriveAPI
+                drive = GoogleDriveAPI()
+                url = drive.make_file_public(gdrive_file_id)
+                # Formato lh3 costuma ser mais 'direto' para crawlers de midia
+                # Aumentamos o delay para 5s para garantir propagação de permissão na rede GCP/Meta
+                if url:
+                    print(f"✅ URL gerada (GDrive): {url} (Aguardando propagação 5s...)")
+                    time.sleep(5)
+                    return url
+            except Exception as e:
+                print(f"❌ Erro ao tornar GDrive publico: {e}")
+
         try:
             with open(local_path, 'rb') as f:
                 # User-Agent as vezes ajuda a evitar bloqueios simples
@@ -31,19 +45,6 @@ class MetaAPI:
         except Exception as e:
             print(f"⚠️ Erro ao tentar tmpfiles.org: {e}")
 
-        if gdrive_file_id:
-            try:
-                from gdrive_api import GoogleDriveAPI
-                drive = GoogleDriveAPI()
-                url = drive.make_file_public(gdrive_file_id)
-                # Formato lh3 costuma ser mais 'direto' para crawlers de midia
-                # mas o link drive.usercontent.google.com tambem e bom.
-                # Aumentamos o delay para 5s para garantir propagação de permissão na rede GCP/Meta
-                print(f"✅ URL gerada (GDrive): {url} (Aguardando propagação 5s...)")
-                time.sleep(5)
-                return url
-            except Exception as e:
-                print(f"❌ Erro ao tornar GDrive publico: {e}")
         return None
 
     def _check_status(self, container_id, platform="ig"):

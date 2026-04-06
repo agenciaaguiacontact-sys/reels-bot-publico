@@ -115,9 +115,8 @@ def main():
     print("=== DOE: Cleanup Tool ===")
     drive = GoogleDriveAPI()
     
-    # 1. Limpeza de Downloads e Temporários Incondicional
+    # 1. Limpeza de Downloads (Arquivos velhos incondicionalmente)
     cleanup_downloads(days=1)
-    cleanup_tmp()
     archive_history(limit=500)
     
     results_path = '.tmp/last_execution_results.json'
@@ -177,9 +176,8 @@ def main():
 
     print("[OK] Estados locais atualizados.")
     
-    # Limpar resultados e temporários finais
-    if os.path.exists(results_path):
-        os.remove(results_path)
+    # Limpar resultados finais e todos os outros temporários
+    cleanup_tmp()
     
     # Re-executar arquivamento após atualização
     archive_history(limit=500)
