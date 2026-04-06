@@ -141,7 +141,7 @@ class ModernCard(ctk.CTkFrame):
         )
 
 class VideoCard(ModernCard):
-    """Card de vídeo com preview e informações"""
+    """Card de mídia com preview e informações"""
     def __init__(self, parent, video_data, on_select=None, on_remove=None, app=None):
         super().__init__(parent)
         self.video = video_data
@@ -196,7 +196,7 @@ class VideoCard(ModernCard):
         icon_label = ctk.CTkLabel(icon_frame, text=media_icon, font=ctk.CTkFont(size=20))
         icon_label.place(relx=0.5, rely=0.5, anchor="center")
         
-        # Informações do vídeo
+        # Informações da mídia
         info_frame = ctk.CTkFrame(container, fg_color="transparent")
         info_frame.pack(side="left", fill="both", expand=True)
         
@@ -612,7 +612,7 @@ class ModernCalendar(ModernCard):
                 badge = ctk.CTkLabel(
                     day_frame,
                     text="",
-                    width=18,
+                    width=24,
                     height=18,
                     corner_radius=9,
                     fg_color="#1e3a8a", # Azul escuro
@@ -708,7 +708,7 @@ class ModernCalendar(ModernCard):
                                 btn.configure(fg_color=ACCENT_PURPLE)
                             
                             # Mostrar badge no canto superior direito
-                            badge_text = str(count) if count < 10 else "+"
+                            badge_text = str(count) if count <= 100 else "+"
                             badge.configure(text=badge_text)
                             badge.place(relx=1.0, rely=0.0, anchor="ne", x=-2, y=2)
     
@@ -770,7 +770,7 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         
         ctk.CTkLabel(
             main_scroll,
-            text=f"{len(self.videos)} vídeos • {len(self.selected_dates)} dias selecionados",
+            text=f"{len(self.videos)} itens • {len(self.selected_dates)} dias selecionados",
             font=ctk.CTkFont(size=14),
             text_color=TEXT_SECONDARY
         ).pack(pady=(0, 30))
@@ -969,7 +969,7 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         # Distribuição
         ctk.CTkLabel(
             timing_container,
-            text="📊 Distribuição dos Vídeos",
+            text="📊 Distribuição das Postagens",
             font=ctk.CTkFont(size=14, weight="bold"),
             text_color=TEXT_PRIMARY,
             anchor="w"
@@ -987,7 +987,7 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         # Posts por dia
         ctk.CTkLabel(
             dist_inner,
-            text="Vídeos por dia:",
+            text="Posts por dia:",
             text_color=TEXT_SECONDARY
         ).pack(anchor="w", pady=(0, 5))
         
@@ -1256,7 +1256,7 @@ class DashboardView(ctk.CTkFrame):
         stats_container = ctk.CTkFrame(self, fg_color="transparent")
         stats_container.pack(fill="x", pady=(0, 30))
         
-        self.stat_videos = StatCard(stats_container, "Vídeos", len(app.videos), "🎬", ACCENT_BLUE)
+        self.stat_videos = StatCard(stats_container, "Mídias", len(app.videos), "🎬", ACCENT_BLUE)
         self.stat_videos.pack(side="left", fill="both", expand=True, padx=(0, 15))
         
         self.stat_scheduled = StatCard(stats_container, "Agendados", len(app.schedule), "⏰", ACCENT_PURPLE)
@@ -1304,8 +1304,8 @@ class DashboardView(ctk.CTkFrame):
             ).pack(pady=40)
             return
         
-        # Mostrar próximos 10
-        sorted_schedule = sorted(self.app.schedule, key=lambda x: x["schedule_time"])[:10]
+        # Mostrar próximos 100
+        sorted_schedule = sorted(self.app.schedule, key=lambda x: x["schedule_time"])[:100]
         
         for item in sorted_schedule:
             card = ScheduleCard(
@@ -1317,7 +1317,7 @@ class DashboardView(ctk.CTkFrame):
             card.pack(fill="x", pady=5)
 
 class LibraryView(ctk.CTkFrame):
-    """Biblioteca de vídeos"""
+    """Biblioteca de mídias"""
     def __init__(self, parent, app):
         super().__init__(parent, fg_color="transparent")
         self.app = app
@@ -1343,7 +1343,7 @@ class LibraryView(ctk.CTkFrame):
         
         self.count_label = ctk.CTkLabel(
             left_header,
-            text=f"{len(app.videos)} vídeos",
+            text=f"{len(app.videos)} mídias",
             font=ctk.CTkFont(size=14),
             text_color=TEXT_SECONDARY
         )
@@ -1437,7 +1437,7 @@ class LibraryView(ctk.CTkFrame):
 
         self.search_entry = ctk.CTkEntry(
             search_inner,
-            placeholder_text="🔍 Buscar vídeos...",
+            placeholder_text="🔍 Buscar mídias...",
             height=40,
             corner_radius=10,
             border_width=0,
@@ -1523,7 +1523,7 @@ class LibraryView(ctk.CTkFrame):
         except:
             pass
 
-        self.count_label.configure(text=f"{len(self.app.videos)} vídeos")
+        self.count_label.configure(text=f"{len(self.app.videos)} mídias")
         
         # Limpar apenas os cards (preservar componentes internos do ScrollableFrame)
         for widget in self.videos_scroll.winfo_children():
@@ -1572,7 +1572,7 @@ class LibraryView(ctk.CTkFrame):
             
             ctk.CTkLabel(
                 empty_card,
-                text="📭 Nenhum vídeo encontrado",
+                text="📭 Nenhuma mídia encontrada",
                 font=ctk.CTkFont(size=14),
                 text_color=TEXT_DIM
             ).pack(pady=40)
@@ -1597,7 +1597,7 @@ class LibraryView(ctk.CTkFrame):
             card = VideoCard(
                 self.videos_scroll,
                 video,
-                on_select=lambda: None,
+                on_select=lambda v=video: self.app.update_selection_order(v),
                 on_remove=lambda v=video: self.app.remove_from_library(v),
                 app=self.app
             )
@@ -1692,7 +1692,7 @@ class ScheduleView(ctk.CTkFrame):
         # Botão de agendar
         self.schedule_btn = ModernButton(
             left_panel,
-            text="Agendar Vídeos Selecionados",
+            text="Agendar Mídias Selecionadas",
             icon="✨",
             style="primary",
             command=self._start_schedule,
@@ -1824,8 +1824,8 @@ class ScheduleView(ctk.CTkFrame):
             messagebox.showwarning("Atenção", "Selecione pelo menos um dia no calendário!")
             return
         
-        # Pegar vídeos selecionados (AGORA PERSISTENTE EM TODAS AS PÁGINAS)
-        selected_videos = [v for v in self.app.videos if v.get("selected")]
+        # Pegar vídeos selecionados (AGORA PERSISTENTE EM TODAS AS PÁGINAS E EM ORDEM DE CLIQUE)
+        selected_videos = [v for v in self.app.selection_order if v.get("selected")]
         
         if not selected_videos:
             messagebox.showwarning("Atenção", "Selecione vídeos na Biblioteca primeiro!")
@@ -1836,6 +1836,7 @@ class ScheduleView(ctk.CTkFrame):
         self.wait_window(wizard)
         
         if wizard.result:
+            # Importante: Passar a lista já ordenada para o processador
             self.app.process_schedule(selected_videos, selected_dates, wizard.result)
     
     def _toggle_select_all(self):
@@ -2263,7 +2264,7 @@ class MetaStudioApp(ctk.CTk):
         super().__init__()
         
         # Configuração da janela
-        self.title("Meta Studio Pro - Agendador de Reels")
+        self.title("Meta Studio Pro - Automação de Mídias")
         self.geometry("1600x900")
         
         # Carregar dados - ORDEM CORRIGIDA: histórico primeiro!
@@ -2272,6 +2273,8 @@ class MetaStudioApp(ctk.CTk):
         self.history = self.load_history()     # <--- Essencial carregar histórico antes do schedule
         self.videos = self.load_library()
         self.schedule = self.load_schedule()    # <--- Agora load_schedule pode usar self.history com segurança
+        
+        self.selection_order = []  # <<< NOVA LISTA PARA RASTREAR ORDEM DE SELEÇÃO
         
         self.acc_vars = {
             acc['name']: tk.BooleanVar(value=(acc['name'] in self.settings.get("last_used_accounts", [])))
@@ -2289,6 +2292,16 @@ class MetaStudioApp(ctk.CTk):
         
         # Auto-renovar tokens
         self.check_token_renewals()
+    
+    def update_selection_order(self, video):
+        """Atualiza a lista de ordem de seleção conforme o usuário clica nos vídeos"""
+        is_selected = video.get("selected", False)
+        if is_selected:
+            if video not in self.selection_order:
+                self.selection_order.append(video)
+        else:
+            if video in self.selection_order:
+                self.selection_order.remove(video)
     
     def cleanup_startup(self):
         """Executa limpezas e verificações iniciais em segundo plano"""
@@ -2977,6 +2990,10 @@ class MetaStudioApp(ctk.CTk):
                     for i, item in enumerate(data):
                         if "date_added" not in item:
                             item["date_added"] = i  # Uso a posição original como proxy de "idade"
+                        
+                        # Popular a lista de ordem de seleção se o item estiver selecionado no carregamento
+                        if item.get("selected") and item not in self.selection_order:
+                            self.selection_order.append(item)
                     return data
             except:
                 pass
@@ -3219,7 +3236,7 @@ class MetaStudioApp(ctk.CTk):
     # === ACTIONS ===
     
     def add_videos(self):
-        """Adiciona vídeos do computador (arquivos individuais)"""
+        """Adiciona mídias do computador (arquivos individuais) strings"""
         files = filedialog.askopenfilenames(
             title="Selecionar Mídias",
             filetypes=[("Mídias compatíveis", "*.mp4 *.mov *.jpg *.jpeg *.png *.zip")]
@@ -3275,7 +3292,7 @@ class MetaStudioApp(ctk.CTk):
             messagebox.showinfo("Info", "Nenhuma mídia nova compatível encontrada nesta pasta.")
     
     def pull_from_drive(self, account_name="Geral"):
-        """Puxa vídeos do Google Drive incluindo subpastas"""
+        """Puxa mídias do Google Drive incluindo subpastas"""
         def task():
             try:
                 folder_id = None
@@ -3304,12 +3321,12 @@ class MetaStudioApp(ctk.CTk):
                 
                 if added > 0:
                     self.save_library()
-                    self.log(f"Drive: {added} novos vídeos")
+                    self.log(f"Drive: {added} novas mídias")
                     self.after(0, lambda: self.views["library"].refresh())
-                    self.after(0, lambda: messagebox.showinfo("Sucesso", f"{added} vídeo(s) do Drive!"))
+                    self.after(0, lambda: messagebox.showinfo("Sucesso", f"{added} mídia(s) do Drive!"))
                 else:
                     self.log("Drive: Nenhum vídeo novo")
-                    self.after(0, lambda: messagebox.showinfo("Info", "Nenhum vídeo novo no Drive"))
+                    self.after(0, lambda: messagebox.showinfo("Info", "Nenhuma mídia nova no Drive"))
             except Exception as e:
                 self.log(f"Erro Drive: {e}")
                 self.after(0, lambda: messagebox.showerror("Erro", f"Erro ao acessar Drive: {e}"))
@@ -3317,25 +3334,30 @@ class MetaStudioApp(ctk.CTk):
         threading.Thread(target=task, daemon=True).start()
     
     def remove_from_library(self, video):
-        """Remove vídeo da biblioteca"""
+        """Remove mídia da biblioteca"""
         if messagebox.askyesno("Confirmar", f"Remover '{video['filename']}'?"):
             self.videos.remove(video)
+            if video in self.selection_order:
+                self.selection_order.remove(video)
             self.save_library()
             self.views["library"].refresh()
     
     def select_all_library(self):
-        """Seleciona todos os vídeos na lista filtrada atual (globalmente)"""
+        """Seleciona todas as mídias na lista filtrada atual (globalmente)"""
         # Se houver busca ou filtro ativo, selecionar apenas os visíveis/filtrados?
         # Por simplicidade e expectativa do usuário, vamos selecionar todos os que estão sendo exibidos
         # Mas o usuário disse 'Selecionar Todos', geralmente espera-se todos da biblioteca.
         for v in self.videos:
             v["selected"] = True
+            if v not in self.selection_order:
+                self.selection_order.append(v)
         self.views["library"].refresh()
     
     def clear_library(self):
         """Limpa toda a biblioteca"""
         if messagebox.askyesno("Confirmar", "Limpar toda a biblioteca?"):
             self.videos = []
+            self.selection_order = []
             self.save_library()
             self.views["library"].refresh()
     
@@ -3382,13 +3404,13 @@ class MetaStudioApp(ctk.CTk):
         
         # Mostrar aviso se houver vídeos pulados
         if skipped_videos:
-            skip_msg = "Os seguintes vídeos foram ignorados:\n\n" + "\n".join(skipped_videos[:10])
+            skip_msg = "Os seguintes itens foram ignorados:\n\n" + "\n".join(skipped_videos[:10])
             if len(skipped_videos) > 10:
                 skip_msg += f"\n\n... e mais {len(skipped_videos) - 10} vídeos"
             
             if not messagebox.askyesno(
                 "Vídeos Ignorados",
-                skip_msg + "\n\nDeseja continuar com os vídeos restantes?",
+                skip_msg + "\n\nDeseja continuar com os itens restantes?",
                 icon="warning"
             ):
                 return
@@ -3396,8 +3418,8 @@ class MetaStudioApp(ctk.CTk):
         # Se não sobrou nenhum vídeo válido
         if not videos:
             messagebox.showwarning(
-                "Nenhum Vídeo Válido",
-                "Todos os vídeos selecionados já foram postados ou agendados!"
+                "Nenhuma Mídia Válida",
+                "Todas as mídias selecionadas já foram postadas ou agendadas!"
             )
             return
         
@@ -3514,9 +3536,10 @@ class MetaStudioApp(ctk.CTk):
         # Adicionar à fila
         self.schedule.extend(all_generated)
         
-        # Desselecionar vídeos globalmente
+        # Desselecionar vídeos globalmente e limpar ordem
         for v in self.videos:
             v["selected"] = False
+        self.selection_order = []
         
         # Limpar seleção do calendário
         if "schedule" in self.views:
@@ -3528,9 +3551,9 @@ class MetaStudioApp(ctk.CTk):
         self.views["dashboard"].refresh()
         
         # Mensagem de sucesso com informações
-        success_msg = f"✨ {len(all_generated)} vídeo(s) agendados!"
+        success_msg = f"✨ {len(all_generated)} postagem(ns) agendada(s)!"
         if skipped_videos:
-            success_msg += f"\n\n⚠️ {len(skipped_videos)} vídeo(s) ignorados"
+            success_msg += f"\n\n⚠️ {len(skipped_videos)} item(ns) ignorados"
         
         messagebox.showinfo("Sucesso", success_msg)
         self.show_view("schedule")
@@ -3645,7 +3668,7 @@ class MetaStudioApp(ctk.CTk):
             self.views["dashboard"].refresh()
             
             msg = f"✅ Limpeza concluída!\n\n"
-            msg += f"🎬 {removed_count} vídeo(s) já postado(s) removido(s)\n"
+            msg += f"🎬 {removed_count} item(s) já postado(s) removido(s)\n"
             msg += f"📋 {len(new_schedule)} agendamento(s) restante(s)\n\n"
             
             if removed_videos:
@@ -3782,7 +3805,7 @@ class MetaStudioApp(ctk.CTk):
             time_diff = next_schedule["schedule_time"] - current_time
             minutes = time_diff // 60
             
-            msg = f"Nenhum vídeo pronto para publicar agora.\n\n"
+            msg = f"Nenhuma mídia pronta para publicar agora.\n\n"
             msg += f"Próximo agendamento:\n"
             msg += f"📹 {next_schedule['filename']}\n"
             msg += f"🕐 {next_time.strftime('%d/%m/%Y às %H:%M')}\n"
@@ -3797,7 +3820,7 @@ class MetaStudioApp(ctk.CTk):
         if not messagebox.askyesno(
             "Confirmar",
             f"🚀 Executar robô agora?\n\n"
-            f"Isso vai publicar {count} vídeo(s) imediatamente.\n\n"
+            f"Isso vai publicar {count} item(s) imediatamente.\n\n"
             f"Deseja continuar?"
         ):
             return
@@ -3961,10 +3984,10 @@ class MetaStudioApp(ctk.CTk):
         ]
         
         if not active or not selected:
-            messagebox.showwarning("Atenção", "Selecione vídeos e contas!")
+            messagebox.showwarning("Atenção", "Selecione mídias e contas!")
             return
         
-        if not messagebox.askyesno("Confirmar", f"Postar {len(selected)} vídeo(s) AGORA em {len(active)} conta(s)?"):
+        if not messagebox.askyesno("Confirmar", f"Postar {len(selected)} mídia(s) AGORA em {len(active)} conta(s)?"):
             return
         
         def task():

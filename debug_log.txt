@@ -69,3 +69,42 @@
 [20:43:39] ✅ Mesclagem local concluída.
 [20:43:39] 📤 Atualizando nuvem (Upload para Drive)...
 [20:43:48] 📦 Sincronizando com GitHub...
+[20:43:50] 🚀 Sincronização COMPLETA!
+[21:03:15] ============================================================
+[21:03:15] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[21:03:15] ============================================================
+[21:03:15] 📥 Sincronizando progresso da nuvem (Drive)...
+[21:03:16] 🧹 Iniciando limpeza e verificações de integridade...
+[21:03:16] ✅ Limpeza e integridade verificadas.
+[21:03:17] 🧩 Mesclando history (Local: 25, Remoto: 25)
+[21:03:17] 🧩 Mesclando schedule (Local: 0, Remoto: 0)
+[21:03:17] ✅ Progresso do Drive carregado.
+[21:03:17] 📥 Verificando mudanças no GitHub...
+[21:03:18] 📊 Status Final: 0 agendados, 25 postados
+[01:07:46] ============================================================
+[01:07:46] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[01:07:46] ============================================================
+[01:07:46] 📥 Sincronizando progresso da nuvem (Drive)...
+[01:07:47] 🧹 Iniciando limpeza e verificações de integridade...
+[01:07:47] ✅ Limpeza e integridade verificadas.
+[01:07:49] 🧩 Mesclando history (Local: 25, Remoto: 25)
+[01:07:49] 🧩 Mesclando schedule (Local: 0, Remoto: 0)
+[01:07:49] ✅ Progresso do Drive carregado.
+[01:07:49] 📥 Verificando mudanças no GitHub...
+[01:07:50] 📊 Status Final: 0 agendados, 25 postados
+[01:09:34] Drive: 26 novas mídias
+[01:11:22] 💾 Backup criado: schedule_queue_backup_20260406_011122.json
+[01:11:22] ✅ Salvos 5 agendamentos
+[01:11:31] ============================================================
+[01:11:31] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[01:11:31] ============================================================
+[01:11:31] 🕐 Horário de início: 06/04/2026 01:11:31
+[01:11:31] 💾 Backup criado: schedule_queue_backup_20260406_011131.json
+[01:11:31] ✅ Salvos 5 agendamentos
+[01:11:31] 📥 Buscando progresso da nuvem (Download do Drive)...
+[01:11:34] 🧩 Mesclando 0 itens da nuvem com locais...
+[01:11:34] 🧩 Mesclando history (Local: 25, Remoto: 25)
+[01:11:34] 🧩 Mesclando schedule (Local: 5, Remoto: 0)
+[01:11:34] ✅ Mesclagem local concluída.
+[01:11:34] 📤 Atualizando nuvem (Upload para Drive)...
+[01:11:42] 📦 Sincronizando com GitHub...
