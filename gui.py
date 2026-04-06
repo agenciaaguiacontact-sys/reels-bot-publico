@@ -1049,7 +1049,7 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         dist_inner.pack(fill="x", padx=20, pady=15)
         
         self.posts_per_day = tk.IntVar(value=1)
-        self.interval_hours = tk.IntVar(value=1)
+        self.interval_minutes = tk.IntVar(value=60)
         
         # Posts por dia
         ctk.CTkLabel(
@@ -1064,8 +1064,8 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         self.ppd_slider = ctk.CTkSlider(
             ppd_frame,
             from_=1,
-            to=10,
-            number_of_steps=9,
+            to=24,
+            number_of_steps=23,
             variable=self.posts_per_day,
             progress_color=ACCENT_GREEN,
             button_color=ACCENT_BLUE,
@@ -1096,10 +1096,10 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         
         self.int_slider = ctk.CTkSlider(
             int_frame,
-            from_=1,
-            to=12,
-            number_of_steps=11,
-            variable=self.interval_hours,
+            from_=10,
+            to=720,
+            number_of_steps=71,
+            variable=self.interval_minutes,
             progress_color=ACCENT_GREEN,
             button_color=ACCENT_BLUE,
             button_hover_color=ACCENT_PURPLE
@@ -1115,7 +1115,15 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         )
         self.int_label.pack(side="right")
         
-        self.interval_hours.trace_add("write", lambda *_: self.int_label.configure(text=f"{self.interval_hours.get()}h"))
+        def format_interval(*args):
+            mins = self.interval_minutes.get()
+            if mins < 60:
+                text = f"{mins}m"
+            else:
+                text = f"{mins//60}h{mins%60}m" if mins%60 != 0 else f"{mins//60}h"
+            self.int_label.configure(text=text)
+            
+        self.interval_minutes.trace_add("write", format_interval)
         
         # === SEÇÃO 3: LEGENDA ===
         self._create_section(main_scroll, "3️⃣ Legenda", "Configure o texto das postagens")
@@ -1182,7 +1190,7 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         
         # Atualizar preview quando mudar valores
         self.posts_per_day.trace_add("write", lambda *_: self.preview_label.configure(text=self._generate_preview()))
-        self.interval_hours.trace_add("write", lambda *_: self.preview_label.configure(text=self._generate_preview()))
+        self.interval_minutes.trace_add("write", lambda *_: self.preview_label.configure(text=self._generate_preview()))
         
         # Inicializar estado da UI (seletores ativos/inativos)
         self._update_ui_state()
@@ -1268,7 +1276,9 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         else:
             ppd = self.posts_per_day.get()
             preview = f"📦 {total_items} mídias serão distribuídas em {days} dia(s)\n"
-            preview += f"📊 Até {ppd} posts por dia, com intervalo de {self.interval_hours.get()}h\n"
+            mins = self.interval_minutes.get()
+            interval_str = f"{mins}m" if mins < 60 else (f"{mins//60}h{mins%60}m" if mins%60 != 0 else f"{mins//60}h")
+            preview += f"📊 Até {ppd} posts por dia, com intervalo de {interval_str}\n"
             preview += f"⏰ Primeiro post: {self.selected_dates[0].strftime('%d/%m/%Y')} às {self.hour_var.get():02d}:{self.min_var.get():02d}\n"
             preview += f"⚠️ Regra: Intervalo mínimo de 5 min entre postagens para evitar conflitos."
         
@@ -1287,7 +1297,7 @@ class QuickScheduleWizard(ctk.CTkToplevel):
             "start_hour": self.hour_var.get(),
             "start_min": self.min_var.get(),
             "posts_per_day": self.posts_per_day.get(),
-            "interval_hours": self.interval_hours.get(),
+            "interval_minutes": self.interval_minutes.get(),
             "caption_mode": self.caption_mode.get(),
             "default_caption": self.caption_text.get("1.0", "end").strip(),
             "schedule_mode": self.schedule_mode.get()
@@ -3635,7 +3645,7 @@ class MetaStudioApp(ctk.CTk):
                 
                 # Distribuir vídeos no dia baseado na configuração
                 posts_today = config["posts_per_day"]
-                interval = config["interval_hours"]
+                interval_mins = config.get("interval_minutes", config.get("interval_hours", 1) * 60)
                 
                 for _ in range(posts_today):
                     if video_idx >= len(videos):
@@ -3668,7 +3678,7 @@ class MetaStudioApp(ctk.CTk):
                     }
                     
                     all_generated.append(new_post)
-                    base_dt += datetime.timedelta(hours=interval)
+                    base_dt += datetime.timedelta(minutes=interval_mins)
                     video_idx += 1
         
         # --- VALIDAÇÃO DE CONFLITOS (TRAVA DE 5 MINUTOS) ---
