@@ -211,3 +211,39 @@
 [09:50:06] ✅ Mesclagem local concluída.
 [09:50:06] 📤 Atualizando nuvem (Upload para Drive)...
 [09:50:15] 📦 Sincronizando com GitHub...
+[09:50:17] 🚀 Sincronização COMPLETA!
+[10:33:54] ============================================================
+[10:33:54] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[10:33:54] ============================================================
+[10:33:54] 📥 Sincronizando progresso da nuvem (Drive)...
+[10:33:55] 🧹 Iniciando limpeza e verificações de integridade...
+[10:33:55] ✅ Limpeza e integridade verificadas.
+[10:33:57] 🧩 Mesclando history (Local: 25, Remoto: 26)
+[10:33:57] 🧩 Mesclando schedule (Local: 6, Remoto: 5)
+[10:33:57]   🗑️ Ignorando 23h-post-religioso-18.png (já postado)
+[10:33:57] ✅ Progresso do Drive carregado.
+[10:33:57] 📥 Verificando mudanças no GitHub...
+[10:33:59] 📊 Status Final: 5 agendados, 26 postados
+[10:34:37] Drive: 10 novas mídias
+[10:35:13] Drive: 49 novas mídias
+[10:36:59] 💾 Backup criado: schedule_queue_backup_20260406_103659.json
+[10:36:59] ✅ Salvos 6 agendamentos
+[10:37:29] 💾 Backup criado: schedule_queue_backup_20260406_103729.json
+[10:37:29] ✅ Salvos 5 agendamentos
+[10:37:29] 🗑️ Agendamento removido: slide_1.png
+[10:38:18] 💾 Backup criado: schedule_queue_backup_20260406_103818.json
+[10:38:18] ✅ Salvos 6 agendamentos
+[10:38:24] ============================================================
+[10:38:24] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[10:38:24] ============================================================
+[10:38:24] 🕐 Horário de início: 06/04/2026 10:38:24
+[10:38:24] 💾 Backup criado: schedule_queue_backup_20260406_103824.json
+[10:38:24] ✅ Salvos 6 agendamentos
+[10:38:24] 📥 Buscando progresso da nuvem (Download do Drive)...
+[10:38:27] 🧩 Mesclando 5 itens da nuvem com locais...
+[10:38:27] 🧩 Mesclando history (Local: 26, Remoto: 26)
+[10:38:27] 🧩 Mesclando schedule (Local: 6, Remoto: 5)
+[10:38:27]   🗑️ Ignorando Carrossel Agrupado (10 itens) (já postado)
+[10:38:27] ✅ Mesclagem local concluída.
+[10:38:27] 📤 Atualizando nuvem (Upload para Drive)...
+[10:38:36] 📦 Sincronizando com GitHub...

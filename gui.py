@@ -2901,7 +2901,15 @@ class MetaStudioApp(ctk.CTk):
         """
         self.log(f"🧩 Mesclando {file_type} (Local: {len(local_data)}, Remoto: {len(remote_data)})")
         
+        # Fresh install ou fila limpa vazia recém instalada
+        if not local_data and not os.path.exists(f"{'schedule_queue' if file_type == 'schedule' else 'posted_history'}.json"):
+            return remote_data
+            
         if file_type == 'history':
+            if not local_data and not remote_data: return []
+            if not local_data: return remote_data
+            if not remote_data: return local_data
+            
             # Para histórico: união simples baseada em ID ou filename
             merged = local_data.copy()
             local_ids = {h.get("id") for h in merged if h.get("id")}
@@ -2915,32 +2923,19 @@ class MetaStudioApp(ctk.CTk):
             
             # Ordenar por tempo de postagem
             merged.sort(key=lambda x: x.get("post_time", 0))
-            
-            # Se exceder o limite, o arquivamento será tratado no save_history
             return merged
             
         elif file_type == 'schedule':
-            # Para fila: união, mas REMOVE o que já está no histórico mesclado
+            # GUI É A COMANDANTE: a fila que vai para o bot é EXATAMENTE a fila local (local_data).
+            # Não fazemos uma "união" cega com o remoto para evitar que itens apagados pelo usuário no GUI
+            # "renasçam" apenas porque ainda estavam guardados na nuvem.
+            
             history_ids = {h.get("id") for h in getattr(self, 'history', []) if h.get("id")}
             history_names = {h.get("filename") for h in getattr(self, 'history', []) if h.get("filename")}
             
-            merged_map = {}
-            
-            # Adiciona remotos primeiro (prioridade base)
-            for item in remote_data:
-                key = item.get("gdrive_id") or item.get("filename")
-                if key:
-                    merged_map[key] = item
-            
-            # Adiciona locais (pode sobrescrever remotos - útil se o usuário editou algo localmente)
-            for item in local_data:
-                key = item.get("gdrive_id") or item.get("filename")
-                if key:
-                    merged_map[key] = item
-            
-            # Filtrar o que já foi postado
+            # Filtrar o que já foi postado do LOCAL DATA (GUI é Comandante)
             final_schedule = []
-            for item in merged_map.values():
+            for item in local_data:
                 gid = item.get("gdrive_id")
                 fname = item.get("filename")
                 if (gid and gid in history_ids) or (fname and fname in history_names):

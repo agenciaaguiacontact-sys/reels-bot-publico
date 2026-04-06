@@ -544,6 +544,16 @@ def main():
         print("❌ Nenhuma conta configurada. Abortando.")
         sys.exit(1)
 
+    # Filtrar contas se TEST_ACCOUNTS estiver definido
+    test_accounts_env = os.environ.get('TEST_ACCOUNTS')
+    if test_accounts_env:
+        target_names = [name.strip() for name in test_accounts_env.split(',')]
+        accounts = [acc for acc in accounts if acc.get('name') in target_names]
+        if not accounts:
+            print(f"❌ Nenhuma conta encontrada correspondente a: {target_names}. Abortando.")
+            sys.exit(1)
+        print(f"🎯 Filtro ativado: Testando apenas {target_names}")
+
     print(f"\n📱 Contas a testar: {[a.get('name') for a in accounts]}\n")
 
     # 2. Gerar mídias de teste
