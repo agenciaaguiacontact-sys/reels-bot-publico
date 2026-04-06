@@ -146,6 +146,67 @@ class ModernCard(ctk.CTkFrame):
             **kwargs
         )
 
+class FolderCard(ModernCard):
+    """Card representando uma pasta clicável na Biblioteca."""
+    def __init__(self, parent, folder_name, folder_path, item_count, on_click=None):
+        super().__init__(parent)
+        self.folder_name = folder_name
+        self.folder_path = folder_path
+        
+        # O mouse hover (hand) só funciona em labels e botões, então criaremos um frame que age como botão invisível.
+        container = ctk.CTkFrame(self, fg_color="transparent")
+        container.pack(fill="both", expand=True, padx=15, pady=8)
+        
+        # Ícone de pasta
+        icon_frame = ctk.CTkFrame(container, width=42, height=42, corner_radius=10, fg_color=BG_SECONDARY)
+        icon_frame.pack(side="left", padx=(0, 15))
+        icon_frame.pack_propagate(False)
+        
+        icon_label = ctk.CTkLabel(icon_frame, text="📁", font=ctk.CTkFont(size=20))
+        icon_label.place(relx=0.5, rely=0.5, anchor="center")
+        
+        info_frame = ctk.CTkFrame(container, fg_color="transparent")
+        info_frame.pack(side="left", fill="both", expand=True)
+        
+        name_label = ctk.CTkLabel(
+            info_frame,
+            text=folder_name,
+            font=ctk.CTkFont(size=14, weight="bold"),
+            text_color=TEXT_PRIMARY,
+            anchor="w"
+        )
+        name_label.pack(anchor="w", pady=(0, 5))
+        
+        count_label = ctk.CTkLabel(
+            info_frame,
+            text=f"{item_count} mídias",
+            font=ctk.CTkFont(size=10),
+            text_color=TEXT_DIM,
+            anchor="w"
+        )
+        count_label.pack(anchor="w")
+        
+        # Botão ABRIR PASTA invisible overlap or explicit CTA on the right
+        btn_abrir = ctk.CTkButton(
+            container,
+            text="Abrir Pasta",
+            width=100,
+            height=30,
+            corner_radius=8,
+            fg_color=BG_SECONDARY,
+            hover_color=ACCENT_BLUE,
+            command=lambda: on_click(folder_path) if on_click else None
+        )
+        btn_abrir.pack(side="right")
+        
+        # Bind clicks tb na label e container para melhor UX
+        def invoke_click(*args):
+            if on_click: on_click(folder_path)
+            
+        for w in (self, container, icon_frame, icon_label, info_frame, name_label, count_label):
+            w.bind("<Button-1>", invoke_click)
+            w.configure(cursor="hand2")
+
 class VideoCard(ModernCard):
     """Card de mídia com preview e informações"""
     def __init__(self, parent, video_data, on_select=None, on_remove=None, app=None):
@@ -1329,9 +1390,10 @@ class LibraryView(ctk.CTkFrame):
         self.app = app
         self.page = 0
         self.per_page = 20
+        self.current_path = ""
         
         self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(2, weight=1) # Linha da lista (expansível)
+        self.grid_rowconfigure(3, weight=1) # Linha da lista de vídeos passa para a 3
         
         # Header com ações
         header = ctk.CTkFrame(self, fg_color="transparent")
@@ -1468,17 +1530,22 @@ class LibraryView(ctk.CTkFrame):
             width=100
         ).pack(side="left")
         
+        # Breadcrumb da navegação de Pastas
+        self.breadcrumb_frame = ctk.CTkFrame(self, fg_color="transparent", height=40)
+        self.breadcrumb_frame.grid(row=2, column=0, sticky="ew", pady=(0, 5), padx=2)
+        self.breadcrumb_frame.pack_propagate(False)
+        
         # Lista de vídeos
         self.videos_scroll = ctk.CTkScrollableFrame(
             self,
             fg_color="transparent",
             label_text="" # Remover qualquer label automático que possa causar offset
         )
-        self.videos_scroll.grid(row=2, column=0, sticky="nsew", pady=(10, 0)) # Margem maior
+        self.videos_scroll.grid(row=3, column=0, sticky="nsew", pady=(10, 0)) # Margem maior
         
         # Paginação
         self.pagination_frame = ctk.CTkFrame(self, fg_color="transparent")
-        self.pagination_frame.grid(row=3, column=0, sticky="ew", pady=(15, 0)) # Mais espaço pro rodapé
+        self.pagination_frame.grid(row=4, column=0, sticky="ew", pady=(15, 0)) # Mais espaço pro rodapé
         
         self.prev_btn = ModernButton(
             self.pagination_frame, 
@@ -1533,18 +1600,62 @@ class LibraryView(ctk.CTkFrame):
         
         # Limpar apenas os cards (preservar componentes internos do ScrollableFrame)
         for widget in self.videos_scroll.winfo_children():
-            if isinstance(widget, (VideoCard, ModernCard, ctk.CTkLabel)):
+            if isinstance(widget, (VideoCard, FolderCard, ModernCard, ctk.CTkLabel)):
                 widget.destroy()
+        
+        for widget in self.breadcrumb_frame.winfo_children():
+            widget.destroy()
         
         # Filtrar por busca e tipo de mídia
         search_term = self.search_entry.get().lower()
         media_filter = self.filter_var.get()
         
+        # Lógica da Trilha de Navegação (Breadcrumbs)
+        if search_term:
+            self.breadcrumb_frame.grid_forget()
+        else:
+            self.breadcrumb_frame.grid(row=2, column=0, sticky="ew", pady=(0, 5), padx=2)
+            
+            btn_home = ctk.CTkButton(
+                self.breadcrumb_frame, text="🏠 Raiz", fg_color="transparent",
+                hover_color=HOVER_COLOR, text_color=TEXT_PRIMARY, font=ctk.CTkFont(weight="bold"),
+                width=50, command=lambda: self.enter_folder("")
+            )
+            btn_home.pack(side="left")
+            
+            if self.current_path:
+                parts = self.current_path.strip("/").split("/")
+                current_build = ""
+                for part in parts:
+                    ctk.CTkLabel(self.breadcrumb_frame, text=">", text_color=TEXT_DIM).pack(side="left", padx=5)
+                    current_build += part if not current_build else "/" + part
+                    
+                    btn_part = ctk.CTkButton(
+                        self.breadcrumb_frame, text=part, fg_color="transparent",
+                        hover_color=HOVER_COLOR, text_color=TEXT_PRIMARY, font=ctk.CTkFont(weight="bold"),
+                        width=50, command=lambda p=current_build: self.enter_folder(p)
+                    )
+                    btn_part.pack(side="left")
+
+            # Botão Voltar
+            if self.current_path:
+                parent_path = "/".join(self.current_path.split("/")[:-1])
+                btn_back = ctk.CTkButton(
+                    self.breadcrumb_frame, text="⬅ Voltar", fg_color=BG_SECONDARY,
+                    hover_color=HOVER_COLOR, text_color=TEXT_PRIMARY, font=ctk.CTkFont(weight="bold"),
+                    width=80, height=28, command=lambda: self.enter_folder(parent_path)
+                )
+                btn_back.pack(side="right", padx=10)
+
+        # Montar a lista (Pasta ou Filtro Global)
         filtered_videos = []
+        subfolders = {} # key: folder_name, value: total_items
+        
         for v in self.app.videos:
             filename = v.get("filename", "").lower()
+            fp = str(v.get("folder", "")).replace("\\", "/") # Garantir formatação
             
-            # Filtro de texto
+            # Filtro de texto (se existir, ignora a hierarquia de pastas)
             if search_term and search_term not in filename:
                 continue
                 
@@ -1556,52 +1667,86 @@ class LibraryView(ctk.CTkFrame):
                 continue
             if media_filter == "Imagens" and not is_image:
                 continue
-                
-            filtered_videos.append(v)
+            
+            if not search_term:
+                # Verificação de hierarquia
+                if fp == self.current_path:
+                    # Pertence EXATAMENTE à pasta atual
+                    filtered_videos.append(v)
+                else:
+                    # Se pertence a uma subpasta da recursão atual
+                    prefix = (self.current_path + "/") if self.current_path else ""
+                    if fp.startswith(prefix):
+                        remainder = fp[len(prefix):]
+                        immediate_subfolder = remainder.split("/")[0]
+                        if immediate_subfolder:
+                            subfolders[immediate_subfolder] = subfolders.get(immediate_subfolder, 0) + 1
+            else:
+                # Se está buscando, liste tudo de forma plana
+                filtered_videos.append(v)
         
-        # Aplicar Ordenação
+        # Aplicar Ordenação Nos Vídeos
         sort_mode = self.sort_var.get()
         if sort_mode == "A-Z":
             filtered_videos.sort(key=lambda x: natural_sort_key(x.get("filename", "")))
         elif sort_mode == "Z-A":
             filtered_videos.sort(key=lambda x: natural_sort_key(x.get("filename", "")), reverse=True)
         elif sort_mode == "Mais Recentes":
-            # Usar date_added se existir, senão usar 0
             filtered_videos.sort(key=lambda x: x.get("date_added", 0), reverse=True)
         elif sort_mode == "Mais Antigos":
             filtered_videos.sort(key=lambda x: x.get("date_added", 0))
         
-        # Salvar para uso em seleção em massa (Select All)
         self.current_filtered_videos = filtered_videos
 
-        if not filtered_videos:
+        if not filtered_videos and not subfolders:
             self.pagination_frame.grid_forget()
             empty_card = ModernCard(self.videos_scroll)
             empty_card.pack(fill="x", pady=20)
             
             ctk.CTkLabel(
                 empty_card,
-                text="📭 Nenhuma mídia encontrada",
+                text="📭 Pasta vazia ou nenhuma mídia encontrada",
                 font=ctk.CTkFont(size=14),
                 text_color=TEXT_DIM
             ).pack(pady=40)
             return
         
-        self.pagination_frame.grid(row=3, column=0, sticky="ew", pady=(10, 0))
+        self.pagination_frame.grid(row=4, column=0, sticky="ew", pady=(10, 0)) # row=4 agora
         
-        # Lógica de Paginação
+        # Processar subpastas (sempre mostradas completas antes dos arquivos da página)
+        if not search_term and self.page == 0:
+            sorted_subfolders = sorted(subfolders.keys(), key=natural_sort_key)
+            for folder_name in sorted_subfolders:
+                count = subfolders[folder_name]
+                full_path = f"{self.current_path}/{folder_name}" if self.current_path else folder_name
+                card = FolderCard(
+                    self.videos_scroll,
+                    folder_name=folder_name,
+                    folder_path=full_path,
+                    item_count=count,
+                    on_click=self.enter_folder
+                )
+                card.pack(fill="x", pady=5)
+        
+        # Paginação apenas para arquivos
         total_pages = max(1, (len(filtered_videos) + self.per_page - 1) // self.per_page)
-        if self.page >= total_pages: self.page = total_pages - 1
-        
+        if self.page >= total_pages and len(filtered_videos) > 0: 
+            self.page = total_pages - 1
+            
         start = self.page * self.per_page
         end = start + self.per_page
         page_items = filtered_videos[start:end]
         
-        self.page_label.configure(text=f"Página {self.page + 1} de {total_pages}")
-        self.prev_btn.configure(state="normal" if self.page > 0 else "disabled")
-        self.next_btn.configure(state="normal" if end < len(filtered_videos) else "disabled")
+        if total_pages > 1:
+            self.page_label.configure(text=f"Página {self.page + 1} de {total_pages}")
+            self.prev_btn.configure(state="normal" if self.page > 0 else "disabled")
+            self.next_btn.configure(state="normal" if end < len(filtered_videos) else "disabled")
+        else:
+            self.page_label.configure(text="Página 1")
+            self.prev_btn.configure(state="disabled")
+            self.next_btn.configure(state="disabled")
 
-        # Criar cards
+        # Criar cards de mídia
         for video in page_items:
             card = VideoCard(
                 self.videos_scroll,
@@ -1612,6 +1757,13 @@ class LibraryView(ctk.CTkFrame):
             )
             card.pack(fill="x", pady=5)
             video["widget"] = card
+
+    def enter_folder(self, path):
+        self.current_path = path
+        self.page = 0
+        self.refresh()
+
+
 
 class ScheduleView(ctk.CTkFrame):
     """View de agendamento com calendário"""
@@ -3276,14 +3428,18 @@ class MetaStudioApp(ctk.CTk):
                 if f.lower().endswith(extensions):
                     path = os.path.join(root, f)
                     if not any(v.get('path') == path for v in self.videos):
-                        # Nome da pasta para organização
-                        rel_folder = os.path.basename(root)
+                        # Obter caminho relativo
+                        rel_path = os.path.relpath(root, folder)
+                        rel_path = rel_path.replace("\\", "/") # padronizar barras
+                        
+                        folder_value = rel_path if rel_path != "." else ""
+                        
                         self.videos.append({
                             "path": path,
                             "filename": f,
                             "caption": "",
                             "gdrive_id": None,
-                            "folder": rel_folder if rel_folder != os.path.basename(folder) else "Local",
+                            "folder": folder_value,
                             "date_added": int(time.time())
                         })
                         added += 1

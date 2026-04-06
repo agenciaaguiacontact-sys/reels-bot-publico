@@ -59,76 +59,92 @@ class GoogleDriveAPI:
             return all_items
 
     def list_media_recursive(self, folder_id=None):
-        """Lista vídeos, imagens e zips recursivamente dentro de uma pasta do Drive."""
+        """Lista vídeos, imagens e zips recursivamente dentro de uma pasta do Drive, reconstruindo a árvore de pastas."""
         f_id = folder_id or self.folder_id
         if not self.service or not f_id: return []
         
-        # Filtro para vídeos, imagens e zips
+        # 1. Obter TODAS as pastas para montar a hierarquia (evita milhares de GETs individuais)
+        folder_query = "mimeType='application/vnd.google-apps.folder' and trashed=false"
+        folders_dict = {}
+        try:
+            page_token = None
+            while True:
+                results = self.service.files().list(
+                    q=folder_query, pageSize=1000, pageToken=page_token,
+                    fields="nextPageToken, files(id, name, parents)",
+                    supportsAllDrives=True, includeItemsFromAllDrives=True
+                ).execute()
+                
+                for f in results.get('files', []):
+                    parents = f.get('parents', [])
+                    parent = parents[0] if parents else None
+                    folders_dict[f['id']] = {'name': f['name'], 'parent': parent}
+                
+                page_token = results.get('nextPageToken')
+                if not page_token: break
+        except Exception as e:
+            print(f"Erro ao mapear pastas do Drive: {e}")
+            
+        def get_full_path(parents):
+            if not parents: return ""
+            curr = parents[0]
+            path_parts = []
+            
+            while curr:
+                # Se chegamos na pasta raiz requisitada, paramos e não incluímos o nome dela no path
+                if f_id and curr == f_id:
+                    break
+                
+                if curr in folders_dict:
+                    path_parts.insert(0, folders_dict[curr]['name'])
+                    curr = folders_dict[curr]['parent']
+                    # Prevenir loops infinitos superando um limite razoável
+                    if len(path_parts) > 30: break
+                else:
+                    break
+                    
+            return "/".join(path_parts)
+
+        # 2. Obter as Mídias
         mime_types = [
             "video/mp4", "video/quicktime", "video/x-msvideo", 
             "image/jpeg", "image/png", "application/zip", "application/x-zip-compressed"
         ]
         mime_query = " or ".join([f"mimeType='{t}'" for t in mime_types])
-        
-        # Busca recursiva: não usamos 'in parents', mas sim uma busca que encontra tudo
-        # onde a pasta raiz está na árvore de ancestrais. No entanto, a API v3 não suporta 
-        # 'descendant of' diretamente de forma simples sem varrer pastas.
-        # Estratégia: Listar todos os arquivos compatíveis que não estão na lixeira e 
-        # depois filtrar os que pertencem à árvore da pasta raiz (ou apenas listar tudo se for a raiz).
-        
         query = f"({mime_query}) and trashed=false"
         
         all_items = []
         page_token = None
         
-        # Cache de nomes de pastas para evitar múltiplas chamadas
-        folder_names = {}
-
-        def get_folder_name(fid):
-            if fid in folder_names: return folder_names[fid]
-            try:
-                res = self.service.files().get(fileId=fid, fields="name").execute()
-                name = res.get("name")
-                folder_names[fid] = name
-                return name
-            except:
-                return "Desconhecida"
-
         try:
             while True:
                 results = self.service.files().list(
-                    q=query, pageSize=100, pageToken=page_token,
+                    q=query, pageSize=1000, pageToken=page_token,
                     fields="nextPageToken, files(id, name, mimeType, parents)",
                     supportsAllDrives=True, includeItemsFromAllDrives=True
                 ).execute()
                 
                 files = results.get('files', [])
                 for f in files:
-                    # Se especificamos uma pasta, verificamos se o arquivo está nela (ou subpastas)
-                    # Para simplificar e performar melhor, se for a pasta raiz do bot, pegamos tudo.
-                    # Se for uma pasta específica de conta, filtramos.
-                    if folder_id:
-                        # Verificação simples de parentesco imediato ou recursivo (opcional)
-                        # Por enquanto, se o usuário pediu uma pasta, vamos assumir que ele quer os arquivos dela.
-                        # Mas para ser verdadeiramente recursivo, teríamos que checar toda a árvore.
-                        # Para o Reels Bot, geralmente as contas têm pastas separadas.
-                        parents = f.get('parents', [])
-                        if folder_id in parents:
-                            # Adiciona nome da pasta pai para organização
-                            f['folder'] = get_folder_name(folder_id)
-                            all_items.append(f)
-                        else:
-                            # Busca profunda: se parent não é o folder_id, checamos se o parent está dentro do folder_id
-                            # Isso exige mapear a árvore. Para o MVP, vamos pegar os que estão na pasta e um nível abaixo.
-                            for p in parents:
-                                f['folder'] = get_folder_name(p)
-                                all_items.append(f)
+                    parents = f.get('parents', [])
+                    
+                    # Checar se este arquivo pertence à árvore do f_id (ou se não limitamos)
+                    belongs = True
+                    if f_id:
+                        # Verificação rápida se o f_id está na árvore ancestral
+                        curr = parents[0] if parents else None
+                        is_in_tree = False
+                        steps = 0
+                        while curr and steps < 30:
+                            if curr == f_id:
+                                is_in_tree = True
                                 break
-                    else:
-                        # Pasta raiz: pega tudo
-                        parents = f.get('parents', [])
-                        if parents:
-                            f['folder'] = get_folder_name(parents[0])
+                            curr = folders_dict.get(curr, {}).get('parent')
+                            steps += 1
+                        belongs = is_in_tree
+
+                    if belongs:
+                        f['folder'] = get_full_path(parents)
                         all_items.append(f)
 
                 page_token = results.get('nextPageToken')
@@ -138,6 +154,7 @@ class GoogleDriveAPI:
         except Exception as e:
             print(f"Erro na busca recursiva do Drive: {e}")
             return all_items
+
 
     def download_file(self, file_id, file_path):
         """Baixa um arquivo do Drive para o caminho especificado.
