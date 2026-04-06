@@ -3442,7 +3442,7 @@ class MetaStudioApp(ctk.CTk):
             
             new_post = {
                 "gdrive_id": None,
-                "filename": f"Carrossel Agrupado ({len(videos)} itens)",
+                "filename": f"Carrossel ({len(videos)} itens) - {base_dt.strftime('%d/%m %H:%M')}",
                 "media_type": "CAROUSEL",
                 "caption": config["default_caption"],
                 "schedule_time": base_dt,

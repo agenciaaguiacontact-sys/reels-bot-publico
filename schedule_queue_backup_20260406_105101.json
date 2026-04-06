@@ -1,10 +1,10 @@
 [
   {
-    "gdrive_id": "1s7DKlzmhlXIHyOy5pAuBZkYJI0vAQ_ud",
-    "filename": "slide_1.png",
-    "media_type": "IMAGE",
+    "gdrive_id": null,
+    "filename": "Carrossel (10 itens) - 06/04 10:51",
+    "media_type": "CAROUSEL",
     "caption": "🚀 \"Você sabia que há técnicas inovadoras que podem transformar sua prática odontológica e facilitar seu dia a dia na clínica?\" 🚀\n\n🔍 Como dentista ou estudante de odontologia, você sabe que estar sempre atualizado é essencial para oferecer o melhor aos seus pacientes. Mas com tantas inovações e métodos, como escolher o melhor para o seu consultório?\n\n📚 Vamos descomplicar! Descubra ferramentas e técnicas que você pode aplicar agora para otimizar tratamentos, melhorar os resultados e até atrair mais pacientes.\n\n👉 Clique no link da bio e acesse conteúdos exclusivos e recursos que vão transformar sua prática odontológica. Não perca! 💡\n\nRepost do perfil: \"odonto_diadia\"\n\n#viniciusjunior #antes #virginia #ancelotti #copa #mundo #neymar #nunca #alo #brasil #franca #benfica #uefa #sousaconfianca #nordeste #botafogo #vitoria #rodada #finalissima #argentina #espanha #ira #saiba #cruzeirofeminino #fluminense\n\n#brasileirao #brasileiro #flamengo #argentinavs #mauritania #amistosos #palpites #grupodobrasil #jogos #cnn #ronaldo #acessivel #maratona #campo #grande #permit #ouro #holanda #tecnico #memphis #corinthians #naopareceboa #noruega #prognostico #quemfezogoldobrasilhj\n\n#bem #gloss #com #mbappe #ekitike #estao #reproducao #globo #veja #selecao #fies #mec #ministerio #educacao #stj #akliouche #zakaria #monaco #world #cup #lyon #finalizacao",
-    "schedule_time": 1775476800,
+    "schedule_time": 1775483460,
     "accounts": [
       {
         "name": "Dentista Curioso",
@@ -16,6 +16,68 @@
         "token_expiry": 1779592859,
         "last_renewed": 1774408859,
         "ig_username": "dentistaa_curioso"
+      }
+    ],
+    "_carousel_items_gdrive": [
+      {
+        "gdrive_id": "1s7DKlzmhlXIHyOy5pAuBZkYJI0vAQ_ud",
+        "filename": "slide_1.png",
+        "type": "IMAGE",
+        "path": "slide_1.png"
+      },
+      {
+        "gdrive_id": "1qfILcbx-fi8v7bSEe4ozNAFwofDTp9qh",
+        "filename": "slide_2.png",
+        "type": "IMAGE",
+        "path": "slide_2.png"
+      },
+      {
+        "gdrive_id": "1yJwQut4yhfwvstfBQjZSwVmvNKQTSoE5",
+        "filename": "slide_3.png",
+        "type": "IMAGE",
+        "path": "slide_3.png"
+      },
+      {
+        "gdrive_id": "1Y1V6oR66-cUQbDQshw2xAOZTyKoVTNMu",
+        "filename": "slide_4.png",
+        "type": "IMAGE",
+        "path": "slide_4.png"
+      },
+      {
+        "gdrive_id": "189UBdnJ7BIIZUUzvm6iTZyVeQdAtGTnw",
+        "filename": "slide_5.png",
+        "type": "IMAGE",
+        "path": "slide_5.png"
+      },
+      {
+        "gdrive_id": "1dQgzIsiUdlG4p6I0vro-6cV4F_b0NMBO",
+        "filename": "slide_6.png",
+        "type": "IMAGE",
+        "path": "slide_6.png"
+      },
+      {
+        "gdrive_id": "1CUZ9sZgqpHa_jgT5tBrICBNyk-4Ghusb",
+        "filename": "slide_7.png",
+        "type": "IMAGE",
+        "path": "slide_7.png"
+      },
+      {
+        "gdrive_id": "1yQHa7hCsuSX_wk8ZtR8DGgZRMnxC54j6",
+        "filename": "slide_8.png",
+        "type": "IMAGE",
+        "path": "slide_8.png"
+      },
+      {
+        "gdrive_id": "1b2Qechww9Ep0S4mJO5aEUCzSt-Ri5n-P",
+        "filename": "slide_9.png",
+        "type": "IMAGE",
+        "path": "slide_9.png"
+      },
+      {
+        "gdrive_id": "1eWdGlO0vKo_9RjliZYTdxL15GWuG55Jk",
+        "filename": "slide_10.png",
+        "type": "IMAGE",
+        "path": "slide_10.png"
       }
     ]
   },
