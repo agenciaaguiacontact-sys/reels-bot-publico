@@ -592,3 +592,21 @@
 [17:23:39] ✅ Mesclagem local concluída.
 [17:23:39] 📤 Atualizando nuvem (Upload para Drive)...
 [17:23:53] 📦 Sincronizando com GitHub...
+[17:23:55] 🚀 Sincronização COMPLETA!
+[18:06:06] Drive: 18 novas mídias
+[18:06:58] 💾 Backup criado: schedule_queue_backup_20260407_180658.json
+[18:06:59] ✅ Salvos 42 agendamentos
+[18:07:04] ============================================================
+[18:07:04] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[18:07:04] ============================================================
+[18:07:04] 🕐 Horário de início: 07/04/2026 18:07:04
+[18:07:04] 💾 Backup criado: schedule_queue_backup_20260407_180704.json
+[18:07:04] ✅ Salvos 42 agendamentos
+[18:07:04] 📥 Buscando progresso da nuvem (Download do Drive)...
+[18:07:08] 🧩 Mesclando 23 itens da nuvem com locais...
+[18:07:08] 🧩 Mesclando history (Local: 54, Remoto: 55)
+[18:07:08] 🧩 Mesclando schedule (Local: 42, Remoto: 23)
+[18:07:08]   🗑️ Ignorando 19h_post_religioso_20260406_122701.png (já postado)
+[18:07:08] ✅ Mesclagem local concluída.
+[18:07:08] 📤 Atualizando nuvem (Upload para Drive)...
+[18:07:21] 📦 Sincronizando com GitHub...
