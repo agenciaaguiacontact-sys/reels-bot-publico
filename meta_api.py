@@ -112,7 +112,7 @@ class MetaAPI:
         pub = requests.post(f"{self.base_url}/{self.ig_account_id}/media_publish", params={'creation_id': cid, 'access_token': self.access_token}, timeout=120).json()
         if 'id' in pub:
             print(f"REEL PUBLICADO NO IG! ID: {pub['id']}")
-            return True
+            return pub['id']
         print(f"DEBUG FB: Error Publish IG Reels: {json.dumps(pub, indent=2)}")
         return False
 
@@ -131,7 +131,7 @@ class MetaAPI:
         pub = requests.post(f"{self.base_url}/{self.ig_account_id}/media_publish", params={'creation_id': cid, 'access_token': self.access_token}, timeout=120).json()
         if 'id' in pub:
             print(f"IMAGEM PUBLICADA NO IG! ID: {pub['id']}")
-            return True
+            return pub['id']
         print(f"DEBUG FB: Error Publish IG Imagem: {json.dumps(pub, indent=2)}")
         return False
 
@@ -160,7 +160,7 @@ class MetaAPI:
         pub = requests.post(f"{self.base_url}/{self.ig_account_id}/media_publish", params={'creation_id': mcid, 'access_token': self.access_token}, timeout=120).json()
         if 'id' in pub:
             print(f"CARROSSEL PUBLICADO NO IG! ID: {pub['id']}")
-            return True
+            return pub['id']
         return False
 
     def upload_fb_reels_resumable(self, video_path, caption):
@@ -192,7 +192,7 @@ class MetaAPI:
             return False
         
         print(f"REEL PUBLICADO NO FB! ID: {video_id}")
-        return True
+        return video_id
 
     def upload_fb_image(self, image_path, caption):
         print(f"Upload FB Imagem: {image_path}")
@@ -200,7 +200,7 @@ class MetaAPI:
             res = requests.post(f"{self.base_url}/{self.fb_page_id}/photos", data={'access_token': self.access_token, 'message': caption}, files={'source': f}, timeout=120).json()
         if 'id' in res:
             print(f"IMAGEM PUBLICADA NO FB! ID: {res['id']}")
-            return True
+            return res['id']
         return False
 
     def upload_fb_carousel(self, items, caption):
@@ -215,7 +215,7 @@ class MetaAPI:
         res = requests.post(f"{self.base_url}/{self.fb_page_id}/feed", data={'access_token': self.access_token, 'attached_media': json.dumps(attached), 'message': caption}, timeout=120).json()
         if 'id' in res:
             print(f"CARROSSEL PUBLICADO NO FB! ID: {res['id']}")
-            return True
+            return res['id']
         return False
 
     def get_account_details(self, access_token):
@@ -239,3 +239,40 @@ class MetaAPI:
             r = requests.get("https://graph.facebook.com/v19.0/oauth/access_token", params=params, timeout=60).json()
             return r.get("access_token", old_token), r.get("expires_in")
         except: return old_token, None
+
+    def post_first_comment(self, post_id: str, comment_text: str, platform: str = "fb") -> bool:
+        """
+        Posta o primeiro comentário em uma publicação recém-criada.
+
+        Args:
+            post_id: ID da publicação retornado pela API após o publish
+            comment_text: Texto do comentário
+            platform: "fb" para Facebook, "ig" para Instagram (ambos usam o mesmo endpoint)
+
+        Returns:
+            True se bem-sucedido, False caso contrário
+        """
+        if not comment_text or not comment_text.strip():
+            return True  # Comentário vazio = sucesso silencioso
+
+        try:
+            time.sleep(3)  # Aguardar indexação do post pela Meta antes de comentar
+            url = f"{self.base_url}/{post_id}/comments"
+            res = requests.post(
+                url,
+                params={
+                    "message": comment_text.strip(),
+                    "access_token": self.access_token
+                },
+                timeout=60
+            ).json()
+
+            if "id" in res:
+                print(f"✅ Primeiro comentário postado! ID: {res['id']}")
+                return True
+            else:
+                print(f"⚠️ Falha ao postar primeiro comentário: {json.dumps(res, indent=2)}")
+                return False
+        except Exception as e:
+            print(f"⚠️ Erro ao postar primeiro comentário: {e}")
+            return False

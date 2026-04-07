@@ -1169,7 +1169,37 @@ class QuickScheduleWizard(ctk.CTkToplevel):
         self.caption_text.pack(fill="x")
         self.caption_text.insert("1.0", self.app.settings.get("default_caption", ""))
         
-        # === PREVIEW ===
+        # === SEÇÃO 4: PRIMEIRO COMENTÁRIO ===
+        self._create_section(main_scroll, "4️⃣ Primeiro Comentário", "Opcional: texto postado automaticamente como 1º comentário")
+        
+        comment_card = ModernCard(main_scroll)
+        comment_card.pack(fill="x", pady=(0, 30))
+        
+        comment_container = ctk.CTkFrame(comment_card, fg_color="transparent")
+        comment_container.pack(fill="x", padx=20, pady=20)
+        
+        ctk.CTkLabel(
+            comment_container,
+            text="💬 Ótimo para hashtags, CTAs ou textos complementares sem poluir a legenda principal.",
+            font=ctk.CTkFont(size=12),
+            text_color=TEXT_SECONDARY,
+            wraplength=580,
+            justify="left"
+        ).pack(anchor="w", pady=(0, 10))
+        
+        self.first_comment_text = ctk.CTkTextbox(
+            comment_container,
+            height=100,
+            corner_radius=10,
+            fg_color=BG_SECONDARY,
+            border_width=1,
+            border_color=BORDER_COLOR,
+            font=ctk.CTkFont(size=13)
+        )
+        self.first_comment_text.pack(fill="x")
+        saved_comment = self.app.settings.get("default_first_comment", "")
+        if saved_comment:
+            self.first_comment_text.insert("1.0", saved_comment)
         self._create_section(main_scroll, "📋 Resumo", "Confira antes de agendar")
         
         preview_card = ModernCard(main_scroll)
@@ -1300,11 +1330,13 @@ class QuickScheduleWizard(ctk.CTkToplevel):
             "interval_minutes": self.interval_minutes.get(),
             "caption_mode": self.caption_mode.get(),
             "default_caption": self.caption_text.get("1.0", "end").strip(),
-            "schedule_mode": self.schedule_mode.get()
+            "schedule_mode": self.schedule_mode.get(),
+            "first_comment": self.first_comment_text.get("1.0", "end").strip()
         }
         
-        # Salvar legenda padrão
+        # Salvar legenda padrão e primeiro comentário
         self.app.settings["default_caption"] = self.result["default_caption"]
+        self.app.settings["default_first_comment"] = self.result["first_comment"]
         self.app.save_settings()
         
         self.destroy()
@@ -3628,7 +3660,8 @@ class MetaStudioApp(ctk.CTk):
                 "caption": config["default_caption"],
                 "schedule_time": base_dt,
                 "accounts": config["accounts"],
-                "_carousel_items_gdrive": carousel_items
+                "_carousel_items_gdrive": carousel_items,
+                "first_comment": config.get("first_comment", "")
             }
             all_generated.append(new_post)
         else:
@@ -3674,7 +3707,8 @@ class MetaStudioApp(ctk.CTk):
                         "media_type": media_type,
                         "caption": caption,
                         "schedule_time": base_dt,
-                        "accounts": config["accounts"]
+                        "accounts": config["accounts"],
+                        "first_comment": config.get("first_comment", "")
                     }
                     
                     all_generated.append(new_post)
@@ -4031,6 +4065,7 @@ class MetaStudioApp(ctk.CTk):
                     file_id = job.get("gdrive_id")
                     caption = job.get("caption", "")
                     accounts = job.get("accounts", [])
+                    first_comment = job.get("first_comment", "")
                     
                     self.log(f"\n📹 Processando: {filename}")
                     
@@ -4058,8 +4093,12 @@ class MetaStudioApp(ctk.CTk):
                         # Instagram
                         if meta.ig_account_id:
                             self.log(f"    📸 Tentando Instagram...")
-                            if meta.upload_ig_reels_resumable(local_path, caption):
+                            ig_result = meta.upload_ig_reels_resumable(local_path, caption)
+                            if ig_result:
                                 self.log(f"    ✅ Instagram OK!")
+                                if first_comment:
+                                    meta.post_first_comment(ig_result, first_comment, "ig")
+                                    self.log(f"    💬 Comentário postado no Instagram!")
                                 acc['ig_account_id'] = None
                                 any_success = True
                             else:
@@ -4068,8 +4107,12 @@ class MetaStudioApp(ctk.CTk):
                         # Facebook
                         if meta.fb_page_id:
                             self.log(f"    📘 Tentando Facebook...")
-                            if meta.upload_fb_reels_resumable(local_path, caption):
+                            fb_result = meta.upload_fb_reels_resumable(local_path, caption)
+                            if fb_result:
                                 self.log(f"    ✅ Facebook OK!")
+                                if first_comment:
+                                    meta.post_first_comment(fb_result, first_comment, "fb")
+                                    self.log(f"    💬 Comentário postado no Facebook!")
                                 acc['fb_page_id'] = None
                                 any_success = True
                             else:
