@@ -445,3 +445,120 @@
 [14:24:37] ✅ Mesclagem local concluída.
 [14:24:37] 📤 Atualizando nuvem (Upload para Drive)...
 [14:24:46] 📦 Sincronizando com GitHub...
+[14:24:48] 🚀 Sincronização COMPLETA!
+[12:06:38] ============================================================
+[12:06:38] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[12:06:38] ============================================================
+[12:06:38] 📥 Sincronizando progresso da nuvem (Drive)...
+[12:06:38] ============================================================
+[12:06:38] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[12:06:38] ============================================================
+[12:06:38] 📥 Sincronizando progresso da nuvem (Drive)...
+[12:06:40] 🧹 Iniciando limpeza e verificações de integridade...
+[12:06:40] ✅ Limpeza e integridade verificadas.
+[12:06:40] 🧹 Iniciando limpeza e verificações de integridade...
+[12:06:40] ✅ Limpeza e integridade verificadas.
+[12:06:42] 🧩 Mesclando history (Local: 30, Remoto: 48)
+[12:06:42] 🧩 Mesclando schedule (Local: 45, Remoto: 29)
+[12:06:42]   🗑️ Ignorando 15h-post-pratico-10.png (já postado)
+[12:06:42]   🗑️ Ignorando 16h-post-educativo-11.png (já postado)
+[12:06:42]   🗑️ Ignorando 17h-post-carreira-6.png (já postado)
+[12:06:42]   🗑️ Ignorando 18h-post-identidade-13.png (já postado)
+[12:06:42]   🗑️ Ignorando 19h-post-educativo-5.png (já postado)
+[12:06:42]   🗑️ Ignorando 20h-post-religioso-15.png (já postado)
+[12:06:42]   🗑️ Ignorando 21h-post-pratico-16.png (já postado)
+[12:06:42]   🗑️ Ignorando 22h-post-identidade-17.png (já postado)
+[12:06:42]   🗑️ Ignorando 12h-post-religioso-7.png (já postado)
+[12:06:42]   🗑️ Ignorando 6h-post-religioso-1.png (já postado)
+[12:06:42]   🗑️ Ignorando 7h-post-educativo-2.png (já postado)
+[12:06:42]   🗑️ Ignorando 8h-post-identidade-3.png (já postado)
+[12:06:42]   🗑️ Ignorando 9h-post-pratico-4.png (já postado)
+[12:06:42]   🗑️ Ignorando 10h-post-educativo-14.png (já postado)
+[12:06:42]   🗑️ Ignorando 12h_post_religioso_20260406_122701.png (já postado)
+[12:06:42]   🗑️ Ignorando 13h_post_religioso_20260406_122701.png (já postado)
+[12:06:42] ✅ Progresso do Drive carregado.
+[12:06:42] 📥 Verificando mudanças no GitHub...
+[12:06:42] 🧩 Mesclando history (Local: 30, Remoto: 48)
+[12:06:42] 🧩 Mesclando schedule (Local: 45, Remoto: 29)
+[12:06:42]   🗑️ Ignorando 15h-post-pratico-10.png (já postado)
+[12:06:42]   🗑️ Ignorando 16h-post-educativo-11.png (já postado)
+[12:06:42]   🗑️ Ignorando 17h-post-carreira-6.png (já postado)
+[12:06:42]   🗑️ Ignorando 18h-post-identidade-13.png (já postado)
+[12:06:42]   🗑️ Ignorando 19h-post-educativo-5.png (já postado)
+[12:06:42]   🗑️ Ignorando 20h-post-religioso-15.png (já postado)
+[12:06:42]   🗑️ Ignorando 21h-post-pratico-16.png (já postado)
+[12:06:42]   🗑️ Ignorando 22h-post-identidade-17.png (já postado)
+[12:06:42]   🗑️ Ignorando 12h-post-religioso-7.png (já postado)
+[12:06:42]   🗑️ Ignorando 6h-post-religioso-1.png (já postado)
+[12:06:42]   🗑️ Ignorando 7h-post-educativo-2.png (já postado)
+[12:06:42]   🗑️ Ignorando 8h-post-identidade-3.png (já postado)
+[12:06:42]   🗑️ Ignorando 9h-post-pratico-4.png (já postado)
+[12:06:42]   🗑️ Ignorando 10h-post-educativo-14.png (já postado)
+[12:06:42]   🗑️ Ignorando 12h_post_religioso_20260406_122701.png (já postado)
+[12:06:42]   🗑️ Ignorando 13h_post_religioso_20260406_122701.png (já postado)
+[12:06:42] ✅ Progresso do Drive carregado.
+[12:06:42] 📥 Verificando mudanças no GitHub...
+[12:06:44] 📊 Status Final: 29 agendados, 48 postados
+[12:10:00] ============================================================
+[12:10:00] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[12:10:00] ============================================================
+[12:10:00] 📥 Sincronizando progresso da nuvem (Drive)...
+[12:10:01] 🧹 Iniciando limpeza e verificações de integridade...
+[12:10:01] ✅ Limpeza e integridade verificadas.
+[12:10:03] 🧩 Mesclando history (Local: 48, Remoto: 48)
+[12:10:03] 🧩 Mesclando schedule (Local: 29, Remoto: 29)
+[12:10:03] ✅ Progresso do Drive carregado.
+[12:10:03] 📥 Verificando mudanças no GitHub...
+[12:11:10] ============================================================
+[12:11:10] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[12:11:10] ============================================================
+[12:11:10] 📥 Sincronizando progresso da nuvem (Drive)...
+[12:11:11] 🧹 Iniciando limpeza e verificações de integridade...
+[12:11:11] ✅ Limpeza e integridade verificadas.
+[12:11:13] 🧩 Mesclando history (Local: 48, Remoto: 48)
+[12:11:13] 🧩 Mesclando schedule (Local: 29, Remoto: 29)
+[12:11:13] ✅ Progresso do Drive carregado.
+[12:11:13] 📥 Verificando mudanças no GitHub...
+[12:11:15] 📊 Status Final: 29 agendados, 48 postados
+[12:11:56] ============================================================
+[12:11:56] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[12:11:56] ============================================================
+[12:11:56] 📥 Sincronizando progresso da nuvem (Drive)...
+[12:11:57] 🧹 Iniciando limpeza e verificações de integridade...
+[12:11:57] ✅ Limpeza e integridade verificadas.
+[12:11:59] 🧩 Mesclando history (Local: 48, Remoto: 48)
+[12:11:59] 🧩 Mesclando schedule (Local: 29, Remoto: 29)
+[12:11:59] ✅ Progresso do Drive carregado.
+[12:11:59] 📥 Verificando mudanças no GitHub...
+[12:12:00] 📊 Status Final: 29 agendados, 48 postados
+[16:50:26] ============================================================
+[16:50:26] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[16:50:26] ============================================================
+[16:50:26] 📥 Sincronizando progresso da nuvem (Drive)...
+[16:50:27] 🧹 Iniciando limpeza e verificações de integridade...
+[16:50:27] ✅ Limpeza e integridade verificadas.
+[16:50:29] 🧩 Mesclando history (Local: 48, Remoto: 52)
+[16:50:29] 🧩 Mesclando schedule (Local: 29, Remoto: 25)
+[16:50:29]   🗑️ Ignorando 14h_post_religioso_20260406_122701.png (já postado)
+[16:50:29]   🗑️ Ignorando 15h_post_religioso_20260406_122701.png (já postado)
+[16:50:29]   🗑️ Ignorando 16h_post_religioso_20260406_122701.png (já postado)
+[16:50:29]   🗑️ Ignorando 17h_post_religioso_20260406_122701.png (já postado)
+[16:50:29] ✅ Progresso do Drive carregado.
+[16:50:29] 📥 Verificando mudanças no GitHub...
+[16:50:31] 📊 Status Final: 25 agendados, 52 postados
+[16:50:38] Drive: 20 novas mídias
+[16:51:55] 💾 Backup criado: schedule_queue_backup_20260407_165155.json
+[16:51:55] ✅ Salvos 26 agendamentos
+[16:52:03] ============================================================
+[16:52:03] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[16:52:03] ============================================================
+[16:52:03] 🕐 Horário de início: 07/04/2026 16:52:03
+[16:52:03] 💾 Backup criado: schedule_queue_backup_20260407_165203.json
+[16:52:03] ✅ Salvos 26 agendamentos
+[16:52:03] 📥 Buscando progresso da nuvem (Download do Drive)...
+[16:52:06] 🧩 Mesclando 25 itens da nuvem com locais...
+[16:52:06] 🧩 Mesclando history (Local: 52, Remoto: 52)
+[16:52:06] 🧩 Mesclando schedule (Local: 26, Remoto: 25)
+[16:52:06] ✅ Mesclagem local concluída.
+[16:52:06] 📤 Atualizando nuvem (Upload para Drive)...
+[16:52:20] 📦 Sincronizando com GitHub...
