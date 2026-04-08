@@ -862,7 +862,9 @@ class QuickScheduleWizard(ctk.CTkToplevel):
                 acc_frame = ctk.CTkFrame(accounts_container, fg_color=BG_SECONDARY, corner_radius=10)
                 acc_frame.pack(fill="x", pady=5)
                 
-                var = self.app.acc_vars.get(acc['name'], tk.BooleanVar(value=False))
+                if acc['name'] not in self.app.acc_vars:
+                    self.app.acc_vars[acc['name']] = tk.BooleanVar(value=False)
+                var = self.app.acc_vars[acc['name']]
                 
                 cb = ctk.CTkCheckBox(
                     acc_frame,
@@ -2290,7 +2292,9 @@ class AccountsView(ctk.CTkFrame):
                 anchor="w"
             ).pack(anchor="w")
             
-            details = f"IG: {acc.get('ig_account_id', 'N/A')[:15]}... • FB: {acc.get('fb_page_id', 'N/A')[:15]}..."
+            ig_id = str(acc.get('ig_account_id') or 'N/A')
+            fb_id = str(acc.get('fb_page_id') or 'N/A')
+            details = f"IG: {ig_id[:15]}... • FB: {fb_id[:15]}..."
             ctk.CTkLabel(
                 info_frame,
                 text=details,
