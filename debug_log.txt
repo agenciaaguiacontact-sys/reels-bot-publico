@@ -627,3 +627,55 @@
 [18:16:53] ✅ Mesclagem local concluída.
 [18:16:53] 📤 Atualizando nuvem (Upload para Drive)...
 [18:17:06] 📦 Sincronizando com GitHub...
+[18:17:08] 🚀 Sincronização COMPLETA!
+[18:36:42] ============================================================
+[18:36:42] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[18:36:42] ============================================================
+[18:36:42] 📥 Sincronizando progresso da nuvem (Drive)...
+[18:36:42] 🧹 Iniciando limpeza e verificações de integridade...
+[18:36:42] ✅ Limpeza e integridade verificadas.
+[18:36:45] 🧩 Mesclando history (Local: 55, Remoto: 55)
+[18:36:45] 🧩 Mesclando schedule (Local: 48, Remoto: 48)
+[18:36:45] ✅ Progresso do Drive carregado.
+[18:36:45] 📥 Verificando mudanças no GitHub...
+[18:36:48] 📊 Status Final: 48 agendados, 55 postados
+[20:55:26] ============================================================
+[20:55:26] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[20:55:26] ============================================================
+[20:55:26] 📥 Sincronizando progresso da nuvem (Drive)...
+[20:55:26] 🧹 Iniciando limpeza e verificações de integridade...
+[20:55:26] ✅ Limpeza e integridade verificadas.
+[20:55:29] 🧩 Mesclando history (Local: 55, Remoto: 59)
+[20:55:29] 🧩 Mesclando schedule (Local: 48, Remoto: 45)
+[20:55:29]   🗑️ Ignorando 20h_post_religioso_20260406_122701.png (já postado)
+[20:55:29]   🗑️ Ignorando 6h - O feed é a vitrine, mas o lucro tá no processo. Sem funil, você é só um blogueiro de dente. Bora profissionalizar #gestão #odontologia #carreira #marketingodontologico #dentista.png (já postado)
+[20:55:29]   🗑️ Ignorando 21h_post_religioso_20260406_122701.png (já postado)
+[20:55:29]   🗑️ Ignorando 7h - Resposta 3mm. Distâncias menores causam reabsorção da crista óssea e perda da papila interdental. Regra de Tarnow na veia! Acertou 🦷 #implantodontia #odontologia #dentista #quiz #posgraduacao #cirurgia.png (já postado)
+[20:55:29] ✅ Progresso do Drive carregado.
+[20:55:29] 📥 Verificando mudanças no GitHub...
+[20:55:32] 📊 Status Final: 44 agendados, 59 postados
+[23:00:33] ============================================================
+[23:00:33] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[23:00:33] ============================================================
+[23:00:33] 📥 Sincronizando progresso da nuvem (Drive)...
+[23:00:33] 🧹 Iniciando limpeza e verificações de integridade...
+[23:00:33] ✅ Limpeza e integridade verificadas.
+[23:00:36] 🧩 Mesclando history (Local: 59, Remoto: 66)
+[23:00:36] 🧩 Mesclando schedule (Local: 40, Remoto: 40)
+[23:00:36] ✅ Progresso do Drive carregado.
+[23:00:36] 📥 Verificando mudanças no GitHub...
+[23:00:38] 📊 Status Final: 40 agendados, 65 postados
+[23:03:55] ============================================================
+[23:03:55] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[23:03:55] ============================================================
+[23:03:55] 🕐 Horário de início: 07/04/2026 23:03:55
+[23:03:55] 💾 Backup criado: schedule_queue_backup_20260407_230355.json
+[23:03:55] ✅ Salvos 40 agendamentos
+[23:03:55] 📥 Buscando progresso da nuvem (Download do Drive)...
+[23:03:58] 🧩 Mesclando 39 itens da nuvem com locais...
+[23:03:58] 🧩 Mesclando history (Local: 65, Remoto: 67)
+[23:03:58] 🧩 Mesclando schedule (Local: 40, Remoto: 39)
+[23:03:58]   🗑️ Ignorando 11h_post_religioso_20260406_122701.png (já postado)
+[23:03:58] ✅ Mesclagem local concluída.
+[23:03:58] 📤 Atualizando nuvem (Upload para Drive)...
+[23:04:13] 📦 Sincronizando com GitHub...

@@ -39,6 +39,7 @@ HISTORY_PATH = os.path.join(PROJECT_ROOT, 'posted_history.json')
 ACCOUNTS_PATH = os.path.join(PROJECT_ROOT, 'accounts.json')
 
 TEST_CAPTION = "✅ [TESTE AUTOMÁTICO] Reels Bot — Validação de Sistema. Ignore esta publicação. 🤖"
+TEST_COMMENT = "💬 [TESTE] Primeiro comentário automático funcionando com sucesso! 🦷✨"
 
 # ─────────────────────────────────────────────
 # GERAÇÃO DE MÍDIAS DE TESTE
@@ -209,6 +210,7 @@ def upload_and_prepare_queue(assets, accounts, drive):
             "caption": TEST_CAPTION + " [REELS]",
             "schedule_time": test_timestamp,
             "accounts": accounts,
+            "first_comment": TEST_COMMENT,
             "_test_type": "REELS",
             "_local_path_override": assets['video']
         })
@@ -226,6 +228,7 @@ def upload_and_prepare_queue(assets, accounts, drive):
             "caption": TEST_CAPTION + " [IMAGE]",
             "schedule_time": test_timestamp,
             "accounts": accounts,
+            "first_comment": TEST_COMMENT,
             "_test_type": "IMAGE",
             "_local_path_override": assets['image']
         })
@@ -254,6 +257,7 @@ def upload_and_prepare_queue(assets, accounts, drive):
             "caption": TEST_CAPTION + " [CAROUSEL]",
             "schedule_time": test_timestamp,
             "accounts": accounts,
+            "first_comment": TEST_COMMENT,
             "_carousel_items_gdrive": carousel_items_for_api,
             "_test_type": "CAROUSEL"
         })
@@ -327,6 +331,10 @@ def run_direct_tests(jobs, drive):
                         ig_result['success'] = acc_meta.upload_ig_image(local_path, caption, gdrive_id)
                     elif media_type == 'CAROUSEL' and carousel_local:
                         ig_result['success'] = acc_meta.upload_ig_carousel(carousel_local, caption)
+                    
+                    if ig_result['success'] and job.get('first_comment'):
+                        print(f"    💬 Postando comentário no IG...")
+                        acc_meta.post_first_comment(ig_result['success'], job['first_comment'], "ig")
                     print(f"  → {'✅ SUCESSO' if ig_result['success'] else '❌ FALHA'}")
                 except Exception as e:
                     ig_result['error'] = traceback.format_exc()
@@ -344,6 +352,10 @@ def run_direct_tests(jobs, drive):
                         fb_result['success'] = acc_meta.upload_fb_image(local_path, caption)
                     elif media_type == 'CAROUSEL' and carousel_local:
                         fb_result['success'] = acc_meta.upload_fb_carousel(carousel_local, caption)
+                        
+                    if fb_result['success'] and job.get('first_comment'):
+                        print(f"    💬 Postando comentário no FB...")
+                        acc_meta.post_first_comment(fb_result['success'], job['first_comment'], "fb")
                     print(f"  → {'✅ SUCESSO' if fb_result['success'] else '❌ FALHA'}")
                 except Exception as e:
                     fb_result['error'] = traceback.format_exc()
@@ -562,8 +574,14 @@ def main():
     # 3. Upload para Drive + preparar jobs
     jobs = upload_and_prepare_queue(assets, accounts, drive)
 
+    # Filtrar jobs por tipo de mídia se TEST_MEDIA_TYPE estiver definido
+    test_media_env = os.environ.get('TEST_MEDIA_TYPE')
+    if test_media_env:
+        jobs = [j for j in jobs if j.get('_test_type') == test_media_env]
+        print(f"🎯 Filtro de mídia: {test_media_env} ({len(jobs)} jobs)")
+
     if not jobs:
-        print("❌ Nenhum job de teste foi preparado. Verifique a conexão com o Drive.")
+        print("❌ Nenhum job de teste foi preparado ou filtro removeu tudo. Abortando.")
         sys.exit(1)
 
     # 4. Testes diretos via MetaAPI

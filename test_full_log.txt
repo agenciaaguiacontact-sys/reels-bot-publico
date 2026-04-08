@@ -1,0 +1,106 @@
+============================================================
+Exception in thread Thread-3 (_readerthread):
+­ƒº¬ REELS BOT ÔÇö Bateria de Testes End-to-End
+============================================================
+Credenciais do Google Drive carregadas via Base64.
+­ƒÄ» Filtro ativado: Testando apenas ['Dentista Curioso']
+Traceback (most recent call last):
+  File "C:\Users\robso\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\robso\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\robso\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+
+­ƒô▒ Contas a testar: ['Dentista Curioso']
+
+­ƒÄ¿ Gerando m├¡dias de teste...
+  Ô£à V├¡deo: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_assets\test_reel.mp4
+  Ô£à Imagem 1 (single): C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_assets\test_image.jpg
+  Ô£à Imagem 2 (carousel item 1): C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_assets\test_carousel_1.jpg
+  Ô£à Imagem 3 (carousel item 2): C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_assets\test_carousel_2.jpg
+
+Ôÿü´©Å Fazendo upload dos assets de teste Para o Google Drive...
+  ­ƒôñ Tentando upload de test_reel.mp4...
+  File "C:\Users\robso\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 94: character maps to <undefined>
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando arquivo LOCAL para teste de REELS (Bypass Drive).
+  ­ƒôñ Tentando upload de test_image.jpg...
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando arquivo LOCAL para teste de IMAGE (Bypass Drive).
+  ­ƒôñ Tentando upload de test_carousel_1.jpg...
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando item LOCAL 1 para CAROUSEL (Bypass Drive).
+  ­ƒôñ Tentando upload de test_carousel_2.jpg...
+Erro ao fazer upload: <HttpError 403 when requesting https://www.googleapis.com/upload/drive/v3/files?fields=id&supportsAllDrives=true&alt=json&uploadType=resumable returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+  ÔÜá´©Å Falha na pasta preferida. Usando fallback: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV
+Erro ao fazer upload: <HttpError 404 when requesting None returned "File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.". Details: "[{'message': 'File not found: 1Vf7ezsZ5jTGE-eD-Zp3TBA31Xa-YV.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+  ÔÜá´©Å Usando item LOCAL 2 para CAROUSEL (Bypass Drive).
+­ƒÄ» Filtro de m├¡dia: IMAGE (1 jobs)
+
+­ƒö¼ Iniciando testes diretos via MetaAPI...
+
+==================================================
+­ƒö¼ Testando: IMAGE | gdrive_id=None
+==================================================
+  Ô£à Usando asset local: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_assets\test_image.jpg
+  ­ƒô© IG (Dentista Curioso) ÔåÆ IMAGE...
+Upload IG Imagem: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_assets\test_image.jpg
+Ô£à URL gerada (tmpfiles): http://tmpfiles.org/dl/32530637/test_image.jpg
+DEBUG FB: Error Container IG Imagem: {
+  "error": {
+    "message": "The access token could not be decrypted",
+    "type": "OAuthException",
+    "code": 190,
+    "fbtrace_id": "APR5rxixLzhNDlUwGxH8NEf"
+  }
+}
+  ÔåÆ ÔØî FALHA
+  ­ƒôÿ FB (Dentista Curioso) ÔåÆ IMAGE...
+Upload FB Imagem: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_assets\test_image.jpg
+  ÔåÆ ÔØî FALHA
+
+­ƒñû Executando bot via orquestrador (python main.py --once)...
+
+
+­ƒº╣ Removendo assets de teste do Google Drive...
+
+============================================================
+­ƒôä RELAT├ôRIO FINAL
+============================================================
+# ­ƒôè Relat├│rio de Testes ÔÇö Reels Bot
+
+**Data:** 2026-04-07 20:51:11
+**Dura├º├úo:** 22.5s
+**Score:** 0/2 testes passaram
+**Status Geral:** ­ƒö┤ FALHA TOTAL
+
+## Ô£à Sucessos
+
+> Nenhum teste foi bem-sucedido.
+
+## ÔØî Falhas
+
+| Conta | Plataforma | Tipo de M├¡dia | Erro |
+|-------|-----------|---------------|------|
+| Dentista Curioso | Instagram | IMAGE | `Retornou False sem exce├º├úo` |
+| Dentista Curioso | Facebook | IMAGE | `Retornou False sem exce├º├úo` |
+
+### Detalhes dos Erros
+
+
+## ­ƒñû Teste do Orquestrador (main.py --once)
+
+> Teste do orquestrador n├úo executado.
+
+­ƒÆ¥ Relat├│rio salvo em: C:\#1-CRIA├ç├òES-AUTOMA├ç├òES-EXTENS├òES\BOT AGENDAMETOS FACE INSTA\.tmp\test_report.md
