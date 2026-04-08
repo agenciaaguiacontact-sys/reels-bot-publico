@@ -727,3 +727,22 @@
 [01:26:24] ✅ Mesclagem local concluída.
 [01:26:24] 📤 Atualizando nuvem (Upload para Drive)...
 [01:26:38] 📦 Sincronizando com GitHub...
+[01:26:40] 🚀 Sincronização COMPLETA!
+[01:35:05] Drive: 18 novas mídias
+[01:36:00] 💾 Backup criado: schedule_queue_backup_20260408_013600.json
+[01:36:00] ✅ Salvos 56 agendamentos
+[01:36:07] ============================================================
+[01:36:07] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[01:36:07] ============================================================
+[01:36:07] 🕐 Horário de início: 08/04/2026 01:36:07
+[01:36:07] 💾 Backup criado: schedule_queue_backup_20260408_013607.json
+[01:36:07] ✅ Salvos 56 agendamentos
+[01:36:07] 📥 Buscando progresso da nuvem (Download do Drive)...
+[01:36:10] 🧩 Mesclando 36 itens da nuvem com locais...
+[01:36:10] 🧩 Mesclando history (Local: 68, Remoto: 70)
+[01:36:10] 🧩 Mesclando schedule (Local: 56, Remoto: 36)
+[01:36:10]   🗑️ Ignorando Olá, sou Grazielle, estudante de farmácia e resolvi criar essa página para divulgar conteúdos educativos sobre farmácia #farmacia #estudo #ciência #brasil.png (já postado)
+[01:36:10]   🗑️ Ignorando 12h - Descanse, colega. Que seu sono seja reparador e as forças renovadas para o sucesso clínico de amanhã. Boa noite! 🦷✨ #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[01:36:11] ✅ Mesclagem local concluída.
+[01:36:11] 📤 Atualizando nuvem (Upload para Drive)...
+[01:36:25] 📦 Sincronizando com GitHub...

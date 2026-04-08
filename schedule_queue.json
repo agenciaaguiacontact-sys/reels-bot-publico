@@ -1,46 +1,5 @@
 [
   {
-    "gdrive_id": "1wdnWrc943EmFdXbm_yoidpp0uezTJ7Y7",
-    "filename": "Olá, sou Grazielle, estudante de farmácia e resolvi criar essa página para divulgar conteúdos educativos sobre farmácia #farmacia #estudo #ciência #brasil.png",
-    "media_type": "IMAGE",
-    "caption": "Olá, sou Grazielle, estudante de farmácia e resolvi criar essa página para divulgar conteúdos educativos sobre farmácia #farmacia #estudo #ciência #brasil",
-    "schedule_time": 1775622360,
-    "accounts": [
-      {
-        "name": "Farmacêutica Curiosa",
-        "ig_account_id": "17841438234063028",
-        "fb_page_id": "1057942790738850",
-        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
-        "profile_pic": null,
-        "token_expiry": 1780804740,
-        "last_renewed": 1775620740
-      }
-    ],
-    "first_comment": "teste",
-    "selected": false
-  },
-  {
-    "gdrive_id": "1PfA4sbScZwAuGVi9Xf47qI-wEsLw64tG",
-    "filename": "12h - Descanse, colega. Que seu sono seja reparador e as forças renovadas para o sucesso clínico de amanhã. Boa noite! 🦷✨ #dentista #motivacao #odontologia #vidadedentista #fe.png",
-    "media_type": "IMAGE",
-    "caption": "12h - Descanse, colega. Que seu sono seja reparador e as forças renovadas para o sucesso clínico de amanhã. Boa noite! 🦷✨ #dentista #motivacao #odontologia #vidadedentista #fe",
-    "schedule_time": 1775622660,
-    "accounts": [
-      {
-        "name": "Dentista Curioso",
-        "ig_account_id": "17841456604444988",
-        "fb_page_id": "547184908483685",
-        "access_token": "EAASPZAaNHHcYBRMuAaZAEITkZC2Ty4oaaSbn8J6BV8aV1DC1XF9gHckkyuLo3oX2nFCc8BgkyUaIRGZBBLV6GMIKuUQm5A37t9o0kuzjS3Rw4TnKpzk3GNCuZBFnIP1vafAdJjd63oH8JeyAKcSVUZBNaykMLXcbjGUIvsWYvZAjxgAD9gngFt8M5eOMj6HiJj4EM3t",
-        "gdrive_folder_id": "1WmvdB-n-jXMyxQYAw47kFFQocs5Keyyi",
-        "profile_pic": "https://scontent.fvix5-1.fna.fbcdn.net/v/t51.2885-15/479717758_1555454531836767_5041437128678092701_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=7d201b&_nc_ohc=1ZMiB110K48Q7kNvwEhauPs&_nc_oc=Adqo6UH0OFkicWToD7p5gFYBLBQEIEQ-eRyl9Hbr6cH-rZ-1yNiJC-_G96OsVmPl6X0&_nc_zt=23&_nc_ht=scontent.fvix5-1.fna&edm=AJdBtusEAAAA&oh=00_AfxN0vMnpMzWJ025YsiI3cuhOcqX5rYHyvx5nspRQO8nIg&oe=69CF7FAC",
-        "token_expiry": 1779592859,
-        "last_renewed": 1774408859,
-        "ig_username": "dentistaa_curioso"
-      }
-    ],
-    "selected": false
-  },
-  {
     "gdrive_id": "1yNcbTRG8wMjFJLKXkFagcj4YeGOaQBde",
     "filename": "6h_post_religioso_20260406_133300.png",
     "media_type": "IMAGE",
@@ -59,6 +18,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1XRewRy-ISemSPC2uL2KwW96NENHEWhl0",
+    "filename": "6h - O café é o único que me entende nessa abertura de plantão. Quem aí também já abriu a loja com fila na porta 😅☕️ #farmácia #humor #farmacêutico #vidadebalconista #plantão.png",
+    "media_type": "IMAGE",
+    "caption": "6h - O café é o único que me entende nessa abertura de plantão. Quem aí também já abriu a loja com fila na porta 😅☕️ #farmácia #humor #farmacêutico #vidadebalconista #plantão",
+    "schedule_time": 1775639460,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -104,6 +83,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "19S_m1KgDtxpNjhgOqx6hliNbp1a847bx",
+    "filename": "7h - Resposta Farmacocinética! Ela estuda o caminho do fármaco no corpo. Já a dinâmica foca na ação no receptor. Acertou 💊✨ #farmacologia #estudantefarmacia #farmacia #quiz #saude.png",
+    "media_type": "IMAGE",
+    "caption": "7h - Resposta Farmacocinética! Ela estuda o caminho do fármaco no corpo. Já a dinâmica foca na ação no receptor. Acertou 💊✨ #farmacologia #estudantefarmacia #farmacia #quiz #saude",
+    "schedule_time": 1775643060,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1Zo7mLpk6dfzUNPI3-HYwYh1vgYr6QoYw",
     "filename": "7h - Resposta B! A rotação no longo eixo rompe o ligamento preservando as corticais. Acertou essa, colega 👇 #quiz #odontologia #cirurgia #bucomaxilo #estudantedeodonto.png",
     "media_type": "IMAGE",
@@ -143,6 +142,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1g-qDtrWhR8v_MTxyYKS-wr1G8nTL2x1v",
+    "filename": "8h - Ler a bula é essencial para o uso seguro! Dúvidas sobre o tratamento Consulte sempre seu farmacêutico de confiança. 💊✨ #farmácia #bula #medicamentos #saúde #dica.png",
+    "media_type": "IMAGE",
+    "caption": "8h - Ler a bula é essencial para o uso seguro! Dúvidas sobre o tratamento Consulte sempre seu farmacêutico de confiança. 💊✨ #farmácia #bula #medicamentos #saúde #dica",
+    "schedule_time": 1775646660,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -188,6 +207,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1swr1DaqJPpvtRTrd0YV7HAycUNZITE1W",
+    "filename": "9h - Café logo após o remédio da tireoide corta o efeito Quase isso! Espere 30-60 min. Sabia dessa Consulte seu farmacêutico! ☕💊 #interaçãomedicamentosa #tireoide #farmácia #saúde #dica #medicamentos.png",
+    "media_type": "IMAGE",
+    "caption": "9h - Café logo após o remédio da tireoide corta o efeito Quase isso! Espere 30-60 min. Sabia dessa Consulte seu farmacêutico! ☕💊 #interaçãomedicamentosa #tireoide #farmácia #saúde #dica #medicamentos",
+    "schedule_time": 1775650260,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1rc0QLldc3XNKA0nW8ftM21_MfHTvs_HP",
     "filename": "9h - O mistério do pão de diamante ataca novamente. Quem mais sofre com essa 'dieta' no consultório 😂 #ortodontia #odonto #dentista #humor #vidadedentista.png",
     "media_type": "IMAGE",
@@ -227,6 +266,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1r5vNOl0QyOaeRQBLLTSUAEWn--tpiDGp",
+    "filename": "10h - Dúvida na farmácia Genéricos e similares têm a mesma eficácia que o de referência. Consulte sempre seu farmacêutico! 💊 #farmácia #medicamentos #genérico #saúde #farmacêutico.png",
+    "media_type": "IMAGE",
+    "caption": "10h - Dúvida na farmácia Genéricos e similares têm a mesma eficácia que o de referência. Consulte sempre seu farmacêutico! 💊 #farmácia #medicamentos #genérico #saúde #farmacêutico",
+    "schedule_time": 1775653860,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -272,6 +331,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1292fGhnOXcnht9Msul9yJl1Hgyh9R2IO",
+    "filename": "11h - Muitos ainda duvidam, mas a ciência comprova genérico é seguro e eficaz. Você confia ou prefere o de marca Comenta aqui embaixo! 👇 #mitoufato #farmácia #medicamentos #genericos #saúde.png",
+    "media_type": "IMAGE",
+    "caption": "11h - Muitos ainda duvidam, mas a ciência comprova genérico é seguro e eficaz. Você confia ou prefere o de marca Comenta aqui embaixo! 👇 #mitoufato #farmácia #medicamentos #genericos #saúde",
+    "schedule_time": 1775657460,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1ly1JX3r-wQLhvD5FftcBlMLsToj-LneA",
     "filename": "11h - Mito! Lidocaína com epi é padrão ouro e segura. O estresse da dor é muito pior para o bebê do que o sal correto. Você ainda tem receio #odontologia #dentista #gestante #anestesia #mitoufato.png",
     "media_type": "IMAGE",
@@ -311,6 +390,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1uqZLH7y5IXA-DYMlPqhSaovZjNWA_YyN",
+    "filename": "12h - Resposta Sim! São equivalentes terapêuticos, com mesma eficácia e segurança pela ANVISA. Dúvidas Chame o farmacêutico! 💊 #quiz #farmácia #medicamentos #genérico #saúde.png",
+    "media_type": "IMAGE",
+    "caption": "12h - Resposta Sim! São equivalentes terapêuticos, com mesma eficácia e segurança pela ANVISA. Dúvidas Chame o farmacêutico! 💊 #quiz #farmácia #medicamentos #genérico #saúde",
+    "schedule_time": 1775661060,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -356,6 +455,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1C0n62_lHZRcZT6nqfslkVQDEaoadZVKL",
+    "filename": "13h - Misturar álcool e anti-inflamatório pode causar lesões no estômago. Na dúvida, peça orientação ao farmacêutico! 💊🚫 #interaçãomedicamentosa #farmácia #saúde #medicamentos #farma.png",
+    "media_type": "IMAGE",
+    "caption": "13h - Misturar álcool e anti-inflamatório pode causar lesões no estômago. Na dúvida, peça orientação ao farmacêutico! 💊🚫 #interaçãomedicamentosa #farmácia #saúde #medicamentos #farma",
+    "schedule_time": 1775664660,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1OWe1i3WKe_03vOt468XDE5yMRtwnQ1fu",
     "filename": "13h - Resp B. Na verdadeira há migração apical do epitélio juncional; na pseudobolsa há apenas edema coronal sem perda de inserção clínica real. #periodontia #perio #quizodonto #dentista #estudantedeodonto.png",
     "media_type": "IMAGE",
@@ -395,6 +514,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1PxDtU_lYHTFGYAXYIw7rThL5yXQ7__je",
+    "filename": "14h - Banheiro não é lugar de remédio! Umidade e calor estragam o efeito. Guarde em local seco e cheque a validade. Dúvidas Consulte seu farmacêutico! 💊 #farmácia #medicamentos #saúde #dicas #bemestar.png",
+    "media_type": "IMAGE",
+    "caption": "14h - Banheiro não é lugar de remédio! Umidade e calor estragam o efeito. Guarde em local seco e cheque a validade. Dúvidas Consulte seu farmacêutico! 💊 #farmácia #medicamentos #saúde #dicas #bemestar",
+    "schedule_time": 1775668260,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -440,6 +579,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1lk40MSqq2VOF3-FbFbzJiNw5RkkdPlpB",
+    "filename": "15h - Adivinhar remédio pela cor e tamanho é a nossa especialidade não oficial, né colegas Conta aqui a pérola que você ouviu hoje! 👇 #farmácia #humor #farmacêutico #vidadebalconista #rotinafarmaceutica.png",
+    "media_type": "IMAGE",
+    "caption": "15h - Adivinhar remédio pela cor e tamanho é a nossa especialidade não oficial, né colegas Conta aqui a pérola que você ouviu hoje! 👇 #farmácia #humor #farmacêutico #vidadebalconista #rotinafarmaceutica",
+    "schedule_time": 1775671860,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "11FiXW_ZnTTLLGeVoQ2nLpLg_w139vux1",
     "filename": "15h - A alma sai do corpo nessas horas. Quem mais já viveu esse trauma no laboratório 😂 #odontologia #dentistica #estudantedeodonto #vidadestudante #meme.png",
     "media_type": "IMAGE",
@@ -479,6 +638,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1HyBbgrcJrPtSjr_7MkhttUcQeOqbH3VI",
+    "filename": "16h - Dúvida clássica! 💊 Nem todo antibiótico anula a pílula, mas o cuidado deve ser redobrado. Na dúvida, consulte o farmacêutico! #farmacia #mitoufato #antibiótico #farmácia #anticoncepcional #saúde.png",
+    "media_type": "IMAGE",
+    "caption": "16h - Dúvida clássica! 💊 Nem todo antibiótico anula a pílula, mas o cuidado deve ser redobrado. Na dúvida, consulte o farmacêutico! #farmacia #mitoufato #antibiótico #farmácia #anticoncepcional #saúde",
+    "schedule_time": 1775675460,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -524,6 +703,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1ghRUwJCu0juAANkGGiTw8tQUiKpn70m3",
+    "filename": "17h - O cansaço passa, o impacto que você gera na saúde de alguém fica. Bom descanso, colega! ☕✨ #farmácia #farmacêutico #vidadebalconista #plantão #carreira.png",
+    "media_type": "IMAGE",
+    "caption": "17h - O cansaço passa, o impacto que você gera na saúde de alguém fica. Bom descanso, colega! ☕✨ #farmácia #farmacêutico #vidadebalconista #plantão #carreira",
+    "schedule_time": 1775679060,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1QL0bOs-WRcUpT64HmFfCiDoTedOHWYJH",
     "filename": "17h - Dica use fotos e mostre o diagnóstico detalhado na 1ª consulta. Quando o paciente vê o problema, ele entende o valor da solução. #odontologia #carreira #dentista #vidadedentista #gestao.png",
     "media_type": "IMAGE",
@@ -563,6 +762,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "11GrmlbcFOSpIkMiCjqLmeqoyHxH2jbyb",
+    "filename": "18h - Resposta 5 mL. 10% = 10g em 100mL (100mgmL). Logo, 500mg estão em 5mL. Acertou essa Comenta aqui! 👇 #farmácia #estudante #cálculofarmacêutico #concursofarmacia #saúde.png",
+    "media_type": "IMAGE",
+    "caption": "18h - Resposta 5 mL. 10% = 10g em 100mL (100mgmL). Logo, 500mg estão em 5mL. Acertou essa Comenta aqui! 👇 #farmácia #estudante #cálculofarmacêutico #concursofarmacia #saúde",
+    "schedule_time": 1775682660,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -608,6 +827,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1zvC71O-ZGseY1-NqSs2VpKrafqvx6SVb",
+    "filename": "19h - Misturar dois anti-inflamatórios (MIPs) pode causar sérias lesões no estômago. Evite riscos, consulte sempre seu farmacêutico! 💊🚫 #saúde #farmácia #interaçãomedicamentosa #medicamentos #cuidado.png",
+    "media_type": "IMAGE",
+    "caption": "19h - Misturar dois anti-inflamatórios (MIPs) pode causar sérias lesões no estômago. Evite riscos, consulte sempre seu farmacêutico! 💊🚫 #saúde #farmácia #interaçãomedicamentosa #medicamentos #cuidado",
+    "schedule_time": 1775686260,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1fIv7CWFiMdoDE0QqPxu6iRUa_J5duJ_s",
     "filename": "19h - Cuidar de vidas cansa, mas devolver sorrisos renova a alma. Obrigado, Deus, por nos confiar essa missão. 🙏✨ #dentista #motivacao #odontologia #vidadedentista #fe #gratidao.png",
     "media_type": "IMAGE",
@@ -647,6 +886,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1xPj93FIixfaIHS8lGXg5Qm9UrxbZ_0ex",
+    "filename": "20h - Comprimido ou gotas A forma farmacêutica garante a absorção correta no seu corpo. Dúvidas Pergunte ao seu farmacêutico! 💊✨ #farmácia #farmacêutico #saúde #medicamentos #dicas.png",
+    "media_type": "IMAGE",
+    "caption": "20h - Comprimido ou gotas A forma farmacêutica garante a absorção correta no seu corpo. Dúvidas Pergunte ao seu farmacêutico! 💊✨ #farmácia #farmacêutico #saúde #medicamentos #dicas",
+    "schedule_time": 1775689860,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
@@ -692,6 +951,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1itnaI7j_k33Gy0vwOccFG2oEoG8mb_y7",
+    "filename": "21h - O corpo sai do plantão, mas o cérebro continua conferindo receita. Quem mais já viveu esse bug 😂 #farmacia #humor #farmaceutico #plantao #vidadefarmaceutico.png",
+    "media_type": "IMAGE",
+    "caption": "21h - O corpo sai do plantão, mas o cérebro continua conferindo receita. Quem mais já viveu esse bug 😂 #farmacia #humor #farmaceutico #plantao #vidadefarmaceutico",
+    "schedule_time": 1775693460,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1H6pXbv6eWr66eMulmPPb1if1NeJuVd4a",
     "filename": "21h - O paciente não compra só a resina, compra a confiança. Mostra o seu real! #dentista #presençadigital #carreira #odontologia #marketingodontologico.png",
     "media_type": "IMAGE",
@@ -734,6 +1013,26 @@
     "selected": false
   },
   {
+    "gdrive_id": "1HiFJh5yOmNvv2S7h074W6pTq_f3JPm5L",
+    "filename": "22h - O uso de remédios ou chás para dormir sem orientação pode piorar a insônia a longo prazo. Você já teve essa experiência Conta pra gente! 👇 #insônia #saúde #farmácia #medicamentos #chás.png",
+    "media_type": "IMAGE",
+    "caption": "22h - O uso de remédios ou chás para dormir sem orientação pode piorar a insônia a longo prazo. Você já teve essa experiência Conta pra gente! 👇 #insônia #saúde #farmácia #medicamentos #chás",
+    "schedule_time": 1775697060,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
+    "selected": false
+  },
+  {
     "gdrive_id": "1chiSrkBKRycgNYFHY6qy5uEocEAGrsZh",
     "filename": "22h - Com técnica refinada e isolamento absoluto, a longevidade vai longe. E na sua mão, quanto costuma durar Vamos debater nos comentários! 👇 #dentistica #resina #odontologia #dentista #vidadedentista.png",
     "media_type": "IMAGE",
@@ -773,6 +1072,26 @@
         "ig_username": "enfermagem_curiosa_oficial"
       }
     ],
+    "selected": false
+  },
+  {
+    "gdrive_id": "1l6-QlzRH36dlGRdk8PXRgeJuX1U2Vwl6",
+    "filename": "23h - O esforço de hoje constrói o profissional incrível que você será. Descanse bem, futuro farmacêutico! 💊✨ #estudantedefarmácia #farmácia #carreira #farma #motivação.png",
+    "media_type": "IMAGE",
+    "caption": "23h - O esforço de hoje constrói o profissional incrível que você será. Descanse bem, futuro farmacêutico! 💊✨ #estudantedefarmácia #farmácia #carreira #farma #motivação",
+    "schedule_time": 1775700660,
+    "accounts": [
+      {
+        "name": "Farmacêutica Curiosa",
+        "ig_account_id": "17841438234063028",
+        "fb_page_id": "1057942790738850",
+        "access_token": "EAASPZAaNHHcYBRBfxnlrvpP2rRURZADR5EsZABbW4fCMrwLBNZBwJWQbhLw52IzXosQRAkQsDKPojC572ZAZCrRIbEGtEnYdhU96AwQRUyGZCXDxEVarsnacZBzbXV1IFzIA0FfFrHeUVw3CEY199rjpqmu80chF2BrzEamcFwc3amjYwwiXqZCNeeRGweTO4ppQZCpjOruJk8",
+        "profile_pic": null,
+        "token_expiry": 1780804740,
+        "last_renewed": 1775620740
+      }
+    ],
+    "first_comment": "teste",
     "selected": false
   },
   {
