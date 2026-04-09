@@ -746,3 +746,96 @@
 [01:36:11] ✅ Mesclagem local concluída.
 [01:36:11] 📤 Atualizando nuvem (Upload para Drive)...
 [01:36:25] 📦 Sincronizando com GitHub...
+[01:36:27] 🚀 Sincronização COMPLETA!
+[00:19:03] ============================================================
+[00:19:03] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[00:19:03] ============================================================
+[00:19:03] 📥 Sincronizando progresso da nuvem (Drive)...
+[00:19:05] 🧹 Iniciando limpeza e verificações de integridade...
+[00:19:05] ✅ Limpeza e integridade verificadas.
+[00:19:08] 🧩 Mesclando history (Local: 70, Remoto: 124)
+[00:19:08] 🧩 Mesclando schedule (Local: 54, Remoto: 0)
+[00:19:08]   🗑️ Ignorando 6h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 6h - O café é o único que me entende nessa abertura de plantão. Quem aí também já abriu a loja com fila na porta 😅☕️ #farmácia #humor #farmacêutico #vidadebalconista #plantão.png (já postado)
+[00:19:08]   🗑️ Ignorando 6h - O medo foge diante da sua competência e fé. Bom dia, colega! Que Deus guie suas mãos hoje. 🙏✨ #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[00:19:08]   🗑️ Ignorando 7h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 7h - Resposta Farmacocinética! Ela estuda o caminho do fármaco no corpo. Já a dinâmica foca na ação no receptor. Acertou 💊✨ #farmacologia #estudantefarmacia #farmacia #quiz #saude.png (já postado)
+[00:19:08]   🗑️ Ignorando 7h - Resposta B! A rotação no longo eixo rompe o ligamento preservando as corticais. Acertou essa, colega 👇 #quiz #odontologia #cirurgia #bucomaxilo #estudantedeodonto.png (já postado)
+[00:19:08]   🗑️ Ignorando 8h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 8h - Ler a bula é essencial para o uso seguro! Dúvidas sobre o tratamento Consulte sempre seu farmacêutico de confiança. 💊✨ #farmácia #bula #medicamentos #saúde #dica.png (já postado)
+[00:19:08]   🗑️ Ignorando 8h - Recessão não é contraindicação, é alerta de vedamento! Proteja o cemento e controle o tempo do H2O2 para evitar o choque. 🦷✨ #clareamento #dentista #esteticadental #odonto #sensibilidade.png (já postado)
+[00:19:08]   🗑️ Ignorando 9h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 9h - Café logo após o remédio da tireoide corta o efeito Quase isso! Espere 30-60 min. Sabia dessa Consulte seu farmacêutico! ☕💊 #interaçãomedicamentosa #tireoide #farmácia #saúde #dica #medicamentos.png (já postado)
+[00:19:08]   🗑️ Ignorando 9h - O mistério do pão de diamante ataca novamente. Quem mais sofre com essa 'dieta' no consultório 😂 #ortodontia #odonto #dentista #humor #vidadedentista.png (já postado)
+[00:19:08]   🗑️ Ignorando 10h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 10h - Dúvida na farmácia Genéricos e similares têm a mesma eficácia que o de referência. Consulte sempre seu farmacêutico! 💊 #farmácia #medicamentos #genérico #saúde #farmacêutico.png (já postado)
+[00:19:08]   🗑️ Ignorando 10h - Secou, marcou, ajustou. Sem segredo e sem levar a anatomia embora no motor. Curtiu o macete 🚀 #odontologia #dentista #oclusao #restauradora #dica #dentistica.png (já postado)
+[00:19:08]   🗑️ Ignorando 11h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 11h - Muitos ainda duvidam, mas a ciência comprova genérico é seguro e eficaz. Você confia ou prefere o de marca Comenta aqui embaixo! 👇 #mitoufato #farmácia #medicamentos #genericos #saúde.png (já postado)
+[00:19:08]   🗑️ Ignorando 11h - Mito! Lidocaína com epi é padrão ouro e segura. O estresse da dor é muito pior para o bebê do que o sal correto. Você ainda tem receio #odontologia #dentista #gestante #anestesia #mitoufato.png (já postado)
+[00:19:08]   🗑️ Ignorando 12h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 12h - Resposta Sim! São equivalentes terapêuticos, com mesma eficácia e segurança pela ANVISA. Dúvidas Chame o farmacêutico! 💊 #quiz #farmácia #medicamentos #genérico #saúde.png (já postado)
+[00:19:08]   🗑️ Ignorando 12h - Respire fundo no intervalo. Sua evolução clínica vem com o tempo e Deus honra cada hora no mocho. Pra cima! 🚀 #odontologia #dentista #vidadedentista #motivacao #fe #estudantedeodonto.png (já postado)
+[00:19:08]   🗑️ Ignorando 13h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 13h - Misturar álcool e anti-inflamatório pode causar lesões no estômago. Na dúvida, peça orientação ao farmacêutico! 💊🚫 #interaçãomedicamentosa #farmácia #saúde #medicamentos #farma.png (já postado)
+[00:19:08]   🗑️ Ignorando 13h - Resp B. Na verdadeira há migração apical do epitélio juncional; na pseudobolsa há apenas edema coronal sem perda de inserção clínica real. #periodontia #perio #quizodonto #dentista #estudantedeodonto.png (já postado)
+[00:19:08]   🗑️ Ignorando 14h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 14h - Banheiro não é lugar de remédio! Umidade e calor estragam o efeito. Guarde em local seco e cheque a validade. Dúvidas Consulte seu farmacêutico! 💊 #farmácia #medicamentos #saúde #dicas #bemestar.png (já postado)
+[00:19:08]   🗑️ Ignorando 14h - Cola aqui pro seu resumo de Head & Neck. Os pares cranianos V, VII, X e XII mandam no jogo. Salva pra não zerar a prova! 📚 #anatomia #odonto #estudante #deglutição #provas.png (já postado)
+[00:19:08]   🗑️ Ignorando 15h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 15h - Adivinhar remédio pela cor e tamanho é a nossa especialidade não oficial, né colegas Conta aqui a pérola que você ouviu hoje! 👇 #farmácia #humor #farmacêutico #vidadebalconista #rotinafarmaceutica.png (já postado)
+[00:19:08]   🗑️ Ignorando 15h - A alma sai do corpo nessas horas. Quem mais já viveu esse trauma no laboratório 😂 #odontologia #dentistica #estudantedeodonto #vidadestudante #meme.png (já postado)
+[00:19:08]   🗑️ Ignorando 16h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 16h - Dúvida clássica! 💊 Nem todo antibiótico anula a pílula, mas o cuidado deve ser redobrado. Na dúvida, consulte o farmacêutico! #farmacia #mitoufato #antibiótico #farmácia #anticoncepcional #saúde.png (já postado)
+[00:19:08]   🗑️ Ignorando 16h - Reciprocante nas curvas pra evitar a fadiga, rotatória no reto pra ganhar tempo. Qual seu sistema favorito no dia a dia #endodontia #odonto #dentista #limas #clinica.png (já postado)
+[00:19:08]   🗑️ Ignorando 17h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 17h - O cansaço passa, o impacto que você gera na saúde de alguém fica. Bom descanso, colega! ☕✨ #farmácia #farmacêutico #vidadebalconista #plantão #carreira.png (já postado)
+[00:19:08]   🗑️ Ignorando 17h - Dica use fotos e mostre o diagnóstico detalhado na 1ª consulta. Quando o paciente vê o problema, ele entende o valor da solução. #odontologia #carreira #dentista #vidadedentista #gestao.png (já postado)
+[00:19:08]   🗑️ Ignorando 18h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 18h - Resposta 5 mL. 10% = 10g em 100mL (100mgmL). Logo, 500mg estão em 5mL. Acertou essa Comenta aqui! 👇 #farmácia #estudante #cálculofarmacêutico #concursofarmacia #saúde.png (já postado)
+[00:19:08]   🗑️ Ignorando 18h - Resposta Atresia maxilar esquelética. O Haas promove a expansão rápida abrindo a sutura palatina mediana. Essa foi fácil ou pegou Comenta aí! 👇 #quiz #ortodontia #odontologia #estudante #dentista.png (já postado)
+[00:19:08]   🗑️ Ignorando 19h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 19h - Misturar dois anti-inflamatórios (MIPs) pode causar sérias lesões no estômago. Evite riscos, consulte sempre seu farmacêutico! 💊🚫 #saúde #farmácia #interaçãomedicamentosa #medicamentos #cuidado.png (já postado)
+[00:19:08]   🗑️ Ignorando 19h - Cuidar de vidas cansa, mas devolver sorrisos renova a alma. Obrigado, Deus, por nos confiar essa missão. 🙏✨ #dentista #motivacao #odontologia #vidadedentista #fe #gratidao.png (já postado)
+[00:19:08]   🗑️ Ignorando 20h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 20h - Comprimido ou gotas A forma farmacêutica garante a absorção correta no seu corpo. Dúvidas Pergunte ao seu farmacêutico! 💊✨ #farmácia #farmacêutico #saúde #medicamentos #dicas.png (já postado)
+[00:19:08]   🗑️ Ignorando 20h - Quem nunca quis jogar a espátula na parede que atire a primeira resina flow. 🥲 #dentista #meme #odontologia #resina #humor.png (já postado)
+[00:19:08]   🗑️ Ignorando 21h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 21h - O corpo sai do plantão, mas o cérebro continua conferindo receita. Quem mais já viveu esse bug 😂 #farmacia #humor #farmaceutico #plantao #vidadefarmaceutico.png (já postado)
+[00:19:08]   🗑️ Ignorando 21h - O paciente não compra só a resina, compra a confiança. Mostra o seu real! #dentista #presençadigital #carreira #odontologia #marketingodontologico.png (já postado)
+[00:19:08]   🗑️ Ignorando 22h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 22h - O uso de remédios ou chás para dormir sem orientação pode piorar a insônia a longo prazo. Você já teve essa experiência Conta pra gente! 👇 #insônia #saúde #farmácia #medicamentos #chás.png (já postado)
+[00:19:08]   🗑️ Ignorando 22h - Com técnica refinada e isolamento absoluto, a longevidade vai longe. E na sua mão, quanto costuma durar Vamos debater nos comentários! 👇 #dentistica #resina #odontologia #dentista #vidadedentista.png (já postado)
+[00:19:08]   🗑️ Ignorando 23h_post_religioso_20260406_133300.png (já postado)
+[00:19:08]   🗑️ Ignorando 23h - O esforço de hoje constrói o profissional incrível que você será. Descanse bem, futuro farmacêutico! 💊✨ #estudantedefarmácia #farmácia #carreira #farma #motivação.png (já postado)
+[00:19:08]   🗑️ Ignorando 23h - Descanse em paz, colega. O que foi desafio hoje, vira força amanhã. Que Deus renove sua energia e sua alma! 🌙✨ #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[00:19:08] ✅ Progresso do Drive carregado.
+[00:19:08] 📥 Verificando mudanças no GitHub...
+[00:19:12] 📊 Status Final: 0 agendados, 124 postados
+[00:19:22] Drive: 90 novas mídias
+[00:20:27] 💾 Backup criado: schedule_queue_backup_20260409_002027.json
+[00:20:27] ✅ Salvos 1 agendamentos
+[00:20:40] 💾 Backup criado: schedule_queue_backup_20260409_002040.json
+[00:20:40] ✅ Salvos 0 agendamentos
+[00:20:40] 🗑️ Agendamento removido: 6h - Sua técnica é arte e sua missão é transformar vidas. Comece o dia com fé, foco e precisão! 🚀🙏 #dentista #motivacao #odontologia #vidadedentista #fe.png
+[00:21:22] 💾 Backup criado: schedule_queue_backup_20260409_002122.json
+[00:21:22] ✅ Salvos 18 agendamentos
+[00:22:25] 💾 Backup criado: schedule_queue_backup_20260409_002225.json
+[00:22:25] ✅ Salvos 36 agendamentos
+[00:24:03] 💾 Backup criado: schedule_queue_backup_20260409_002403.json
+[00:24:03] ✅ Salvos 54 agendamentos
+[00:25:30] 💾 Backup criado: schedule_queue_backup_20260409_002530.json
+[00:25:30] ✅ Salvos 72 agendamentos
+[00:25:53] ============================================================
+[00:25:53] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[00:25:53] ============================================================
+[00:25:53] 🕐 Horário de início: 09/04/2026 00:25:53
+[00:25:53] 💾 Backup criado: schedule_queue_backup_20260409_002553.json
+[00:25:53] ✅ Salvos 72 agendamentos
+[00:25:53] 📥 Buscando progresso da nuvem (Download do Drive)...
+[00:25:57] 🧩 Mesclando 0 itens da nuvem com locais...
+[00:25:57] 🧩 Mesclando history (Local: 124, Remoto: 124)
+[00:25:57] 🧩 Mesclando schedule (Local: 72, Remoto: 0)
+[00:25:57] ✅ Mesclagem local concluída.
+[00:25:57] 📤 Atualizando nuvem (Upload para Drive)...
+[00:26:12] 📦 Sincronizando com GitHub...
