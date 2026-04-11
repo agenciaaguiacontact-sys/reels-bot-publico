@@ -869,3 +869,150 @@
 [00:49:57] ✅ Mesclagem local concluída.
 [00:49:57] 📤 Atualizando nuvem (Upload para Drive)...
 [00:50:06] 📦 Sincronizando com GitHub...
+[00:50:08] 🚀 Sincronização COMPLETA!
+[00:50:26] ============================================================
+[00:50:26] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[00:50:26] ============================================================
+[00:50:26] 📥 Sincronizando progresso da nuvem (Drive)...
+[00:50:28] 🧹 Iniciando limpeza e verificações de integridade...
+[00:50:28] ✅ Limpeza e integridade verificadas.
+[00:50:29] 🧩 Mesclando history (Local: 124, Remoto: 124)
+[00:50:29] 🧩 Mesclando schedule (Local: 108, Remoto: 108)
+[00:50:29] ✅ Progresso do Drive carregado.
+[00:50:29] 📥 Verificando mudanças no GitHub...
+[00:50:32] 📊 Status Final: 108 agendados, 124 postados
+[11:28:30] ============================================================
+[11:28:30] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[11:28:30] ============================================================
+[11:28:30] 📥 Sincronizando progresso da nuvem (Drive)...
+[11:28:32] 🧹 Iniciando limpeza e verificações de integridade...
+[11:28:32] ✅ Limpeza e integridade verificadas.
+[11:28:33] 🧩 Mesclando history (Local: 124, Remoto: 233)
+[11:28:33] 🧩 Mesclando schedule (Local: 108, Remoto: 0)
+[11:28:33]   🗑️ Ignorando 6h - Para o setor lotado e a pressão do dia, confie n'Ele. A força vem do alto! Amém 🙏✨ #fé #enfermagem #plantão #fé #enfermagem #plantão.png (já postado)
+[11:28:33]   🗑️ Ignorando 6h - Respirar fundo, sorrir e explicar sem receita, sem controlado! Quem mais começa o dia assim 😂 #farmacia #vidadefarmaceutico #humor #plantao #farmaceutico.png (já postado)
+[11:28:33]   🗑️ Ignorando 6h - Sua técnica é arte e sua missão é transformar vidas. Comece o dia com fé, foco e precisão! 🚀🙏 #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[11:28:33]   🗑️ Ignorando 7h - Domine as precauções! N95 para aerossóis e cirúrgica para gotículas. Salve para nunca mais esquecer! 🏥💉 #enfermagem #saude #epi #plantao #enfermagem #tecnicoenfermagem #estudos.png (já postado)
+[11:28:33]   🗑️ Ignorando 7h - Resolução 250mg-5mL  500mg-X. X=(5005)250 = 10mL. Acertou Estude sempre e consulte o farmacêutico! #cálculofarmacêutico #farmácia #estudantedefarmácia #matemática #farma.png (já postado)
+[11:28:33]   🗑️ Ignorando 7h - Resp Bloqueio do influxo de Na+. Eles se ligam a receptores no canal, impedindo a despolarização. Acertou essa ou precisa revisar #farmacologia #anestesia #odontologia #estudante #concurso #dentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 8h - Aquele fantasma olfativo que persegue a gente até em casa. Quem já viveu esse trauma 🤢😂 #enfermagem #plantão #humor #vidadeenfermeira #enfermagem #plantão #humor.png (já postado)
+[11:28:33]   🗑️ Ignorando 8h - Remédio no lixo polui o planeta! 🌍 Leve vencidos aos pontos de coleta em farmácias. Proteja a natureza e sua família. 💊♻️ #meioambiente #farmacia #saude #descartecorreto #sustentabilidade.png (já postado)
+[11:28:33]   🗑️ Ignorando 8h - Menos é mais! Pincel 000 e mão leve para sulcos naturais. O segredo tá na diluição do pigmento. Curtiu a dica, colega #odontologia #resina #dentista #estetica #dicasdeodonto #dentística.png (já postado)
+[11:28:33]   🗑️ Ignorando 9h - Cuidado com o tórax lenhoso! Infunda Fentanil lentamente e monitore sempre a respiração. 💉 #enfermagem #plantao #dica #seguranca #enfermagem #dica #segurançadopaciente.png (já postado)
+[11:28:33]   🗑️ Ignorando 9h - Passe a quantidade certa 3 dedos de protetor! Físico ou químico O farmacêutico te ajuda a escolher o melhor para sua pele. 🧴☀️ #skincare #protetorsolar #farmácia #saúde #estética #cuidadoscomapele.png (já postado)
+[11:28:33]   🗑️ Ignorando 9h - Quem mais sente a dor no peito só de ouvir isso Haja paciência pra explicar o pH pro paciente. 😂 #dentista #humor #odontologia #vidadedentista #esmalte.png (já postado)
+[11:28:33]   🗑️ Ignorando 10h - O deslocamento do útero para a esquerda é decisivo na RCP da gestante. Salve esse resumo técnico! 🚑💨 #enfermagem #emergencia #gestante #enfermagem #urgencia #gestante.png (já postado)
+[11:28:33]   🗑️ Ignorando 10h - O farmacêutico é o último elo de segurança entre a receita e o paciente. Valorize quem garante o uso correto do seu medicamento! 💊✨ #farmácia #farmacêutico #saúde #farmáciaclínica #cuidado.png (já postado)
+[11:28:33]   🗑️ Ignorando 10h - Nó no fio dental no sulco antes de polimerizar o terror da gengivite marginal por excesso de cimento. Testa aí e me fala! #odontologia #reabilitacaooral #dentista #vidadedentista #odonto.png (já postado)
+[11:28:33]   🗑️ Ignorando 11h - Já pensou em atuar na pesquisa clínica Rotina previsível e alta valorização! 🚀 #enfermagem #carreira #estudosclinicos #pesquisaclinica #carreira.png (já postado)
+[11:28:33]   🗑️ Ignorando 11h - Cuidado com o excesso! Vitaminas em demasia podem causar toxicidade. Consulte sempre um farmacêutico antes de suplementar. 💊✨ #mitoufato #vitaminas #saúde #farmácia #suplementos.png (já postado)
+[11:28:33]   🗑️ Ignorando 11h - Mito! O risco de trinca térmica é real. Já passou sufoco removendo pino e a raiz fraturou Me conta sua experiência aqui! 👇 #endodontia #odontologia #reabilitação #dentista #vidadedentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 12h - Pausa para nutrir o corpo e a alma. Que nossas mãos sejam instrumento de cura no segundo tempo do plantão. 🙏✨ #enfermagem #fé #fé #enfermagem #plantão.png (já postado)
+[11:28:33]   🗑️ Ignorando 12h - O cafezinho pode atrapalhar ou potencializar seu remédio! Veja por que evitar essa mistura e consulte sempre seu farmacêutico. ☕💊 #interaçãomedicamentosa #café #farmácia #saúde #medicamentos.png (já postado)
+[11:28:33]   🗑️ Ignorando 12h - O almoço é pra renovar a técnica e a fé. Cada detalhe conta na busca pela excelência. Bora pra cima, colega! 🦷✨ #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[11:28:33]   🗑️ Ignorando 13h - Manejo seguro da hipoglicemia com a Regra dos 15. Essencial para todo profissional de saúde! 🩺🩸 #enfermagem #saude #estudos #plantao #enfermagem #segurançadopaciente #plantao.png (já postado)
+[11:28:33]   🗑️ Ignorando 13h - Automedicação mascara doenças e causa alergias graves. Não arrisque sua vida com palpites, fale sempre com o farmacêutico! 💊 #farmácia #saúde #automedicação #farmacêutico #cuidado.png (já postado)
+[11:28:33]   🗑️ Ignorando 13h - Resposta S. mutans. Ele é o principal colonizador e produtor de ácido em superfícies lisas. Acertou essa de micro #quiz #microbiologia #odontologia #dentista #estudante.png (já postado)
+[11:28:33]   🗑️ Ignorando 14h - A lei da gravidade nunca falha! Sentou, aconteceu. 😅🚑 #enfermagem #plantao #humor #enfermagem #humor.png (já postado)
+[11:28:33]   🗑️ Ignorando 14h - Mantenha seu kit em dia e organizado! Verifique validades e nunca se automedique. Peça sempre orientação ao seu farmacêutico! 💊✨ #farmácia #saúde #primeirossocorros #organização #medicamentos.png (já postado)
+[11:28:33]   🗑️ Ignorando 14h - Dominar esse espaço é o segredo para nunca mais errar o bloqueio do alveolar inferior. Salva esse guia pra revisar! #odontologia #anatomia #dentista #estudantedeodonto #concurso.png (já postado)
+[11:28:33]   🗑️ Ignorando 15h - Compare Ramsay e RASS para avaliação neurológica na UTI. Guia rápido para seu plantão! 🏥 #enfermagem #uti #estudos #saude #enfermagem #uti #plantao.png (já postado)
+[11:28:33]   🗑️ Ignorando 15h - Quantas vezes você já tentou adivinhar o remédio só pela cor da caixa Conta aqui o seu 'redondinho' favorito! 😂 #farmácia #humorfarmaceutico #vidadefarmacia #medicamentos #saude.png (já postado)
+[11:28:33]   🗑️ Ignorando 15h - O protocolo de adesão chora e a gente chora junto. Quem nunca 🤡 #odontologia #meme #dentista #vidadedentista #restauracao.png (já postado)
+[11:28:33]   🗑️ Ignorando 16h - Domine os cuidados com TQT técnica estéril, controle do cuff e umidificação. Segurança do paciente sempre! 🫁💉 #enfermagem #tqt #uti #hospital #enfermagem #tqt #uti.png (já postado)
+[11:28:33]   🗑️ Ignorando 16h - Nem tudo que é natural é isento de riscos. Plantas podem causar toxicidade e interações sérias. Peça orientação ao farmacêutico! 🌿💊 #fitoterapia #farmácia #saúde #medicamentos #farmacêutico.png (já postado)
+[11:28:33]   🗑️ Ignorando 16h - Mecanizada mantém a centragem, mas o glide path manual é o segredo contra degraus. Menos transporte, mais paz no apical. 🦷 #endodontia #odonto #dentista #canaldentario #niti.png (já postado)
+[11:28:33]   🗑️ Ignorando 17h - Sua dor é válida. Cuidar cria laços que a partida não apaga. 🤍 #enfermagem #luto #humanizacao #saude #enfermagem #luto #humanizacao.png (já postado)
+[11:28:33]   🗑️ Ignorando 17h - A ciência evolui todo dia! Quais fontes você usa para se atualizar Conte nos comentários. 💡 #farmácia #carreira #estudos #saúde #farmacêutico.png (já postado)
+[11:28:33]   🗑️ Ignorando 17h - Dica defina 15min de tolerância e avise no agendamento. Lucro vem da organização e não do caos! 🚀 #gestao #odontologia #vidadedentista #clinica #carreira.png (já postado)
+[11:28:33]   🗑️ Ignorando 18h - Herói não usa capa, traz pão de queijo e bolo! 🥖☕ Marca esse colega que salva o time! #enfermagem #plantaonoturno #humor #enfermagem #plantao.png (já postado)
+[11:28:33]   🗑️ Ignorando 18h - Resposta Inibidores da ECA. A tosse ocorre pelo acúmulo de bradicinina nos pulmões. Sentiu o efeito Fale com seu farmacêutico! #farmácia #farmacologia #saúde #hipertensão #quiz.png (já postado)
+[11:28:33]   🗑️ Ignorando 18h - Resposta Forame mentoniano. A variação de posição pode sobrepor ao ápice e simular rarefação óssea. Fica esperto no diagnóstico diferencial! #radiologia #odontologia #estudante #dentista #quiz.png (já postado)
+[11:28:33]   🗑️ Ignorando 19h - Resumo técnico Para identificar IAM de parede inferior no ECG, observe DII, DIII e aVF. Salve essa dica! 🫀⚡ #enfermagem #ecg #plantao #uti #enfermagem #ecg #uti.png (já postado)
+[11:28:33]   🗑️ Ignorando 19h - Colheres de casa não são precisas. Para a dose correta, use apenas o dosador do medicamento. Segurança em 1º lugar! 💊 #farmácia #pediatria #saúdeinfantil #medicamentos #farmacêutico.png (já postado)
+[11:28:33]   🗑️ Ignorando 19h - O cansaço físico é o troféu de quem entregou o seu melhor hoje. Que Deus renove nossas forças e precisão para amanhã. 🙏✨ #vidadedentista #motivacao #odontologia #gratidao #devercumprido.png (já postado)
+[11:28:33]   🗑️ Ignorando 20h - Que a paz de Deus preencha cada corredor nesta noite. Amém! 🙏✨ #enfermagem #fé #plantãonoturno #enfermagem #fé #plantão.png (já postado)
+[11:28:33]   🗑️ Ignorando 20h - Entenda a diferença entre as tarjas e o controle das receitas. A segurança no uso começa com informação! Consulte sempre seu farmacêutico. #farmácia #farmacêutico #medicamentos #saúde #farma #dicasdesaúde.png (já postado)
+[11:28:33]   🗑️ Ignorando 20h - Quem já viveu essa vitória épica no mocho sabe que a dopamina vai no alto! 💉✨ #endodontia #odonto #dentista #vidadentista #endo.png (já postado)
+[11:28:33]   🗑️ Ignorando 21h - Dicas essenciais para manejar a agitação noturna em idosos. Salve para o plantão! 🩺🌙 #enfermagem #geriatria #plantao #enfermagem #geriatria.png (já postado)
+[11:28:33]   🗑️ Ignorando 21h - Quem aí também precisou de um curso de tradução no primeiro dia Comenta aqui sua maior dificuldade! 👇 #farmácia #estagiário #humor #farmacêutico #vidadeestagiario #saude.png (já postado)
+[11:28:33]   🗑️ Ignorando 21h - Ter um lab que fala a sua língua muda o jogo. Menos tempo de ajuste, mais lucro e satisfação. Como tá a parceria por aí 👇 #carreira #odontologia #protesedentaria #tpd #vidadedentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 22h - Às 5 da manhã ninguém mais responde por si. É rir para não chorar! 😂☕️ #enfermagem #plantao #vidadenfermeira #enfermagem #plantao.png (já postado)
+[11:28:33]   🗑️ Ignorando 22h - Entenda as siglas da sua receita e evite erros! Ficou com dúvida O farmacêutico é o profissional certo para te orientar. 💊 #farmácia #saúde #receitamedica #farmacêutico #dicasdesaúde.png (já postado)
+[11:28:33]   🗑️ Ignorando 22h - Extração profilática em todos os casos ou acompanhamento clínico Qual sua conduta de rotina, colega Comenta aí! 👇 #cirurgia #odontologia #ctbmf #dentista #sisos.png (já postado)
+[11:28:33]   🗑️ Ignorando 23h - Entregue seu cansaço a Deus. Descanse e recupere as forças para o próximo plantão. 🙏✨ #enfermagem #fé #boanoite #fé #enfermagem #boanoite.png (já postado)
+[11:28:33]   🗑️ Ignorando 23h - O dia foi longo, mas o impacto na saúde da comunidade é eterno. Bom descanso, colega! 💊✨ #farmácia #farmacêutico #carreira #saúde #propósito.png (já postado)
+[11:28:33]   🗑️ Ignorando 23h - Suas mãos são instrumentos de benção. Descanse bem para continuar transformando sorrisos amanhã. Boa noite, colega! 🌙 #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[11:28:33]   🗑️ Ignorando 6h - Comece o plantão com confiança! Ele está no controle de cada decisão. Amém 🙏✨ #enfermagem #fé #plantão #fé #enfermagem #plantão.png (já postado)
+[11:28:33]   🗑️ Ignorando 6h - tecnico.png (já postado)
+[11:28:33]   🗑️ Ignorando 6h - Que seu consultório seja lugar de acolhimento e cura. Além do dente, existe uma vida. Bom dia, colega! #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[11:28:33]   🗑️ Ignorando 7h - Guia rápido da Escala de Flebite! Identifique os graus de 0 a 4 e saiba como agir no plantão. Salve para consultar! 💉🩺 #enfermagem #flebite #estudo #enfermagem #flebite.png (já postado)
+[11:28:33]   🗑️ Ignorando 7h - O café nem bateu e o milagre já foi solicitado! Quem aí já começou o plantão com um pedido desses Comenta aqui! 😂👇 #farmácia #humor #farmacêutico #vidadebalconista #ressaca.png (já postado)
+[11:28:33]   🗑️ Ignorando 7h - Resposta Fígado. As amidas são metabolizadas por enzimas microssomais hepáticas, diferente dos ésteres (plasma). Acertou essa ✅ #quiz #odontologia #estudante #farmacologia #dentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 8h - Passagem de plantão ou desafio de decifrar enigmas 😂 Marque o colega que já passou por isso! #enfermagem #plantao #humor #enfermagem #plantao #humor.png (já postado)
+[11:28:33]   🗑️ Ignorando 8h - Resposta Meia-vida! É o tempo para a concentração do fármaco cair 50%. Isso dita o intervalo das doses. Siga sempre a orientação do farmacêutico! #farmacologia #farmácia #estudante #saúde #medicamentos.png (já postado)
+[11:28:33]   🗑️ Ignorando 8h - Adeus distorção do silicone de condensação! Estabilidade top para reabilitar com segurança. Já usa no consultório ou na clínica da faculdade #odontologia #reabilitação #protesefixa #dentista #moldagem.png (já postado)
+[11:28:33]   🗑️ Ignorando 9h - Dipirona rápida derruba a pressão! Administre sempre de forma lenta e segura para o seu paciente. 💉🩹 #enfermagem #plantao #seguranca #enfermagem #plantao.png (já postado)
+[11:28:33]   🗑️ Ignorando 9h - A ordem dos produtos altera o resultado! Comece pelo tratamento, hidrate e proteja. Na dúvida, peça ajuda ao farmacêutico! 💊 #skincare #farmácia #saúde #estética #cuidadoscomapele.png (já postado)
+[11:28:33]   🗑️ Ignorando 9h - O paciente jura que não sabe de onde vem o manchamento. Quem mais já ouviu essa fic no consultório 😂 #odontologia #meme #dentista #vidadedentista #clinica.png (já postado)
+[11:28:33]   🗑️ Ignorando 10h - Domine a Posição de Sims! Técnica correta para enemas e exames com segurança. Salve esse resumo técnico! 🩺📖 #enfermagem #plantao #saude #enfermagem #estudos.png (já postado)
+[11:28:33]   🗑️ Ignorando 10h - O segredo do tratamento é a paciência! O jejum garante que o remédio seja absorvido. Espere 30min para o café. Consulte seu farmacêutico! 💊 #tireoide #farmacia #medicamentos #saude #levotiroxina.png (já postado)
+[11:28:33]   🗑️ Ignorando 10h - Bolha no fundo é falha de selamento certa. Usa a Centrix ou aglutina sem 'bater' a mistura. Curtiu a dica, colega #odontologia #civ #dentista #dicaclinica #reabilitacao #odonto.png (já postado)
+[11:28:33]   🗑️ Ignorando 11h - Adrenalina e liberdade em alto mar. Você encara esse desafio ⚓💉 #enfermagem #offshore #carreira #offshore #carreira.png (já postado)
+[11:28:33]   🗑️ Ignorando 11h - O genérico passa por testes de bioequivalência para garantir a mesma eficácia que o de referência. Dúvidas Fale com seu farmacêutico! 💊 #farmácia #medicamentos #genericos #saude #farmaceutico.png (já postado)
+[11:28:33]   🗑️ Ignorando 11h - C-factor alto ou falha na hibridização Qual o maior erro do colega que gera esse pós-op Comenta aí sua técnica! 👇 #dentistica #odontologia #resina #cfactor #dentista #vidadedentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 12h - Que cada refeição renove suas forças e sua alma para a missão de cuidar. Amém! 🙏☕ #enfermagem #fé #gratidão #enfermagem #fé #gratidão.png (já postado)
+[11:28:33]   🗑️ Ignorando 12h - Vitamina C impede a gripe 🍊 A verdade ela ajuda na imunidade, mas não evita o contágio. Consulte sempre seu farmacêutico! #saúde #vitaminac #gripe #farmácia #saúde #mitofato #imunidade.png (já postado)
+[11:28:33]   🗑️ Ignorando 12h - Respire fundo no almoço. O que foi difícil de manhã te fez um dentista melhor agora. Deus tá vendo seu suor! 🚀 #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[11:28:33]   🗑️ Ignorando 13h - Diferença vital Enteral vs Parenteral. NPT exige assepsia total e acesso venoso exclusivo. Atenção redobrada! 🏥💉 #enfermagem #estudos #npt #enfermagem #estudos #npt.png (já postado)
+[11:28:33]   🗑️ Ignorando 13h - Resposta Anti-inflamatório (AINE)! Usado para dor e febre. Lembre-se MIPs também exigem cuidado. Consulte sempre o farmacêutico! ✅ #quiz #farmácia #medicamentos #saúde #farmacêutico.png (já postado)
+[11:28:33]   🗑️ Ignorando 13h - Resposta 3mm. Menos que isso invade o espaço biológico, gerando inflamação e perda óssea. Relembrar é viver! #quiz #odontologia #periodontia #estudante #dentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 14h - É só fechar o prontuário que a mágica acontece. Quem mais vive essa maldição no plantão 😂💉 #enfermagem #plantao #vidadeenfermeiro #enfermagem #plantao #humor.png (já postado)
+[11:28:33]   🗑️ Ignorando 14h - Misturar álcool e paracetamol sobrecarrega seu fígado e pode ser perigoso. Proteja sua saúde e consulte o farmacêutico! 💊⚠️ #saúde #farmácia #interaçãomedicamentosa #fígado #cuidados.png (já postado)
+[11:28:33]   🗑️ Ignorando 14h - Dominar o trajeto da artéria palatina maior evita aquela hemorragia tensa no enxerto. Estude o palato e opere com segurança! 🩸 #odontologia #periodontia #anatomia #dentista #cirurgia.png (já postado)
+[11:28:33]   🗑️ Ignorando 15h - Domine a Escala de Bristol! 💩 Essencial para padronizar suas anotações e avaliar a motilidade do paciente. Salve agora! #enfermagem #dica #plantao #enfermagem #dica #plantao.png (já postado)
+[11:28:33]   🗑️ Ignorando 15h - Banheiro é úmido e quente, o que estraga seu remédio. Guarde em local seco e ventilado! Dúvidas Fale com o farmacêutico. 💊 #farmácia #saúde #medicamentos #dicas #bemestar.png (já postado)
+[11:28:33]   🗑️ Ignorando 15h - O frio na espinha é maior que o de uma pulpite aguda. Quem já viveu esse pânico na graduação 😂 #odontologia #faculdade #vidadedentista #estudantedeodonto #meme.png (já postado)
+[11:28:33]   🗑️ Ignorando 16h - Aprenda o posicionamento correto dos coxins para prevenir Lesões por Pressão. Técnica salva vidas! 🛌✨ #enfermagem #cuidados #lpp #enfermagem #lpp #saude.png (já postado)
+[11:28:33]   🗑️ Ignorando 16h - O GPS do paciente é diferenciado! 😂 Já tentaram te explicar a localização em vez do nome Conta sua história aqui! 👇 #farmácia #vidadefarmacêutico #humor #farmacêutico #balcão.png (já postado)
+[11:28:33]   🗑️ Ignorando 16h - Escolher o veículo certo muda o jogo na Endo. Aquoso p ação imediata, viscoso p manutenção. Já sabia dessa #endodontia #odontologia #odonto #endolovers #dentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 17h - A técnica é essencial, mas o toque humano é o que realmente acalma a alma. Valorize sua essência! 🤝✨ #enfermagem #humanizacao #enfermagem #humanizacao #carreira.png (já postado)
+[11:28:33]   🗑️ Ignorando 17h - Usar sobras de antibiótico cria super-bactérias! 🦠 Nunca se automedique e sempre siga a orientação do farmacêutico. #saude #resistenciabacteriana #antibiotico #saude #farmacia #mito.png (já postado)
+[11:28:33]   🗑️ Ignorando 17h - Dicas Separe PF de PJ, registre cada centavo e use software. Sem fluxo de caixa, o lucro vira fumaça! 💸 #gestaoodonto #dentista #carreira #vidadedentista #odontologia.png (já postado)
+[11:28:33]   🗑️ Ignorando 18h - Checklist feito e a oração é uma só que a madrugada seja de paz! 🙏✨ #enfermagem #plantao #hospital #enfermagem #plantao #emergencia.png (já postado)
+[11:28:33]   🗑️ Ignorando 18h - O farmacêutico é, muitas vezes, o primeiro contato do paciente com a saúde. Orgulho dessa missão! ❤️ #farmácia #farmacêutico #saúde #carreira #humanização.png (já postado)
+[11:28:33]   🗑️ Ignorando 18h - Resposta Camada basal em paliçada com núcleos hipercromáticos. Um clássico da pato que cai em toda prova! E aí, lembrou dessa #odontologia #patologiaoral #odonto #estudante #concurso.png (já postado)
+[11:28:33]   🗑️ Ignorando 19h - O SF 0,9% é o único compatível para correr com hemácias. 🩸 Evite a hemólise e garanta a segurança! 📚 #enfermagem #estudos #saude #enfermagem #hemoterapia.png (já postado)
+[11:28:33]   🗑️ Ignorando 19h - Resposta Reduz a eficácia. O Hipérico acelera a metabolização do hormônio, aumentando o risco de falha. Consulte sempre seu farmacêutico! 💊 #farmacia #estudantedefarmacia #quiz #farmacologia #saúde.png (já postado)
+[11:28:33]   🗑️ Ignorando 19h - Mãos cansadas, alma em paz. Obrigado, Deus, por guiar cada movimento. Devolver a função social a alguém é nossa maior recompensa. 🙏✨ #dentista #motivacao #odontologia #vidadedentista #fe #gratidao.png (já postado)
+[11:28:33]   🗑️ Ignorando 20h - Oração pela nossa proteção. Que os anjos guardem as portas do hospital nesta madrugada. 🙏✨ #enfermagem #plantão #fé #enfermagem #fé #proteção.png (já postado)
+[11:28:33]   🗑️ Ignorando 20h - Cálcio e ferro competem pela absorção! Evite tomar suplemento de ferro com leite ou derivados. Consulte seu farmacêutico! 💊🥛 #interaçãomedicamentosa #farmácia #saúde #nutrição #suplementação.png (já postado)
+[11:28:33]   🗑️ Ignorando 20h - O curso de tradução de 'pacientês' vem junto com o diploma, né colegas 😂 #dentista #meme #odontologia #consultório #humor.png (já postado)
+[11:28:33]   🗑️ Ignorando 21h - Lave o acesso com pressão positiva e evite ter que puncionar o paciente às 3h da manhã! 💉✅ #enfermagem #plantao #dica #enfermagem #dica.png (já postado)
+[11:28:33]   🗑️ Ignorando 21h - Entenda por que a via sublingual 'foge' do fígado para agir mais rápido no corpo! Tire dúvidas com seu farmacêutico. #farmácia #farmacêutico #farmacologia #saúde #estudos.png (já postado)
+[11:28:33]   🗑️ Ignorando 21h - Título atrai, mas autoridade e valor retêm. Como você se comunica hoje Bora se diferenciar! #carreira #dentista #marketingodontologico #odonto #estudante.png (já postado)
+[11:28:33]   🗑️ Ignorando 22h - Aquele silêncio que faz a gente até prender a respiração. É milagre ou a calma antes da tempestade 👀🏥 #enfermagem #plantao #humor #enfermagem #plantao.png (já postado)
+[11:28:33]   🗑️ Ignorando 22h - A letra é difícil, mas o nosso compromisso com a sua saúde é claro! Quem aí já usou esse superpoder hoje 🔍💊 #farmácia #humor #farmacêutico #saúde #vidadefarmacia.png (já postado)
+[11:28:33]   🗑️ Ignorando 22h - Receita de bolo ou critério clínico Qual seu protocolo medicamentoso preferido para evitar edema nos sisos Comenta aí! 👇 #cirurgia #terceiromolar #farmacologia #odontologia #dentista.png (já postado)
+[11:28:33]   🗑️ Ignorando 23h - O choro dura uma noite, mas a alegria vem ao fim do plantão. Vidas salvas e coração em paz. 🙏✨ #enfermagem #fé #gratidão #enfermagem #gratidão #plantão.png (já postado)
+[11:28:33]   🗑️ Ignorando 23h - Melatonina não resolve todo tipo de insônia e o uso sem orientação é arriscado. Você sente que ela realmente te ajuda Consulte um farmacêutico! 💊💤 #melatonina #insônia #farmácia #saúde #sono #farmacêutico.png (já postado)
+[11:28:33]   🗑️ Ignorando 23h - Descanse a mente e o corpo para brilhar amanhã com excelência. Sua profissão é uma missão nobre. Boa noite, colega! ✨ #dentista #motivacao #odontologia #vidadedentista #fe.png (já postado)
+[11:28:33] ✅ Progresso do Drive carregado.
+[11:28:33] 📥 Verificando mudanças no GitHub...
+[11:28:35] 📊 Status Final: 0 agendados, 233 postados
+[11:30:10] Drive: 251 novas mídias
+[11:30:45] 💾 Backup criado: schedule_queue_backup_20260411_113045.json
+[11:30:45] ✅ Salvos 1 agendamentos
+[11:30:47] ============================================================
+[11:30:47] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[11:30:47] ============================================================
+[11:30:47] 🕐 Horário de início: 11/04/2026 11:30:47
+[11:30:47] 💾 Backup criado: schedule_queue_backup_20260411_113047.json
+[11:30:47] ✅ Salvos 1 agendamentos
+[11:30:47] 📥 Buscando progresso da nuvem (Download do Drive)...
+[11:30:51] 🧩 Mesclando 0 itens da nuvem com locais...
+[11:30:51] 🧩 Mesclando history (Local: 233, Remoto: 233)
+[11:30:51] 🧩 Mesclando schedule (Local: 1, Remoto: 0)
+[11:30:51] ✅ Mesclagem local concluída.
+[11:30:51] 📤 Atualizando nuvem (Upload para Drive)...
+[11:31:04] 📦 Sincronizando com GitHub...

@@ -1,4 +1,5 @@
 import os
+import re
 import datetime
 import threading
 import tkinter as tk
@@ -3693,6 +3694,8 @@ class MetaStudioApp(ctk.CTk):
                     # Determinar legenda
                     if config["caption_mode"] == "title":
                         caption = os.path.splitext(v["filename"])[0]
+                        # Remove prefixo de horário (ex: "6h -", "10h - ") inserido pelo usuário para controle de agendamento
+                        caption = re.sub(r'^\d+h\s*-\s*', '', caption).strip()
                     else:
                         caption = config["default_caption"]
                     
