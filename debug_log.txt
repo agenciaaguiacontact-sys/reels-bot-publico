@@ -1016,3 +1016,25 @@
 [11:30:51] ✅ Mesclagem local concluída.
 [11:30:51] 📤 Atualizando nuvem (Upload para Drive)...
 [11:31:04] 📦 Sincronizando com GitHub...
+[11:31:11] 🚀 Sincronização COMPLETA!
+[11:35:37] 💾 Backup criado: schedule_queue_backup_20260411_113537.json
+[11:35:37] ✅ Salvos 2 agendamentos
+[11:35:55] 💾 Backup criado: schedule_queue_backup_20260411_113555.json
+[11:35:55] ✅ Salvos 1 agendamentos
+[11:35:55] 🗑️ Agendamento removido: 7h - Na hora do 'clack' o paciente decide contar a história da família inteira. Quem já passou por isso 😂 #odonto #exodontia #vidadedentista #cirurgia #meme.png
+[11:37:14] 💾 Backup criado: schedule_queue_backup_20260411_113714.json
+[11:37:14] ✅ Salvos 5 agendamentos
+[11:37:20] ============================================================
+[11:37:20] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[11:37:20] ============================================================
+[11:37:20] 🕐 Horário de início: 11/04/2026 11:37:20
+[11:37:20] 💾 Backup criado: schedule_queue_backup_20260411_113720.json
+[11:37:20] ✅ Salvos 5 agendamentos
+[11:37:20] 📥 Buscando progresso da nuvem (Download do Drive)...
+[11:37:23] 🧩 Mesclando 0 itens da nuvem com locais...
+[11:37:23] 🧩 Mesclando history (Local: 233, Remoto: 234)
+[11:37:23] 🧩 Mesclando schedule (Local: 5, Remoto: 0)
+[11:37:23]   🗑️ Ignorando 6h - NaOCl 2.5% + EDTA 17% por 3 min para limpar a smear layer. Finaliza com hipoclorito. Protocolo padrão ouro pra necrose! 🦷✨ #endodontia #odontologia #dentista #canaldental #vidadedentista.png (já postado)
+[11:37:23] ✅ Mesclagem local concluída.
+[11:37:23] 📤 Atualizando nuvem (Upload para Drive)...
+[11:37:34] 📦 Sincronizando com GitHub...
