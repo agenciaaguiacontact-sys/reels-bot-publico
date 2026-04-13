@@ -1063,3 +1063,72 @@
 [11:41:50] ✅ Mesclagem local concluída.
 [11:41:50] 📤 Atualizando nuvem (Upload para Drive)...
 [11:42:03] 📦 Sincronizando com GitHub...
+[11:42:16] 🚀 Sincronização COMPLETA!
+[11:42:31] ============================================================
+[11:42:31] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[11:42:31] ============================================================
+[11:42:31] 📥 Sincronizando progresso da nuvem (Drive)...
+[11:42:32] 🧹 Iniciando limpeza e verificações de integridade...
+[11:42:32] ✅ Limpeza e integridade verificadas.
+[11:42:34] 🧩 Mesclando history (Local: 234, Remoto: 234)
+[11:42:34] 🧩 Mesclando schedule (Local: 29, Remoto: 29)
+[11:42:34] ✅ Progresso do Drive carregado.
+[11:42:34] 📥 Verificando mudanças no GitHub...
+[11:42:36] 📊 Status Final: 29 agendados, 234 postados
+[16:53:04] ============================================================
+[16:53:04] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[16:53:04] ============================================================
+[16:53:04] 📥 Sincronizando progresso da nuvem (Drive)...
+[16:53:05] 🧹 Iniciando limpeza e verificações de integridade...
+[16:53:05] ✅ Limpeza e integridade verificadas.
+[16:53:07] 🧩 Mesclando history (Local: 234, Remoto: 263)
+[16:53:07] 🧩 Mesclando schedule (Local: 29, Remoto: 0)
+[16:53:07]   🗑️ Ignorando 6h - Que a sua segunda seja renovada pela força que vem do alto. Bom plantão, equipe! 🙏✨ #enfermagem #fé #bomdia #enfermagem #fé #bomdia #plantão.png (já postado)
+[16:53:07]   🗑️ Ignorando 6h - Resp C! Agonistas ativam o receptor gerando efeito. Antagonistas ligam-se, mas apenas bloqueiam a ativação. Consulte sempre um farmacêutico! 🧬💊 #farmacologia #farmácia #estudante #saúde #farmacodinâmica.png (já postado)
+[16:53:07]   🗑️ Ignorando 7h - Na hora do 'clack' o paciente decide contar a história da família inteira. Quem já passou por isso 😂 #odonto #exodontia #vidadedentista #cirurgia #meme.png (já postado)
+[16:53:07]   🗑️ Ignorando 7h - O torniquete salva vidas! Confira as indicações corretas para controle de hemorragias graves. 🩹🚨 #enfermagem #aph #emergencia #estudos #enfermagem #aph #trauma.png (já postado)
+[16:53:07]   🗑️ Ignorando 7h - Sua saúde não aceita imitação. Confira sempre lote, selo e validade. Na dúvida, fale com o farmacêutico! 🛡️💊 #segurançadomedicamento #farmácia #saúde #farma #anvisa.png (já postado)
+[16:53:07]   🗑️ Ignorando 8h - Classe I áreas edêntulas bilaterais posteriores aos dentes remanescentes. Regra clássica de Applegate! Acertou ou precisa revisar #quiz #odontologia #protese #ppr #estudantedeodonto #dentista.png (já postado)
+[16:53:07]   🗑️ Ignorando 8h - Onde foi parar minha cadeira 😂 A luta diária de todo plantonista! #enfermagem #plantao #humor #enfermagem #humor.png (já postado)
+[16:53:07]   🗑️ Ignorando 8h - Xarope tem açúcar, Elixir tem álcool e Suspensão deve ser agitada. Cuidado com diabéticos e crianças! Consulte sempre seu farmacêutico. #farmácia #farmacêutico #medicamentos #saúde #farma #farmaciaclinica.png (já postado)
+[16:53:07]   🗑️ Ignorando 9h - Mantém o rebordo, mas e o risco de infecção Você encara o sepultamento ou prefere a exodontia total Comenta sua experiência! 👇 #odontologia #implantodontia #reabilitacao #dentista #cirurgia.png (já postado)
+[16:53:07]   🗑️ Ignorando 9h - Dicas para aquela veia difícil! Garrote suave, calor e braço baixo garantem o sucesso na punção. 💉✨ #enfermagem #puncao #dica #enfermagem #puncao #plantao.png (já postado)
+[16:53:07]   🗑️ Ignorando 9h - O jejum é vital para o tratamento da tireoide! Cálcio e ferro impedem a absorção. Siga a orientação do farmacêutico! 🦋💊 #tireoide #saúde #farmácia #levotiroxina #medicamentos.png (já postado)
+[16:53:07]   🗑️ Ignorando 10h - Trabalho multidisciplinar eleva o ticket e garante o resultado. Não tente abraçar o mundo sozinho, colega! 🚀 #carreira #odontologia #reabilitacao #vidadedentista #parceria.png (já postado)
+[16:53:07]   🗑️ Ignorando 10h - Resumo técnico sobre Tipos de Choque para o seu plantão! 🩺 Salve este conteúdo para revisar sempre. #enfermagem #estudos #plantao #saude #enfermagem #estudos #plantao.png (já postado)
+[16:53:07]   🗑️ Ignorando 10h - Técnica correta garante que o remédio chegue ao pulmão e não fique na boca. Siga o passo a passo e consulte seu farmacêutico! 💊 #farmácia #saúde #inalador #asma #farmacêutico #cuidados.png (já postado)
+[16:53:07]   🗑️ Ignorando 6h - Ganhe tempo em cavidades profundas! Respeite o limite de 4-5mm e não esqueça do 'capping' com convencional. 🔥 #dentistica #odontologia #dentista #bulkfill #vidadedentista.png (já postado)
+[16:53:07]   🗑️ Ignorando 11h - Sua experiência no plantão é ouro na sala de aula! 🎓✨ #enfermagem #docencia #carreira #enfermagem #docencia.png (já postado)
+[16:53:07]   🗑️ Ignorando 11h - Atenção vitaminas A, D, E e K em excesso podem causar toxicidade! Suplementação segura exige orientação profissional. 💊⚠️ #vitaminas #saúde #farmácia #hipervitaminose #farmacêutico.png (já postado)
+[16:53:07]   🗑️ Ignorando 7h - O 'nada' é o maior causador de perda dentária do mundo, né colegas 😂 #odontologia #meme #dentista #vidadedentista #emergencia.png (já postado)
+[16:53:07]   🗑️ Ignorando 12h - Pausa para agradecer pelo pão e pela honra de ser a resposta da oração de um paciente. 🙏✨ #enfermagem #fé #enfermagem #fé #gratidão.png (já postado)
+[16:53:07]   🗑️ Ignorando 12h - Verdes são ótimos, mas a constância é a chave para quem usa varfarina. Mudou a dieta Avise seu farmacêutico! 🥦💊 #interaçãomedicamentosa #farmácia #saúde #varfarina #cuidado.png (já postado)
+[16:53:07]   🗑️ Ignorando 8h - Acertou É o Nervo Bucal! Sem ele, o paciente vai sentir o descolamento do retalho vestibular. Marque aquele colega que sempre esquece. #quiz #odontologia #anestesiologia #dentista #estudantedeodonto.png (já postado)
+[16:53:07]   🗑️ Ignorando 13h - O mini infarto é real! Quem já passou por esse desespero no plantão 😂 #enfermagem #humor #vidadeenfermeira #enfermagem #humor #plantao.png (já postado)
+[16:53:07]   🗑️ Ignorando 13h - Termolábeis como a insulina exigem 2°C a 8°C. Guarde no meio da geladeira, nunca na porta! Dúvidas Fale com o farmacêutico. 🌡️💊 #farmácia #insulina #medicamentos #saúde #termolabeis.png (já postado)
+[16:53:07]   🗑️ Ignorando 9h - Remover mancha não é clarear. O RDA alto é um perigo pro esmalte. Qual sua conduta quando o paciente pergunta 👇 #odontologia #dentista #clareamento #estetica #vidadedentista.png (já postado)
+[16:53:07]   🗑️ Ignorando 14h - Domine a evolução de enfermagem com esses termos essenciais! 🫁 Salve este guia de bolso para o plantão. #enfermagem #saude #dica #plantao #enfermagem #estudos.png (já postado)
+[16:53:07]   🗑️ Ignorando 14h - A Curva ABC equilibra oferta e validade. Menos desperdício, mais eficiência na farmácia! 🚀 #farmácia #gestãofarmacêutica #estoque #carreira #farmacêutico.png (já postado)
+[16:53:07]   🗑️ Ignorando 10h - Já conferiu a validade das suas resinas especiais hoje Não deixe seu lucro ir pro lixo. Organização é chave! 🚀 #gestão #odontologia #consultorio #dentista #carreira.png (já postado)
+[16:53:07]   🗑️ Ignorando 15h - Dica essencial na administração de anticoagulantes! Nada de aspirar ou massagear, hein 💉🩺 #enfermagem #estudos #farmacologia #enfermagem #farmaco #estudos.png (já postado)
+[16:53:07]   🗑️ Ignorando 15h - Tratamento parado não funciona! Use alarmes e organizadores. Tem dúvidas sobre a rotina Peça ajuda ao seu farmacêutico de confiança! ✅ #farmácia #saúde #medicamentos #adesão #farmacêutico.png (já postado)
+[16:53:07] ✅ Progresso do Drive carregado.
+[16:53:07] 📥 Verificando mudanças no GitHub...
+[16:53:09] 📊 Status Final: 0 agendados, 263 postados
+[16:53:15] Drive: 105 novas mídias
+[16:53:44] Drive: 105 novas mídias
+[16:54:43] 💾 Backup criado: schedule_queue_backup_20260413_165443.json
+[16:54:43] ✅ Salvos 5 agendamentos
+[16:54:52] ============================================================
+[16:54:52] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[16:54:52] ============================================================
+[16:54:52] 🕐 Horário de início: 13/04/2026 16:54:52
+[16:54:52] 💾 Backup criado: schedule_queue_backup_20260413_165452.json
+[16:54:52] ✅ Salvos 5 agendamentos
+[16:54:52] 📥 Buscando progresso da nuvem (Download do Drive)...
+[16:54:56] 🧩 Mesclando 0 itens da nuvem com locais...
+[16:54:56] 🧩 Mesclando history (Local: 263, Remoto: 263)
+[16:54:56] 🧩 Mesclando schedule (Local: 5, Remoto: 0)
+[16:54:56] ✅ Mesclagem local concluída.
+[16:54:56] 📤 Atualizando nuvem (Upload para Drive)...
+[16:55:08] 📦 Sincronizando com GitHub...
