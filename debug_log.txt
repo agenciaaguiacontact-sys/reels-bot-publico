@@ -1132,3 +1132,21 @@
 [16:54:56] ✅ Mesclagem local concluída.
 [16:54:56] 📤 Atualizando nuvem (Upload para Drive)...
 [16:55:08] 📦 Sincronizando com GitHub...
+[16:55:19] 🚀 Sincronização COMPLETA!
+[16:56:22] 💾 Backup criado: schedule_queue_backup_20260413_165622.json
+[16:56:22] ✅ Salvos 10 agendamentos
+[16:58:09] 💾 Backup criado: schedule_queue_backup_20260413_165809.json
+[16:58:09] ✅ Salvos 35 agendamentos
+[16:58:16] ============================================================
+[16:58:16] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[16:58:16] ============================================================
+[16:58:16] 🕐 Horário de início: 13/04/2026 16:58:16
+[16:58:16] 💾 Backup criado: schedule_queue_backup_20260413_165816.json
+[16:58:16] ✅ Salvos 35 agendamentos
+[16:58:16] 📥 Buscando progresso da nuvem (Download do Drive)...
+[16:58:21] 🧩 Mesclando 5 itens da nuvem com locais...
+[16:58:21] 🧩 Mesclando history (Local: 263, Remoto: 263)
+[16:58:21] 🧩 Mesclando schedule (Local: 35, Remoto: 5)
+[16:58:21] ✅ Mesclagem local concluída.
+[16:58:21] 📤 Atualizando nuvem (Upload para Drive)...
+[16:58:31] 📦 Sincronizando com GitHub...
