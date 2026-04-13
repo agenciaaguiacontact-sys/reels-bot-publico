@@ -1184,3 +1184,46 @@
 [17:04:48] ✅ Mesclagem local concluída.
 [17:04:48] 📤 Atualizando nuvem (Upload para Drive)...
 [17:05:02] 📦 Sincronizando com GitHub...
+[17:05:09] 🚀 Sincronização COMPLETA!
+[19:28:43] ============================================================
+[19:28:43] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[19:28:43] ============================================================
+[19:28:43] 📥 Sincronizando progresso da nuvem (Drive)...
+[19:28:45] 🧹 Iniciando limpeza e verificações de integridade...
+[19:28:45] ✅ Limpeza e integridade verificadas.
+[19:28:47] 🧩 Mesclando history (Local: 263, Remoto: 269)
+[19:28:47] 🧩 Mesclando schedule (Local: 105, Remoto: 64)
+[19:28:47]   🗑️ Ignorando 0h - Resposta Todas as alternativas! A resistência envolve enzimas, mudanças no alvo e barreiras físicas. Já revisou esse mecanismo hoje 💊 #farmacologia #farmácia #antibióticos #estudante #saúde.png (já postado)
+[19:28:47]   🗑️ Ignorando 1h - Notificar reações adversas é dever do farmacêutico e segurança para todos. Use o VigiMed! Dúvidas Fale com o farmacêutico. ✅ #farmácia #farmacovigilância #anvisa #medicamentos #saúde.png (já postado)
+[19:28:47]   🗑️ Ignorando 6h - Sua assinatura é sua responsabilidade. Recusar o incerto é proteger o paciente. Já teve que dizer não por segurança 👇 #farmácia #farmacêutico #ética #segurançadopaciente #carreira.png (já postado)
+[19:28:47]   🗑️ Ignorando 0h - Cerdas duras são inimigas do periodonto e do esmalte. Manda pro paciente que acha que escovar com força é sinal de limpeza! 🦷❌ #odontologia #dentista #prevencao #periodontia #estudantedeodonto.png (já postado)
+[19:28:47]   🗑️ Ignorando 7h - Febre e dor no corpo Cuidado! AAS e anti-inflamatórios aumentam o risco de hemorragia na dengue. Consulte sempre o farmacêutico! 💊🛑 #dengue #saúde #farmácia #medicamentos #farmacêutico #cuidado.png (já postado)
+[19:28:47]   🗑️ Ignorando 1h - Aposentadoria precoce por dor lombar ninguém quer, né Cuida dessa postura enquanto há tempo, colega! 🚀 #odontologia #ergonomia #vidadedentista #carreira #dentista.png (já postado)
+[19:28:47] ✅ Progresso do Drive carregado.
+[19:28:47] 📥 Verificando mudanças no GitHub...
+[19:28:50] 📊 Status Final: 99 agendados, 269 postados
+[19:50:50] ============================================================
+[19:50:50] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[19:50:50] ============================================================
+[19:50:50] 📥 Sincronizando progresso da nuvem (Drive)...
+[19:50:51] 🧹 Iniciando limpeza e verificações de integridade...
+[19:50:51] ✅ Limpeza e integridade verificadas.
+[19:50:54] 🧩 Mesclando history (Local: 269, Remoto: 270)
+[19:50:54] 🧩 Mesclando schedule (Local: 99, Remoto: 63)
+[19:50:54]   [!] Ignorando 8h - Entender VCM e HCM ajuda a classificar anemias. Consulte sempre um farmacêutico para interpretar seus exames corretamente! #farmácia #hemograma #anemia #estudantedefarmacia #saúde.png (já postado após horário agendado)
+[19:50:54] ✅ Progresso do Drive carregado.
+[19:50:54] 📥 Verificando mudanças no GitHub...
+[19:50:59] 📊 Status Final: 98 agendados, 270 postados
+[19:53:19] ============================================================
+[19:53:19] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[19:53:19] ============================================================
+[19:53:19] 🕐 Horário de início: 13/04/2026 19:53:19
+[19:53:19] 💾 Backup criado: schedule_queue_backup_20260413_195319.json
+[19:53:19] ✅ Salvos 98 agendamentos
+[19:53:19] 📥 Buscando progresso da nuvem (Download do Drive)...
+[19:53:23] 🧩 Mesclando 63 itens da nuvem com locais...
+[19:53:23] 🧩 Mesclando history (Local: 270, Remoto: 270)
+[19:53:23] 🧩 Mesclando schedule (Local: 98, Remoto: 63)
+[19:53:23] ✅ Mesclagem local concluída.
+[19:53:23] 📤 Atualizando nuvem (Upload para Drive)...
+[19:53:36] 📦 Sincronizando com GitHub...

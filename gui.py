@@ -3138,16 +3138,33 @@ class MetaStudioApp(ctk.CTk):
             # Não fazemos uma "união" cega com o remoto para evitar que itens apagados pelo usuário no GUI
             # "renasçam" apenas porque ainda estavam guardados na nuvem.
             
-            history_ids = {h.get("id") for h in getattr(self, 'history', []) if h.get("id")}
-            history_names = {h.get("filename") for h in getattr(self, 'history', []) if h.get("filename")}
+            history = getattr(self, 'history', [])
             
             # Filtrar o que já foi postado do LOCAL DATA (GUI é Comandante)
             final_schedule = []
             for item in local_data:
                 gid = item.get("gdrive_id")
                 fname = item.get("filename")
-                if (gid and gid in history_ids) or (fname and fname in history_names):
-                    self.log(f"  🗑️ Ignorando {fname} (já postado)")
+                sched_val = item.get("schedule_time", 0)
+                import datetime
+                if isinstance(sched_val, datetime.datetime):
+                    sched_ts = int(sched_val.timestamp())
+                else:
+                    sched_ts = int(sched_val)
+                    
+                already_posted = False
+                for h in history:
+                    h_gid = h.get("id")
+                    h_fname = h.get("filename")
+                    h_time = h.get("post_time", 0)
+                    
+                    if ((gid and gid == h_gid) or (fname and fname == h_fname)):
+                        if h_time > (sched_ts - 3600):
+                            already_posted = True
+                            break
+                            
+                if already_posted:
+                    self.log(f"  [!] Ignorando {fname} (já postado após horário agendado)")
                     continue
                 final_schedule.append(item)
                 
@@ -4257,8 +4274,12 @@ class MetaStudioApp(ctk.CTk):
                     print(f"📝 Legenda do vídeo: '{v.get('caption', 'NENHUMA')}'")
                     print(f"� Legenda final a ser usada: '{video_caption}'")
                     
+                    media_type = "VIDEO"
+                    if video_path.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
+                        media_type = "IMAGE"
+                        
                     for acc in active:
-                        print(f"\n� Conta: {acc['name']}")
+                        print(f"\n Conta: {acc['name']}")
                         meta = MetaAPI(
                             acc['ig_account_id'],
                             acc['fb_page_id'],
@@ -4266,12 +4287,18 @@ class MetaStudioApp(ctk.CTk):
                         )
                         
                         if acc.get('ig_account_id'):
-                            print(f"📱 Postando no Instagram...")
-                            meta.upload_ig_reels_resumable(video_path, video_caption)
+                            print(f"[!] Postando no Instagram ({media_type})...")
+                            if media_type == "IMAGE":
+                                meta.upload_ig_image(video_path, video_caption)
+                            else:
+                                meta.upload_ig_reels_resumable(video_path, video_caption)
                         
                         if acc.get('fb_page_id'):
-                            print(f"📘 Postando no Facebook...")
-                            meta.upload_fb_reels_resumable(video_path, video_caption)
+                            print(f"[!] Postando no Facebook ({media_type})...")
+                            if media_type == "IMAGE":
+                                meta.upload_fb_image(video_path, video_caption)
+                            else:
+                                meta.upload_fb_reels_resumable(video_path, video_caption)
                 
                 self.after(0, lambda: messagebox.showinfo("Sucesso", "Postagens concluídas!"))
             except Exception as err:
