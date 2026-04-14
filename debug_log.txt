@@ -1241,3 +1241,40 @@
 [19:57:20] ✅ Mesclagem local concluída.
 [19:57:20] 📤 Atualizando nuvem (Upload para Drive)...
 [19:57:33] 📦 Sincronizando com GitHub...
+[19:57:46] 🚀 Sincronização COMPLETA!
+[11:30:36] ============================================================
+[11:30:36] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[11:30:36] ============================================================
+[11:30:36] 📥 Sincronizando progresso da nuvem (Drive)...
+[11:30:37] 🧹 Iniciando limpeza e verificações de integridade...
+[11:30:37] ✅ Limpeza e integridade verificadas.
+[11:30:39] 🧩 Mesclando history (Local: 270, Remoto: 280)
+[11:30:39] 🧩 Mesclando schedule (Local: 98, Remoto: 89)
+[11:30:39]   [!] Ignorando 6h - Entrego meu plantão e peço sabedoria para cuidar com amor. Que Deus guie cada passo hoje! 🙏✨ #enfermagem #fé #hospital #enfermagem #fé #plantão.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 7h - Resumo técnico sobre o uso do cateter tipo óculos. Fluxo ideal e proteção da mucosa! 🏥📚 #enfermagem #oxigenioterapia #saude #enfermagem #estudos.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 8h - O clássico assalto culposo pós-plantão! Quem nunca 😅🏥 #enfermagem #humor #plantao #enfermagem #plantao.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 2h - Escolher a sutura certa garante o coágulo no lugar. Simples pra precisão, X pra hemostasia e contínua pra agilidade! #odontologia #cirurgia #sutura #dentista #ctbmf.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 9h - Domine a Regra dos Nove agora! 🩺 Essencial para hidratação de emergência no trauma. Salve este guia! #enfermagem #queimaduras #estudos #enfermagem #trauma #emergencia.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 3h - Quem nunca suou frio tentando decifrar os hieróglifos do colega Marque seu amigo da Orto! 😂 #odontologia #ortodontia #cirurgia #vidadedentista #humor.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 10h - Aprenda a diferenciar hipoglicemia e hiperglicemia em segundos. Dica essencial para o plantão! 💉🩺 #enfermagem #saude #estudo #enfermagem #saude.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 4h - Resp B (20-22ml100g). Proporção exata garante resistência à abrasão e fidelidade do troquel. Excesso de água gera porosidade. Sabia dessa ✅ #quiz #odontologia #protesedentaria #estudante #dentista.png (já postado após horário agendado)
+[11:30:39]   [!] Ignorando 5h - A oclusão manda mais que a estética. Se está estável e funcional, mexer pode dar B.O. no espaço biológico. Você fecha todos 👇 #odontologia #dentista #esteticadental #oclusao #diastema.png (já postado após horário agendado)
+[11:30:39] ✅ Progresso do Drive carregado.
+[11:30:39] 📥 Verificando mudanças no GitHub...
+[11:30:43] 📊 Status Final: 89 agendados, 280 postados
+[11:31:05] Drive: 4 novas mídias
+[11:33:07] 💾 Backup criado: schedule_queue_backup_20260414_113307.json
+[11:33:07] ✅ Salvos 90 agendamentos
+[11:33:15] ============================================================
+[11:33:15] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[11:33:15] ============================================================
+[11:33:15] 🕐 Horário de início: 14/04/2026 11:33:15
+[11:33:15] 💾 Backup criado: schedule_queue_backup_20260414_113315.json
+[11:33:15] ✅ Salvos 90 agendamentos
+[11:33:15] 📥 Buscando progresso da nuvem (Download do Drive)...
+[11:33:18] 🧩 Mesclando 89 itens da nuvem com locais...
+[11:33:18] 🧩 Mesclando history (Local: 280, Remoto: 280)
+[11:33:18] 🧩 Mesclando schedule (Local: 90, Remoto: 89)
+[11:33:18] ✅ Mesclagem local concluída.
+[11:33:18] 📤 Atualizando nuvem (Upload para Drive)...
+[11:33:32] 📦 Sincronizando com GitHub...
