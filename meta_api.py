@@ -50,7 +50,7 @@ class MetaAPI:
         return None
 
     def _check_status(self, container_id, platform="ig"):
-        url = f"{self.base_url}/{container_id}?fields=status_code&access_token={self.access_token}"
+        url = f"{self.base_url}/{container_id}?fields=status_code,failure_reason&access_token={self.access_token}"
         if platform == "fb": url = f"{self.base_url}/{container_id}?fields=status&access_token={self.access_token}"
         # Facebook Reels podem demorar até 10 minutos para processar
         iterations = 60 if platform == "fb" else 20
@@ -101,14 +101,35 @@ class MetaAPI:
     def upload_ig_reels_resumable(self, video_path, caption, gdrive_file_id=None):
         caption = self._sanitize_caption(caption)
         print(f"Upload IG Reels: {video_path}")
+        
+        # Estratégia de tentativa com Fallback de URL
+        # 1. Tentar URL primária (preferencialmente GDrive se fornecido)
         url = self._get_public_url(video_path, gdrive_file_id, is_video=True)
         if not url: return False
+        
         res = requests.post(f"{self.base_url}/{self.ig_account_id}/media", params={'media_type': 'REELS', 'video_url': url, 'caption': caption, 'access_token': self.access_token}, timeout=120).json()
+        
         if 'id' not in res:
-            print(f"DEBUG FB: Error Container IG Reels: {json.dumps(res, indent=2)}")
-            return False
+            # Se falhou na criação do container com link do GDrive, tenta via tmpfiles (se já não for tmpfiles)
+            if gdrive_file_id:
+                print("⚠️ Falha na criação do container com GDrive. Tentando fallback via tmpfiles...")
+                url = self._get_public_url(video_path, None, is_video=True) # Nenhum ID força tmpfiles
+                if url:
+                    res = requests.post(f"{self.base_url}/{self.ig_account_id}/media", params={'media_type': 'REELS', 'video_url': url, 'caption': caption, 'access_token': self.access_token}, timeout=120).json()
+            
+            if 'id' not in res:
+                print(f"DEBUG FB: Error Container IG Reels: {json.dumps(res, indent=2)}")
+                return False
+        
         cid = res['id']
-        if not self._check_status(cid, "ig"): return False
+        if not self._check_status(cid, "ig"):
+            # Se falhou no processamento (ERROR status) e tínhamos GDrive, tentamos TUDO de novo com tmpfiles
+            if gdrive_file_id:
+                print("❌ Erro de processamento Meta com GDrive. Tentando REPROCESSO total via tmpfiles...")
+                # Repetir o ciclo mas sem usar o ID do GDrive para forçar tmpfiles
+                return self.upload_ig_reels_resumable(video_path, caption, None) 
+            return False
+            
         print("Aguardando propagacao interna Meta (15s)...")
         time.sleep(15)
         pub = requests.post(f"{self.base_url}/{self.ig_account_id}/media_publish", params={'creation_id': cid, 'access_token': self.access_token}, timeout=120).json()
