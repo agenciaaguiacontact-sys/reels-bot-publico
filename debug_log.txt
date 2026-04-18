@@ -1489,3 +1489,33 @@
 [18:53:35] ✅ Mesclagem local concluída.
 [18:53:35] 📤 Atualizando nuvem (Upload para Drive)...
 [18:53:48] 📦 Sincronizando com GitHub...
+[18:53:55] 🚀 Sincronização COMPLETA!
+[19:36:46] ============================================================
+[19:36:46] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[19:36:46] ============================================================
+[19:36:46] 📥 Sincronizando progresso da nuvem (Drive)...
+[19:36:47] 🧹 Iniciando limpeza e verificações de integridade...
+[19:36:47] ✅ Limpeza e integridade verificadas.
+[19:36:50] 🧩 Mesclando history (Local: 354, Remoto: 356)
+[19:36:50] 🧩 Mesclando schedule (Local: 29, Remoto: 27)
+[19:36:50]   [!] Ignorando 18h - Resposta 150! Ele é o universal para superiores. O 151 é para os inferiores. Já errou essa na clínica ou na prova #quiz #odontologia #estudante #cirurgia #dentista.png (já postado após horário agendado)
+[19:36:50]   [!] Ignorando 18h - O escape é comum na adaptação do anticoncepcional contínuo. Se for intenso ou persistente, fale com seu farmacêutico! 👩‍⚕️ #anticoncepcional #saudefeminina #farmácia #saúde #farmacêutico.png (já postado após horário agendado)
+[19:36:50] ✅ Progresso do Drive carregado.
+[19:36:50] 📥 Verificando mudanças no GitHub...
+[19:36:51] 📊 Status Final: 27 agendados, 356 postados
+[19:37:01] Drive: 10 novas mídias
+[19:39:03] 💾 Backup criado: schedule_queue_backup_20260418_193903.json
+[19:39:03] ✅ Salvos 28 agendamentos
+[19:39:08] ============================================================
+[19:39:08] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[19:39:08] ============================================================
+[19:39:08] 🕐 Horário de início: 18/04/2026 19:39:08
+[19:39:08] 💾 Backup criado: schedule_queue_backup_20260418_193908.json
+[19:39:08] ✅ Salvos 28 agendamentos
+[19:39:08] 📥 Buscando progresso da nuvem (Download do Drive)...
+[19:39:11] 🧩 Mesclando 27 itens da nuvem com locais...
+[19:39:11] 🧩 Mesclando history (Local: 356, Remoto: 356)
+[19:39:11] 🧩 Mesclando schedule (Local: 28, Remoto: 27)
+[19:39:11] ✅ Mesclagem local concluída.
+[19:39:11] 📤 Atualizando nuvem (Upload para Drive)...
+[19:39:21] 📦 Sincronizando com GitHub...
