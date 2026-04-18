@@ -256,12 +256,16 @@ class GoogleDriveAPI:
             print(f"Erro ao salvar JSON no Drive: {msg}")
             return False
 
-    def make_file_public(self, file_id):
+    def make_file_public(self, file_id, is_video=False):
         if not self.service: return None
         try:
             self.service.permissions().create(fileId=file_id, body={'type': 'anyone', 'role': 'reader'}, supportsAllDrives=True).execute()
-            # Formato lh3 é um link direto que o Instagram aceita bem para imagens
-            url = f"https://lh3.googleusercontent.com/d/{file_id}"
+            # Para vídeos: usar uc?export=download (download direto, aceito pelo Instagram para REELS)
+            # Para imagens: lh3.googleusercontent.com é mais rápido e aceito pelo IG
+            if is_video:
+                url = f"https://drive.google.com/uc?export=download&confirm=t&id={file_id}"
+            else:
+                url = f"https://lh3.googleusercontent.com/d/{file_id}"
             print(f"Arquivo tornado publico: {url}")
             return url
         except Exception as e:

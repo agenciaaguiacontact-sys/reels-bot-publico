@@ -12,17 +12,19 @@ class MetaAPI:
         self.fb_page_id = fb_page_id or FB_PAGE_ID
         self.base_url = "https://graph.facebook.com/v25.0"
 
-    def _get_public_url(self, local_path, gdrive_file_id=None):
+    def _get_public_url(self, local_path, gdrive_file_id=None, is_video=False):
         if gdrive_file_id:
             try:
                 from gdrive_api import GoogleDriveAPI
                 drive = GoogleDriveAPI()
-                url = drive.make_file_public(gdrive_file_id)
-                # Formato lh3 costuma ser mais 'direto' para crawlers de midia
-                # Aumentamos o delay para 5s para garantir propagação de permissão na rede GCP/Meta
+                url = drive.make_file_public(gdrive_file_id, is_video=is_video)
+                # Para vídeos usamos URL de download direto (uc?export=download)
+                # Para imagens usamos lh3 que é mais rápido
+                # Delay maior para vídeos pois o CDN da Meta precisa de mais tempo
+                delay = 10 if is_video else 5
                 if url:
-                    print(f"✅ URL gerada (GDrive): {url} (Aguardando propagação 5s...)")
-                    time.sleep(5)
+                    print(f"✅ URL gerada (GDrive): {url} (Aguardando propagação {delay}s...)")
+                    time.sleep(delay)
                     return url
             except Exception as e:
                 print(f"❌ Erro ao tornar GDrive publico: {e}")
@@ -99,7 +101,7 @@ class MetaAPI:
     def upload_ig_reels_resumable(self, video_path, caption, gdrive_file_id=None):
         caption = self._sanitize_caption(caption)
         print(f"Upload IG Reels: {video_path}")
-        url = self._get_public_url(video_path, gdrive_file_id)
+        url = self._get_public_url(video_path, gdrive_file_id, is_video=True)
         if not url: return False
         res = requests.post(f"{self.base_url}/{self.ig_account_id}/media", params={'media_type': 'REELS', 'video_url': url, 'caption': caption, 'access_token': self.access_token}, timeout=120).json()
         if 'id' not in res:
@@ -119,7 +121,7 @@ class MetaAPI:
     def upload_ig_image(self, image_path, caption, gdrive_file_id=None):
         caption = self._sanitize_caption(caption)
         print(f"Upload IG Imagem: {image_path}")
-        url = self._get_public_url(image_path, gdrive_file_id)
+        url = self._get_public_url(image_path, gdrive_file_id, is_video=False)
         if not url: return False
         res = requests.post(f"{self.base_url}/{self.ig_account_id}/media", params={'image_url': url, 'caption': caption, 'access_token': self.access_token}, timeout=120).json()
         if 'id' not in res:
