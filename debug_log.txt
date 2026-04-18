@@ -1519,3 +1519,34 @@
 [19:39:11] ✅ Mesclagem local concluída.
 [19:39:11] 📤 Atualizando nuvem (Upload para Drive)...
 [19:39:21] 📦 Sincronizando com GitHub...
+[19:39:28] 🚀 Sincronização COMPLETA!
+[20:36:19] 🗑️ Removido da fila (já postado): Cuidado só quem é íntimo pode te derrubar. Entenda os 3 tipos de amigos. #amizade #psicologia #reflexao #mentoria #relacionamentos (ceaf0b).mp4
+[20:36:19] ✅ Limpeza automática: 1 vídeo(s) já postado(s) removido(s)
+[20:36:19] 💾 Backup criado: schedule_queue_backup_20260418_203619.json
+[20:36:19] ✅ Salvos 26 agendamentos
+[20:36:24] ============================================================
+[20:36:24] 🔄 SINCRONIZAÇÃO AUTOMÁTICA AO INICIAR
+[20:36:24] ============================================================
+[20:36:24] 📥 Sincronizando progresso da nuvem (Drive)...
+[20:36:25] 🧹 Iniciando limpeza e verificações de integridade...
+[20:36:25] ✅ Limpeza e integridade verificadas.
+[20:36:27] 🧩 Mesclando history (Local: 358, Remoto: 358)
+[20:36:27] 🧩 Mesclando schedule (Local: 26, Remoto: 27)
+[20:36:27] ✅ Progresso do Drive carregado.
+[20:36:27] 📥 Verificando mudanças no GitHub...
+[20:36:29] 📊 Status Final: 26 agendados, 358 postados
+[20:37:40] 💾 Backup criado: schedule_queue_backup_20260418_203740.json
+[20:37:40] ✅ Salvos 35 agendamentos
+[20:37:46] ============================================================
+[20:37:46] 🔄 SINCRONIZAÇÃO GLOBAL (DRIVE + GITHUB)
+[20:37:46] ============================================================
+[20:37:46] 🕐 Horário de início: 18/04/2026 20:37:46
+[20:37:46] 💾 Backup criado: schedule_queue_backup_20260418_203746.json
+[20:37:46] ✅ Salvos 35 agendamentos
+[20:37:46] 📥 Buscando progresso da nuvem (Download do Drive)...
+[20:37:50] 🧩 Mesclando 27 itens da nuvem com locais...
+[20:37:50] 🧩 Mesclando history (Local: 358, Remoto: 358)
+[20:37:50] 🧩 Mesclando schedule (Local: 35, Remoto: 27)
+[20:37:50] ✅ Mesclagem local concluída.
+[20:37:50] 📤 Atualizando nuvem (Upload para Drive)...
+[20:38:02] 📦 Sincronizando com GitHub...
