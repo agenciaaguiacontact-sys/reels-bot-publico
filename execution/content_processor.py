@@ -117,7 +117,6 @@ def process_job(job, drive, global_accounts, tz_br):
             print(f"[ERR] Erro ao baixar {filename}.")
             return result
 
-        first_comment = job.get('first_comment', '')
 
         for acc in job_accounts:
             acc_name = acc.get('name', 'Conta s/ nome')
@@ -130,9 +129,6 @@ def process_job(job, drive, global_accounts, tz_br):
                     if media_type in ['VIDEO', 'REELS']: ig_result = acc_meta.upload_ig_reels_resumable(local_path, caption, file_id)
                     elif media_type == 'IMAGE': ig_result = acc_meta.upload_ig_image(local_path, caption, file_id)
                     elif media_type == 'CAROUSEL': ig_result = acc_meta.upload_ig_carousel(carousel_items, caption)
-                    if ig_result and first_comment:
-                        print(f"[*] Postando primeiro comentário no Instagram ({acc_name})...")
-                        acc_meta.post_first_comment(ig_result, first_comment, platform="ig")
                 except Exception as e: print(f"[ERR] Erro IG em {acc_name}: {e}")
             ig_success = bool(ig_result)
             
@@ -142,9 +138,6 @@ def process_job(job, drive, global_accounts, tz_br):
                     if media_type in ['VIDEO', 'REELS']: fb_result = acc_meta.upload_fb_reels_resumable(local_path, caption)
                     elif media_type == 'IMAGE': fb_result = acc_meta.upload_fb_image(local_path, caption)
                     elif media_type == 'CAROUSEL': fb_result = acc_meta.upload_fb_carousel(carousel_items, caption)
-                    if fb_result and first_comment:
-                        print(f"[*] Postando primeiro comentário no Facebook ({acc_name})...")
-                        acc_meta.post_first_comment(fb_result, first_comment, platform="fb")
                 except Exception as e: print(f"[ERR] Erro FB em {acc_name}: {e}")
             fb_success = bool(fb_result)
                 

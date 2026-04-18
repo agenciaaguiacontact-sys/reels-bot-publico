@@ -6,7 +6,9 @@ on:
 jobs:
   post_reels:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -25,6 +27,7 @@ jobs:
 
       - name: Instalar FFmpeg
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
       - name: Iniciar Bot de Reels
         env:
           GDRIVE_JSON_B64: ${{ secrets.GDRIVE_JSON_B64 }}

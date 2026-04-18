@@ -240,39 +240,3 @@ class MetaAPI:
             return r.get("access_token", old_token), r.get("expires_in")
         except: return old_token, None
 
-    def post_first_comment(self, post_id: str, comment_text: str, platform: str = "fb") -> bool:
-        """
-        Posta o primeiro comentário em uma publicação recém-criada.
-
-        Args:
-            post_id: ID da publicação retornado pela API após o publish
-            comment_text: Texto do comentário
-            platform: "fb" para Facebook, "ig" para Instagram (ambos usam o mesmo endpoint)
-
-        Returns:
-            True se bem-sucedido, False caso contrário
-        """
-        if not comment_text or not comment_text.strip():
-            return True  # Comentário vazio = sucesso silencioso
-
-        try:
-            time.sleep(3)  # Aguardar indexação do post pela Meta antes de comentar
-            url = f"{self.base_url}/{post_id}/comments"
-            res = requests.post(
-                url,
-                params={
-                    "message": comment_text.strip(),
-                    "access_token": self.access_token
-                },
-                timeout=60
-            ).json()
-
-            if "id" in res:
-                print(f"✅ Primeiro comentário postado! ID: {res['id']}")
-                return True
-            else:
-                print(f"⚠️ Falha ao postar primeiro comentário: {json.dumps(res, indent=2)}")
-                return False
-        except Exception as e:
-            print(f"⚠️ Erro ao postar primeiro comentário: {e}")
-            return False
