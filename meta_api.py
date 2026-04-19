@@ -5,6 +5,14 @@ import requests
 from urllib.parse import quote
 from config import META_ACCESS_TOKEN, IG_ACCOUNT_ID, FB_PAGE_ID
 
+class IGRateLimitError(Exception):
+    """Erro lançado quando o Instagram bloqueia por rate limit (code 4 / subcode 2207051)."""
+    pass
+
+class IGActionBlockedError(Exception):
+    """Erro lançado quando o Instagram bloqueia uma ação por segurança da comunidade."""
+    pass
+
 class MetaAPI:
     def __init__(self, ig_account_id=None, fb_page_id=None, access_token=None):
         self.access_token = access_token or META_ACCESS_TOKEN
@@ -98,9 +106,29 @@ class MetaAPI:
             return sanitized
         return caption
 
-    def upload_ig_reels_resumable(self, video_path, caption, gdrive_file_id=None):
+    def _check_ig_error(self, res):
+        """Verifica se a resposta da API IG contém erros críticos e lança exceções específicas."""
+        error = res.get('error', {})
+        if not error:
+            return
+        code = error.get('code')
+        subcode = error.get('error_subcode')
+        msg = error.get('message', '')
+        user_msg = error.get('error_user_msg', '')
+        
+        # Rate limit (Application request limit reached)
+        if code == 4 or subcode == 2207051:
+            print(f"🚨 RATE LIMIT IG DETECTADO! Código {code}/{subcode}: {msg}")
+            raise IGRateLimitError(f"IG Rate Limit: {msg}")
+        
+        # Ação bloqueada por segurança da comunidade
+        if subcode in [2207006, 2207025, 2207026, 2207027, 2207028] or 'bloqueada' in user_msg.lower() or 'restricted' in msg.lower():
+            print(f"🚨 AÇÃO BLOQUEADA IG! Código {code}/{subcode}: {user_msg or msg}")
+            raise IGActionBlockedError(f"IG Action Blocked: {user_msg or msg}")
+
+    def upload_ig_reels_resumable(self, video_path, caption, gdrive_file_id=None, _fallback_attempt=False):
         caption = self._sanitize_caption(caption)
-        print(f"Upload IG Reels: {video_path}")
+        print(f"Upload IG Reels: {video_path} (fallback={_fallback_attempt})")
         
         # Estratégia de tentativa com Fallback de URL
         # 1. Tentar URL primária (preferencialmente GDrive se fornecido)
@@ -109,13 +137,17 @@ class MetaAPI:
         
         res = requests.post(f"{self.base_url}/{self.ig_account_id}/media", params={'media_type': 'REELS', 'video_url': url, 'caption': caption, 'access_token': self.access_token}, timeout=120).json()
         
+        # Verificar erros críticos ANTES de qualquer retry
+        self._check_ig_error(res)
+        
         if 'id' not in res:
-            # Se falhou na criação do container com link do GDrive, tenta via tmpfiles (se já não for tmpfiles)
-            if gdrive_file_id:
+            # Se falhou na criação do container com link do GDrive E ainda não tentamos tmpfiles
+            if gdrive_file_id and not _fallback_attempt:
                 print("⚠️ Falha na criação do container com GDrive. Tentando fallback via tmpfiles...")
-                url = self._get_public_url(video_path, None, is_video=True) # Nenhum ID força tmpfiles
+                url = self._get_public_url(video_path, None, is_video=True)
                 if url:
                     res = requests.post(f"{self.base_url}/{self.ig_account_id}/media", params={'media_type': 'REELS', 'video_url': url, 'caption': caption, 'access_token': self.access_token}, timeout=120).json()
+                    self._check_ig_error(res)
             
             if 'id' not in res:
                 print(f"DEBUG FB: Error Container IG Reels: {json.dumps(res, indent=2)}")
@@ -123,11 +155,11 @@ class MetaAPI:
         
         cid = res['id']
         if not self._check_status(cid, "ig"):
-            # Se falhou no processamento (ERROR status) e tínhamos GDrive, tentamos TUDO de novo com tmpfiles
-            if gdrive_file_id:
-                print("❌ Erro de processamento Meta com GDrive. Tentando REPROCESSO total via tmpfiles...")
-                # Repetir o ciclo mas sem usar o ID do GDrive para forçar tmpfiles
-                return self.upload_ig_reels_resumable(video_path, caption, None) 
+            # Se falhou no processamento e tínhamos GDrive E ainda não tentamos fallback
+            if gdrive_file_id and not _fallback_attempt:
+                print("❌ Erro de processamento Meta com GDrive. Tentando REPROCESSO total via tmpfiles (1 tentativa)...")
+                return self.upload_ig_reels_resumable(video_path, caption, None, _fallback_attempt=True)
+            print(f"❌ Falha definitiva no processamento IG Reels (fallback={_fallback_attempt}). Desistindo.")
             return False
             
         print("Aguardando propagacao interna Meta (15s)...")
@@ -145,6 +177,7 @@ class MetaAPI:
         url = self._get_public_url(image_path, gdrive_file_id, is_video=False)
         if not url: return False
         res = requests.post(f"{self.base_url}/{self.ig_account_id}/media", params={'image_url': url, 'caption': caption, 'access_token': self.access_token}, timeout=120).json()
+        self._check_ig_error(res)
         if 'id' not in res:
             print(f"DEBUG FB: Error Container IG Imagem: {json.dumps(res, indent=2)}")
             return False

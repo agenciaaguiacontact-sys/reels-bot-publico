@@ -20,7 +20,7 @@ if sys.stdout.encoding != 'utf-8':
         pass
 
 from gdrive_api import GoogleDriveAPI
-from meta_api import MetaAPI
+from meta_api import MetaAPI, IGRateLimitError, IGActionBlockedError
 
 def process_job(job, drive, global_accounts, tz_br):
     file_id = job.get('gdrive_id')
@@ -124,12 +124,17 @@ def process_job(job, drive, global_accounts, tz_br):
             acc_meta = MetaAPI(acc.get('ig_account_id'), acc.get('fb_page_id'), acc.get('access_token'))
             
             ig_result = False
+            ig_blocked = False
             if acc.get('ig_account_id'):
                 try:
                     if media_type in ['VIDEO', 'REELS']: ig_result = acc_meta.upload_ig_reels_resumable(local_path, caption, file_id)
                     elif media_type == 'IMAGE': ig_result = acc_meta.upload_ig_image(local_path, caption, file_id)
                     elif media_type == 'CAROUSEL': ig_result = acc_meta.upload_ig_carousel(carousel_items, caption)
-                except Exception as e: print(f"[ERR] Erro IG em {acc_name}: {e}")
+                except (IGRateLimitError, IGActionBlockedError) as e:
+                    print(f"[BLOQUEIO-IG] {acc_name}: {e}. Marcando IG como bloqueado para esta execução.")
+                    ig_blocked = True
+                except Exception as e:
+                    print(f"[ERR] Erro IG em {acc_name}: {e}")
             ig_success = bool(ig_result)
             
             fb_result = False
@@ -140,13 +145,23 @@ def process_job(job, drive, global_accounts, tz_br):
                     elif media_type == 'CAROUSEL': fb_result = acc_meta.upload_fb_carousel(carousel_items, caption)
                 except Exception as e: print(f"[ERR] Erro FB em {acc_name}: {e}")
             fb_success = bool(fb_result)
+            
+            # Se IG estava bloqueado por rate limit mas FB postou: considerar sucesso parcial
+            # e NAO retentar IG para evitar mais bloqueios
+            if ig_blocked and fb_success:
+                print(f"[OK-PARCIAL] {acc_name}: FB postou com sucesso. IG bloqueado por rate limit. Removendo da fila.")
+                result["any_success"] = True
+                result["total_posts"] += 1
+                result["success_accounts"].append(acc_name)
+                # Nao adicionar aos failed_accounts para que nao haja retry
+                continue
                 
             if ig_success or fb_success:
                 result["any_success"] = True
                 result["total_posts"] += 1
                 result["success_accounts"].append(acc_name)
             
-            if (acc.get('ig_account_id') and not ig_success) or (acc.get('fb_page_id') and not fb_success):
+            if (acc.get('ig_account_id') and not ig_success and not ig_blocked) or (acc.get('fb_page_id') and not fb_success):
                 acc_p = acc.copy()
                 if ig_success: acc_p['ig_account_id'] = None
                 if fb_success: acc_p['fb_page_id'] = None
