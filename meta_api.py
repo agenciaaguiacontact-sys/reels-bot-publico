@@ -58,18 +58,29 @@ class MetaAPI:
         return None
 
     def _check_status(self, container_id, platform="ig"):
-        url = f"{self.base_url}/{container_id}?fields=status_code,failure_reason&access_token={self.access_token}"
+        url = f"{self.base_url}/{container_id}?fields=status_code,status,failure_reason,error_message&access_token={self.access_token}"
         if platform == "fb": url = f"{self.base_url}/{container_id}?fields=status&access_token={self.access_token}"
         # Facebook Reels podem demorar até 10 minutos para processar
-        iterations = 60 if platform == "fb" else 20
-        for _ in range(iterations):
+        iterations = 60 if platform == "fb" else 30
+        
+        # Delay inicial: IG Reels precisa de tempo para processar antes de consultar
+        initial_delay = 30 if platform == "ig" else 10
+        print(f"  ... Aguardando {initial_delay}s antes de verificar status ({platform.upper()})...")
+        time.sleep(initial_delay)
+        
+        for i in range(iterations):
             try:
                 res = requests.get(url, timeout=60).json()
                 if platform == "ig":
-                    if res.get('status_code') == 'FINISHED': return True
-                    if res.get('status_code') == 'ERROR':
-                        print(f"DEBUG FB: Error IG: {json.dumps(res, indent=2)}")
+                    status_code = res.get('status_code', 'UNKNOWN')
+                    failure_reason = res.get('failure_reason', '')
+                    error_msg = res.get('error_message', '')
+                    print(f"  ... IG Status [{i+1}/{iterations}]: {status_code}" + (f" | Motivo: {failure_reason}" if failure_reason else "") + (f" | Erro: {error_msg}" if error_msg else ""))
+                    if status_code == 'FINISHED': return True
+                    if status_code == 'ERROR':
+                        print(f"❌ IG Container ERROR: failure_reason={failure_reason} | Resposta: {json.dumps(res, indent=2)}")
                         return False
+                    # IN_PROGRESS ou outro status: continuar aguardando
                 else:
                     s = res.get('status', {})
                     if isinstance(s, dict):
@@ -79,11 +90,13 @@ class MetaAPI:
                             print(f"DEBUG FB: Error FB: {json.dumps(res, indent=2)}")
                             return False
                         # Log para outros status (processing, upload_complete, etc)
-                        print(f"  ... FB Status: {status_val}")
+                        print(f"  ... FB Status [{i+1}/{iterations}]: {status_val}")
                     else:
                         print(f"DEBUG FB: Status format unknown: {res}")
-            except: pass
+            except Exception as e:
+                print(f"  ... Erro ao checar status: {e}")
             time.sleep(10)
+        print(f"❌ Timeout ao aguardar status {platform.upper()} para container {container_id}")
         return False
 
     def _sanitize_caption(self, caption):
